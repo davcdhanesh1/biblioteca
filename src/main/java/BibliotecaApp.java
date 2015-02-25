@@ -24,9 +24,8 @@ public class BibliotecaApp {
         inputScanner.useDelimiter("\n");
         while(inputScanner.hasNext()) {
             String option = inputScanner.next();
-            if (option.equals("1")) {
-                printer.print(bookList.toString());
-            }
+            Menu menu = Menu.forOption(option);
+            menu.perform(bookList,printer);
         }
     }
 
