@@ -1,13 +1,15 @@
+import IO.OutPutPrinter;
 import book.BookList;
 
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class BibliotecaApp {
 
-    public void run(Printer printer, BookList bookList) {
-        printer.print(getWelcomeToBibliotecaMsg());
-        printer.print(getSeparator());
-        printer.print(bookList.toString());
+    public void run(OutPutPrinter outPutPrinter, BookList bookList) {
+        outPutPrinter.print(getWelcomeToBibliotecaMsg());
+        outPutPrinter.print(getSeparator());
+        outPutPrinter.print(bookList.toString());
     }
 
     private String getSeparator() {

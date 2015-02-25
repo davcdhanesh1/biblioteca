@@ -1,3 +1,4 @@
+import IO.OutPutPrinter;
 import book.Book;
 import book.BookList;
 import org.junit.Before;
@@ -17,7 +18,7 @@ public class BibliotecaAppTest {
             = ResourceBundle.getBundle("bookList").getString("HarryPotterAndTheChambersOfSecrets");
     BookList bookList;
     private ByteArrayOutputStream outputStream;
-    private Printer printer;
+    private OutPutPrinter outPutPrinter;
     private BibliotecaApp bibliotecaApp;
     private final String JKRowling
             = ResourceBundle.getBundle("bookList").getString("JKRowling");
@@ -28,9 +29,9 @@ public class BibliotecaAppTest {
         bookList.add(new Book(harryPotterAndPhilosophersStone, JKRowling, 1987));
         bookList.add(new Book(harryPotterAndChambersOfSecrets, JKRowling, 1987));
         outputStream = new ByteArrayOutputStream();
-        printer = new Printer(outputStream);
+        outPutPrinter = new OutPutPrinter(outputStream);
         bibliotecaApp = new BibliotecaApp();
-        bibliotecaApp.run(printer,bookList);
+        bibliotecaApp.run(outPutPrinter,bookList);
     }
 
     @Test

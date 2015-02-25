@@ -1,10 +1,12 @@
+package IO;
+
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-public class Printer {
+public class OutPutPrinter {
     private final PrintStream printStream;
 
-    public Printer(OutputStream outputStream) {
+    public OutPutPrinter(OutputStream outputStream) {
         this.printStream = new PrintStream(outputStream);
     }
 
