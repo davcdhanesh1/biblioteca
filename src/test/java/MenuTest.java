@@ -1,4 +1,4 @@
-import IO.OutPutPrinter;
+import IO.Printer;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -14,8 +14,8 @@ public class MenuTest {
     public void testPrintAll() throws Exception {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         OutputStream outputStream = new PrintStream(byteArrayOutputStream);
-        OutPutPrinter outPutPrinter = new OutPutPrinter(outputStream);
-        Menu.printAll(outPutPrinter);
+        Printer printer = new Printer(outputStream);
+        Menu.printAll(printer);
 
         String expectedListOfAllMenus = new String();
         expectedListOfAllMenus +="1. List Books\n";
