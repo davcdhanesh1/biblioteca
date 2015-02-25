@@ -91,4 +91,29 @@ public class BibliotecaAppTest {
 
         assertThat(outputStream.toString(),containsString(Menu.InvalidOption.toString()));
     }
+
+    @Test
+    public void testSelectingOptionsUntilQuitOptionIsSelected() throws Exception {
+        input = "1\n-1\n2\n1\n";
+        byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
+        scanner = new Scanner(byteArrayInputStream);
+        bibliotecaApp = new BibliotecaApp(printer, scanner);
+        bibliotecaApp.run(bookList);
+
+        String actualOutput = outputStream.toString();
+
+        String expectedOutput = "Welcome To Biblioteca\n";
+        expectedOutput += "-----------------------------------------------------------------------------\n";
+        expectedOutput += "1. List Books\n";
+        expectedOutput += "\n";
+        expectedOutput += "2. Quit\n";
+        expectedOutput += "Select Option: \n";
+        expectedOutput += "|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987\n";
+        expectedOutput += "|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987\n";
+        expectedOutput += "\n";
+        expectedOutput += "Invalid option!\n";
+        expectedOutput += "Book a week, keeps teacher away!\n";
+
+        assertThat(actualOutput,is(expectedOutput));
+    }
 }

@@ -28,6 +28,9 @@ public class BibliotecaApp {
             String option = inputScanner.next();
             menu = Menu.forOption(option);
             menu.perform(bookList, printer);
+            if(!menu.shouldContinueRunning()) {
+                break;
+            }
         }
     }
 

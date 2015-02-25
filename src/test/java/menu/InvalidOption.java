@@ -45,4 +45,9 @@ public class InvalidOption {
     public void testToString() throws Exception {
         assertThat(Menu.InvalidOption.toString(), is(""));
     }
+
+    @Test
+    public void testShouldContinueRunning() throws Exception {
+        assertThat(Menu.Quit.shouldContinueRunning(),is(false));
+    }
 }

@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ListAllBookTest {
+public class QuitTest {
     public final String HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE
             = ResourceBundle.getBundle("bookList").getString("HarryPotterAndThePhilosophersStone");
     public final String HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS
@@ -37,19 +37,13 @@ public class ListAllBookTest {
 
     @Test
     public void testPerform() throws Exception {
-        String expectedListOfAllBooks = new String();
-        expectedListOfAllBooks += "|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987\n";
-        expectedListOfAllBooks += "|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987\n";
-        expectedListOfAllBooks += "\n";
-
-        Menu.ListAllBook.perform(bookList,printer);
-
-        assertThat(byteArrayOutputStream.toString(),is(expectedListOfAllBooks));
+        Menu.Quit.perform(bookList, printer);
+        assertThat(byteArrayOutputStream.toString(), is("Book a week, keeps teacher away!\n"));
     }
 
     @Test
     public void testToString() throws Exception {
-        assertThat(Menu.ListAllBook.toString(), is("1. List Books"));
+        assertThat(Menu.Quit.toString(),is("2. Quit"));
     }
 
     @Test

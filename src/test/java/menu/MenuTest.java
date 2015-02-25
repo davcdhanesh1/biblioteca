@@ -34,6 +34,6 @@ public class MenuTest {
     public void testPrintAll() throws Exception {
         Menu.printAll(printer);
 
-        assertThat(byteArrayOutputStream.toString(),is("1. List Books\n\n"));
+        assertThat(byteArrayOutputStream.toString(),is("1. List Books\n\n2. Quit\n"));
     }
 }

@@ -10,6 +10,11 @@ public enum Menu {
         public void perform(BookList bookList, Printer printer) {
             printer.print(bookList.toString());
         }
+
+        @Override
+        public boolean shouldContinueRunning() {
+            return true;
+        }
     },
     InvalidOption("0","Invalid option") {
         @Override
@@ -18,8 +23,24 @@ public enum Menu {
         }
 
         @Override
+        public boolean shouldContinueRunning() {
+            return true;
+        }
+
+        @Override
         public void perform(BookList bookList, Printer printer) {
             printer.print("Invalid option!");
+        }
+    },
+    Quit("2","Quit") {
+        @Override
+        public void perform(BookList bookList, Printer printer) {
+            printer.print("Book a week, keeps teacher away!");
+        }
+
+        @Override
+        public boolean shouldContinueRunning() {
+            return false;
         }
     };
 
@@ -57,4 +78,6 @@ public enum Menu {
     public String toString() {
         return id + ". " + description;
     }
+
+    public abstract boolean shouldContinueRunning();
 }
