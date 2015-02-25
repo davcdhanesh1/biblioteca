@@ -9,6 +9,6 @@ public class Printer {
     }
 
     public void print(String message) {
-        printStream.print(message);
+        printStream.println(message);
     }
 }

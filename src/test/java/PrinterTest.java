@@ -13,13 +13,7 @@ public class PrinterTest {
         OutputStream outputStream = new ByteArrayOutputStream();
         Printer printer = new Printer(outputStream);
         printer.print("Hello Foo");
-        assertThat(outputStream.toString(),is("Hello Foo"));
+        assertThat(outputStream.toString(),is("Hello Foo\n"));
     }
 
-    @Test
-    public void testPrinterWithSystemOutPrintStream() throws Exception {
-        Printer printer = new Printer(System.out);
-        printer.print("Hello Foo");
-
-    }
 }
