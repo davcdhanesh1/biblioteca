@@ -19,12 +19,14 @@ public class BibliotecaAppTest {
     private ByteArrayOutputStream outputStream;
     private Printer printer;
     private BibliotecaApp bibliotecaApp;
+    private final String JKRowling
+            = ResourceBundle.getBundle("bookList").getString("JKRowling");
 
     @Before
     public void setUp() throws Exception {
         bookList = new BookList();
-        bookList.add(new Book(harryPotterAndPhilosophersStone));
-        bookList.add(new Book(harryPotterAndChambersOfSecrets));
+        bookList.add(new Book(harryPotterAndPhilosophersStone, JKRowling, 1987));
+        bookList.add(new Book(harryPotterAndChambersOfSecrets, JKRowling, 1987));
         outputStream = new ByteArrayOutputStream();
         printer = new Printer(outputStream);
         bibliotecaApp = new BibliotecaApp();
@@ -39,8 +41,11 @@ public class BibliotecaAppTest {
 
     @Test
     public void testPrintingOfListOfBooksOnStartUp() throws Exception {
-        String expectedListOfBooks = "\n" + harryPotterAndPhilosophersStone + "\n" + harryPotterAndChambersOfSecrets + "\n\n";
-        assertThat(outputStream.toString(),containsString(expectedListOfBooks));
+        String expectedBookListOutput = new String();
+        expectedBookListOutput += "|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987\n";
+        expectedBookListOutput += "|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987\n";
+
+        assertThat(outputStream.toString(),containsString(expectedBookListOutput));
 
     }
 }
