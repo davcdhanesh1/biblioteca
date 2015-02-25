@@ -10,6 +10,17 @@ public enum Menu {
         public void perform(BookList bookList, Printer printer) {
             printer.print(bookList.toString());
         }
+    },
+    InvalidOption("0","Invalid option") {
+        @Override
+        public String toString() {
+            return "";
+        }
+
+        @Override
+        public void perform(BookList bookList, Printer printer) {
+            printer.print("Invalid option!");
+        }
     };
 
     private final String id;
@@ -23,13 +34,9 @@ public enum Menu {
 
     public abstract void perform(BookList bookList, Printer printer);
 
-    public void view(Printer printer) {
-        printer.print(id + ". " + description);
-    }
-
     public static void printAll(Printer printer){
         for(Menu menu : Menu.values()) {
-            menu.view(printer);
+            printer.print(menu.toString());
         }
     }
 
@@ -39,10 +46,15 @@ public enum Menu {
                 return menu;
             }
         }
-        return null;
+        return InvalidOption;
     }
 
     private boolean matches(String id) {
         return this.id.equals(id);
+    }
+
+    @Override
+    public String toString() {
+        return id + ". " + description;
     }
 }
