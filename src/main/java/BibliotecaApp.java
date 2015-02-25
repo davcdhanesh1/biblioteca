@@ -1,6 +1,6 @@
 import IO.Printer;
 import book.BookList;
-import menu.MenuOption;
+import menu.Menu;
 
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -21,18 +21,18 @@ public class BibliotecaApp {
         printSeparatorLine();
         printMenuList();
         printPrompt();
-        MenuOption menuOption;
+        Menu menu;
 
         inputScanner.useDelimiter("\n");
         while(inputScanner.hasNext()) {
             String option = inputScanner.next();
-            menuOption = MenuOption.forOption(option);
-            menuOption.perform(bookList, printer);
+            menu = Menu.forOption(option);
+            menu.perform(bookList, printer);
         }
     }
 
     private void printMenuList() {
-        MenuOption.printAll(printer);
+        Menu.printAll(printer);
     }
 
     private void printPrompt() {

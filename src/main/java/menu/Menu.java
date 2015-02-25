@@ -3,7 +3,7 @@ package menu;
 import IO.Printer;
 import book.BookList;
 
-public enum MenuOption {
+public enum Menu {
 
     ListAllBook("1", "List Books") {
         @Override
@@ -16,7 +16,7 @@ public enum MenuOption {
 
     private final String description;
 
-    MenuOption(String id, String description) {
+    Menu(String id, String description) {
         this.id = id;
         this.description = description;
     }
@@ -28,15 +28,15 @@ public enum MenuOption {
     }
 
     public static void printAll(Printer printer){
-        for(MenuOption menuOption: MenuOption.values()) {
-            menuOption.view(printer);
+        for(Menu menu : Menu.values()) {
+            menu.view(printer);
         }
     }
 
-    public static MenuOption forOption(String option) {
-        for(MenuOption menuOption: MenuOption.values()) {
-            if(menuOption.matches(option)) {
-                return menuOption;
+    public static Menu forOption(String option) {
+        for(Menu menu : Menu.values()) {
+            if(menu.matches(option)) {
+                return menu;
             }
         }
         return null;
