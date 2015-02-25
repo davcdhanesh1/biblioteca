@@ -14,16 +14,14 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class BibliotecaAppTest {
-    public static final String harryPotterAndPhilosophersStone
-            = ResourceBundle.getBundle("bookList").getString("HarryPotterAndThePhilosophersStone");
-    public static final String harryPotterAndChambersOfSecrets
-            = ResourceBundle.getBundle("bookList").getString("HarryPotterAndTheChambersOfSecrets");
+    public static final String harryPotterAndPhilosophersStone = ResourceBundle.getBundle("bookList").getString("HarryPotterAndThePhilosophersStone");
+    public static final String harryPotterAndChambersOfSecrets = ResourceBundle.getBundle("bookList").getString("HarryPotterAndTheChambersOfSecrets");
+    private final String JKRowling = ResourceBundle.getBundle("bookList").getString("JKRowling");
+
     BookList bookList;
     private ByteArrayOutputStream outputStream;
     private Printer printer;
     private BibliotecaApp bibliotecaApp;
-    private final String JKRowling
-            = ResourceBundle.getBundle("bookList").getString("JKRowling");
     private String input;
     private ByteArrayInputStream byteArrayInputStream;
     private Scanner scanner;
