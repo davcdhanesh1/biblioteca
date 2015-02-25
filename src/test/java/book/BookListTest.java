@@ -3,12 +3,16 @@ package book;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ResourceBundle;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class BookListTest {
-    public static final String HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE = "Harry Potter and the Philosopher's Stone";
-    public static final String HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS = "Harry Potter and the Chamber of Secrets";
+    public static final String HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE
+            = ResourceBundle.getBundle("bookList").getString("HarryPotterAndThePhilosophersStone");
+    public static final String HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS
+            = ResourceBundle.getBundle("bookList").getString("HarryPotterAndTheChambersOfSecrets");
     BookList bookList;
 
     @Before
