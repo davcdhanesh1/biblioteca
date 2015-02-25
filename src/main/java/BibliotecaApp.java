@@ -40,8 +40,7 @@ public class BibliotecaApp {
     }
 
     private void printSeparatorLine() {
-        String separatorPattern = ResourceBundle.getBundle("BibliotecaAppMessages").getString("SeparatorDesign");
-        printer.print(String.format("%-64s", separatorPattern));
+        printer.print("-----------------------------------------------------------------------------");
     }
 
     private void printWelcomeMessage() {

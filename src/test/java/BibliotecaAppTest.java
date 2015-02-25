@@ -52,7 +52,7 @@ public class BibliotecaAppTest {
     public void testSeparatorBetweenWelcomeMessageAndListOfBooks() throws Exception {
         bibliotecaApp.run(bookList);
 
-        assertThat(outputStream.toString(),containsString(String.format("\n%-64s",'-')));
+        assertThat(outputStream.toString(), containsString("-----------------------------------------------------------------------------\n"));
     }
 
     @Test
