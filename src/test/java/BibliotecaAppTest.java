@@ -1,6 +1,7 @@
 import IO.Printer;
 import book.Book;
 import book.BookList;
+import menu.Menu;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,7 +29,7 @@ public class BibliotecaAppTest {
 
     @Before
     public void setUp() throws Exception {
-        input = "1\n";
+        input = "0\n";
         byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
         scanner = new Scanner(byteArrayInputStream);
         bookList = new BookList();
@@ -37,6 +38,7 @@ public class BibliotecaAppTest {
         outputStream = new ByteArrayOutputStream();
         printer = new Printer(outputStream);
         bibliotecaApp = new BibliotecaApp(printer, scanner);
+
     }
 
     @Test
@@ -68,10 +70,25 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testUserShouldBeAbleToInputOption() throws Exception {
+    public void testSelectListBookOption() throws Exception {
+        input = "1\n";
+        byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
+        scanner = new Scanner(byteArrayInputStream);
+        bibliotecaApp = new BibliotecaApp(printer, scanner);
         bibliotecaApp.run(bookList);
 
         assertThat(outputStream.toString(),containsString(harryPotterAndChambersOfSecrets));
         assertThat(outputStream.toString(),containsString(harryPotterAndPhilosophersStone));
+    }
+
+    @Test
+    public void testSelectingInvalidOption() throws Exception {
+        input = "-1\n";
+        byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
+        scanner = new Scanner(byteArrayInputStream);
+        bibliotecaApp = new BibliotecaApp(printer, scanner);
+        bibliotecaApp.run(bookList);
+
+        assertThat(outputStream.toString(),containsString(Menu.InvalidOption.toString()));
     }
 }
