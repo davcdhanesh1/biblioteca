@@ -35,8 +35,13 @@ public class BibliotecaAppTest {
 
     @Test
     public void testPrintingOfWelcomeMessage() throws Exception {
-        String expectedWelcomeToBibliotecaMsg = ResourceBundle.getBundle("bibliotecaAppMessages").getString("WelcomeMessage");
+        String expectedWelcomeToBibliotecaMsg = ResourceBundle.getBundle("bibliotecaAppMessagesTest").getString("WelcomeMessage");
         assertThat(outputStream.toString(),containsString(expectedWelcomeToBibliotecaMsg));
+    }
+
+    @Test
+    public void testSeparatorBetweenWelcomeMessageAndListOfBooks() throws Exception {
+        assertThat(outputStream.toString(),containsString(String.format("\n%-64s",'-')));
     }
 
     @Test
