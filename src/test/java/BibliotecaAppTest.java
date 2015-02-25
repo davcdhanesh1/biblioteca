@@ -30,8 +30,8 @@ public class BibliotecaAppTest {
         bookList.add(new Book(harryPotterAndChambersOfSecrets, JKRowling, 1987));
         outputStream = new ByteArrayOutputStream();
         outPutPrinter = new OutPutPrinter(outputStream);
-        bibliotecaApp = new BibliotecaApp();
-        bibliotecaApp.run(outPutPrinter,bookList);
+        bibliotecaApp = new BibliotecaApp(outPutPrinter);
+        bibliotecaApp.run(bookList);
     }
 
     @Test
@@ -46,12 +46,12 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testPrintingOfListOfBooksOnStartUp() throws Exception {
-        String expectedBookListOutput = new String();
-        expectedBookListOutput += "|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987\n";
-        expectedBookListOutput += "|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987\n";
+    public void testMenuOptionOnStart() throws Exception {
+        String expectedMenuOptions = new String();
+        expectedMenuOptions += "1. List Books";
+        String selectOption = "Select Option: ";
 
-        assertThat(outputStream.toString(),containsString(expectedBookListOutput));
-
+        assertThat(outputStream.toString(),containsString(expectedMenuOptions));
+        assertThat(outputStream.toString(),containsString(selectOption));
     }
 }

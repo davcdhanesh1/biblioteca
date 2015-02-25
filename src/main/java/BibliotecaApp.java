@@ -2,22 +2,37 @@ import IO.OutPutPrinter;
 import book.BookList;
 
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 public class BibliotecaApp {
 
-    public void run(OutPutPrinter outPutPrinter, BookList bookList) {
-        outPutPrinter.print(getWelcomeToBibliotecaMsg());
-        outPutPrinter.print(getSeparator());
-        outPutPrinter.print(bookList.toString());
+    private OutPutPrinter outPutPrinter;
+
+    public BibliotecaApp(OutPutPrinter outPutPrinter) {
+
+        this.outPutPrinter = outPutPrinter;
     }
 
-    private String getSeparator() {
+    public void run(BookList bookList) {
+        printWelcomeMessage();
+        printSeparatorLine();
+        printMenuList();
+        printPrompt();
+    }
+
+    private void printMenuList() {
+        Menu.printAll(outPutPrinter);
+    }
+
+    private void printPrompt() {
+        outPutPrinter.print("Select Option: ");
+    }
+
+    private void printSeparatorLine() {
         String separatorPattern = ResourceBundle.getBundle("BibliotecaAppMessages").getString("SeparatorDesign");
-        return String.format("%-64s",separatorPattern);
+        outPutPrinter.print(String.format("%-64s", separatorPattern));
     }
 
-    private String getWelcomeToBibliotecaMsg() {
-        return ResourceBundle.getBundle("BibliotecaAppMessages").getString("WelcomeMessage");
+    private void printWelcomeMessage() {
+        outPutPrinter.print(ResourceBundle.getBundle("BibliotecaAppMessages").getString("WelcomeMessage"));
     }
 }
