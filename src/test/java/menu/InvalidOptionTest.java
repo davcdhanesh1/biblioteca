@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class InvalidOption {
+public class InvalidOptionTest {
     public final String HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE
             = ResourceBundle.getBundle("bookList").getString("HarryPotterAndThePhilosophersStone");
     public final String HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS
