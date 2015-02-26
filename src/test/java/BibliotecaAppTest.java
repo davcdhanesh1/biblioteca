@@ -140,14 +140,24 @@ public class BibliotecaAppTest {
                 "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
                 "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 "",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Quit",
+                "Select Option: ",
                 "Invalid option!",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Quit",
+                "Select Option: ",
                 "Book a week, keeps teacher away!");
 
         assertThat(actualOutput,is(expectedOutput));
     }
 
     @Test
-    public void testSelectingToCheckOutABook() throws Exception, BookNotFoundException {
+    public void testSuccessfullBookCheckOut() throws Exception, BookNotFoundException {
         inputForSelectingBook = "2\n1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);

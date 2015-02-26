@@ -21,10 +21,11 @@ public class BibliotecaApp {
     }
 
     public void run(Library library) throws BookNotFoundException {
-        bootStrapApp();
+        printWelcomeMessage();
         Menu menu; String option;
         scanner.useDelimiter("\n");
         while(scanner.hasNext()) {
+            printMenuListAndPrompt();
             option = scanner.next();
             menu = menuList.find(option);
             menu.perform(library, printer, scanner);
@@ -34,8 +35,7 @@ public class BibliotecaApp {
         }
     }
 
-    private void bootStrapApp() {
-        printWelcomeMessage();
+    private void printMenuListAndPrompt() {
         printSeparatorLine();
         printMenuList();
         printPrompt();
