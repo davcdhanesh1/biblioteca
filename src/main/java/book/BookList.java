@@ -33,7 +33,7 @@ public class BookList {
         try {
             return bookList.get(indexOfItemToBeFound);
         } catch (IndexOutOfBoundsException e) {
-            throw new BookNotFoundException("Book you are tyring to find, is not present.");
+            throw new BookNotFoundException("That book is not available.");
         }
     }
 }

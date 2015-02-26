@@ -54,6 +54,6 @@ public class LibraryTest {
     public void testCheckOutBookWhenWrongIdIsGiven() throws Exception, BookNotFoundException {
         library.checkOut("10");
 
-        assertThat(outputStream.toString(),is("Book you are tyring to find, is not present.\n"));
+        assertThat(outputStream.toString(),is("That book is not available.\n"));
     }
 }
