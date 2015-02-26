@@ -36,4 +36,15 @@ public class BookList {
             throw new BookNotFoundException("Invalid Book to return");
         }
     }
+
+    public Book findFromCheckedOutBooksById(String index) throws BookNotFoundException, BookIsNotAvailable {
+        int indexOfItemToBeFound = Integer.parseInt(index) - 1;
+        try {
+            Book book = bookList.get(indexOfItemToBeFound);
+            if (!book.isCheckedOut()) throw new BookIsNotAvailable("That book is not checked out");
+            return book;
+        } catch (IndexOutOfBoundsException e) {
+            throw new BookNotFoundException("Invalid Book to return");
+        }
+    }
 }

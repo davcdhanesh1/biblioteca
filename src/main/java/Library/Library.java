@@ -31,4 +31,16 @@ public class Library {
     public void printAllBook() {
         printer.println(bookList.toString());
     }
+
+    public void returnBook(String bookId) throws BookIsNotAvailable {
+        try {
+            Book book = bookList.findFromCheckedOutBooksById(bookId);
+            book.checkIn();
+            printer.println("Thank you for returning the book.");
+        } catch (BookNotFoundException e) {
+            printer.println(e.getMessage());
+        } catch (BookIsNotAvailable e) {
+            printer.println(e.getMessage());
+        }
+    }
 }
