@@ -1,6 +1,7 @@
 package menu;
 
 import IO.Printer;
+import StringHelpers.StringUtil;
 import book.Book;
 import book.BookList;
 import org.junit.Before;
@@ -39,14 +40,15 @@ public class ListAllBookTest {
 
     @Test
     public void testPerform() throws Exception {
-        String expectedListOfAllBooks = new String();
-        expectedListOfAllBooks += "|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987\n";
-        expectedListOfAllBooks += "|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987\n";
-        expectedListOfAllBooks += "\n";
+        String expectedOutput = StringUtil.getOutputString(
+                "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                ""
+        );
 
         listAllBook.perform(bookList, printer);
 
-        assertThat(byteArrayOutputStream.toString(),is(expectedListOfAllBooks));
+        assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
     }
 
     @Test

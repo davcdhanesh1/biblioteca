@@ -100,7 +100,15 @@ public class BibliotecaAppTest {
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
         bibliotecaApp.run(bookList);
 
-        assertThat(outputStream.toString(),containsString("Invalid option!"));
+        String expectedOutput = StringUtil.getOutputString(
+                "Welcome To Biblioteca",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Quit",
+                "Select Option: ",
+                "Invalid option!");
+
+        assertThat(outputStream.toString(), is(expectedOutput));
     }
 
     @Test
@@ -119,8 +127,8 @@ public class BibliotecaAppTest {
                 "1. List Books",
                 "2. Quit",
                 "Select Option: ",
-                "|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
-                "|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 "",
                 "Invalid option!",
                 "Book a week, keeps teacher away!");

@@ -16,9 +16,12 @@ public class BookList {
     @Override
     public String toString() {
         String result = new String();
-        for (Book book: bookList) {
-            if(book.isCheckedOut()) continue;
-            result += book.toString() + "\n";
+        int indexToDisplay; Book book;
+        for(int i = 0; i < bookList.size(); i++) {
+            book = bookList.get(i);
+            if (book.isCheckedOut()) continue;
+            indexToDisplay = i + 1;
+            result += (indexToDisplay) + ". " + book.toString() + "\n";
         }
         return result;
     }
