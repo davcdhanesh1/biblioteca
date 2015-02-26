@@ -14,7 +14,11 @@ public class Library {
     }
 
     public void checkOut(String bookId) throws BookNotFoundException {
-        Book book = bookList.find(bookId);
-        book.checkOut();
+        try {
+            Book book = bookList.find(bookId);
+            book.checkOut();
+        } catch (BookNotFoundException e) {
+            printer.println(e.getMessage());
+        }
     }
 }

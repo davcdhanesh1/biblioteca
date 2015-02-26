@@ -45,4 +45,11 @@ public class LibraryTest {
         library.checkOut("1");
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
     }
+
+    @Test
+    public void testCheckOutBookWhenWrongIdIsGiven() throws Exception, BookNotFoundException {
+        library.checkOut("10");
+
+        assertThat(outputStream.toString(),is("Book you are tyring to find, is not present.\n"));
+    }
 }
