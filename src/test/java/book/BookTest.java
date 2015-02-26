@@ -16,4 +16,13 @@ public class BookTest {
 
         assertThat(book.toString(), is(expectedBookRepresentation));
     }
+
+    @Test
+    public void testCheckOutBook() throws Exception {
+        Book book = new Book("A pedagogy of opression", "Paulo Freire", 1987);
+
+        assertThat(book.isCheckedOut(), is(false));
+        book.checkOut();
+        assertThat(book.isCheckedOut(), is(true));
+    }
 }
