@@ -41,7 +41,7 @@ public class LibraryTest {
 
     @Test
     public void testCheckOutBook() throws Exception {
-        library.checkOut(harryPotterAndTheChambersOfSecrets);
-        assertThat(harryPotterAndTheChambersOfSecrets.isCheckedOut(),is(true));
+        library.checkOut("1");
+        assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
     }
 }

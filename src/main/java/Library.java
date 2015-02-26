@@ -12,7 +12,8 @@ public class Library {
         this.printer = printer;
     }
 
-    public void checkOut(Book book) {
+    public void checkOut(String bookId) {
+        Book book = bookList.find(bookId);
         book.checkOut();
     }
 }
