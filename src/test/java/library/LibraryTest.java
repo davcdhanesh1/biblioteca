@@ -47,6 +47,7 @@ public class LibraryTest {
     public void testCheckOutBook() throws Exception, BookNotFoundException {
         library.checkOut("1");
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
+        assertThat(outputStream.toString(),is("Thanks you! Enjoy the book\n"));
     }
 
     @Test
