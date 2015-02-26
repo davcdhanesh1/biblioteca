@@ -170,4 +170,30 @@ public class BibliotecaAppTest {
 
         assertThat(actualOutput,is(expectedOutput));
     }
+
+    @Test
+    public void testUnsuccessfulCheckOut() throws Exception, BookNotFoundException {
+        inputForSelectingBook = "2\n3\n";
+        byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
+        scanner = new Scanner(byteArrayInputStream);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
+        bibliotecaApp.run(library);
+
+        String actualOutput = outputStream.toString();
+
+        String expectedOutput = StringUtil.getOutputString(
+                "Welcome To Biblioteca",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Quit",
+                "Select Option: ",
+                "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                "",
+                "Select a book: ",
+                "That book is not available.");
+
+        assertThat(actualOutput,is(expectedOutput));
+    }
 }
