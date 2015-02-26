@@ -8,8 +8,10 @@ import book.BookList;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -28,11 +30,17 @@ public class ListAllBookTest {
     private BookList bookList;
     private ListAllBook listAllBook;
     private Library library;
+    private ByteArrayInputStream byteArrayInputStream;
+    private Scanner scanner;
 
     @Before
     public void setUp() throws Exception {
         byteArrayOutputStream = new ByteArrayOutputStream();
         printer = new Printer(byteArrayOutputStream);
+
+        byte[] input = new String().getBytes();
+        byteArrayInputStream = new ByteArrayInputStream(input);
+        scanner =  new Scanner(byteArrayInputStream);
 
         bookList = new BookList();
         bookList.add(new Book(HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987));
@@ -49,7 +57,7 @@ public class ListAllBookTest {
                 ""
         );
 
-        listAllBook.perform(library, printer);
+        listAllBook.perform(library, printer, scanner);
 
         assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
     }

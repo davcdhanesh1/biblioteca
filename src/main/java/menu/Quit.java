@@ -3,6 +3,8 @@ package menu;
 import IO.Printer;
 import Library.Library;
 
+import java.util.Scanner;
+
 public class Quit extends Menu {
 
     public Quit() {
@@ -10,7 +12,7 @@ public class Quit extends Menu {
     }
 
     @Override
-    public void perform(Library library, Printer printer) {
+    public void perform(Library library, Printer printer, Scanner scanner) {
         printer.println("Book a week, keeps teacher away!");
     }
 

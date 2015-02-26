@@ -3,6 +3,8 @@ package menu;
 import IO.Printer;
 import Library.Library;
 
+import java.util.Scanner;
+
 public class ListAllBook extends Menu{
 
     public ListAllBook() {
@@ -10,7 +12,7 @@ public class ListAllBook extends Menu{
     }
 
     @Override
-    public void perform(Library library, Printer printer) {
+    public void perform(Library library, Printer printer, Scanner scanner) {
         library.printAllBook();
     }
 

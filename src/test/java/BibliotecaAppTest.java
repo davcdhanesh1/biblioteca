@@ -2,6 +2,7 @@ import IO.Printer;
 import Library.Library;
 import book.Book;
 import book.BookList;
+import book.BookNotFoundException;
 import menu.ListAllBook;
 import menu.MenuList;
 import menu.Quit;
@@ -57,7 +58,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testPrintingOfWelcomeMessage() throws Exception {
+    public void testPrintingOfWelcomeMessage() throws Exception, BookNotFoundException {
         String expectedWelcomeToBibliotecaMsg = ResourceBundle.getBundle("bibliotecaAppMessagesTest").getString("WelcomeMessage");
 
         bibliotecaApp.run(library);
@@ -66,14 +67,14 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testSeparatorBetweenWelcomeMessageAndListOfBooks() throws Exception {
+    public void testSeparatorBetweenWelcomeMessageAndListOfBooks() throws Exception, BookNotFoundException {
         bibliotecaApp.run(library);
 
         assertThat(outputStream.toString(), containsString("-----------------------------------------------------------------------------\n"));
     }
 
     @Test
-    public void testMenuOptionOnStart() throws Exception {
+    public void testMenuOptionOnStart() throws Exception, BookNotFoundException {
         String expectedMenuOptions = new String();
         expectedMenuOptions += "1. List Books";
         String selectOption = "Select Option: ";
@@ -85,7 +86,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testSelectListBookOption() throws Exception {
+    public void testSelectListBookOption() throws Exception, BookNotFoundException {
         input = "1\n";
         byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
         scanner = new Scanner(byteArrayInputStream);
@@ -97,7 +98,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testSelectingInvalidOption() throws Exception {
+    public void testSelectingInvalidOption() throws Exception, BookNotFoundException {
         input = "-1\n";
         byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
         scanner = new Scanner(byteArrayInputStream);
@@ -116,7 +117,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testSelectingOptionsUntilQuitOptionIsSelected() throws Exception {
+    public void testSelectingOptionsUntilQuitOptionIsSelected() throws Exception, BookNotFoundException {
         input = "1\n-1\n2\n1\n";
         byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
         scanner = new Scanner(byteArrayInputStream);

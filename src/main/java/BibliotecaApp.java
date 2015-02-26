@@ -1,5 +1,6 @@
 import IO.Printer;
 import Library.Library;
+import book.BookNotFoundException;
 import menu.Menu;
 import menu.MenuList;
 
@@ -9,24 +10,24 @@ import java.util.Scanner;
 public class BibliotecaApp {
 
     private Printer printer;
-    private Scanner inputScanner;
+    private Scanner scanner;
     private MenuList menuList;
 
-    public BibliotecaApp(Printer printer, Scanner inputScanner, MenuList menuList) {
+    public BibliotecaApp(Printer printer, Scanner scanner, MenuList menuList) {
 
         this.printer = printer;
-        this.inputScanner = inputScanner;
+        this.scanner = scanner;
         this.menuList = menuList;
     }
 
-    public void run(Library library) {
+    public void run(Library library) throws BookNotFoundException {
         bootStrapApp();
         Menu menu; String option;
-        inputScanner.useDelimiter("\n");
-        while(inputScanner.hasNext()) {
-            option = inputScanner.next();
+        scanner.useDelimiter("\n");
+        while(scanner.hasNext()) {
+            option = scanner.next();
             menu = menuList.find(option);
-            menu.perform(library, printer);
+            menu.perform(library, printer, scanner);
             if(!menu.shouldContinueRunning()) {
                 break;
             }

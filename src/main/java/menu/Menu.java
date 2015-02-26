@@ -2,6 +2,9 @@ package menu;
 
 import IO.Printer;
 import Library.Library;
+import book.BookNotFoundException;
+
+import java.util.Scanner;
 
 public abstract class Menu {
 
@@ -11,7 +14,7 @@ public abstract class Menu {
         this.description = description;
     }
 
-    public abstract void perform(Library library, Printer printer);
+    public abstract void perform(Library library, Printer printer, Scanner scanner) throws BookNotFoundException;
 
     public abstract boolean shouldContinueRunning();
 

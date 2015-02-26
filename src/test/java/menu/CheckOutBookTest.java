@@ -2,14 +2,17 @@ package menu;
 
 import IO.Printer;
 import Library.Library;
+import book.BookNotFoundException;
 import testhelpers.StringUtil;
 import book.Book;
 import book.BookList;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -28,12 +31,18 @@ public class CheckOutBookTest {
     private CheckOutBook checkOutBook = new CheckOutBook();
     private Printer printer;
     private ByteArrayOutputStream byteArrayOutputStream;
+    private ByteArrayInputStream byteArrayInputStream;
     private Library library;
+    private Scanner scanner;
+    private String input;
 
     @Before
     public void setUp() throws Exception {
+        input = "1\n";
         byteArrayOutputStream = new ByteArrayOutputStream();
         printer  = new Printer(byteArrayOutputStream);
+        byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
+        scanner = new Scanner(byteArrayInputStream);
 
         bookList = new BookList();
         harryPotterAndThePhilosophersStone = new Book(HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987);
@@ -55,15 +64,18 @@ public class CheckOutBookTest {
     }
 
     @Test
-    public void testPerform() throws Exception {
-        checkOutBook.perform(library, printer);
+    public void testPerform() throws Exception, BookNotFoundException {
+        checkOutBook.perform(library, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
                 "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
                 "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 "",
-                "Select a book: "
+                "Select a book: ",
+                "Thanks you! Enjoy the book"
+
         );
 
         assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
+        assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
     }
 }

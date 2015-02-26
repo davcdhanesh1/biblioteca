@@ -19,6 +19,7 @@ public class Library {
         try {
             Book book = bookList.find(bookId);
             book.checkOut();
+            printer.println("Thanks you! Enjoy the book");
         } catch (BookNotFoundException e) {
             printer.println(e.getMessage());
         }
