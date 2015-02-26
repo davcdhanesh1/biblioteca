@@ -1,6 +1,7 @@
 import IO.Printer;
 import book.BookList;
 import menu.Menu;
+import menu.MenuList;
 
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -9,24 +10,22 @@ public class BibliotecaApp {
 
     private Printer printer;
     private Scanner inputScanner;
+    private MenuList menuList;
 
-    public BibliotecaApp(Printer printer, Scanner inputScanner) {
+    public BibliotecaApp(Printer printer, Scanner inputScanner, MenuList menuList) {
 
         this.printer = printer;
         this.inputScanner = inputScanner;
+        this.menuList = menuList;
     }
 
     public void run(BookList bookList) {
-        printWelcomeMessage();
-        printSeparatorLine();
-        printMenuList();
-        printPrompt();
+        bootStrapApp();
         Menu menu;
-
         inputScanner.useDelimiter("\n");
         while(inputScanner.hasNext()) {
             String option = inputScanner.next();
-            menu = Menu.forOption(option);
+            menu = menuList.find(option);
             menu.perform(bookList, printer);
             if(!menu.shouldContinueRunning()) {
                 break;
@@ -34,8 +33,15 @@ public class BibliotecaApp {
         }
     }
 
+    private void bootStrapApp() {
+        printWelcomeMessage();
+        printSeparatorLine();
+        printMenuList();
+        printPrompt();
+    }
+
     private void printMenuList() {
-        Menu.printAll(printer);
+        menuList.printAll(printer);
     }
 
     private void printPrompt() {

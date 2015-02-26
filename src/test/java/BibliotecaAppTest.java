@@ -1,7 +1,10 @@
 import IO.Printer;
 import book.Book;
 import book.BookList;
+import menu.ListAllBook;
 import menu.Menu;
+import menu.MenuList;
+import menu.Quit;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,19 +29,27 @@ public class BibliotecaAppTest {
     private String input;
     private ByteArrayInputStream byteArrayInputStream;
     private Scanner scanner;
+    private MenuList menuList;
 
     @Before
     public void setUp() throws Exception {
         input = "0\n";
+
         byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
         scanner = new Scanner(byteArrayInputStream);
+
+        outputStream = new ByteArrayOutputStream();
+        printer = new Printer(outputStream);
+
+        menuList = new MenuList();
+        menuList.add(new ListAllBook());
+        menuList.add(new Quit());
+
         bookList = new BookList();
         bookList.add(new Book(harryPotterAndPhilosophersStone, JKRowling, 1987));
         bookList.add(new Book(harryPotterAndChambersOfSecrets, JKRowling, 1987));
-        outputStream = new ByteArrayOutputStream();
-        printer = new Printer(outputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner);
 
+        bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
     }
 
     @Test
@@ -74,7 +85,7 @@ public class BibliotecaAppTest {
         input = "1\n";
         byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
         bibliotecaApp.run(bookList);
 
         assertThat(outputStream.toString(),containsString(harryPotterAndChambersOfSecrets));
@@ -86,10 +97,10 @@ public class BibliotecaAppTest {
         input = "-1\n";
         byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
         bibliotecaApp.run(bookList);
 
-        assertThat(outputStream.toString(),containsString(Menu.InvalidOption.toString()));
+        assertThat(outputStream.toString(),containsString("Invalid option!"));
     }
 
     @Test
@@ -97,7 +108,7 @@ public class BibliotecaAppTest {
         input = "1\n-1\n2\n1\n";
         byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
         bibliotecaApp.run(bookList);
 
         String actualOutput = outputStream.toString();
@@ -105,7 +116,6 @@ public class BibliotecaAppTest {
         String expectedOutput = "Welcome To Biblioteca\n";
         expectedOutput += "-----------------------------------------------------------------------------\n";
         expectedOutput += "1. List Books\n";
-        expectedOutput += "\n";
         expectedOutput += "2. Quit\n";
         expectedOutput += "Select Option: \n";
         expectedOutput += "|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987\n";
