@@ -11,7 +11,7 @@ public class Quit extends Menu {
 
     @Override
     public void perform(BookList bookList, Printer printer) {
-        printer.print("Book a week, keeps teacher away!");
+        printer.println("Book a week, keeps teacher away!");
     }
 
     @Override

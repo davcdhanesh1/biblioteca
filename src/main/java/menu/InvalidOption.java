@@ -16,6 +16,6 @@ public class InvalidOption extends Menu {
 
     @Override
     public void perform(BookList bookList, Printer printer) {
-        printer.print("Invalid option!");
+        printer.println("Invalid option!");
     }
 }

@@ -1,5 +1,6 @@
 package book;
 
+import StringHelpers.StringUtil;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,9 +36,10 @@ public class BookListTest {
 
     @Test
     public void testPrintListOfBooks() throws Exception {
-        String expectedBookListOutput = new String();
-        expectedBookListOutput += "|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987\n";
-        expectedBookListOutput += "|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987\n";
+        String expectedBookListOutput = StringUtil.getOutputString(
+                "|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987"
+        );
 
         assertThat(bookList.toString(),is(expectedBookListOutput));
     }

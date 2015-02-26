@@ -18,7 +18,7 @@ public class BookList {
         String result = new String();
         for (Book book: bookList) {
             if(book.isCheckedOut()) continue;
-            result += book + "\n";
+            result += book.toString() + "\n";
         }
         return result;
     }

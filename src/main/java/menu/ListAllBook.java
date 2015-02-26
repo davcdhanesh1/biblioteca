@@ -11,7 +11,7 @@ public class ListAllBook extends Menu{
 
     @Override
     public void perform(BookList bookList, Printer printer) {
-        printer.print(bookList.toString());
+        printer.println(bookList.toString());
     }
 
     @Override

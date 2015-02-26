@@ -21,10 +21,10 @@ public class BibliotecaApp {
 
     public void run(BookList bookList) {
         bootStrapApp();
-        Menu menu;
+        Menu menu; String option;
         inputScanner.useDelimiter("\n");
         while(inputScanner.hasNext()) {
-            String option = inputScanner.next();
+            option = inputScanner.next();
             menu = menuList.find(option);
             menu.perform(bookList, printer);
             if(!menu.shouldContinueRunning()) {
@@ -45,14 +45,14 @@ public class BibliotecaApp {
     }
 
     private void printPrompt() {
-        printer.print("Select Option: ");
+        printer.println("Select Option: ");
     }
 
     private void printSeparatorLine() {
-        printer.print("-----------------------------------------------------------------------------");
+        printer.println("-----------------------------------------------------------------------------");
     }
 
     private void printWelcomeMessage() {
-        printer.print(ResourceBundle.getBundle("BibliotecaAppMessages").getString("WelcomeMessage"));
+        printer.println(ResourceBundle.getBundle("BibliotecaAppMessages").getString("WelcomeMessage"));
     }
 }

@@ -10,7 +10,7 @@ public class Printer {
         this.printStream = new PrintStream(outputStream);
     }
 
-    public void print(String message) {
+    public void println(String message) {
         printStream.println(message);
     }
 }

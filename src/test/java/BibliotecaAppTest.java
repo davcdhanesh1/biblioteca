@@ -1,8 +1,8 @@
 import IO.Printer;
+import StringHelpers.StringUtil;
 import book.Book;
 import book.BookList;
 import menu.ListAllBook;
-import menu.Menu;
 import menu.MenuList;
 import menu.Quit;
 import org.junit.Before;
@@ -113,17 +113,19 @@ public class BibliotecaAppTest {
 
         String actualOutput = outputStream.toString();
 
-        String expectedOutput = "Welcome To Biblioteca\n";
-        expectedOutput += "-----------------------------------------------------------------------------\n";
-        expectedOutput += "1. List Books\n";
-        expectedOutput += "2. Quit\n";
-        expectedOutput += "Select Option: \n";
-        expectedOutput += "|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987\n";
-        expectedOutput += "|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987\n";
-        expectedOutput += "\n";
-        expectedOutput += "Invalid option!\n";
-        expectedOutput += "Book a week, keeps teacher away!\n";
+        String expectedOutput = StringUtil.getOutputString(
+                "Welcome To Biblioteca",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Quit",
+                "Select Option: ",
+                "|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                "",
+                "Invalid option!",
+                "Book a week, keeps teacher away!");
 
         assertThat(actualOutput,is(expectedOutput));
     }
+
 }

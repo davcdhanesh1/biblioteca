@@ -14,7 +14,7 @@ public class PrinterTest {
     public void testPrinterWithByteArrayOutputStream() throws Exception {
         OutputStream outputStream = new ByteArrayOutputStream();
         Printer printer = new Printer(outputStream);
-        printer.print("Hello Foo");
+        printer.println("Hello Foo");
         assertThat(outputStream.toString(), is("Hello Foo\n"));
     }
 

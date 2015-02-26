@@ -14,7 +14,7 @@ public class MenuList {
 
     public void printAll(Printer printer) {
         for(int index = 0; index < list.size(); index++) {
-            printer.print((index + 1) + ". " + list.get(index).toString());
+            printer.println((index + 1) + ". " + list.get(index).toString());
         }
     }
 

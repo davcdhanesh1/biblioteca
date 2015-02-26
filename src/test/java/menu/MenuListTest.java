@@ -1,6 +1,7 @@
 package menu;
 
 import IO.Printer;
+import StringHelpers.StringUtil;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -17,8 +18,7 @@ public class MenuListTest {
         MenuList menuList = new MenuList();
         menuList.add(new ListAllBook());
         menuList.add(new Quit());
-        String expectedMenuList = "1. List Books\n";
-        expectedMenuList += "2. Quit\n";
+        String expectedMenuList = StringUtil.getOutputString("1. List Books", "2. Quit");
         menuList.printAll(printer);
 
         assertThat(byteArrayOutputStream.toString(),is(expectedMenuList));
