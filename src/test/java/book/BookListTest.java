@@ -16,12 +16,16 @@ public class BookListTest {
     BookList bookList;
     private final String JKRowling
             = ResourceBundle.getBundle("bookList").getString("JKRowling");
+    private Book harryPotterAndThePhilosophersStone;
+    private Book harryPotterAndTheChambersOfSecrets;
 
     @Before
     public void setUp() throws Exception {
         bookList = new BookList();
-        bookList.add(new Book(HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987));
-        bookList.add(new Book(HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
+        harryPotterAndThePhilosophersStone = new Book(HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987);
+        bookList.add(harryPotterAndThePhilosophersStone);
+        harryPotterAndTheChambersOfSecrets = new Book(HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987);
+        bookList.add(harryPotterAndTheChambersOfSecrets);
     }
 
     @Test
@@ -34,6 +38,16 @@ public class BookListTest {
         String expectedBookListOutput = new String();
         expectedBookListOutput += "|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987\n";
         expectedBookListOutput += "|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987\n";
+
+        assertThat(bookList.toString(),is(expectedBookListOutput));
+    }
+
+    @Test
+    public void testPrintListOfUncheckedOutBook() throws Exception {
+        String expectedBookListOutput = new String();
+        expectedBookListOutput += "|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987\n";
+
+        harryPotterAndTheChambersOfSecrets.checkOut();
 
         assertThat(bookList.toString(),is(expectedBookListOutput));
     }
