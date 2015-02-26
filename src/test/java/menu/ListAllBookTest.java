@@ -24,6 +24,7 @@ public class ListAllBookTest {
     private ByteArrayOutputStream byteArrayOutputStream;
     private Printer printer;
     private BookList bookList;
+    private ListAllBook listAllBook;
 
     @Before
     public void setUp() throws Exception {
@@ -33,6 +34,7 @@ public class ListAllBookTest {
         bookList = new BookList();
         bookList.add(new Book(HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987));
         bookList.add(new Book(HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
+        listAllBook = new ListAllBook();
     }
 
     @Test
@@ -42,18 +44,18 @@ public class ListAllBookTest {
         expectedListOfAllBooks += "|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987\n";
         expectedListOfAllBooks += "\n";
 
-        Menu.ListAllBook.perform(bookList,printer);
+        listAllBook.perform(bookList, printer);
 
         assertThat(byteArrayOutputStream.toString(),is(expectedListOfAllBooks));
     }
 
     @Test
     public void testToString() throws Exception {
-        assertThat(Menu.ListAllBook.toString(), is("1. List Books"));
+        assertThat(listAllBook.toString(), is("List Books"));
     }
 
     @Test
     public void testShouldContinueRunning() throws Exception {
-        assertThat(Menu.Quit.shouldContinueRunning(),is(false));
+        assertThat(listAllBook.shouldContinueRunning(),is(true));
     }
 }

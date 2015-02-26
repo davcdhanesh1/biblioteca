@@ -24,6 +24,7 @@ public class InvalidOptionTest {
     private ByteArrayOutputStream byteArrayOutputStream;
     private Printer printer;
     private BookList bookList;
+    private InvalidOption invalidOption;
 
     @Before
     public void setUp() throws Exception {
@@ -33,21 +34,22 @@ public class InvalidOptionTest {
         bookList = new BookList();
         bookList.add(new Book(HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987));
         bookList.add(new Book(HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
+        invalidOption = new InvalidOption();
     }
 
     @Test
     public void testPerform() throws Exception {
-        Menu.InvalidOption.perform(bookList, printer);
+        invalidOption.perform(bookList, printer);
         assertThat(byteArrayOutputStream.toString(), is("Invalid option!\n"));
     }
 
     @Test
     public void testToString() throws Exception {
-        assertThat(Menu.InvalidOption.toString(), is(""));
+        assertThat(invalidOption.toString(), is(""));
     }
 
     @Test
     public void testShouldContinueRunning() throws Exception {
-        assertThat(Menu.Quit.shouldContinueRunning(),is(false));
+        assertThat(invalidOption.shouldContinueRunning(),is(true));
     }
 }

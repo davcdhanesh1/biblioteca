@@ -24,6 +24,7 @@ public class QuitTest {
     private ByteArrayOutputStream byteArrayOutputStream;
     private Printer printer;
     private BookList bookList;
+    private Quit quit;
 
     @Before
     public void setUp() throws Exception {
@@ -33,21 +34,22 @@ public class QuitTest {
         bookList = new BookList();
         bookList.add(new Book(HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987));
         bookList.add(new Book(HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
+        quit = new Quit();
     }
 
     @Test
     public void testPerform() throws Exception {
-        Menu.Quit.perform(bookList, printer);
+        quit.perform(bookList, printer);
         assertThat(byteArrayOutputStream.toString(), is("Book a week, keeps teacher away!\n"));
     }
 
     @Test
     public void testToString() throws Exception {
-        assertThat(Menu.Quit.toString(),is("2. Quit"));
+        assertThat(quit.toString(),is("Quit"));
     }
 
     @Test
     public void testShouldContinueRunning() throws Exception {
-        assertThat(Menu.Quit.shouldContinueRunning(),is(false));
+        assertThat(quit.shouldContinueRunning(),is(false));
     }
 }
