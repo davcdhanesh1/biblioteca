@@ -1,7 +1,7 @@
 package menu;
 
 import IO.Printer;
-import Library.Library;
+import library.Library;
 import book.BookNotFoundException;
 import testhelpers.StringUtil;
 import book.Book;

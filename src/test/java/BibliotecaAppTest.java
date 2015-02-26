@@ -1,5 +1,5 @@
 import IO.Printer;
-import Library.Library;
+import library.Library;
 import book.Book;
 import book.BookList;
 import book.BookNotFoundException;
@@ -112,7 +112,8 @@ public class BibliotecaAppTest {
                 "Welcome To Biblioteca",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Quit",
+                "2. Checkout a Book",
+                "3. Quit",
                 "Select Option: ",
                 "Invalid option!");
 
