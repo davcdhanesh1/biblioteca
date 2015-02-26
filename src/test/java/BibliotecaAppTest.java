@@ -3,6 +3,7 @@ import Library.Library;
 import book.Book;
 import book.BookList;
 import book.BookNotFoundException;
+import menu.CheckOutBook;
 import menu.ListAllBook;
 import menu.MenuList;
 import menu.Quit;
@@ -28,17 +29,18 @@ public class BibliotecaAppTest {
     private ByteArrayOutputStream outputStream;
     private Printer printer;
     private BibliotecaApp bibliotecaApp;
-    private String input;
+    private String inputForSelectingBook;
     private ByteArrayInputStream byteArrayInputStream;
     private Scanner scanner;
     private MenuList menuList;
     private Library library;
+    private String inputForSelectingMenu;
 
     @Before
     public void setUp() throws Exception {
-        input = "0\n";
+        inputForSelectingMenu = "0\n";
 
-        byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
+        byteArrayInputStream = new ByteArrayInputStream(inputForSelectingMenu.getBytes());
         scanner = new Scanner(byteArrayInputStream);
 
         outputStream = new ByteArrayOutputStream();
@@ -46,6 +48,7 @@ public class BibliotecaAppTest {
 
         menuList = new MenuList();
         menuList.add(new ListAllBook());
+        menuList.add(new CheckOutBook());
         menuList.add(new Quit());
 
         bookList = new BookList();
@@ -87,8 +90,8 @@ public class BibliotecaAppTest {
 
     @Test
     public void testSelectListBookOption() throws Exception, BookNotFoundException {
-        input = "1\n";
-        byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
+        inputForSelectingBook = "1\n";
+        byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
         bibliotecaApp.run(library);
@@ -99,8 +102,8 @@ public class BibliotecaAppTest {
 
     @Test
     public void testSelectingInvalidOption() throws Exception, BookNotFoundException {
-        input = "-1\n";
-        byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
+        inputForSelectingBook = "-1\n";
+        byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
         bibliotecaApp.run(library);
@@ -118,8 +121,8 @@ public class BibliotecaAppTest {
 
     @Test
     public void testSelectingOptionsUntilQuitOptionIsSelected() throws Exception, BookNotFoundException {
-        input = "1\n-1\n2\n1\n";
-        byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
+        inputForSelectingBook = "1\n-1\n3\n1\n";
+        byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
         bibliotecaApp.run(library);
@@ -130,7 +133,8 @@ public class BibliotecaAppTest {
                 "Welcome To Biblioteca",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Quit",
+                "2. Checkout a Book",
+                "3. Quit",
                 "Select Option: ",
                 "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
                 "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
@@ -141,4 +145,29 @@ public class BibliotecaAppTest {
         assertThat(actualOutput,is(expectedOutput));
     }
 
+    @Test
+    public void testSelectingToCheckOutABook() throws Exception, BookNotFoundException {
+        inputForSelectingBook = "2\n1\n";
+        byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
+        scanner = new Scanner(byteArrayInputStream);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
+        bibliotecaApp.run(library);
+
+        String actualOutput = outputStream.toString();
+
+        String expectedOutput = StringUtil.getOutputString(
+                "Welcome To Biblioteca",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Quit",
+                "Select Option: ",
+                "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                "",
+                "Select a book: ",
+                "Thanks you! Enjoy the book");
+
+        assertThat(actualOutput,is(expectedOutput));
+    }
 }
