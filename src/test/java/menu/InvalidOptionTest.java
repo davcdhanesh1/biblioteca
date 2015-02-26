@@ -45,7 +45,7 @@ public class InvalidOptionTest {
 
     @Test
     public void testToString() throws Exception {
-        assertThat(invalidOption.toString(), is(""));
+        assertThat(invalidOption.toString(), is("Invalid Option!"));
     }
 
     @Test

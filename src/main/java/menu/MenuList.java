@@ -17,4 +17,13 @@ public class MenuList {
             printer.print((index + 1) + ". " + list.get(index).toString());
         }
     }
+
+    public Menu find(String index) {
+        int indexOfItemToBeFound = Integer.parseInt(index) - 1;
+        try {
+            return list.get(indexOfItemToBeFound);
+        } catch (IndexOutOfBoundsException e) {
+            return new InvalidOption();
+        }
+    }
 }

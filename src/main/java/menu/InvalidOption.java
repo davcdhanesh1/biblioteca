@@ -10,11 +10,6 @@ public class InvalidOption extends Menu {
     }
 
     @Override
-    public String toString() {
-        return "";
-    }
-
-    @Override
     public boolean shouldContinueRunning() {
         return true;
     }
