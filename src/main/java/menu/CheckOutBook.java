@@ -16,11 +16,8 @@ public class CheckOutBook extends Menu {
         String option;
         library.printAllBook();
         printer.println("Select a book: ");
-        scanner.useDelimiter("\n");
-        while(scanner.hasNext()) {
-            option = scanner.next();
-            library.checkOut(option);
-        }
+        option = scanner.next();
+        library.checkOut(option);
     }
     @Override
     public boolean shouldContinueRunning() { return true; }

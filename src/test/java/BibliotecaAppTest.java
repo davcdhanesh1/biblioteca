@@ -61,34 +61,6 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testPrintingOfWelcomeMessage() throws Exception, BookNotFoundException {
-        String expectedWelcomeToBibliotecaMsg = ResourceBundle.getBundle("bibliotecaAppMessagesTest").getString("WelcomeMessage");
-
-        bibliotecaApp.run(library);
-
-        assertThat(outputStream.toString(),containsString(expectedWelcomeToBibliotecaMsg));
-    }
-
-    @Test
-    public void testSeparatorBetweenWelcomeMessageAndListOfBooks() throws Exception, BookNotFoundException {
-        bibliotecaApp.run(library);
-
-        assertThat(outputStream.toString(), containsString("-----------------------------------------------------------------------------\n"));
-    }
-
-    @Test
-    public void testMenuOptionOnStart() throws Exception, BookNotFoundException {
-        String expectedMenuOptions = new String();
-        expectedMenuOptions += "1. List Books";
-        String selectOption = "Select Option: ";
-
-        bibliotecaApp.run(library);
-
-        assertThat(outputStream.toString(),containsString(expectedMenuOptions));
-        assertThat(outputStream.toString(),containsString(selectOption));
-    }
-
-    @Test
     public void testSelectListBookOption() throws Exception, BookNotFoundException {
         inputForSelectingBook = "1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
@@ -96,8 +68,24 @@ public class BibliotecaAppTest {
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
         bibliotecaApp.run(library);
 
-        assertThat(outputStream.toString(),containsString(harryPotterAndChambersOfSecrets));
-        assertThat(outputStream.toString(),containsString(harryPotterAndPhilosophersStone));
+        String actual = outputStream.toString();
+        String expectedOutput = StringUtil.getOutputString(
+                "Welcome To Biblioteca",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Quit",
+                "Select Option: ",
+                "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                "",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Quit",
+                "Select Option: ");
+
+        assertThat(actual, is(expectedOutput));
     }
 
     @Test
@@ -115,7 +103,13 @@ public class BibliotecaAppTest {
                 "2. Checkout a Book",
                 "3. Quit",
                 "Select Option: ",
-                "Invalid option!");
+                "Invalid option!",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Quit",
+                "Select Option: "
+        );
 
         assertThat(outputStream.toString(), is(expectedOutput));
     }
@@ -157,8 +151,8 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testSuccessfullBookCheckOut() throws Exception, BookNotFoundException {
-        inputForSelectingBook = "2\n1\n";
+    public void testSuccessfulBookCheckOut() throws Exception, BookNotFoundException {
+        inputForSelectingBook = "2\n1\n1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
@@ -177,7 +171,20 @@ public class BibliotecaAppTest {
                 "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 "",
                 "Select a book: ",
-                "Thanks you! Enjoy the book");
+                "Thanks you! Enjoy the book",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Quit",
+                "Select Option: ",
+                "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                "",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Quit",
+                "Select Option: "
+        );
 
         assertThat(actualOutput,is(expectedOutput));
     }
@@ -203,7 +210,13 @@ public class BibliotecaAppTest {
                 "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 "",
                 "Select a book: ",
-                "That book is not available.");
+                "That book is not available.",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Quit",
+                "Select Option: "
+        );
 
         assertThat(actualOutput,is(expectedOutput));
     }

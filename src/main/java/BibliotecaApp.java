@@ -1,8 +1,9 @@
 import IO.Printer;
+import book.Book;
+import book.BookList;
 import library.Library;
 import book.BookNotFoundException;
-import menu.Menu;
-import menu.MenuList;
+import menu.*;
 
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -25,13 +26,13 @@ public class BibliotecaApp {
         Menu menu; String option;
         scanner.useDelimiter("\n");
         while(scanner.hasNext()) {
-            printMenuListAndPrompt();
             option = scanner.next();
             menu = menuList.find(option);
             menu.perform(library, printer, scanner);
             if(!menu.shouldContinueRunning()) {
                 break;
             }
+            printMenuListAndPrompt();
         }
     }
 
@@ -55,5 +56,6 @@ public class BibliotecaApp {
 
     private void printWelcomeMessage() {
         printer.println(ResourceBundle.getBundle("BibliotecaAppMessages").getString("WelcomeMessage"));
+        printMenuListAndPrompt();
     }
 }

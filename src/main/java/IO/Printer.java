@@ -13,4 +13,8 @@ public class Printer {
     public void println(String message) {
         printStream.println(message);
     }
+
+    public void print(String message) {
+        printStream.print(message);
+    }
 }
