@@ -1,6 +1,7 @@
 package menu;
 
 import IO.Printer;
+import book.BookIsNotAvailable;
 import library.Library;
 import book.BookNotFoundException;
 
@@ -12,7 +13,7 @@ public class CheckOutBook extends Menu {
     }
 
     @Override
-    public void perform(Library library, Printer printer, Scanner scanner) throws BookNotFoundException {
+    public void perform(Library library, Printer printer, Scanner scanner) throws BookNotFoundException, BookIsNotAvailable {
         String option;
         library.printAllBook();
         printer.println("Select a book: ");

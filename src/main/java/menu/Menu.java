@@ -1,6 +1,7 @@
 package menu;
 
 import IO.Printer;
+import book.BookIsNotAvailable;
 import library.Library;
 import book.BookNotFoundException;
 
@@ -14,7 +15,7 @@ public abstract class Menu {
         this.description = description;
     }
 
-    public abstract void perform(Library library, Printer printer, Scanner scanner) throws BookNotFoundException;
+    public abstract void perform(Library library, Printer printer, Scanner scanner) throws BookNotFoundException, BookIsNotAvailable;
 
     public abstract boolean shouldContinueRunning();
 

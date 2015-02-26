@@ -2,6 +2,7 @@ package library;
 
 import IO.Printer;
 import book.Book;
+import book.BookIsNotAvailable;
 import book.BookList;
 import book.BookNotFoundException;
 
@@ -15,12 +16,14 @@ public class Library {
         this.printer = printer;
     }
 
-    public void checkOut(String bookId) throws BookNotFoundException {
+    public void checkOut(String bookId) throws BookNotFoundException, BookIsNotAvailable {
         try {
-            Book book = bookList.find(bookId);
+            Book book = bookList.findFromAvailableBook(bookId);
             book.checkOut();
             printer.println("Thanks you! Enjoy the book");
         } catch (BookNotFoundException e) {
+            printer.println(e.getMessage());
+        } catch (BookIsNotAvailable e) {
             printer.println(e.getMessage());
         }
     }

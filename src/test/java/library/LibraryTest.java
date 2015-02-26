@@ -2,10 +2,12 @@ package library;
 
 import IO.Printer;
 import book.Book;
+import book.BookIsNotAvailable;
 import book.BookList;
 import book.BookNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
+import testhelpers.StringUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ResourceBundle;
@@ -43,16 +45,24 @@ public class LibraryTest {
     }
 
     @Test
-    public void testCheckOutBook() throws Exception, BookNotFoundException {
+    public void testCheckOutBook() throws Exception, BookNotFoundException, BookIsNotAvailable {
         library.checkOut("1");
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
         assertThat(outputStream.toString(),is("Thanks you! Enjoy the book\n"));
     }
 
     @Test
-    public void testCheckOutBookWhenWrongIdIsGiven() throws Exception, BookNotFoundException {
+    public void testCheckOutBookWhenWrongIdIsGiven() throws Exception, BookNotFoundException, BookIsNotAvailable {
         library.checkOut("10");
 
-        assertThat(outputStream.toString(),is("That book is not available.\n"));
+        assertThat(outputStream.toString(),is("Invalid Book to return\n"));
+    }
+
+    @Test
+    public void testCheckOutBookWhenBookWithGivenIdIsNotAvailable() throws BookIsNotAvailable, BookNotFoundException {
+        library.checkOut("1");
+        String expectedOutput = StringUtil.getOutputString("Thanks you! Enjoy the book","That book is not available");
+        library.checkOut("1");
+        assertThat(outputStream.toString(),is(expectedOutput));
     }
 }

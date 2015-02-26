@@ -56,12 +56,18 @@ public class BookListTest {
     }
 
     @Test
-    public void testFindBook() throws Exception, BookNotFoundException {
-        assertThat(bookList.find("1"),is(harryPotterAndThePhilosophersStone));
+    public void testFindBook() throws Exception, BookNotFoundException, BookIsNotAvailable {
+        assertThat(bookList.findFromAvailableBook("1"),is(harryPotterAndThePhilosophersStone));
     }
 
     @Test(expected = BookNotFoundException.class)
-    public void testFindBookWhenBookToBeFoundIsNotPresentInTheList() throws Exception, BookNotFoundException {
-        bookList.find("3");
+    public void testFindBookWhenBookToBeFoundIsNotPresentInTheList() throws Exception, BookNotFoundException, BookIsNotAvailable {
+        bookList.findFromAvailableBook("3");
+    }
+
+    @Test(expected = BookIsNotAvailable.class)
+    public void testFindingAlreadyCheckedOutBook() throws Exception, BookNotFoundException, BookIsNotAvailable {
+        harryPotterAndTheChambersOfSecrets.checkOut();
+        bookList.findFromAvailableBook("2");
     }
 }

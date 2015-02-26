@@ -1,7 +1,5 @@
 package book;
 
-import menu.InvalidOption;
-
 import java.util.ArrayList;
 
 public class BookList {
@@ -28,12 +26,14 @@ public class BookList {
         return result;
     }
 
-    public Book find(String index) throws BookNotFoundException {
+    public Book findFromAvailableBook(String index) throws BookNotFoundException, BookIsNotAvailable {
         int indexOfItemToBeFound = Integer.parseInt(index) - 1;
         try {
-            return bookList.get(indexOfItemToBeFound);
+            Book book = bookList.get(indexOfItemToBeFound);
+            if (book.isCheckedOut()) throw new BookIsNotAvailable("That book is not available");
+            return book;
         } catch (IndexOutOfBoundsException e) {
-            throw new BookNotFoundException("That book is not available.");
+            throw new BookNotFoundException("Invalid Book to return");
         }
     }
 }

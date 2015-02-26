@@ -1,5 +1,6 @@
 import IO.Printer;
 import book.Book;
+import book.BookIsNotAvailable;
 import book.BookList;
 import library.Library;
 import book.BookNotFoundException;
@@ -21,7 +22,7 @@ public class BibliotecaApp {
         this.menuList = menuList;
     }
 
-    public void run(Library library) throws BookNotFoundException {
+    public void run(Library library) throws BookNotFoundException, BookIsNotAvailable {
         printWelcomeMessage();
         Menu menu; String option;
         scanner.useDelimiter("\n");
