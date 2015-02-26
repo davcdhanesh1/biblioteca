@@ -4,10 +4,7 @@ import library.Library;
 import book.Book;
 import book.BookList;
 import book.BookNotFoundException;
-import menu.CheckOutBook;
-import menu.ListAllBook;
-import menu.MenuList;
-import menu.Quit;
+import menu.*;
 import org.junit.Before;
 import org.junit.Test;
 import testhelpers.StringUtil;
@@ -36,6 +33,8 @@ public class BibliotecaAppTest {
     private MenuList menuList;
     private Library library;
     private String inputForSelectingMenu;
+    private Book harryPotterAndPhilosophersStoneBook;
+    private Book harryPotterAndChambersOfSecretsBook;
 
     @Before
     public void setUp() throws Exception {
@@ -50,11 +49,14 @@ public class BibliotecaAppTest {
         menuList = new MenuList();
         menuList.add(new ListAllBook());
         menuList.add(new CheckOutBook());
+        menuList.add(new ReturnBook());
         menuList.add(new Quit());
 
         bookList = new BookList();
-        bookList.add(new Book(harryPotterAndPhilosophersStone, JKRowling, 1987));
-        bookList.add(new Book(harryPotterAndChambersOfSecrets, JKRowling, 1987));
+        harryPotterAndPhilosophersStoneBook = new Book(harryPotterAndPhilosophersStone, JKRowling, 1987);
+        harryPotterAndChambersOfSecretsBook = new Book(BibliotecaAppTest.harryPotterAndChambersOfSecrets, JKRowling, 1987);
+        bookList.add(harryPotterAndPhilosophersStoneBook);
+        bookList.add(harryPotterAndChambersOfSecretsBook);
 
         library = new Library(bookList, printer);
 
@@ -75,7 +77,8 @@ public class BibliotecaAppTest {
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
                 "2. Checkout a Book",
-                "3. Quit",
+                "3. Return a Book",
+                "4. Quit",
                 "Select Option: ",
                 "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
                 "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
@@ -83,7 +86,8 @@ public class BibliotecaAppTest {
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
                 "2. Checkout a Book",
-                "3. Quit",
+                "3. Return a Book",
+                "4. Quit",
                 "Select Option: ");
 
         assertThat(actual, is(expectedOutput));
@@ -102,13 +106,15 @@ public class BibliotecaAppTest {
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
                 "2. Checkout a Book",
-                "3. Quit",
+                "3. Return a Book",
+                "4. Quit",
                 "Select Option: ",
                 "Invalid option!",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
                 "2. Checkout a Book",
-                "3. Quit",
+                "3. Return a Book",
+                "4. Quit",
                 "Select Option: "
         );
 
@@ -117,7 +123,7 @@ public class BibliotecaAppTest {
 
     @Test
     public void testSelectingOptionsUntilQuitOptionIsSelected() throws Exception, BookNotFoundException, BookIsNotAvailable {
-        inputForSelectingBook = "1\n-1\n3\n1\n";
+        inputForSelectingBook = "1\n-1\n4\n1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
@@ -130,7 +136,8 @@ public class BibliotecaAppTest {
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
                 "2. Checkout a Book",
-                "3. Quit",
+                "3. Return a Book",
+                "4. Quit",
                 "Select Option: ",
                 "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
                 "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
@@ -138,13 +145,15 @@ public class BibliotecaAppTest {
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
                 "2. Checkout a Book",
-                "3. Quit",
+                "3. Return a Book",
+                "4. Quit",
                 "Select Option: ",
                 "Invalid option!",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
                 "2. Checkout a Book",
-                "3. Quit",
+                "3. Return a Book",
+                "4. Quit",
                 "Select Option: ",
                 "Book a week, keeps teacher away!");
 
@@ -166,7 +175,8 @@ public class BibliotecaAppTest {
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
                 "2. Checkout a Book",
-                "3. Quit",
+                "3. Return a Book",
+                "4. Quit",
                 "Select Option: ",
                 "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
                 "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
@@ -176,14 +186,16 @@ public class BibliotecaAppTest {
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
                 "2. Checkout a Book",
-                "3. Quit",
+                "3. Return a Book",
+                "4. Quit",
                 "Select Option: ",
                 "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 "",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
                 "2. Checkout a Book",
-                "3. Quit",
+                "3. Return a Book",
+                "4. Quit",
                 "Select Option: "
         );
 
@@ -205,17 +217,19 @@ public class BibliotecaAppTest {
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
                 "2. Checkout a Book",
-                "3. Quit",
+                "3. Return a Book",
+                "4. Quit",
                 "Select Option: ",
                 "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
                 "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 "",
                 "Select a book: ",
-                "Invalid Book to return",
+                "Invalid Book to checkout",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
                 "2. Checkout a Book",
-                "3. Quit",
+                "3. Return a Book",
+                "4. Quit",
                 "Select Option: "
         );
 
@@ -244,7 +258,8 @@ public class BibliotecaAppTest {
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
                 "2. Checkout a Book",
-                "3. Quit",
+                "3. Return a Book",
+                "4. Quit",
                 "Select Option: ",
                 "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
                 "",
@@ -253,7 +268,121 @@ public class BibliotecaAppTest {
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
                 "2. Checkout a Book",
-                "3. Quit",
+                "3. Return a Book",
+                "4. Quit",
+                "Select Option: "
+        );
+
+        assertThat(actualOutput,is(expectedOutput));
+    }
+
+    @Test
+    public void testSuccessfulBookReturn() throws Exception, BookNotFoundException, BookIsNotAvailable {
+        harryPotterAndPhilosophersStoneBook.checkOut();
+        inputForSelectingBook = "1\n3\n1\n1\n";
+        byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
+        scanner = new Scanner(byteArrayInputStream);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
+        bibliotecaApp.run(library);
+
+        String actualOutput = outputStream.toString();
+
+        String expectedOutput = StringUtil.getOutputString(
+                "Welcome To Biblioteca",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Return a Book",
+                "4. Quit",
+                "Select Option: ",
+                "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                "",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Return a Book",
+                "4. Quit",
+                "Select Option: ",
+                "Enter id of Book: ",
+                "Thank you for returning the book.",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Return a Book",
+                "4. Quit",
+                "Select Option: ",
+                "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                "",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Return a Book",
+                "4. Quit",
+                "Select Option: "
+        );
+
+        assertThat(actualOutput,is(expectedOutput));
+    }
+
+    @Test
+    public void testUnsuccessfulBookReturnWhenInvalidBookIsTriedToBeReturned() throws Exception, BookNotFoundException, BookIsNotAvailable {
+
+        inputForSelectingBook = "3\n10\n";
+        byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
+        scanner = new Scanner(byteArrayInputStream);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
+        bibliotecaApp.run(library);
+
+        String actualOutput = outputStream.toString();
+
+        String expectedOutput = StringUtil.getOutputString(
+                "Welcome To Biblioteca",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Return a Book",
+                "4. Quit",
+                "Select Option: ",
+                "Enter id of Book: ",
+                "Invalid Book to return",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Return a Book",
+                "4. Quit",
+                "Select Option: "
+        );
+
+        assertThat(actualOutput,is(expectedOutput));
+    }
+
+    @Test
+    public void testUnsuccessfulBookReturnWhenAlreadyCheckedInBookIsTriedToBeCheckedIn() throws Exception, BookNotFoundException, BookIsNotAvailable {
+        harryPotterAndPhilosophersStoneBook.checkIn();
+        inputForSelectingBook = "3\n2\n";
+        byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
+        scanner = new Scanner(byteArrayInputStream);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
+        bibliotecaApp.run(library);
+
+        String actualOutput = outputStream.toString();
+
+        String expectedOutput = StringUtil.getOutputString(
+                "Welcome To Biblioteca",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Return a Book",
+                "4. Quit",
+                "Select Option: ",
+                "Enter id of Book: ",
+                "That book is not checked out",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Return a Book",
+                "4. Quit",
                 "Select Option: "
         );
 

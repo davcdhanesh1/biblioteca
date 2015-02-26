@@ -33,7 +33,7 @@ public class BookList {
             if (book.isCheckedOut()) throw new BookIsNotAvailable("That book is not available");
             return book;
         } catch (IndexOutOfBoundsException e) {
-            throw new BookNotFoundException("Invalid Book to return");
+            throw new BookNotFoundException("Invalid Book to checkout");
         }
     }
 

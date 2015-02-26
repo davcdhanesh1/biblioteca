@@ -55,7 +55,7 @@ public class LibraryTest {
     public void testCheckOutBookWhenInvalidBookIdIsGiven() throws Exception, BookNotFoundException, BookIsNotAvailable {
         library.checkOut("10");
 
-        assertThat(outputStream.toString(),is("Invalid Book to return\n"));
+        assertThat(outputStream.toString(),is("Invalid Book to checkout\n"));
     }
 
     @Test
