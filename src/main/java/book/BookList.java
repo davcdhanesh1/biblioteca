@@ -28,12 +28,12 @@ public class BookList {
         return result;
     }
 
-    public Book find(String index) {
+    public Book find(String index) throws BookNotFoundException {
         int indexOfItemToBeFound = Integer.parseInt(index) - 1;
         try {
             return bookList.get(indexOfItemToBeFound);
         } catch (IndexOutOfBoundsException e) {
-            return null;
+            throw new BookNotFoundException("Book you are tyring to find, is not present.");
         }
     }
 }

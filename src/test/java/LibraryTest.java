@@ -1,6 +1,7 @@
 import IO.Printer;
 import book.Book;
 import book.BookList;
+import book.BookNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -40,7 +41,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void testCheckOutBook() throws Exception {
+    public void testCheckOutBook() throws Exception, BookNotFoundException {
         library.checkOut("1");
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
     }

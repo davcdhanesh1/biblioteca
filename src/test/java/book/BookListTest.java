@@ -56,7 +56,12 @@ public class BookListTest {
     }
 
     @Test
-    public void testFindBook() throws Exception {
+    public void testFindBook() throws Exception, BookNotFoundException {
         assertThat(bookList.find("1"),is(harryPotterAndThePhilosophersStone));
+    }
+
+    @Test(expected = BookNotFoundException.class)
+    public void testFindBookWhenBookToBeFoundIsNotPresentInTheList() throws Exception, BookNotFoundException {
+        bookList.find("3");
     }
 }

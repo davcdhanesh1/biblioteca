@@ -1,6 +1,7 @@
 import IO.Printer;
 import book.Book;
 import book.BookList;
+import book.BookNotFoundException;
 
 public class Library {
     private final BookList bookList;
@@ -12,7 +13,7 @@ public class Library {
         this.printer = printer;
     }
 
-    public void checkOut(String bookId) {
+    public void checkOut(String bookId) throws BookNotFoundException {
         Book book = bookList.find(bookId);
         book.checkOut();
     }

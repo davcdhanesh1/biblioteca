@@ -12,6 +12,8 @@ public class CheckOutBook extends Menu {
     public void perform(BookList bookList, Printer printer) {
         printer.println(bookList.toString());
         printer.println("Select a book: ");
+//        String bookToBeCheckedOut = scanner.scan();
+//        library.checkOutBook(bookToBeCheckedOut);
     }
 
     @Override
