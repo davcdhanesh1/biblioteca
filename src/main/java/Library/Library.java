@@ -1,3 +1,5 @@
+package Library;
+
 import IO.Printer;
 import book.Book;
 import book.BookList;
@@ -20,5 +22,9 @@ public class Library {
         } catch (BookNotFoundException e) {
             printer.println(e.getMessage());
         }
+    }
+
+    public void printAllBook() {
+        printer.println(bookList.toString());
     }
 }

@@ -1,7 +1,7 @@
 package menu;
 
 import IO.Printer;
-import StringHelpers.StringUtil;
+import testhelpers.StringUtil;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;

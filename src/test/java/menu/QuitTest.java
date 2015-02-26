@@ -1,6 +1,7 @@
 package menu;
 
 import IO.Printer;
+import Library.Library;
 import book.Book;
 import book.BookList;
 import org.junit.Before;
@@ -25,6 +26,7 @@ public class QuitTest {
     private Printer printer;
     private BookList bookList;
     private Quit quit;
+    private Library library;
 
     @Before
     public void setUp() throws Exception {
@@ -35,11 +37,12 @@ public class QuitTest {
         bookList.add(new Book(HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987));
         bookList.add(new Book(HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
         quit = new Quit();
+        library = new Library(bookList,printer);
     }
 
     @Test
     public void testPerform() throws Exception {
-        quit.perform(bookList, printer);
+        quit.perform(library, printer);
         assertThat(byteArrayOutputStream.toString(), is("Book a week, keeps teacher away!\n"));
     }
 

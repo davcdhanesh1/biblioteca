@@ -1,7 +1,7 @@
 package menu;
 
 import IO.Printer;
-import book.BookList;
+import Library.Library;
 
 public class InvalidOption extends Menu {
 
@@ -10,12 +10,13 @@ public class InvalidOption extends Menu {
     }
 
     @Override
+    public void perform(Library library, Printer printer) {
+        printer.println("Invalid option!");
+    }
+
+    @Override
     public boolean shouldContinueRunning() {
         return true;
     }
 
-    @Override
-    public void perform(BookList bookList, Printer printer) {
-        printer.println("Invalid option!");
-    }
 }

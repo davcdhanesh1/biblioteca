@@ -1,5 +1,5 @@
 import IO.Printer;
-import book.BookList;
+import Library.Library;
 import menu.Menu;
 import menu.MenuList;
 
@@ -19,14 +19,14 @@ public class BibliotecaApp {
         this.menuList = menuList;
     }
 
-    public void run(BookList bookList) {
+    public void run(Library library) {
         bootStrapApp();
         Menu menu; String option;
         inputScanner.useDelimiter("\n");
         while(inputScanner.hasNext()) {
             option = inputScanner.next();
             menu = menuList.find(option);
-            menu.perform(bookList, printer);
+            menu.perform(library, printer);
             if(!menu.shouldContinueRunning()) {
                 break;
             }

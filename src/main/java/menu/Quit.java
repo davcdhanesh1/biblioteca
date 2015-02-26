@@ -1,7 +1,7 @@
 package menu;
 
 import IO.Printer;
-import book.BookList;
+import Library.Library;
 
 public class Quit extends Menu {
 
@@ -10,7 +10,7 @@ public class Quit extends Menu {
     }
 
     @Override
-    public void perform(BookList bookList, Printer printer) {
+    public void perform(Library library, Printer printer) {
         printer.println("Book a week, keeps teacher away!");
     }
 

@@ -1,4 +1,4 @@
-package StringHelpers;
+package testhelpers;
 
 public class StringUtil {
     public static String getOutputString(String... strings) {

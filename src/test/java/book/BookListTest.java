@@ -1,6 +1,6 @@
 package book;
 
-import StringHelpers.StringUtil;
+import testhelpers.StringUtil;
 import org.junit.Before;
 import org.junit.Test;
 

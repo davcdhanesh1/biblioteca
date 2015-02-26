@@ -1,7 +1,7 @@
 package menu;
 
 import IO.Printer;
-import book.BookList;
+import Library.Library;
 
 public class CheckOutBook extends Menu {
     public CheckOutBook() {
@@ -9,11 +9,9 @@ public class CheckOutBook extends Menu {
     }
 
     @Override
-    public void perform(BookList bookList, Printer printer) {
-        printer.println(bookList.toString());
+    public void perform(Library library, Printer printer) {
+        library.printAllBook();
         printer.println("Select a book: ");
-//        String bookToBeCheckedOut = scanner.scan();
-//        library.checkOutBook(bookToBeCheckedOut);
     }
 
     @Override

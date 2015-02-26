@@ -1,7 +1,7 @@
 package menu;
 
 import IO.Printer;
-import book.BookList;
+import Library.Library;
 
 public class ListAllBook extends Menu{
 
@@ -10,8 +10,8 @@ public class ListAllBook extends Menu{
     }
 
     @Override
-    public void perform(BookList bookList, Printer printer) {
-        printer.println(bookList.toString());
+    public void perform(Library library, Printer printer) {
+        library.printAllBook();
     }
 
     @Override

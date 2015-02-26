@@ -1,7 +1,7 @@
 package menu;
 
 import IO.Printer;
-import book.BookList;
+import Library.Library;
 
 public abstract class Menu {
 
@@ -11,7 +11,7 @@ public abstract class Menu {
         this.description = description;
     }
 
-    public abstract void perform(BookList bookList, Printer printer);
+    public abstract void perform(Library library, Printer printer);
 
     public abstract boolean shouldContinueRunning();
 

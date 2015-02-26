@@ -1,6 +1,7 @@
 package menu;
 
 import IO.Printer;
+import Library.Library;
 import book.Book;
 import book.BookList;
 import org.junit.Before;
@@ -24,6 +25,7 @@ public class InvalidOptionTest {
     private ByteArrayOutputStream byteArrayOutputStream;
     private Printer printer;
     private BookList bookList;
+    private Library library;
     private InvalidOption invalidOption;
 
     @Before
@@ -35,11 +37,12 @@ public class InvalidOptionTest {
         bookList.add(new Book(HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987));
         bookList.add(new Book(HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
         invalidOption = new InvalidOption();
+        library = new Library(bookList, printer);
     }
 
     @Test
     public void testPerform() throws Exception {
-        invalidOption.perform(bookList, printer);
+        invalidOption.perform(library, printer);
         assertThat(byteArrayOutputStream.toString(), is("Invalid option!\n"));
     }
 

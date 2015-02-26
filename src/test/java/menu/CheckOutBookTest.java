@@ -1,7 +1,8 @@
 package menu;
 
 import IO.Printer;
-import StringHelpers.StringUtil;
+import Library.Library;
+import testhelpers.StringUtil;
 import book.Book;
 import book.BookList;
 import org.junit.Before;
@@ -27,6 +28,7 @@ public class CheckOutBookTest {
     private CheckOutBook checkOutBook = new CheckOutBook();
     private Printer printer;
     private ByteArrayOutputStream byteArrayOutputStream;
+    private Library library;
 
     @Before
     public void setUp() throws Exception {
@@ -38,6 +40,8 @@ public class CheckOutBookTest {
         harryPotterAndTheChambersOfSecrets = new Book(HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987);
         bookList.add(harryPotterAndThePhilosophersStone);
         bookList.add(harryPotterAndTheChambersOfSecrets);
+
+        library = new Library(bookList, printer);
     }
 
     @Test
@@ -52,7 +56,7 @@ public class CheckOutBookTest {
 
     @Test
     public void testPerform() throws Exception {
-        checkOutBook.perform(bookList, printer);
+        checkOutBook.perform(library, printer);
         String expectedOutput = StringUtil.getOutputString(
                 "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
                 "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",

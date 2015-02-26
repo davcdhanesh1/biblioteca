@@ -1,5 +1,5 @@
 import IO.Printer;
-import StringHelpers.StringUtil;
+import Library.Library;
 import book.Book;
 import book.BookList;
 import menu.ListAllBook;
@@ -7,6 +7,7 @@ import menu.MenuList;
 import menu.Quit;
 import org.junit.Before;
 import org.junit.Test;
+import testhelpers.StringUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -30,6 +31,7 @@ public class BibliotecaAppTest {
     private ByteArrayInputStream byteArrayInputStream;
     private Scanner scanner;
     private MenuList menuList;
+    private Library library;
 
     @Before
     public void setUp() throws Exception {
@@ -49,6 +51,8 @@ public class BibliotecaAppTest {
         bookList.add(new Book(harryPotterAndPhilosophersStone, JKRowling, 1987));
         bookList.add(new Book(harryPotterAndChambersOfSecrets, JKRowling, 1987));
 
+        library = new Library(bookList, printer);
+
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
     }
 
@@ -56,14 +60,14 @@ public class BibliotecaAppTest {
     public void testPrintingOfWelcomeMessage() throws Exception {
         String expectedWelcomeToBibliotecaMsg = ResourceBundle.getBundle("bibliotecaAppMessagesTest").getString("WelcomeMessage");
 
-        bibliotecaApp.run(bookList);
+        bibliotecaApp.run(library);
 
         assertThat(outputStream.toString(),containsString(expectedWelcomeToBibliotecaMsg));
     }
 
     @Test
     public void testSeparatorBetweenWelcomeMessageAndListOfBooks() throws Exception {
-        bibliotecaApp.run(bookList);
+        bibliotecaApp.run(library);
 
         assertThat(outputStream.toString(), containsString("-----------------------------------------------------------------------------\n"));
     }
@@ -74,7 +78,7 @@ public class BibliotecaAppTest {
         expectedMenuOptions += "1. List Books";
         String selectOption = "Select Option: ";
 
-        bibliotecaApp.run(bookList);
+        bibliotecaApp.run(library);
 
         assertThat(outputStream.toString(),containsString(expectedMenuOptions));
         assertThat(outputStream.toString(),containsString(selectOption));
@@ -86,7 +90,7 @@ public class BibliotecaAppTest {
         byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
         scanner = new Scanner(byteArrayInputStream);
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
-        bibliotecaApp.run(bookList);
+        bibliotecaApp.run(library);
 
         assertThat(outputStream.toString(),containsString(harryPotterAndChambersOfSecrets));
         assertThat(outputStream.toString(),containsString(harryPotterAndPhilosophersStone));
@@ -98,7 +102,7 @@ public class BibliotecaAppTest {
         byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
         scanner = new Scanner(byteArrayInputStream);
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
-        bibliotecaApp.run(bookList);
+        bibliotecaApp.run(library);
 
         String expectedOutput = StringUtil.getOutputString(
                 "Welcome To Biblioteca",
@@ -117,7 +121,7 @@ public class BibliotecaAppTest {
         byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
         scanner = new Scanner(byteArrayInputStream);
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
-        bibliotecaApp.run(bookList);
+        bibliotecaApp.run(library);
 
         String actualOutput = outputStream.toString();
 

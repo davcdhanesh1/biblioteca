@@ -1,7 +1,8 @@
 package menu;
 
 import IO.Printer;
-import StringHelpers.StringUtil;
+import Library.Library;
+import testhelpers.StringUtil;
 import book.Book;
 import book.BookList;
 import org.junit.Before;
@@ -26,6 +27,7 @@ public class ListAllBookTest {
     private Printer printer;
     private BookList bookList;
     private ListAllBook listAllBook;
+    private Library library;
 
     @Before
     public void setUp() throws Exception {
@@ -36,6 +38,7 @@ public class ListAllBookTest {
         bookList.add(new Book(HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987));
         bookList.add(new Book(HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
         listAllBook = new ListAllBook();
+        library = new Library(bookList, printer);
     }
 
     @Test
@@ -46,7 +49,7 @@ public class ListAllBookTest {
                 ""
         );
 
-        listAllBook.perform(bookList, printer);
+        listAllBook.perform(library, printer);
 
         assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
     }

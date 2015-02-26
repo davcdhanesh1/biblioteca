@@ -1,4 +1,7 @@
+package library;
+
 import IO.Printer;
+import Library.Library;
 import book.Book;
 import book.BookList;
 import book.BookNotFoundException;
