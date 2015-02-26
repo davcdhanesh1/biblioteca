@@ -54,4 +54,9 @@ public class BookListTest {
 
         assertThat(bookList.toString(),is(expectedBookListOutput));
     }
+
+    @Test
+    public void testFindBook() throws Exception {
+        assertThat(bookList.find("1"),is(harryPotterAndThePhilosophersStone));
+    }
 }

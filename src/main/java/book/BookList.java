@@ -1,5 +1,7 @@
 package book;
 
+import menu.InvalidOption;
+
 import java.util.ArrayList;
 
 public class BookList {
@@ -24,5 +26,14 @@ public class BookList {
             result += (indexToDisplay) + ". " + book.toString() + "\n";
         }
         return result;
+    }
+
+    public Book find(String index) {
+        int indexOfItemToBeFound = Integer.parseInt(index) - 1;
+        try {
+            return bookList.get(indexOfItemToBeFound);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
 }
