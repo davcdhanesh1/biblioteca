@@ -1,12 +1,12 @@
 package com.biblioteca;
 
+import com.biblioteca.book.BookCanNotBeReturned;
 import com.biblioteca.io.Printer;
-import com.biblioteca.book.BookIsNotAvailable;
+import com.biblioteca.book.BookIsNotAvailableForCheckOut;
 import com.biblioteca.library.Library;
 import com.biblioteca.book.BookNotFoundException;
 import com.biblioteca.menu.*;
 
-import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class BibliotecaApp {
@@ -22,7 +22,7 @@ public class BibliotecaApp {
         this.menuList = menuList;
     }
 
-    public void run(Library library) throws BookNotFoundException, BookIsNotAvailable {
+    public void run(Library library) throws BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned {
         init();
         Menu menu; String option;
         scanner.useDelimiter("\n");

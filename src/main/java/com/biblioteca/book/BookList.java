@@ -25,25 +25,25 @@ public class BookList {
         return result;
     }
 
-    public Book findFromAvailableBookById(String bookId) throws BookNotFoundException, BookIsNotAvailable {
+    public Book findFromAvailableBookById(String bookId) throws BookNotFoundException, BookIsNotAvailableForCheckOut {
         int idOfBookToBeFound = Integer.parseInt(bookId);
         try {
             Book book = findBookWithId(idOfBookToBeFound);
-            if (book.isCheckedOut()) throw new BookIsNotAvailable("That book is not available");
+            if (book.isCheckedOut()) throw new BookIsNotAvailableForCheckOut();
             return book;
         } catch (BookNotFoundException e) {
-            throw new BookNotFoundException("Invalid Book to checkout");
+            throw new BookNotFoundException();
         }
     }
 
-    public Book findFromCheckedOutBooksById(String index) throws BookNotFoundException, BookIsNotAvailable {
+    public Book findFromCheckedOutBooksById(String index) throws BookNotFoundException, BookCanNotBeReturned {
         int idOfBookToBeFound = Integer.parseInt(index);
         try {
             Book book = findBookWithId(idOfBookToBeFound);
-            if (!book.isCheckedOut()) throw new BookIsNotAvailable("That book is not checked out");
+            if (!book.isCheckedOut()) throw new BookCanNotBeReturned();
             return book;
         } catch (BookNotFoundException e) {
-            throw new BookNotFoundException("Invalid Book to return");
+            throw new BookNotFoundException();
         }
     }
 
@@ -53,6 +53,6 @@ public class BookList {
                 return book;
             }
         }
-        throw new BookNotFoundException("Book with given id is not present in the list of books");
+        throw new BookNotFoundException();
     }
 }

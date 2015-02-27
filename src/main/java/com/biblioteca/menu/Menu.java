@@ -1,7 +1,8 @@
 package com.biblioteca.menu;
 
+import com.biblioteca.book.BookCanNotBeReturned;
 import com.biblioteca.io.Printer;
-import com.biblioteca.book.BookIsNotAvailable;
+import com.biblioteca.book.BookIsNotAvailableForCheckOut;
 import com.biblioteca.library.Library;
 import com.biblioteca.book.BookNotFoundException;
 
@@ -15,7 +16,7 @@ public abstract class Menu {
         this.description = description;
     }
 
-    public abstract void perform(Library library, Printer printer, Scanner scanner) throws BookNotFoundException, BookIsNotAvailable;
+    public abstract void perform(Library library, Printer printer, Scanner scanner) throws BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned;
 
     public abstract boolean shouldContinueRunning();
 

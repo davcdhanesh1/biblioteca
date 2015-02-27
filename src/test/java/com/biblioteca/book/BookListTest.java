@@ -51,34 +51,34 @@ public class BookListTest {
     }
 
     @Test
-    public void testFindFromAvailableBook() throws Exception, BookNotFoundException, BookIsNotAvailable {
+    public void testFindFromAvailableBook() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut {
         assertThat(bookList.findFromAvailableBookById("10"),is(harryPotterAndThePhilosophersStoneBook));
     }
 
     @Test(expected = BookNotFoundException.class)
-    public void testFindFromAvailableBookWhenBookToBeFoundIsNotPresentInTheList() throws Exception, BookNotFoundException, BookIsNotAvailable {
+    public void testFindFromAvailableBookWhenBookToBeFoundIsNotPresentInTheList() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut {
         bookList.findFromAvailableBookById("3");
     }
 
-    @Test(expected = BookIsNotAvailable.class)
-    public void testFindingFromAvailableBookWhenBookToBeFoundIsAlreadyCheckedOut() throws Exception, BookNotFoundException, BookIsNotAvailable {
+    @Test(expected = BookIsNotAvailableForCheckOut.class)
+    public void testFindingFromAvailableBookWhenBookToBeFoundIsAlreadyCheckedOut() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut {
         harryPotterAndTheChambersOfSecretsBook.checkOut();
         bookList.findFromAvailableBookById("20");
     }
 
     @Test
-    public void testFindFromCheckedOutBooks() throws Exception, BookNotFoundException, BookIsNotAvailable {
+    public void testFindFromCheckedOutBooks() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned {
         harryPotterAndThePhilosophersStoneBook.checkOut();
         assertThat(bookList.findFromCheckedOutBooksById("10"),is(harryPotterAndThePhilosophersStoneBook));
     }
 
     @Test(expected = BookNotFoundException.class)
-    public void testFindFromCheckedOutBooksWhenBookToBeCheckedOutIsNotPresentInTheList() throws Exception, BookNotFoundException, BookIsNotAvailable {
+    public void testFindFromCheckedOutBooksWhenBookToBeCheckedOutIsNotPresentInTheList() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned {
         bookList.findFromCheckedOutBooksById("3");
     }
 
-    @Test(expected = BookIsNotAvailable.class)
-    public void testFindFromCheckedOutBooksWhenBookToBeFoundIsNotPresentInTheListOfCheckedOutBooks() throws Exception, BookNotFoundException, BookIsNotAvailable {
+    @Test(expected = BookCanNotBeReturned.class)
+    public void testFindFromCheckedOutBooksWhenBookToBeFoundIsNotPresentInTheListOfCheckedOutBooks() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned {
         harryPotterAndTheChambersOfSecretsBook.checkIn();
         bookList.findFromCheckedOutBooksById("20");
     }

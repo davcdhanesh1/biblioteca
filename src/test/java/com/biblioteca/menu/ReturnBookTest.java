@@ -1,10 +1,7 @@
 package com.biblioteca.menu;
 
+import com.biblioteca.book.*;
 import com.biblioteca.io.Printer;
-import com.biblioteca.book.Book;
-import com.biblioteca.book.BookIsNotAvailable;
-import com.biblioteca.book.BookList;
-import com.biblioteca.book.BookNotFoundException;
 import com.biblioteca.library.Library;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,7 +60,7 @@ public class ReturnBookTest {
     }
 
     @Test
-    public void testPerform() throws Exception, BookNotFoundException, BookIsNotAvailable {
+    public void testPerform() throws Exception, BookNotFoundException, BookCanNotBeReturned {
         harryPotterAndThePhilosophersStone.checkOut();
         returnBookOption.perform(library, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(

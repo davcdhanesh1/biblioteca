@@ -1,10 +1,7 @@
 package com.biblioteca.library;
 
+import com.biblioteca.book.*;
 import com.biblioteca.io.Printer;
-import com.biblioteca.book.Book;
-import com.biblioteca.book.BookIsNotAvailable;
-import com.biblioteca.book.BookList;
-import com.biblioteca.book.BookNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import testhelpers.StringUtil;
@@ -41,21 +38,21 @@ public class LibraryTest {
     }
 
     @Test
-    public void testCheckOutBook() throws Exception, BookNotFoundException, BookIsNotAvailable {
+    public void testCheckOutBook() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut {
         library.checkOut("1");
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
         assertThat(outputStream.toString(),is("Thanks you! Enjoy the book\n"));
     }
 
     @Test
-    public void testCheckOutBookWhenInvalidBookIdIsGiven() throws Exception, BookNotFoundException, BookIsNotAvailable {
+    public void testCheckOutBookWhenInvalidBookIdIsGiven() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut {
         library.checkOut("10");
 
         assertThat(outputStream.toString(),is("Invalid Book to checkout\n"));
     }
 
     @Test
-    public void testCheckOutBookWhenBookWithGivenIdIsNotAvailable() throws BookIsNotAvailable, BookNotFoundException {
+    public void testCheckOutBookWhenBookWithGivenIdIsNotAvailable() throws BookIsNotAvailableForCheckOut, BookNotFoundException {
         harryPotterAndThePhilosophersStone.checkOut();
         String expectedOutput = StringUtil.getOutputString("That book is not available");
         library.checkOut("1");
@@ -63,7 +60,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void testCheckInBook() throws Exception, BookIsNotAvailable {
+    public void testCheckInBook() throws Exception,  BookNotFoundException, BookCanNotBeReturned {
         harryPotterAndThePhilosophersStone.checkOut();
         library.returnBook("1");
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(false));
@@ -71,18 +68,18 @@ public class LibraryTest {
     }
 
     @Test
-    public void testCheckInBookWhenInvalidBookIdIsGiven() throws Exception, BookIsNotAvailable {
+    public void testCheckInBookWhenInvalidBookIdIsGiven() throws Exception, BookNotFoundException, BookCanNotBeReturned {
         library.returnBook("10");
 
         assertThat(outputStream.toString(),is("Invalid Book to return\n"));
     }
 
     @Test
-    public void testCheckInBookWhenBookWithGivenIdIsNotCheckedOut() throws Exception, BookIsNotAvailable {
+    public void testCheckInBookWhenBookWithGivenIdIsNotCheckedOut() throws Exception, BookNotFoundException, BookCanNotBeReturned {
         harryPotterAndThePhilosophersStone.checkIn();
 
         library.returnBook("1");
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(false));
-        assertThat(outputStream.toString(),is("That book is not checked out\n"));
+        assertThat(outputStream.toString(),is("We already have this book !\n"));
     }
 }

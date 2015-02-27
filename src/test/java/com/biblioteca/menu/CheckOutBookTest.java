@@ -1,7 +1,7 @@
 package com.biblioteca.menu;
 
 import com.biblioteca.io.Printer;
-import com.biblioteca.book.BookIsNotAvailable;
+import com.biblioteca.book.BookIsNotAvailableForCheckOut;
 import com.biblioteca.library.Library;
 import com.biblioteca.book.BookNotFoundException;
 import testhelpers.StringUtil;
@@ -61,7 +61,7 @@ public class CheckOutBookTest {
     }
 
     @Test
-    public void testPerform() throws Exception, BookNotFoundException, BookIsNotAvailable {
+    public void testPerform() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut {
         checkOutBook.perform(library, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
                 "|1       |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",

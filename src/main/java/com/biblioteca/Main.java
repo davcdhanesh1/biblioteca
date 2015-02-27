@@ -1,9 +1,6 @@
 package com.biblioteca;
 
-import com.biblioteca.book.Book;
-import com.biblioteca.book.BookIsNotAvailable;
-import com.biblioteca.book.BookList;
-import com.biblioteca.book.BookNotFoundException;
+import com.biblioteca.book.*;
 import com.biblioteca.io.Printer;
 import com.biblioteca.library.Library;
 import com.biblioteca.menu.*;
@@ -12,7 +9,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws BookNotFoundException, BookIsNotAvailable {
+    public static void main(String[] args) throws BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned {
         MenuList menuList = new MenuList();
         menuList.add(new ListAllBook());
         menuList.add(new CheckOutBook());

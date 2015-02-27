@@ -1,7 +1,8 @@
 package com.biblioteca.menu;
 
+import com.biblioteca.book.BookCanNotBeReturned;
 import com.biblioteca.io.Printer;
-import com.biblioteca.book.BookIsNotAvailable;
+import com.biblioteca.book.BookIsNotAvailableForCheckOut;
 import com.biblioteca.book.BookNotFoundException;
 import com.biblioteca.library.Library;
 
@@ -13,7 +14,7 @@ public class ReturnBook extends Menu{
     }
 
     @Override
-    public void perform(Library library, Printer printer, Scanner scanner) throws BookNotFoundException, BookIsNotAvailable {
+    public void perform(Library library, Printer printer, Scanner scanner) throws BookNotFoundException, BookCanNotBeReturned {
         printer.println("Enter id of Book: ");
         String option = scanner.next();
         library.returnBook(option);
