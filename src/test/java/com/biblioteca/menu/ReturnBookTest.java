@@ -69,7 +69,7 @@ public class ReturnBookTest {
         returnBookOption.perform(library, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
                 "Enter id of Book: ",
-                "Thank you for returning the com.biblioteca.book."
+                "Thank you for returning the book."
         );
 
         assertThat(byteArrayOutputStream.toString(),is(expectedOutput));

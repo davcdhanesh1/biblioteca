@@ -20,7 +20,7 @@ public class Library {
         try {
             Book book = bookList.findFromAvailableBook(bookId);
             book.checkOut();
-            printer.println("Thanks you! Enjoy the com.biblioteca.book");
+            printer.println("Thanks you! Enjoy the book");
         } catch (BookNotFoundException e) {
             printer.println(e.getMessage());
         } catch (BookIsNotAvailable e) {
@@ -36,7 +36,7 @@ public class Library {
         try {
             Book book = bookList.findFromCheckedOutBooksById(bookId);
             book.checkIn();
-            printer.println("Thank you for returning the com.biblioteca.book.");
+            printer.println("Thank you for returning the book.");
         } catch (BookNotFoundException e) {
             printer.println(e.getMessage());
         } catch (BookIsNotAvailable e) {

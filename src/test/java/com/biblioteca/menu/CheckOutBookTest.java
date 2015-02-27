@@ -68,8 +68,8 @@ public class CheckOutBookTest {
                 "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
                 "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 "",
-                "Select a com.biblioteca.book: ",
-                "Thanks you! Enjoy the com.biblioteca.book"
+                "Select a book: ",
+                "Thanks you! Enjoy the book"
 
         );
 

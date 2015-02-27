@@ -16,7 +16,7 @@ public class CheckOutBook extends Menu {
     public void perform(Library library, Printer printer, Scanner scanner) throws BookNotFoundException, BookIsNotAvailable {
         String option;
         library.printAllBook();
-        printer.println("Select a com.biblioteca.book: ");
+        printer.println("Select a book: ");
         option = scanner.next();
         library.checkOut(option);
     }

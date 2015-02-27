@@ -30,7 +30,7 @@ public class BookList {
         int indexOfItemToBeFound = Integer.parseInt(index) - 1;
         try {
             Book book = bookList.get(indexOfItemToBeFound);
-            if (book.isCheckedOut()) throw new BookIsNotAvailable("That com.biblioteca.book is not available");
+            if (book.isCheckedOut()) throw new BookIsNotAvailable("That book is not available");
             return book;
         } catch (IndexOutOfBoundsException e) {
             throw new BookNotFoundException("Invalid Book to checkout");
@@ -41,7 +41,7 @@ public class BookList {
         int indexOfItemToBeFound = Integer.parseInt(index) - 1;
         try {
             Book book = bookList.get(indexOfItemToBeFound);
-            if (!book.isCheckedOut()) throw new BookIsNotAvailable("That com.biblioteca.book is not checked out");
+            if (!book.isCheckedOut()) throw new BookIsNotAvailable("That book is not checked out");
             return book;
         } catch (IndexOutOfBoundsException e) {
             throw new BookNotFoundException("Invalid Book to return");
