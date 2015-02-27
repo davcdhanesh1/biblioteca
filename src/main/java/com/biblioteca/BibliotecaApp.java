@@ -29,14 +29,18 @@ public class BibliotecaApp {
         while(scanner.hasNext()) {
             option = scanner.next();
             menu = menuList.find(option);
-            printSeparatorLine();
-            menu.perform(library, printer, scanner);
-            printSeparatorLine();
+            performSelectedMenu(library, menu);
             if(!menu.shouldContinueRunning()) {
                 break;
             }
             printMenuListAndPrompt();
         }
+    }
+
+    private void performSelectedMenu(Library library, Menu menu) throws BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned {
+        printSeparatorLine();
+        menu.perform(library, printer, scanner);
+        printSeparatorLine();
     }
 
     private void init() {
