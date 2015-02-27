@@ -20,9 +20,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class BibliotecaAppTest {
-    public static final String harryPotterAndPhilosophersStone = ResourceBundle.getBundle("bookList").getString("HarryPotterAndThePhilosophersStone");
-    public static final String harryPotterAndChambersOfSecrets = ResourceBundle.getBundle("bookList").getString("HarryPotterAndTheChambersOfSecrets");
-    private final String JKRowling = ResourceBundle.getBundle("bookList").getString("JKRowling");
+    public static final String harryPotterAndPhilosophersStone = "Harry Potter and the Philosopher's Stone";
+    public static final String harryPotterAndChambersOfSecrets = "Harry Potter and the Chamber of Secrets";
+    private final String JKRowling = "J K Rowling";
 
     BookList bookList;
     private ByteArrayOutputStream outputStream;

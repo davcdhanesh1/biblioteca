@@ -24,6 +24,7 @@ public class BibliotecaApp {
 
     public void run(Library library) throws BookNotFoundException, BookIsNotAvailable {
         printWelcomeMessage();
+        printMenuListAndPrompt();
         Menu menu; String option;
         scanner.useDelimiter("\n");
         while(scanner.hasNext()) {
@@ -56,7 +57,6 @@ public class BibliotecaApp {
     }
 
     private void printWelcomeMessage() {
-        printer.println(ResourceBundle.getBundle("BibliotecaAppMessages").getString("WelcomeMessage"));
-        printMenuListAndPrompt();
+        printer.println("Welcome To Biblioteca");
     }
 }

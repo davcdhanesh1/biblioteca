@@ -17,13 +17,11 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ListAllBookTest {
-    public final String HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE
-            = ResourceBundle.getBundle("bookList").getString("HarryPotterAndThePhilosophersStone");
-    public final String HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS
-            = ResourceBundle.getBundle("bookList").getString("HarryPotterAndTheChambersOfSecrets");
+    public final String HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE = "Harry Potter and the Philosopher's Stone";
+    public final String HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS = "Harry Potter and the Chamber of Secrets";
 
-    private final String JKRowling
-            = ResourceBundle.getBundle("bookList").getString("JKRowling");
+    private final String JKRowling = "J K Rowling";
+
 
     private ByteArrayOutputStream byteArrayOutputStream;
     private Printer printer;

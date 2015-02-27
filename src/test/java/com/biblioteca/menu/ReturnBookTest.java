@@ -20,13 +20,11 @@ import static org.junit.Assert.*;
 
 public class ReturnBookTest {
 
-    public final String HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE
-            = ResourceBundle.getBundle("bookList").getString("HarryPotterAndThePhilosophersStone");
-    public final String HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS
-            = ResourceBundle.getBundle("bookList").getString("HarryPotterAndTheChambersOfSecrets");
-    BookList bookList;
-    private final String JKRowling
-            = ResourceBundle.getBundle("bookList").getString("JKRowling");
+    public final String HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE = "Harry Potter and the Philosopher's Stone";
+    public final String HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS = "Harry Potter and the Chamber of Secrets";
+
+    private final String JKRowling = "J K Rowling";
+
     private Book harryPotterAndThePhilosophersStone;
     private Book harryPotterAndTheChambersOfSecrets;
     private ReturnBook returnBookOption = new ReturnBook();
@@ -36,6 +34,7 @@ public class ReturnBookTest {
     private Library library;
     private Scanner scanner;
     private String input;
+    private BookList bookList;
 
     @Before
     public void setUp() throws Exception {
