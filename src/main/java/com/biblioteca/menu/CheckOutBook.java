@@ -1,5 +1,7 @@
 package com.biblioteca.menu;
 
+import com.biblioteca.inputValidator.InputValidationException;
+import com.biblioteca.inputValidator.Validator;
 import com.biblioteca.io.Printer;
 import com.biblioteca.book.BookIsNotAvailableForCheckOut;
 import com.biblioteca.library.Library;
@@ -13,11 +15,12 @@ public class CheckOutBook extends Menu {
     }
 
     @Override
-    public void perform(Library library, Printer printer, Scanner scanner) throws BookNotFoundException, BookIsNotAvailableForCheckOut {
+    public void perform(Library library, Printer printer, Scanner scanner) throws BookNotFoundException, BookIsNotAvailableForCheckOut, InputValidationException {
         String option;
         library.printAllBook();
         printer.println("Enter id of Book: ");
         option = scanner.next();
+        Validator.validate(option);
         library.checkOut(option);
     }
     @Override

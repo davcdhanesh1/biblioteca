@@ -1,5 +1,6 @@
 package com.biblioteca.menu;
 
+import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
 import com.biblioteca.book.BookIsNotAvailableForCheckOut;
 import com.biblioteca.library.Library;
@@ -16,6 +17,8 @@ import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class CheckOutBookTest {
 
@@ -61,7 +64,7 @@ public class CheckOutBookTest {
     }
 
     @Test
-    public void testPerform() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut {
+    public void testPerform() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, InputValidationException {
         checkOutBook.perform(library, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
                 "|1       |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
@@ -73,5 +76,19 @@ public class CheckOutBookTest {
 
         assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
+    }
+
+    @Test
+    public void testPerformWhenInputIsNotValid() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut {
+        Library mockLibrary = mock(Library.class);
+        Printer mockPrinter = mock(Printer.class);
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream("a".getBytes());
+        Scanner scanner = new Scanner(byteArrayInputStream);
+
+        try {
+            checkOutBook.perform(mockLibrary, mockPrinter, scanner);
+        } catch (InputValidationException e) {
+            assertThat(e.getMessage(),is("Input has to be number"));
+        }
     }
 }

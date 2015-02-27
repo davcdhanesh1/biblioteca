@@ -1,6 +1,7 @@
 package com.biblioteca;
 
 import com.biblioteca.book.*;
+import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
 import com.biblioteca.library.Library;
 import com.biblioteca.menu.*;
@@ -61,7 +62,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testSelectListBookOption() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned {
+    public void testSelectListBookOption() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned, InputValidationException {
         inputForSelectingBook = "1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
@@ -92,7 +93,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testSelectingInvalidOption() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned {
+    public void testSelectingInvalidOption() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned, InputValidationException {
         inputForSelectingBook = "-1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
@@ -121,7 +122,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testSelectingOptionsUntilQuitOptionIsSelected() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned {
+    public void testSelectingOptionsUntilQuitOptionIsSelected() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned, InputValidationException {
         inputForSelectingBook = "1\n-1\n4\n1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
@@ -164,7 +165,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testSuccessfulBookCheckOut() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned {
+    public void testSuccessfulBookCheckOut() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned, InputValidationException {
         inputForSelectingBook = "2\n1\n1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
@@ -208,7 +209,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testUnsuccessfulCheckOutWhenAnInvalidBookIsTriedToBeCheckedOut() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned {
+    public void testUnsuccessfulCheckOutWhenAnInvalidBookIsTriedToBeCheckedOut() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned, InputValidationException {
         inputForSelectingBook = "2\n3\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
@@ -243,7 +244,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testUnsuccessfulCheckOutWhenAlreadyCheckedOutBookIsTriedToCheckedOut() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned {
+    public void testUnsuccessfulCheckOutWhenAlreadyCheckedOutBookIsTriedToCheckedOut() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned, InputValidationException {
         harryPotterAndChambersOfSecretsBook.checkOut();
 
         inputForSelectingBook = "2\n2\n";
@@ -279,7 +280,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testSuccessfulBookReturn() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned {
+    public void testSuccessfulBookReturn() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned, InputValidationException {
         harryPotterAndPhilosophersStoneBook.checkOut();
         inputForSelectingBook = "1\n3\n1\n1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
@@ -331,7 +332,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testUnsuccessfulBookReturnWhenInvalidBookIsTriedToBeReturned() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned {
+    public void testUnsuccessfulBookReturnWhenInvalidBookIsTriedToBeReturned() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned, InputValidationException {
 
         inputForSelectingBook = "3\n10\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
@@ -364,7 +365,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testUnsuccessfulBookReturnWhenAlreadyCheckedInBookIsTriedToBeCheckedIn() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned {
+    public void testUnsuccessfulBookReturnWhenAlreadyCheckedInBookIsTriedToBeCheckedIn() throws Exception, BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned, InputValidationException {
         harryPotterAndPhilosophersStoneBook.checkIn();
         inputForSelectingBook = "3\n2\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());

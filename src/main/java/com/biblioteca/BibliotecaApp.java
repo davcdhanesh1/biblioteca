@@ -1,6 +1,7 @@
 package com.biblioteca;
 
 import com.biblioteca.book.BookCanNotBeReturned;
+import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
 import com.biblioteca.book.BookIsNotAvailableForCheckOut;
 import com.biblioteca.library.Library;
@@ -22,7 +23,7 @@ public class BibliotecaApp {
         this.menuList = menuList;
     }
 
-    public void run(Library library) throws BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned {
+    public void run(Library library) throws BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned, InputValidationException {
         init();
         Menu menu; String option;
         scanner.useDelimiter("\n");
@@ -37,7 +38,7 @@ public class BibliotecaApp {
         }
     }
 
-    private void performSelectedMenu(Library library, Menu menu) throws BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned {
+    private void performSelectedMenu(Library library, Menu menu) throws BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned, InputValidationException {
         printSeparatorLine();
         menu.perform(library, printer, scanner);
         printSeparatorLine();

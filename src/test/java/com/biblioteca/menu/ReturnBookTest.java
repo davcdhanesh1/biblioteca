@@ -1,6 +1,7 @@
 package com.biblioteca.menu;
 
 import com.biblioteca.book.*;
+import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
 import com.biblioteca.library.Library;
 import org.junit.Before;
@@ -13,6 +14,7 @@ import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 public class ReturnBookTest {
 
@@ -60,7 +62,7 @@ public class ReturnBookTest {
     }
 
     @Test
-    public void testPerform() throws Exception, BookNotFoundException, BookCanNotBeReturned {
+    public void testPerform() throws Exception, BookNotFoundException, BookCanNotBeReturned, InputValidationException {
         harryPotterAndThePhilosophersStone.checkOut();
         returnBookOption.perform(library, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
@@ -70,6 +72,20 @@ public class ReturnBookTest {
 
         assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(false));
+    }
+
+    @Test
+    public void testPerformWhenInputIsNotValid() throws InputValidationException, BookNotFoundException, BookCanNotBeReturned {
+        Library mockLibrary = mock(Library.class);
+        Printer mockPrinter = mock(Printer.class);
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream("a".getBytes());
+        Scanner scanner = new Scanner(byteArrayInputStream);
+
+        try {
+            returnBookOption.perform(mockLibrary, mockPrinter, scanner);
+        } catch (InputValidationException e) {
+            assertThat(e.getMessage(),is("Input has to be number"));
+        }
     }
 
 }
