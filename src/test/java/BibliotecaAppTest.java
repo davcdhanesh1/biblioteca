@@ -1,4 +1,4 @@
-import IO.Printer;
+import io.Printer;
 import book.BookIsNotAvailable;
 import library.Library;
 import book.Book;
@@ -14,7 +14,6 @@ import java.io.ByteArrayOutputStream;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 

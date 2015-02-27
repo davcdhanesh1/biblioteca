@@ -1,6 +1,6 @@
 package menu;
 
-import IO.Printer;
+import io.Printer;
 import book.Book;
 import book.BookIsNotAvailable;
 import book.BookList;
