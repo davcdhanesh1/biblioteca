@@ -23,14 +23,15 @@ public class BibliotecaApp {
     }
 
     public void run(Library library) throws BookNotFoundException, BookIsNotAvailable {
-        printWelcomeMessage();
-        printMenuListAndPrompt();
+        init();
         Menu menu; String option;
         scanner.useDelimiter("\n");
         while(scanner.hasNext()) {
             option = scanner.next();
             menu = menuList.find(option);
+            printSeparatorLine();
             menu.perform(library, printer, scanner);
+            printSeparatorLine();
             if(!menu.shouldContinueRunning()) {
                 break;
             }
@@ -38,8 +39,13 @@ public class BibliotecaApp {
         }
     }
 
-    private void printMenuListAndPrompt() {
+    private void init() {
+        printWelcomeMessage();
         printSeparatorLine();
+        printMenuListAndPrompt();
+    }
+
+    private void printMenuListAndPrompt() {
         printMenuList();
         printPrompt();
     }
