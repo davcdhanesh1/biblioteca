@@ -2,21 +2,23 @@ package com.biblioteca.book;
 
 public class Book {
 
+    private final int id;
     private final String name;
     private final String author;
     private final int publicationYear;
     private boolean checkedOut;
 
-    public Book(String name, String author, int publicationYear) {
+    public Book(int id, String name, String author, int publicationYear) {
+        this.id = id;
         this.name = name;
         this.author = author;
         this.publicationYear = publicationYear;
-        this.checkedOut = false;
+        this.checkedOut =  false;
     }
 
     @Override
     public String toString() {
-        return String.format("|%-64s|%-32s|%d", name, author, publicationYear);
+        return String.format("|%d|%-64s|%-32s|%d", id, name, author, publicationYear);
     }
 
 
@@ -25,4 +27,8 @@ public class Book {
     public void checkOut() { checkedOut = true; }
 
     public void checkIn() { checkedOut = false; }
+
+    public boolean hasId(int bookId) {
+        return this.id == bookId;
+    }
 }

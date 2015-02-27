@@ -12,7 +12,6 @@ import testhelpers.StringUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -45,8 +44,8 @@ public class ReturnBookTest {
         scanner = new Scanner(byteArrayInputStream);
 
         bookList = new BookList();
-        harryPotterAndThePhilosophersStone = new Book(HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987);
-        harryPotterAndTheChambersOfSecrets = new Book(HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987);
+        harryPotterAndThePhilosophersStone = new Book(1, HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987);
+        harryPotterAndTheChambersOfSecrets = new Book(1, HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987);
         bookList.add(harryPotterAndThePhilosophersStone);
         bookList.add(harryPotterAndTheChambersOfSecrets);
 

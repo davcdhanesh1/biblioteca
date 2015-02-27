@@ -16,35 +16,43 @@ public class BookList {
     @Override
     public String toString() {
         String result = new String();
-        int indexToDisplay; Book book;
+        Book book;
         for(int i = 0; i < bookList.size(); i++) {
             book = bookList.get(i);
             if (book.isCheckedOut()) continue;
-            indexToDisplay = i + 1;
-            result += (indexToDisplay) + ". " + book.toString() + "\n";
+            result += book.toString() + "\n";
         }
         return result;
     }
 
-    public Book findFromAvailableBook(String index) throws BookNotFoundException, BookIsNotAvailable {
-        int indexOfItemToBeFound = Integer.parseInt(index) - 1;
+    public Book findFromAvailableBookById(String bookId) throws BookNotFoundException, BookIsNotAvailable {
+        int idOfBookToBeFound = Integer.parseInt(bookId);
         try {
-            Book book = bookList.get(indexOfItemToBeFound);
+            Book book = findBookWithId(idOfBookToBeFound);
             if (book.isCheckedOut()) throw new BookIsNotAvailable("That book is not available");
             return book;
-        } catch (IndexOutOfBoundsException e) {
+        } catch (BookNotFoundException e) {
             throw new BookNotFoundException("Invalid Book to checkout");
         }
     }
 
     public Book findFromCheckedOutBooksById(String index) throws BookNotFoundException, BookIsNotAvailable {
-        int indexOfItemToBeFound = Integer.parseInt(index) - 1;
+        int idOfBookToBeFound = Integer.parseInt(index);
         try {
-            Book book = bookList.get(indexOfItemToBeFound);
+            Book book = findBookWithId(idOfBookToBeFound);
             if (!book.isCheckedOut()) throw new BookIsNotAvailable("That book is not checked out");
             return book;
-        } catch (IndexOutOfBoundsException e) {
+        } catch (BookNotFoundException e) {
             throw new BookNotFoundException("Invalid Book to return");
         }
+    }
+
+    private Book findBookWithId(int bookId) throws BookNotFoundException {
+        for(Book book : bookList) {
+            if (book.hasId(bookId)) {
+                return book;
+            }
+        }
+        throw new BookNotFoundException("Book with given id is not present in the list of books");
     }
 }

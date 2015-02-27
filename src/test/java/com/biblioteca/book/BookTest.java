@@ -8,8 +8,9 @@ import static org.junit.Assert.*;
 public class BookTest {
     @Test
     public void testBookCreation() throws Exception {
-        Book book = new Book("A pedagogy of opression", "Paulo Freire", 1987);
+        Book book = new Book(1, "A pedagogy of opression", "Paulo Freire", 1987);
         String expectedBookRepresentation = new String();
+        expectedBookRepresentation += "|1";
         expectedBookRepresentation += "|A pedagogy of opression                                         ";
         expectedBookRepresentation += "|Paulo Freire                    ";
         expectedBookRepresentation += "|1987";
@@ -19,7 +20,7 @@ public class BookTest {
 
     @Test
     public void testCheckOutBook() throws Exception {
-        Book book = new Book("A pedagogy of opression", "Paulo Freire", 1987);
+        Book book = new Book(1, "A pedagogy of opression", "Paulo Freire", 1987);
 
         assertThat(book.isCheckedOut(), is(false));
         book.checkOut();
@@ -28,7 +29,7 @@ public class BookTest {
 
     @Test
     public void testCheckInBook() throws Exception {
-        Book book = new Book("A pedagogy of opression", "Paulo Freire", 1987);
+        Book book = new Book(1, "A pedagogy of opression", "Paulo Freire", 1987);
 
         book.checkOut();
         book.checkIn();

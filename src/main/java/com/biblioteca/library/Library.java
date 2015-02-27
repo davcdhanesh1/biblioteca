@@ -18,7 +18,7 @@ public class Library {
 
     public void checkOut(String bookId) throws BookNotFoundException, BookIsNotAvailable {
         try {
-            Book book = bookList.findFromAvailableBook(bookId);
+            Book book = bookList.findFromAvailableBookById(bookId);
             book.checkOut();
             printer.println("Thanks you! Enjoy the book");
         } catch (BookNotFoundException e) {

@@ -10,7 +10,6 @@ import org.junit.Test;
 import testhelpers.StringUtil;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ResourceBundle;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -31,8 +30,8 @@ public class LibraryTest {
     @Before
     public void setUp() throws Exception {
         bookList = new BookList();
-        harryPotterAndThePhilosophersStone = new Book(HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987);
-        harryPotterAndTheChambersOfSecrets = new Book(HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987);
+        harryPotterAndThePhilosophersStone = new Book(1, HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987);
+        harryPotterAndTheChambersOfSecrets = new Book(2, HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987);
         bookList.add(harryPotterAndThePhilosophersStone);
         bookList.add(harryPotterAndTheChambersOfSecrets);
 

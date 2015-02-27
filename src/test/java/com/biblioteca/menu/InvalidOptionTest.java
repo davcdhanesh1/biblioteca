@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -39,8 +38,8 @@ public class InvalidOptionTest {
         scanner =  new Scanner(byteArrayInputStream);
 
         bookList = new BookList();
-        bookList.add(new Book(HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987));
-        bookList.add(new Book(HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
+        bookList.add(new Book(1, HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987));
+        bookList.add(new Book(1, HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
         invalidOption = new InvalidOption();
         library = new Library(bookList, printer);
     }

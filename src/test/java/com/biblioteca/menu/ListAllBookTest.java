@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -41,8 +40,8 @@ public class ListAllBookTest {
         scanner =  new Scanner(byteArrayInputStream);
 
         bookList = new BookList();
-        bookList.add(new Book(HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987));
-        bookList.add(new Book(HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
+        bookList.add(new Book(1, HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987));
+        bookList.add(new Book(2, HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
         listAllBook = new ListAllBook();
         library = new Library(bookList, printer);
     }
@@ -50,8 +49,8 @@ public class ListAllBookTest {
     @Test
     public void testPerform() throws Exception {
         String expectedOutput = StringUtil.getOutputString(
-                "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
-                "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                "|1|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "|2|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 ""
         );
 

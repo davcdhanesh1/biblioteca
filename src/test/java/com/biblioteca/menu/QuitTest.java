@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -40,8 +39,8 @@ public class QuitTest {
         scanner =  new Scanner(byteArrayInputStream);
 
         bookList = new BookList();
-        bookList.add(new Book(HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987));
-        bookList.add(new Book(HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
+        bookList.add(new Book(1, HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987));
+        bookList.add(new Book(1, HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
         quit = new Quit();
         library = new Library(bookList,printer);
     }

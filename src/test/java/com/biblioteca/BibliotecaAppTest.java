@@ -13,7 +13,6 @@ import testhelpers.StringUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -54,8 +53,8 @@ public class BibliotecaAppTest {
         menuList.add(new Quit());
 
         bookList = new BookList();
-        harryPotterAndPhilosophersStoneBook = new Book(harryPotterAndPhilosophersStone, JKRowling, 1987);
-        harryPotterAndChambersOfSecretsBook = new Book(BibliotecaAppTest.harryPotterAndChambersOfSecrets, JKRowling, 1987);
+        harryPotterAndPhilosophersStoneBook = new Book(1, harryPotterAndPhilosophersStone, JKRowling, 1987);
+        harryPotterAndChambersOfSecretsBook = new Book(2, BibliotecaAppTest.harryPotterAndChambersOfSecrets, JKRowling, 1987);
         bookList.add(harryPotterAndPhilosophersStoneBook);
         bookList.add(harryPotterAndChambersOfSecretsBook);
 
@@ -82,8 +81,8 @@ public class BibliotecaAppTest {
                 "4. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
-                "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
-                "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                "|1|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "|2|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 "",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
@@ -143,8 +142,8 @@ public class BibliotecaAppTest {
                 "4. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
-                "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
-                "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                "|1|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "|2|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 "",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
@@ -186,8 +185,8 @@ public class BibliotecaAppTest {
                 "4. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
-                "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
-                "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                "|1|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "|2|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 "",
                 "Enter id of Book: ",
                 "Thanks you! Enjoy the book",
@@ -198,7 +197,7 @@ public class BibliotecaAppTest {
                 "4. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
-                "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                "|2|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 "",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
@@ -230,8 +229,8 @@ public class BibliotecaAppTest {
                 "4. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
-                "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
-                "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                "|1|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "|2|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 "",
                 "Enter id of Book: ",
                 "Invalid Book to checkout",
@@ -248,11 +247,6 @@ public class BibliotecaAppTest {
 
     @Test
     public void testUnsuccessfulCheckOutWhenAlreadyCheckedOutBookIsTriedToCheckedOut() throws Exception, BookNotFoundException, BookIsNotAvailable {
-        BookList bookList = new BookList();
-        Book harryPotterAndPhilosophersStoneBook = new Book(harryPotterAndPhilosophersStone, JKRowling, 1987);
-        Book harryPotterAndChambersOfSecretsBook = new Book(harryPotterAndChambersOfSecrets, JKRowling, 1987);
-        bookList.add(harryPotterAndPhilosophersStoneBook);
-        bookList.add(harryPotterAndChambersOfSecretsBook);
         harryPotterAndChambersOfSecretsBook.checkOut();
 
         inputForSelectingBook = "2\n2\n";
@@ -272,7 +266,7 @@ public class BibliotecaAppTest {
                 "4. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
-                "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "|1|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
                 "",
                 "Enter id of Book: ",
                 "That book is not available",
@@ -307,7 +301,7 @@ public class BibliotecaAppTest {
                 "4. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
-                "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                "|2|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 "",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
@@ -325,8 +319,8 @@ public class BibliotecaAppTest {
                 "4. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
-                "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
-                "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                "|1|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "|2|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 "",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",

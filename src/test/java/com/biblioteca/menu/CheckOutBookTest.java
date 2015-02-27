@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -35,7 +34,7 @@ public class CheckOutBookTest {
     private String input;
 
     @Before
-    public void setUp() throws Exception {
+    public void etUp() throws Exception {
         input = "1\n";
         byteArrayOutputStream = new ByteArrayOutputStream();
         printer  = new Printer(byteArrayOutputStream);
@@ -43,8 +42,8 @@ public class CheckOutBookTest {
         scanner = new Scanner(byteArrayInputStream);
 
         bookList = new BookList();
-        harryPotterAndThePhilosophersStone = new Book(HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987);
-        harryPotterAndTheChambersOfSecrets = new Book(HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987);
+        harryPotterAndThePhilosophersStone = new Book(1, HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987);
+        harryPotterAndTheChambersOfSecrets = new Book(2, HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987);
         bookList.add(harryPotterAndThePhilosophersStone);
         bookList.add(harryPotterAndTheChambersOfSecrets);
 
@@ -65,8 +64,8 @@ public class CheckOutBookTest {
     public void testPerform() throws Exception, BookNotFoundException, BookIsNotAvailable {
         checkOutBook.perform(library, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
-                "1. |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
-                "2. |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                "|1|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "|2|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 "",
                 "Enter id of Book: ",
                 "Thanks you! Enjoy the book"
