@@ -49,8 +49,8 @@ public class ListAllBookTest {
     @Test
     public void testPerform() throws Exception {
         String expectedOutput = StringUtil.getOutputString(
-                "|1|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
-                "|2|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
+                "|1       |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "|2       |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 ""
         );
 

@@ -32,8 +32,8 @@ public class BookListTest {
     @Test
     public void testPrintListOfBooks() throws Exception {
         String expectedBookListOutput = StringUtil.getOutputString(
-                "|10|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
-                "|20|Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987"
+                "|10      |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "|20      |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987"
         );
 
         assertThat(bookList.toString(),is(expectedBookListOutput));
@@ -42,7 +42,7 @@ public class BookListTest {
     @Test
     public void testPrintListOfUncheckedOutBook() throws Exception {
         String expectedBookListOutput = StringUtil.getOutputString(
-                "|10|Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987"
+                "|10      |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987"
         );
 
         harryPotterAndTheChambersOfSecretsBook.checkOut();

@@ -10,7 +10,7 @@ public class BookTest {
     public void testBookCreation() throws Exception {
         Book book = new Book(1, "A pedagogy of opression", "Paulo Freire", 1987);
         String expectedBookRepresentation = new String();
-        expectedBookRepresentation += "|1";
+        expectedBookRepresentation += "|1       ";
         expectedBookRepresentation += "|A pedagogy of opression                                         ";
         expectedBookRepresentation += "|Paulo Freire                    ";
         expectedBookRepresentation += "|1987";

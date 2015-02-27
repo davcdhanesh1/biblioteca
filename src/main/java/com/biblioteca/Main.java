@@ -20,8 +20,8 @@ public class Main {
         menuList.add(new Quit());
 
         BookList bookList = new BookList();
-        Book harryPotterAndPhilosophersStoneBook = new Book(1, "Harry potters and philosophers Stone", "J K Rowling", 1987);
-        Book harryPotterAndChambersOfSecretsBook = new Book(1, "Harry potters and chambers of secrets", "J K Rowling", 1987);
+        Book harryPotterAndPhilosophersStoneBook = new Book(10, "Harry potters and philosophers Stone", "J K Rowling", 1987);
+        Book harryPotterAndChambersOfSecretsBook = new Book(11, "Harry potters and chambers of secrets", "J K Rowling", 1987);
         bookList.add(harryPotterAndPhilosophersStoneBook);
         bookList.add(harryPotterAndChambersOfSecretsBook);
 

@@ -18,7 +18,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return String.format("|%d|%-64s|%-32s|%d", id, name, author, publicationYear);
+        return String.format("|%-8d|%-64s|%-32s|%d", id, name, author, publicationYear);
     }
 
 
