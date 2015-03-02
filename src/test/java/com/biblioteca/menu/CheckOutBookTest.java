@@ -1,8 +1,8 @@
 package com.biblioteca.menu;
 
-import com.biblioteca.item.Book;
+import com.biblioteca.item.book.Book;
 import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
-import com.biblioteca.item.BookList;
+import com.biblioteca.item.book.BookList;
 import com.biblioteca.item.ItemNotFoundException;
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;

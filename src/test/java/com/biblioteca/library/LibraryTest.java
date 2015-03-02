@@ -2,6 +2,8 @@ package com.biblioteca.library;
 
 import com.biblioteca.io.Printer;
 import com.biblioteca.item.*;
+import com.biblioteca.item.book.Book;
+import com.biblioteca.item.book.BookList;
 import org.junit.Before;
 import org.junit.Test;
 import testhelpers.StringUtil;

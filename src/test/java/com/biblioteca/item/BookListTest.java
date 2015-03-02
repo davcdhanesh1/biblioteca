@@ -1,5 +1,7 @@
 package com.biblioteca.item;
 
+import com.biblioteca.item.book.Book;
+import com.biblioteca.item.book.BookList;
 import testhelpers.StringUtil;
 import org.junit.Before;
 import org.junit.Test;

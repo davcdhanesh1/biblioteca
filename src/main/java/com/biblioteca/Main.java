@@ -3,6 +3,8 @@ package com.biblioteca;
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
 import com.biblioteca.item.*;
+import com.biblioteca.item.book.Book;
+import com.biblioteca.item.book.BookList;
 import com.biblioteca.library.Library;
 import com.biblioteca.menu.*;
 

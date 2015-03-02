@@ -1,6 +1,8 @@
-package com.biblioteca.item;
+package com.biblioteca.item.book;
 
-public class Book extends Item{
+import com.biblioteca.item.Item;
+
+public class Book extends Item {
     private final String name;
     private final String author;
     private final int publicationYear;

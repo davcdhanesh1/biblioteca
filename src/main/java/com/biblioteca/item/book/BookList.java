@@ -1,6 +1,11 @@
-package com.biblioteca.item;
+package com.biblioteca.item.book;
 
-public class BookList extends ItemList{
+import com.biblioteca.item.ItemCanNotBeReturned;
+import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
+import com.biblioteca.item.ItemList;
+import com.biblioteca.item.ItemNotFoundException;
+
+public class BookList extends ItemList {
     @Override
     public String toString() {
         String result = new String();

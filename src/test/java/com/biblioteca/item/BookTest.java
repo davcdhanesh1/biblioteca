@@ -1,5 +1,6 @@
 package com.biblioteca.item;
 
+import com.biblioteca.item.book.Book;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
