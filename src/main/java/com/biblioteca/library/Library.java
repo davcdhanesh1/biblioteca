@@ -13,14 +13,14 @@ public class Library {
         this.printer = printer;
     }
 
-    public void checkOut(String bookId) throws BookNotFoundException, BookIsNotAvailableForCheckOut {
+    public void checkOut(String bookId) throws ItemNotFoundException, ItemIsNotAvailableForCheckOut {
         try {
             Book book = bookList.findFromAvailableItemsInStockById(bookId);
             book.checkOut();
             printer.println("Thanks you! Enjoy the book");
-        } catch (BookNotFoundException e) {
+        } catch (ItemNotFoundException e) {
             printer.println("Invalid Book to checkout");
-        } catch (BookIsNotAvailableForCheckOut e) {
+        } catch (ItemIsNotAvailableForCheckOut e) {
             printer.println("That book is not available");
         }
     }
@@ -29,14 +29,14 @@ public class Library {
         printer.println(bookList.toString());
     }
 
-    public void returnBook(String bookId) throws BookNotFoundException, BookCanNotBeReturned {
+    public void returnBook(String bookId) throws ItemNotFoundException, ItemCanNotBeReturned {
         try {
             Book book = bookList.findFromCheckedOutItemById(bookId);
             book.checkIn();
             printer.println("Thank you for returning the book.");
-        } catch (BookNotFoundException e) {
+        } catch (ItemNotFoundException e) {
             printer.println("Invalid Book to return");
-        } catch (BookCanNotBeReturned e) {
+        } catch (ItemCanNotBeReturned e) {
             printer.println("We already have this book !");
         }
     }

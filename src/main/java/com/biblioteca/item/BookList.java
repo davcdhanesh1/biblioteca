@@ -14,12 +14,12 @@ public class BookList extends ItemList{
     }
 
     @Override
-    public Book findFromAvailableItemsInStockById(String bookId) throws BookNotFoundException, BookIsNotAvailableForCheckOut {
+    public Book findFromAvailableItemsInStockById(String bookId) throws ItemNotFoundException, ItemIsNotAvailableForCheckOut {
         return (Book) super.findFromAvailableItemsInStockById(bookId);
     }
 
     @Override
-    public Book findFromCheckedOutItemById(String index) throws BookNotFoundException, BookCanNotBeReturned {
+    public Book findFromCheckedOutItemById(String index) throws ItemNotFoundException, ItemCanNotBeReturned {
         return (Book) super.findFromCheckedOutItemById(index);
     }
 }

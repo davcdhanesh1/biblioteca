@@ -1,9 +1,9 @@
 package com.biblioteca.menu;
 
 import com.biblioteca.item.Book;
-import com.biblioteca.item.BookCanNotBeReturned;
+import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.BookList;
-import com.biblioteca.item.BookNotFoundException;
+import com.biblioteca.item.ItemNotFoundException;
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
 import com.biblioteca.library.Library;
@@ -65,7 +65,7 @@ public class ReturnBookTest {
     }
 
     @Test
-    public void testPerform() throws Exception, BookNotFoundException, BookCanNotBeReturned, InputValidationException {
+    public void testPerform() throws Exception, ItemNotFoundException, ItemCanNotBeReturned, InputValidationException {
         harryPotterAndThePhilosophersStone.checkOut();
         returnBookOption.perform(library, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
@@ -78,7 +78,7 @@ public class ReturnBookTest {
     }
 
     @Test
-    public void testPerformWhenInputIsNotValid() throws InputValidationException, BookNotFoundException, BookCanNotBeReturned {
+    public void testPerformWhenInputIsNotValid() throws InputValidationException, ItemNotFoundException, ItemCanNotBeReturned {
         Library mockLibrary = mock(Library.class);
         Printer mockPrinter = mock(Printer.class);
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream("a".getBytes());

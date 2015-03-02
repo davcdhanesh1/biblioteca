@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned, InputValidationException {
+    public static void main(String[] args) throws ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException {
         MenuList menuList = new MenuList();
         menuList.add(new ListAllBook());
         menuList.add(new CheckOutBook());

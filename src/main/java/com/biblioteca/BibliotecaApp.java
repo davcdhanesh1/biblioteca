@@ -1,12 +1,12 @@
 package com.biblioteca;
 
-import com.biblioteca.item.BookCanNotBeReturned;
+import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.inputValidator.Validator;
 import com.biblioteca.io.Printer;
-import com.biblioteca.item.BookIsNotAvailableForCheckOut;
+import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.library.Library;
-import com.biblioteca.item.BookNotFoundException;
+import com.biblioteca.item.ItemNotFoundException;
 import com.biblioteca.menu.*;
 
 import java.util.Scanner;
@@ -24,7 +24,7 @@ public class BibliotecaApp {
         this.menuList = menuList;
     }
 
-    public void run(Library library) throws BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned, InputValidationException {
+    public void run(Library library) throws ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException {
         init();
         Menu menu; String option;
         scanner.useDelimiter("\n");
@@ -58,7 +58,7 @@ public class BibliotecaApp {
         printSeparatorLine();
     }
 
-    private void performSelectedMenu(Library library, Menu menu) throws BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned, InputValidationException {
+    private void performSelectedMenu(Library library, Menu menu) throws ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException {
         printSeparatorLine();
         menu.perform(library, printer, scanner);
         printSeparatorLine();

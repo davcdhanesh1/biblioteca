@@ -1,11 +1,11 @@
 package com.biblioteca.menu;
 
-import com.biblioteca.item.BookCanNotBeReturned;
+import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
-import com.biblioteca.item.BookIsNotAvailableForCheckOut;
+import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.library.Library;
-import com.biblioteca.item.BookNotFoundException;
+import com.biblioteca.item.ItemNotFoundException;
 
 import java.util.Scanner;
 
@@ -17,7 +17,7 @@ public abstract class Menu {
         this.description = description;
     }
 
-    public abstract void perform(Library library, Printer printer, Scanner scanner) throws BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned, InputValidationException;
+    public abstract void perform(Library library, Printer printer, Scanner scanner) throws ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException;
 
     public abstract boolean shouldContinueRunning();
 

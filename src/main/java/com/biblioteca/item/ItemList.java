@@ -26,34 +26,34 @@ public abstract class ItemList {
         return result;
     }
 
-    protected Item findFromAvailableItemsInStockById(String bookId) throws BookNotFoundException, BookIsNotAvailableForCheckOut {
+    protected Item findFromAvailableItemsInStockById(String bookId) throws ItemNotFoundException, ItemIsNotAvailableForCheckOut {
         int idOfBookToBeFound = Integer.parseInt(bookId);
         try {
             Item item = findItemWithId(idOfBookToBeFound);
-            if (item.isCheckedOut()) throw new BookIsNotAvailableForCheckOut();
+            if (item.isCheckedOut()) throw new ItemIsNotAvailableForCheckOut();
             return item;
-        } catch (BookNotFoundException e) {
-            throw new BookNotFoundException();
+        } catch (ItemNotFoundException e) {
+            throw new ItemNotFoundException();
         }
     }
 
-    protected Item findFromCheckedOutItemById(String index) throws BookNotFoundException, BookCanNotBeReturned {
+    protected Item findFromCheckedOutItemById(String index) throws ItemNotFoundException, ItemCanNotBeReturned {
         int idOfBookToBeFound = Integer.parseInt(index);
         try {
             Item item = findItemWithId(idOfBookToBeFound);
-            if (!item.isCheckedOut()) throw new BookCanNotBeReturned();
+            if (!item.isCheckedOut()) throw new ItemCanNotBeReturned();
             return item;
-        } catch (BookNotFoundException e) {
-            throw new BookNotFoundException();
+        } catch (ItemNotFoundException e) {
+            throw new ItemNotFoundException();
         }
     }
 
-    private Item findItemWithId(int bookId) throws BookNotFoundException {
+    private Item findItemWithId(int bookId) throws ItemNotFoundException {
         for(Item item : itemList) {
             if (item.hasId(bookId)) {
                 return item;
             }
         }
-        throw new BookNotFoundException();
+        throw new ItemNotFoundException();
     }
 }
