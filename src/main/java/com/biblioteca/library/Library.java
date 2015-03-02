@@ -15,9 +15,21 @@ abstract class Closure<T extends Item, S extends ItemList> {
     }
     abstract T getItem(String id) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException;
     abstract String successMsg();
-    abstract String invalidItemMsg();
+    abstract String itemNotFoundMsg();
     abstract String itemNotAvailableMsg();
     abstract void performAction(T item);
+
+    public String perform(String itemId) {
+        try {
+            Item item = getItem(itemId);
+            performAction((T) item);
+            return successMsg();
+        } catch (ItemNotFoundException e) {
+            return itemNotFoundMsg();
+        } catch (ItemIsNotAvailableForCheckOut e) {
+            return itemNotAvailableMsg();
+        }
+    }
 };
 
 public class Library {
@@ -34,8 +46,8 @@ public class Library {
 
     public void checkOutBook(String bookId) throws ItemNotFoundException, ItemIsNotAvailableForCheckOut {
 
-        Closure<Book, BookList> Closure;
-        Closure = new Closure<Book, BookList>(bookList) {
+        Closure<Book, BookList> closure;
+        closure = new Closure<Book, BookList>(bookList) {
 
             @Override
             Book getItem(String id) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException {
@@ -48,7 +60,7 @@ public class Library {
             }
 
             @Override
-            String invalidItemMsg() {
+            String itemNotFoundMsg() {
                 return "Invalid Book to checkout";
             }
 
@@ -62,7 +74,7 @@ public class Library {
                 book.checkOut();
             }
         };
-        performAction(bookId, Closure);
+        printer.println(closure.perform(bookId));
     }
 
     public void printAllBook() {
@@ -86,7 +98,7 @@ public class Library {
     }
 
     public void checkOutMovie(String movieId) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException {
-        Closure<Movie, MovieList> Closure = new Closure<Movie, MovieList>(movieList) {
+        Closure<Movie, MovieList> closure = new Closure<Movie, MovieList>(movieList) {
 
             @Override
             Movie getItem(String id) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException {
@@ -99,7 +111,7 @@ public class Library {
             }
 
             @Override
-            String invalidItemMsg() {
+            String itemNotFoundMsg() {
                 return "Invalid Movie to checkout";
             }
 
@@ -113,19 +125,7 @@ public class Library {
                 item.checkOut();
             }
         };
-        performAction(movieId, Closure);
-    }
-
-    private void performAction(String itemId, Closure Closure) {
-        try {
-            Item item = Closure.getItem(itemId);
-            Closure.performAction(item);
-            printer.println(Closure.successMsg());
-        } catch (ItemNotFoundException e) {
-            printer.println(Closure.invalidItemMsg());
-        } catch (ItemIsNotAvailableForCheckOut e) {
-            printer.println(Closure.itemNotAvailableMsg());
-        }
+        printer.println(closure.perform(movieId));
     }
 
 }
