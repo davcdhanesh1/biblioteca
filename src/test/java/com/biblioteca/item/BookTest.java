@@ -6,6 +6,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class BookTest {
+    
     @Test
     public void testBookCreation() throws Exception {
         Book book = new Book(1, "A pedagogy of opression", "Paulo Freire", 1987);
