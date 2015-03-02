@@ -1,58 +1,25 @@
 package com.biblioteca.item;
 
-import java.util.ArrayList;
-
-public class BookList {
-    private ArrayList<Book> bookList = new ArrayList<Book>();
-
-    public void add(Book book) {
-        bookList.add(book);
-    }
-
-    public Integer count() {
-        return this.bookList.size();
-    }
-
+public class BookList extends ItemList{
     @Override
     public String toString() {
         String result = new String();
         Book book;
-        for(int i = 0; i < bookList.size(); i++) {
-            book = bookList.get(i);
+        for(int i = 0; i < itemList.size(); i++) {
+            book = (Book) itemList.get(i);
             if (book.isCheckedOut()) continue;
             result += book.toString() + "\n";
         }
         return result;
     }
 
-    public Book findFromAvailableBookById(String bookId) throws BookNotFoundException, BookIsNotAvailableForCheckOut {
-        int idOfBookToBeFound = Integer.parseInt(bookId);
-        try {
-            Book book = findBookWithId(idOfBookToBeFound);
-            if (book.isCheckedOut()) throw new BookIsNotAvailableForCheckOut();
-            return book;
-        } catch (BookNotFoundException e) {
-            throw new BookNotFoundException();
-        }
+    @Override
+    public Book findFromAvailableItemsInStockById(String bookId) throws BookNotFoundException, BookIsNotAvailableForCheckOut {
+        return (Book) super.findFromAvailableItemsInStockById(bookId);
     }
 
-    public Book findFromCheckedOutBooksById(String index) throws BookNotFoundException, BookCanNotBeReturned {
-        int idOfBookToBeFound = Integer.parseInt(index);
-        try {
-            Book book = findBookWithId(idOfBookToBeFound);
-            if (!book.isCheckedOut()) throw new BookCanNotBeReturned();
-            return book;
-        } catch (BookNotFoundException e) {
-            throw new BookNotFoundException();
-        }
-    }
-
-    private Book findBookWithId(int bookId) throws BookNotFoundException {
-        for(Book book : bookList) {
-            if (book.hasId(bookId)) {
-                return book;
-            }
-        }
-        throw new BookNotFoundException();
+    @Override
+    public Book findFromCheckedOutItemById(String index) throws BookNotFoundException, BookCanNotBeReturned {
+        return (Book) super.findFromCheckedOutItemById(index);
     }
 }

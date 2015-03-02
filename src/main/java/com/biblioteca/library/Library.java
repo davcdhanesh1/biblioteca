@@ -15,7 +15,7 @@ public class Library {
 
     public void checkOut(String bookId) throws BookNotFoundException, BookIsNotAvailableForCheckOut {
         try {
-            Book book = bookList.findFromAvailableBookById(bookId);
+            Book book = bookList.findFromAvailableItemsInStockById(bookId);
             book.checkOut();
             printer.println("Thanks you! Enjoy the book");
         } catch (BookNotFoundException e) {
@@ -31,7 +31,7 @@ public class Library {
 
     public void returnBook(String bookId) throws BookNotFoundException, BookCanNotBeReturned {
         try {
-            Book book = bookList.findFromCheckedOutBooksById(bookId);
+            Book book = bookList.findFromCheckedOutItemById(bookId);
             book.checkIn();
             printer.println("Thank you for returning the book.");
         } catch (BookNotFoundException e) {
