@@ -1,4 +1,4 @@
-package com.biblioteca.book;
+package com.biblioteca.item;
 
 import testhelpers.StringUtil;
 import org.junit.Before;

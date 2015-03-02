@@ -1,7 +1,7 @@
 package com.biblioteca.library;
 
-import com.biblioteca.book.*;
 import com.biblioteca.io.Printer;
+import com.biblioteca.item.*;
 import org.junit.Before;
 import org.junit.Test;
 import testhelpers.StringUtil;

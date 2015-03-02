@@ -1,8 +1,8 @@
 package com.biblioteca;
 
-import com.biblioteca.book.*;
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
+import com.biblioteca.item.*;
 import com.biblioteca.library.Library;
 import com.biblioteca.menu.*;
 

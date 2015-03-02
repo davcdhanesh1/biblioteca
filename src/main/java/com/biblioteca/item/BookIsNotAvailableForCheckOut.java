@@ -1,4 +1,4 @@
-package com.biblioteca.book;
+package com.biblioteca.item;
 
 public class BookIsNotAvailableForCheckOut extends Throwable {
     public BookIsNotAvailableForCheckOut() {

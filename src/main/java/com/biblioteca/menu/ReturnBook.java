@@ -1,11 +1,10 @@
 package com.biblioteca.menu;
 
-import com.biblioteca.book.BookCanNotBeReturned;
+import com.biblioteca.item.BookCanNotBeReturned;
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.inputValidator.Validator;
 import com.biblioteca.io.Printer;
-import com.biblioteca.book.BookIsNotAvailableForCheckOut;
-import com.biblioteca.book.BookNotFoundException;
+import com.biblioteca.item.BookNotFoundException;
 import com.biblioteca.library.Library;
 
 import java.util.Scanner;

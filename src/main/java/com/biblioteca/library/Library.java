@@ -1,7 +1,7 @@
 package com.biblioteca.library;
 
-import com.biblioteca.book.*;
 import com.biblioteca.io.Printer;
+import com.biblioteca.item.*;
 
 public class Library {
     private final BookList bookList;

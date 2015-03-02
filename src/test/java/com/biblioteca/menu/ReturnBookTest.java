@@ -1,9 +1,9 @@
 package com.biblioteca.menu;
 
-import com.biblioteca.book.Book;
-import com.biblioteca.book.BookCanNotBeReturned;
-import com.biblioteca.book.BookList;
-import com.biblioteca.book.BookNotFoundException;
+import com.biblioteca.item.Book;
+import com.biblioteca.item.BookCanNotBeReturned;
+import com.biblioteca.item.BookList;
+import com.biblioteca.item.BookNotFoundException;
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
 import com.biblioteca.library.Library;

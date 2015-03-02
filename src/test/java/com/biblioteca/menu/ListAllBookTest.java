@@ -3,8 +3,8 @@ package com.biblioteca.menu;
 import com.biblioteca.io.Printer;
 import com.biblioteca.library.Library;
 import testhelpers.StringUtil;
-import com.biblioteca.book.Book;
-import com.biblioteca.book.BookList;
+import com.biblioteca.item.Book;
+import com.biblioteca.item.BookList;
 import org.junit.Before;
 import org.junit.Test;
 
