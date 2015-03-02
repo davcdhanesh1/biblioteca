@@ -54,8 +54,14 @@ public class Library {
     }
 
     public void checkOutMovie(String movieId) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException {
-        Movie movie = movieList.findFromAvailableById(movieId);
-        movie.checkOut();
-        printer.println("Thanks you! Enjoy the movie");
+        try {
+            Movie movie = movieList.findFromAvailableById(movieId);
+            movie.checkOut();
+            printer.println("Thanks you! Enjoy the movie");
+        } catch (ItemNotFoundException e) {
+            printer.println("Invalid Movie to checkout");
+        } catch (ItemIsNotAvailableForCheckOut e) {
+            printer.println("That movie is not available");
+        }
     }
 }
