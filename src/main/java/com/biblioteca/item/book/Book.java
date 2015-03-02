@@ -3,13 +3,11 @@ package com.biblioteca.item.book;
 import com.biblioteca.item.Item;
 
 public class Book extends Item {
-    private final String name;
     private final String author;
     private final int publicationYear;
 
     public Book(int id, String name, String author, int publicationYear) {
-        super(id);
-        this.name = name;
+        super(id, name);
         this.author = author;
         this.publicationYear = publicationYear;
     }

@@ -3,14 +3,12 @@ package com.biblioteca.item.movie;
 import com.biblioteca.item.Item;
 
 public class Movie extends Item {
-    private final String name;
     private final String directorName;
     private final int publicationYear;
     private final Rating rating;
 
     public Movie(int id, String name, String directorName, int publicationYear, Rating rating) {
-        super(id);
-        this.name = name;
+        super(id, name);
         this.directorName = directorName;
         this.publicationYear = publicationYear;
         this.rating = rating;

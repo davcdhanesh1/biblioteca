@@ -3,11 +3,13 @@ package com.biblioteca.item;
 public abstract class Item {
 
     protected final int id;
+    protected final String name;
     private boolean checkedOut;
 
-    protected Item(int id) {
+    protected Item(int id, String name) {
         this.id = id;
         this.checkedOut = false;
+        this.name = name;
     }
 
 
