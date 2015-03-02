@@ -1,13 +1,14 @@
-package com.biblioteca.item;
+package com.biblioteca.item.book;
 
-import com.biblioteca.item.book.Book;
-import com.biblioteca.item.book.BookList;
-import testhelpers.StringUtil;
+import com.biblioteca.item.ItemCanNotBeReturned;
+import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
+import com.biblioteca.item.ItemNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
+import testhelpers.StringUtil;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class BookListTest {
     public final String HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE = "Harry Potter and the Philosopher's Stone";

@@ -1,10 +1,9 @@
-package com.biblioteca.item;
+package com.biblioteca.item.book;
 
-import com.biblioteca.item.book.Book;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class BookTest {
 
