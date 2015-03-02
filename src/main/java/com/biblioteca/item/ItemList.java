@@ -26,7 +26,7 @@ public abstract class ItemList {
         return result;
     }
 
-    protected Item findFromAvailableItemsInStockById(String bookId) throws ItemNotFoundException, ItemIsNotAvailableForCheckOut {
+    protected Item findFromAvailableItemsById(String bookId) throws ItemNotFoundException, ItemIsNotAvailableForCheckOut {
         int idOfBookToBeFound = Integer.parseInt(bookId);
         try {
             Item item = findItemWithId(idOfBookToBeFound);
@@ -37,7 +37,7 @@ public abstract class ItemList {
         }
     }
 
-    protected Item findFromCheckedOutItemById(String index) throws ItemNotFoundException, ItemCanNotBeReturned {
+    protected Item findFromCheckedOutItemsById(String index) throws ItemNotFoundException, ItemCanNotBeReturned {
         int idOfBookToBeFound = Integer.parseInt(index);
         try {
             Item item = findItemWithId(idOfBookToBeFound);
