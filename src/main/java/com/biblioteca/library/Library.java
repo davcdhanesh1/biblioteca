@@ -15,7 +15,7 @@ public class Library {
         this.printer = printer;
     }
 
-    public void checkOut(String bookId) throws ItemNotFoundException, ItemIsNotAvailableForCheckOut {
+    public void checkOutBook(String bookId) throws ItemNotFoundException, ItemIsNotAvailableForCheckOut {
         try {
             Book book = bookList.findFromAvailableById(bookId);
             book.checkOut();

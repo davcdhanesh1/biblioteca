@@ -41,14 +41,14 @@ public class LibraryTest {
 
     @Test
     public void testCheckOutBook() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut {
-        library.checkOut("1");
+        library.checkOutBook("1");
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
         assertThat(outputStream.toString(),is("Thanks you! Enjoy the book\n"));
     }
 
     @Test
     public void testCheckOutBookWhenInvalidBookIdIsGiven() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut {
-        library.checkOut("10");
+        library.checkOutBook("10");
 
         assertThat(outputStream.toString(),is("Invalid Book to checkout\n"));
     }
@@ -57,7 +57,7 @@ public class LibraryTest {
     public void testCheckOutBookWhenBookWithGivenIdIsNotAvailable() throws ItemIsNotAvailableForCheckOut, ItemNotFoundException {
         harryPotterAndThePhilosophersStone.checkOut();
         String expectedOutput = StringUtil.getOutputString("That book is not available");
-        library.checkOut("1");
+        library.checkOutBook("1");
         assertThat(outputStream.toString(),is(expectedOutput));
     }
 

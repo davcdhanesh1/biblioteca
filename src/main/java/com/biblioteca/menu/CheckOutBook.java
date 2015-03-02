@@ -21,7 +21,7 @@ public class CheckOutBook extends Menu {
         printer.println("Enter id of Book: ");
         option = scanner.next();
         Validator.validate(option);
-        library.checkOut(option);
+        library.checkOutBook(option);
     }
     @Override
     public boolean shouldContinueRunning() { return true; }
