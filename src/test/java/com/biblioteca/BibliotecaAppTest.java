@@ -102,7 +102,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void testSelectingInvalidOption() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException {
+    public void testEnteringInvalidOptionFormat() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException {
         inputForSelectingBook = "-1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);

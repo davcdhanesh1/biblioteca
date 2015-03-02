@@ -8,6 +8,7 @@ import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.library.Library;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import testhelpers.StringUtil;
@@ -89,6 +90,7 @@ public class CheckOutBookTest {
 
         try {
             checkOutBook.perform(mockLibrary, mockPrinter, scanner);
+            Assert.fail("Test did not fail for invalid input");
         } catch (InputValidationException e) {
             assertThat(e.getMessage(),is("Input has to be number"));
         }
