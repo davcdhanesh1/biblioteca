@@ -1,9 +1,10 @@
 package com.biblioteca.menu;
 
 import com.biblioteca.io.Printer;
-import com.biblioteca.library.Library;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
+import com.biblioteca.item.movie.MovieList;
+import com.biblioteca.library.Library;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,6 +14,7 @@ import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class InvalidOptionTest {
     public final String HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE = "Harry Potter and the Philosopher's Stone";
@@ -27,6 +29,7 @@ public class InvalidOptionTest {
     private InvalidOption invalidOption;
     private ByteArrayInputStream byteArrayInputStream;
     private Scanner scanner;
+    private MovieList movieList;
 
     @Before
     public void setUp() throws Exception {
@@ -41,7 +44,10 @@ public class InvalidOptionTest {
         bookList.add(new Book(1, HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987));
         bookList.add(new Book(1, HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
         invalidOption = new InvalidOption();
-        library = new Library(bookList, printer);
+
+        movieList = mock(MovieList.class);
+
+        library = new Library(bookList, movieList, printer);
     }
 
     @Test

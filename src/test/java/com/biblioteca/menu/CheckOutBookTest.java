@@ -1,11 +1,12 @@
 package com.biblioteca.menu;
 
-import com.biblioteca.item.book.Book;
-import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
-import com.biblioteca.item.book.BookList;
-import com.biblioteca.item.ItemNotFoundException;
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
+import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
+import com.biblioteca.item.ItemNotFoundException;
+import com.biblioteca.item.book.Book;
+import com.biblioteca.item.book.BookList;
+import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.library.Library;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,14 +35,16 @@ public class CheckOutBookTest {
     private Library library;
     private Scanner scanner;
     private String input;
+    private MovieList movieList;
 
     @Before
-    public void etUp() throws Exception {
+    public void setUp() throws Exception {
         input = "1\n";
         byteArrayOutputStream = new ByteArrayOutputStream();
         printer  = new Printer(byteArrayOutputStream);
         byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
         scanner = new Scanner(byteArrayInputStream);
+        movieList = mock(MovieList.class);
 
         bookList = new BookList();
         harryPotterAndThePhilosophersStone = new Book(1, HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987);
@@ -49,7 +52,7 @@ public class CheckOutBookTest {
         bookList.add(harryPotterAndThePhilosophersStone);
         bookList.add(harryPotterAndTheChambersOfSecrets);
 
-        library = new Library(bookList, printer);
+        library = new Library(bookList, movieList, printer);
     }
 
     @Test

@@ -2,9 +2,12 @@ package com.biblioteca;
 
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
-import com.biblioteca.item.*;
+import com.biblioteca.item.ItemCanNotBeReturned;
+import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
+import com.biblioteca.item.ItemNotFoundException;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
+import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.library.Library;
 import com.biblioteca.menu.*;
 import org.junit.Before;
@@ -17,6 +20,7 @@ import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class BibliotecaAppTest {
     public static final String harryPotterAndPhilosophersStone = "Harry Potter and the Philosopher's Stone";
@@ -35,6 +39,7 @@ public class BibliotecaAppTest {
     private String inputForSelectingMenu;
     private Book harryPotterAndPhilosophersStoneBook;
     private Book harryPotterAndChambersOfSecretsBook;
+    private MovieList movieList;
 
     @Before
     public void setUp() throws Exception {
@@ -58,7 +63,9 @@ public class BibliotecaAppTest {
         bookList.add(harryPotterAndPhilosophersStoneBook);
         bookList.add(harryPotterAndChambersOfSecretsBook);
 
-        library = new Library(bookList, printer);
+        movieList = mock(MovieList.class);
+
+        library = new Library(bookList, movieList, printer);
 
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
     }
@@ -262,7 +269,7 @@ public class BibliotecaAppTest {
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
-        bibliotecaApp.run(new Library(bookList, printer));
+        bibliotecaApp.run(new Library(bookList, movieList, printer));
 
         String actualOutput = outputStream.toString();
 

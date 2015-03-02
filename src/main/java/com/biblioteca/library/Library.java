@@ -1,17 +1,23 @@
 package com.biblioteca.library;
 
 import com.biblioteca.io.Printer;
-import com.biblioteca.item.*;
+import com.biblioteca.item.ItemCanNotBeReturned;
+import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
+import com.biblioteca.item.ItemNotFoundException;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
+import com.biblioteca.item.movie.Movie;
+import com.biblioteca.item.movie.MovieList;
 
 public class Library {
     private final BookList bookList;
     private final Printer printer;
+    private final MovieList movieList;
 
-    public Library(BookList bookList, Printer printer) {
+    public Library(BookList bookList, MovieList movieList, Printer printer) {
 
         this.bookList = bookList;
+        this.movieList = movieList;
         this.printer = printer;
     }
 
@@ -41,5 +47,15 @@ public class Library {
         } catch (ItemCanNotBeReturned e) {
             printer.println("We already have this book !");
         }
+    }
+
+    public void printAllMovies() {
+        printer.println(movieList.toString());
+    }
+
+    public void checkOutMovie(String movieId) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException {
+        Movie movie = movieList.findFromAvailableById(movieId);
+        movie.checkOut();
+        printer.println("Thanks you! Enjoy the movie");
     }
 }

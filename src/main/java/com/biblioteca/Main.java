@@ -5,6 +5,9 @@ import com.biblioteca.io.Printer;
 import com.biblioteca.item.*;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
+import com.biblioteca.item.movie.Movie;
+import com.biblioteca.item.movie.MovieList;
+import com.biblioteca.item.movie.Rating;
 import com.biblioteca.library.Library;
 import com.biblioteca.menu.*;
 
@@ -25,10 +28,17 @@ public class Main {
         bookList.add(harryPotterAndPhilosophersStoneBook);
         bookList.add(harryPotterAndChambersOfSecretsBook);
 
+        MovieList movieList = new MovieList();
+        Movie whiplashMovie = new Movie(1, "Whiplash", "Damien Chazelle", 2014, Rating.NINE);
+        Movie birdmanMovie = new Movie(2, "BirdMan", "Alejandro González Iñárritu", 2014, Rating.TEN);
+        movieList = new MovieList();
+        movieList.add(whiplashMovie);
+        movieList.add(birdmanMovie);
+
         Printer printer = new Printer(System.out);
         Scanner scanner = new Scanner(System.in);
 
-        Library library = new Library(bookList, printer);
+        Library library = new Library(bookList, movieList, printer);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
         bibliotecaApp.run(library);
     }

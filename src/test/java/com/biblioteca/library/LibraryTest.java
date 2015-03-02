@@ -1,9 +1,12 @@
 package com.biblioteca.library;
 
 import com.biblioteca.io.Printer;
-import com.biblioteca.item.*;
+import com.biblioteca.item.ItemCanNotBeReturned;
+import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
+import com.biblioteca.item.ItemNotFoundException;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
+import com.biblioteca.item.movie.MovieList;
 import org.junit.Before;
 import org.junit.Test;
 import testhelpers.StringUtil;
@@ -12,6 +15,7 @@ import java.io.ByteArrayOutputStream;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class LibraryTest {
     public final String HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE = "Harry Potter and the Philosopher's Stone";
@@ -25,6 +29,7 @@ public class LibraryTest {
 
     private ByteArrayOutputStream outputStream;
     private Printer printer;
+    private MovieList movieList;
 
     @Before
     public void setUp() throws Exception {
@@ -34,9 +39,11 @@ public class LibraryTest {
         bookList.add(harryPotterAndThePhilosophersStone);
         bookList.add(harryPotterAndTheChambersOfSecrets);
 
+        movieList = mock(MovieList.class);
+
         outputStream = new ByteArrayOutputStream();
         printer = new Printer(outputStream);
-        library = new Library(bookList,printer);
+        library = new Library(bookList, movieList, printer);
     }
 
     @Test

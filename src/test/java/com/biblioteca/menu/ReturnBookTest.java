@@ -1,11 +1,12 @@
 package com.biblioteca.menu;
 
-import com.biblioteca.item.book.Book;
-import com.biblioteca.item.ItemCanNotBeReturned;
-import com.biblioteca.item.book.BookList;
-import com.biblioteca.item.ItemNotFoundException;
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
+import com.biblioteca.item.ItemCanNotBeReturned;
+import com.biblioteca.item.ItemNotFoundException;
+import com.biblioteca.item.book.Book;
+import com.biblioteca.item.book.BookList;
+import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.library.Library;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +37,7 @@ public class ReturnBookTest {
     private Scanner scanner;
     private String input;
     private BookList bookList;
+    private MovieList movieList;
 
     @Before
     public void setUp() throws Exception {
@@ -51,7 +53,8 @@ public class ReturnBookTest {
         bookList.add(harryPotterAndThePhilosophersStone);
         bookList.add(harryPotterAndTheChambersOfSecrets);
 
-        library = new Library(bookList, printer);
+        movieList = mock(MovieList.class);
+        library = new Library(bookList, movieList, printer);
     }
 
     @Test

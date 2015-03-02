@@ -1,12 +1,13 @@
 package com.biblioteca.menu;
 
 import com.biblioteca.io.Printer;
-import com.biblioteca.library.Library;
-import testhelpers.StringUtil;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
+import com.biblioteca.item.movie.MovieList;
+import com.biblioteca.library.Library;
 import org.junit.Before;
 import org.junit.Test;
+import testhelpers.StringUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -14,6 +15,7 @@ import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class ListAllBookTest {
     public final String HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE = "Harry Potter and the Philosopher's Stone";
@@ -29,6 +31,7 @@ public class ListAllBookTest {
     private Library library;
     private ByteArrayInputStream byteArrayInputStream;
     private Scanner scanner;
+    private MovieList movieList;
 
     @Before
     public void setUp() throws Exception {
@@ -43,7 +46,10 @@ public class ListAllBookTest {
         bookList.add(new Book(1, HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987));
         bookList.add(new Book(2, HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
         listAllBook = new ListAllBook();
-        library = new Library(bookList, printer);
+
+        movieList = mock(MovieList.class);
+
+        library = new Library(bookList, movieList, printer);
     }
 
     @Test
