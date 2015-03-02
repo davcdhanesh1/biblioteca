@@ -125,7 +125,7 @@ public class BibliotecaAppTest {
 
     @Test
     public void testSelectingOptionsUntilQuitOptionIsSelected() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException {
-        inputForSelectingBook = "1\na\n4\n1\n";
+        inputForSelectingBook = "1\na\n5\n4\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
@@ -160,8 +160,17 @@ public class BibliotecaAppTest {
                 "4. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
+                "Invalid option!",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Return a Book",
+                "4. Quit",
+                "Select Option: ",
+                "-----------------------------------------------------------------------------",
                 "Book a week, keeps teacher away!",
-                "-----------------------------------------------------------------------------");
+                "-----------------------------------------------------------------------------"
+        );
 
         assertThat(actualOutput,is(expectedOutput));
     }
