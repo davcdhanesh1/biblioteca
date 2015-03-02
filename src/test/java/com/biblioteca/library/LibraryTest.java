@@ -54,21 +54,21 @@ public class LibraryTest {
     }
 
     @Test
-    public void testCheckOutBook() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut {
+    public void testCheckOutBook() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
         library.checkOutBook("1");
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
         assertThat(outputStream.toString(),is("Thanks you! Enjoy the book\n"));
     }
 
     @Test
-    public void testCheckOutBookWhenInvalidBookIdIsGiven() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut {
+    public void testCheckOutBookWhenInvalidBookIdIsGiven() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
         library.checkOutBook("10");
 
         assertThat(outputStream.toString(),is("Invalid Book to checkout\n"));
     }
 
     @Test
-    public void testCheckOutBookWhenBookWithGivenIdIsNotAvailable() throws ItemIsNotAvailableForCheckOut, ItemNotFoundException {
+    public void testCheckOutBookWhenBookWithGivenIdIsNotAvailable() throws ItemIsNotAvailableForCheckOut, ItemNotFoundException, ItemCanNotBeReturned {
         harryPotterAndThePhilosophersStone.checkOut();
         String expectedOutput = StringUtil.getOutputString("That book is not available");
         library.checkOutBook("1");
@@ -76,7 +76,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void testCheckOutMovie() throws Exception, ItemIsNotAvailableForCheckOut, ItemNotFoundException {
+    public void testCheckOutMovie() throws Exception, ItemIsNotAvailableForCheckOut, ItemNotFoundException, ItemCanNotBeReturned {
         library.checkOutMovie("1");
 
         assertThat(whiplashMovie.isCheckedOut(),is(true));
@@ -84,14 +84,14 @@ public class LibraryTest {
     }
 
     @Test
-    public void testCheckOutMovieWhenInvalidMovieIdIsGiven() throws Exception, ItemIsNotAvailableForCheckOut, ItemNotFoundException {
+    public void testCheckOutMovieWhenInvalidMovieIdIsGiven() throws Exception, ItemIsNotAvailableForCheckOut, ItemNotFoundException, ItemCanNotBeReturned {
         library.checkOutMovie("10");
 
         assertThat(outputStream.toString(),is("Invalid Movie to checkout\n"));
     }
 
     @Test
-    public void testCheckOutMovieWhenMovieWithGivenIdIsNotAvailableBecauseItIsAlreadyCheckedOut() throws Exception, ItemIsNotAvailableForCheckOut, ItemNotFoundException {
+    public void testCheckOutMovieWhenMovieWithGivenIdIsNotAvailableBecauseItIsAlreadyCheckedOut() throws Exception, ItemIsNotAvailableForCheckOut, ItemNotFoundException, ItemCanNotBeReturned {
         whiplashMovie.checkOut();
 
         library.checkOutMovie("1");

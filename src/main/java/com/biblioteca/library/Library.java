@@ -13,20 +13,20 @@ abstract class Closure<T extends Item, S extends ItemList> {
     Closure(S list) {
         this.list = list;
     }
-    abstract T getItem(String id) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException;
+    abstract T getItem(String id) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException, ItemCanNotBeReturned;
     abstract String successMsg();
     abstract String itemNotFoundMsg();
     abstract String itemNotAvailableMsg();
     abstract void performAction(T item);
 
-    public String perform(String itemId) {
+    public String perform(String itemId) throws ItemCanNotBeReturned {
         try {
             Item item = getItem(itemId);
             performAction((T) item);
             return successMsg();
         } catch (ItemNotFoundException e) {
             return itemNotFoundMsg();
-        } catch (ItemIsNotAvailableForCheckOut e) {
+        } catch (ItemIsNotAvailableForCheckOut|ItemCanNotBeReturned e) {
             return itemNotAvailableMsg();
         }
     }
@@ -44,7 +44,7 @@ public class Library {
         this.printer = printer;
     }
 
-    public void checkOutBook(String bookId) throws ItemNotFoundException, ItemIsNotAvailableForCheckOut {
+    public void checkOutBook(String bookId) throws ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
 
         Closure<Book, BookList> closure;
         closure = new Closure<Book, BookList>(bookList) {
@@ -82,22 +82,41 @@ public class Library {
     }
 
     public void returnBook(String bookId) throws ItemNotFoundException, ItemCanNotBeReturned {
-        try {
-            Book book = bookList.findFromCheckedOutById(bookId);
-            book.checkIn();
-            printer.println("Thank you for returning the book.");
-        } catch (ItemNotFoundException e) {
-            printer.println("Invalid Book to return");
-        } catch (ItemCanNotBeReturned e) {
-            printer.println("We already have this book !");
-        }
+        Closure<Book, BookList> closure = new Closure<Book, BookList>(bookList) {
+            @Override
+            Book getItem(String id) throws ItemNotFoundException, ItemCanNotBeReturned {
+                return bookList.findFromCheckedOutById(id);
+            }
+
+            @Override
+            String successMsg() {
+                return "Thank you for returning the book.";
+            }
+
+            @Override
+            String itemNotFoundMsg() {
+                return "Invalid Book to return";
+            }
+
+            @Override
+            String itemNotAvailableMsg() {
+                return "We already have this book !";
+            }
+
+            @Override
+            void performAction(Book book) {
+                book.checkIn();
+            }
+        };
+
+        printer.println(closure.perform(bookId));
     }
 
     public void printAllMovies() {
         printer.println(movieList.toString());
     }
 
-    public void checkOutMovie(String movieId) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException {
+    public void checkOutMovie(String movieId) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException, ItemCanNotBeReturned {
         Closure<Movie, MovieList> closure = new Closure<Movie, MovieList>(movieList) {
 
             @Override
