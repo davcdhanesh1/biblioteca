@@ -2,6 +2,7 @@ package com.biblioteca;
 
 import com.biblioteca.book.BookCanNotBeReturned;
 import com.biblioteca.inputValidator.InputValidationException;
+import com.biblioteca.inputValidator.Validator;
 import com.biblioteca.io.Printer;
 import com.biblioteca.book.BookIsNotAvailableForCheckOut;
 import com.biblioteca.library.Library;
@@ -29,6 +30,7 @@ public class BibliotecaApp {
         scanner.useDelimiter("\n");
         while(scanner.hasNext()) {
             option = scanner.next();
+            if (!isValidInput(option)) continue;
             menu = menuList.find(option);
             performSelectedMenu(library, menu);
             if(!menu.shouldContinueRunning()) {
@@ -36,6 +38,24 @@ public class BibliotecaApp {
             }
             printMenuListAndPrompt();
         }
+
+    }
+
+    private boolean isValidInput(String option) {
+        try {
+            Validator.validate(option);
+        } catch (InputValidationException e) {
+            printErrorMessage(e.getMessage());
+            printMenuListAndPrompt();
+            return false;
+        }
+        return true;
+    }
+
+    private void printErrorMessage(String msg) {
+        printSeparatorLine();
+        printer.println(msg);
+        printSeparatorLine();
     }
 
     private void performSelectedMenu(Library library, Menu menu) throws BookNotFoundException, BookIsNotAvailableForCheckOut, BookCanNotBeReturned, InputValidationException {

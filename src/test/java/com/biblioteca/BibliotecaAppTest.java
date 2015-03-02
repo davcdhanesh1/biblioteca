@@ -396,4 +396,34 @@ public class BibliotecaAppTest {
 
         assertThat(actualOutput,is(expectedOutput));
     }
+
+    @Test
+    public void testWhenInputEnteredIsInvalid() throws Exception, InputValidationException, BookCanNotBeReturned, BookIsNotAvailableForCheckOut, BookNotFoundException {
+        inputForSelectingBook = "a\n";
+        byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
+        scanner = new Scanner(byteArrayInputStream);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
+        bibliotecaApp.run(library);
+
+        String actualOutput = outputStream.toString();
+
+        String expectedOutput = StringUtil.getOutputString(
+                "Welcome To Biblioteca",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Return a Book",
+                "4. Quit",
+                "Select Option: ",
+                "-----------------------------------------------------------------------------",
+                "Input has to be number",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Return a Book",
+                "4. Quit",
+                "Select Option: "
+        );
+        assertThat(actualOutput,is(expectedOutput));
+    }
 }
