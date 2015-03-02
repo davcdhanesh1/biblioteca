@@ -1,5 +1,6 @@
-package com.biblioteca;
+package functional;
 
+import com.biblioteca.BibliotecaApp;
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
 import com.biblioteca.item.ItemCanNotBeReturned;
@@ -22,7 +23,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class BibliotecaAppTest {
+public class BibliotecaAppTestForBooks {
     public static final String harryPotterAndPhilosophersStone = "Harry Potter and the Philosopher's Stone";
     public static final String harryPotterAndChambersOfSecrets = "Harry Potter and the Chamber of Secrets";
     private final String JKRowling = "J K Rowling";
@@ -59,7 +60,7 @@ public class BibliotecaAppTest {
 
         bookList = new BookList();
         harryPotterAndPhilosophersStoneBook = new Book(1, harryPotterAndPhilosophersStone, JKRowling, 1987);
-        harryPotterAndChambersOfSecretsBook = new Book(2, BibliotecaAppTest.harryPotterAndChambersOfSecrets, JKRowling, 1987);
+        harryPotterAndChambersOfSecretsBook = new Book(2, BibliotecaAppTestForBooks.harryPotterAndChambersOfSecrets, JKRowling, 1987);
         bookList.add(harryPotterAndPhilosophersStoneBook);
         bookList.add(harryPotterAndChambersOfSecretsBook);
 
