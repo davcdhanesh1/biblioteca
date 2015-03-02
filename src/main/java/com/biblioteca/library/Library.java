@@ -16,7 +16,7 @@ abstract class Closure<T extends Item, S extends ItemList> {
     abstract T getItem(String id) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException, ItemCanNotBeReturned;
     abstract String successMsg();
     abstract String itemNotFoundMsg();
-    abstract String itemNotAvailableMsg();
+    abstract String actionCanNotBePerformedMsg();
     abstract void performAction(T item);
 
     public String perform(String itemId) throws ItemCanNotBeReturned {
@@ -27,7 +27,7 @@ abstract class Closure<T extends Item, S extends ItemList> {
         } catch (ItemNotFoundException e) {
             return itemNotFoundMsg();
         } catch (ItemIsNotAvailableForCheckOut|ItemCanNotBeReturned e) {
-            return itemNotAvailableMsg();
+            return actionCanNotBePerformedMsg();
         }
     }
 };
@@ -65,7 +65,7 @@ public class Library {
             }
 
             @Override
-            String itemNotAvailableMsg() {
+            String actionCanNotBePerformedMsg() {
                 return "That book is not available";
             }
 
@@ -99,7 +99,7 @@ public class Library {
             }
 
             @Override
-            String itemNotAvailableMsg() {
+            String actionCanNotBePerformedMsg() {
                 return "We already have this book !";
             }
 
@@ -135,7 +135,7 @@ public class Library {
             }
 
             @Override
-            String itemNotAvailableMsg() {
+            String actionCanNotBePerformedMsg() {
                 return "That movie is not available";
             }
 
