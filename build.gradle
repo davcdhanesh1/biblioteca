@@ -13,5 +13,10 @@ jar {
     }
 }
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile ('junit:junit-dep:4.+') {
+        exclude module : 'hamcrest'
+        exclude module : 'hamcrest-core'
+    }
+    testCompile 'org.hamcrest:hamcrest-library:1.2.1'
+    testCompile group:'org.mockito',name:'mockito-core',version:'1.10.+'
 }
