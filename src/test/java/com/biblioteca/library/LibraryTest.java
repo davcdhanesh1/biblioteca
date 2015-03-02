@@ -80,7 +80,7 @@ public class LibraryTest {
         library.checkOutMovie("1");
 
         assertThat(whiplashMovie.isCheckedOut(),is(true));
-        assertThat(outputStream.toString(), is("Thanks you! Enjoy the Movie\n"));
+        assertThat(outputStream.toString(), is("Thanks you! Enjoy the movie\n"));
     }
 
     @Test
@@ -96,7 +96,7 @@ public class LibraryTest {
 
         library.checkOutMovie("1");
 
-        assertThat(outputStream.toString(),is("That movie is not available out"));
+        assertThat(outputStream.toString(),is("That movie is not available\n"));
     }
 
     @Test

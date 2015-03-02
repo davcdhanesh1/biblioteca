@@ -1,13 +1,24 @@
 package com.biblioteca.library;
 
 import com.biblioteca.io.Printer;
-import com.biblioteca.item.ItemCanNotBeReturned;
-import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
-import com.biblioteca.item.ItemNotFoundException;
+import com.biblioteca.item.*;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
 import com.biblioteca.item.movie.Movie;
 import com.biblioteca.item.movie.MovieList;
+
+abstract class Closure<T extends Item, S extends ItemList> {
+    private S list;
+
+    Closure(S list) {
+        this.list = list;
+    }
+    abstract T getItem(String id) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException;
+    abstract String successMsg();
+    abstract String invalidItemMsg();
+    abstract String itemNotAvailableMsg();
+    abstract void performAction(T item);
+};
 
 public class Library {
     private final BookList bookList;
@@ -22,15 +33,36 @@ public class Library {
     }
 
     public void checkOutBook(String bookId) throws ItemNotFoundException, ItemIsNotAvailableForCheckOut {
-        try {
-            Book book = bookList.findFromAvailableById(bookId);
-            book.checkOut();
-            printer.println("Thanks you! Enjoy the book");
-        } catch (ItemNotFoundException e) {
-            printer.println("Invalid Book to checkout");
-        } catch (ItemIsNotAvailableForCheckOut e) {
-            printer.println("That book is not available");
-        }
+
+        Closure<Book, BookList> Closure;
+        Closure = new Closure<Book, BookList>(bookList) {
+
+            @Override
+            Book getItem(String id) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException {
+                return bookList.findFromAvailableById(id);
+            }
+
+            @Override
+            String successMsg() {
+                return "Thanks you! Enjoy the book";
+            }
+
+            @Override
+            String invalidItemMsg() {
+                return "Invalid Book to checkout";
+            }
+
+            @Override
+            String itemNotAvailableMsg() {
+                return "That book is not available";
+            }
+
+            @Override
+            void performAction(Book book) {
+                book.checkOut();
+            }
+        };
+        performAction(bookId, Closure);
     }
 
     public void printAllBook() {
@@ -54,14 +86,46 @@ public class Library {
     }
 
     public void checkOutMovie(String movieId) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException {
+        Closure<Movie, MovieList> Closure = new Closure<Movie, MovieList>(movieList) {
+
+            @Override
+            Movie getItem(String id) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException {
+                return movieList.findFromAvailableById(id);
+            }
+
+            @Override
+            String successMsg() {
+                return "Thanks you! Enjoy the movie";
+            }
+
+            @Override
+            String invalidItemMsg() {
+                return "Invalid Movie to checkout";
+            }
+
+            @Override
+            String itemNotAvailableMsg() {
+                return "That movie is not available";
+            }
+
+            @Override
+            void performAction(Movie item) {
+                item.checkOut();
+            }
+        };
+        performAction(movieId, Closure);
+    }
+
+    private void performAction(String itemId, Closure Closure) {
         try {
-            Movie movie = movieList.findFromAvailableById(movieId);
-            movie.checkOut();
-            printer.println("Thanks you! Enjoy the movie");
+            Item item = Closure.getItem(itemId);
+            Closure.performAction(item);
+            printer.println(Closure.successMsg());
         } catch (ItemNotFoundException e) {
-            printer.println("Invalid Movie to checkout");
+            printer.println(Closure.invalidItemMsg());
         } catch (ItemIsNotAvailableForCheckOut e) {
-            printer.println("That movie is not available");
+            printer.println(Closure.itemNotAvailableMsg());
         }
     }
+
 }
