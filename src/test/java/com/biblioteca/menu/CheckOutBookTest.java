@@ -1,24 +1,23 @@
 package com.biblioteca.menu;
 
+import com.biblioteca.book.Book;
+import com.biblioteca.book.BookIsNotAvailableForCheckOut;
+import com.biblioteca.book.BookList;
+import com.biblioteca.book.BookNotFoundException;
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
-import com.biblioteca.book.BookIsNotAvailableForCheckOut;
 import com.biblioteca.library.Library;
-import com.biblioteca.book.BookNotFoundException;
-import testhelpers.StringUtil;
-import com.biblioteca.book.Book;
-import com.biblioteca.book.BookList;
 import org.junit.Before;
 import org.junit.Test;
+import testhelpers.StringUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class CheckOutBookTest {
 
