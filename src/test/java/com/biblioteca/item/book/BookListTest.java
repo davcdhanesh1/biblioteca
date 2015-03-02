@@ -55,34 +55,34 @@ public class BookListTest {
 
     @Test
     public void testFindFromAvailableBook() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut {
-        assertThat(bookList.findFromAvailableItemsById("10"),is(harryPotterAndThePhilosophersStoneBook));
+        assertThat(bookList.findFromAvailableById("10"),is(harryPotterAndThePhilosophersStoneBook));
     }
 
     @Test(expected = ItemNotFoundException.class)
     public void testFindFromAvailableBookWhenBookToBeFoundIsNotPresentInTheList() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut {
-        bookList.findFromAvailableItemsById("3");
+        bookList.findFromAvailableById("3");
     }
 
     @Test(expected = ItemIsNotAvailableForCheckOut.class)
     public void testFindingFromAvailableBookWhenBookToBeFoundIsAlreadyCheckedOut() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut {
         harryPotterAndTheChambersOfSecretsBook.checkOut();
-        bookList.findFromAvailableItemsById("20");
+        bookList.findFromAvailableById("20");
     }
 
     @Test
     public void testFindFromCheckedOutBooks() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
         harryPotterAndThePhilosophersStoneBook.checkOut();
-        assertThat(bookList.findFromCheckedOutItemsById("10"),is(harryPotterAndThePhilosophersStoneBook));
+        assertThat(bookList.findFromCheckedOutById("10"),is(harryPotterAndThePhilosophersStoneBook));
     }
 
     @Test(expected = ItemNotFoundException.class)
     public void testFindFromCheckedOutBooksWhenBookToBeCheckedOutIsNotPresentInTheList() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
-        bookList.findFromCheckedOutItemsById("3");
+        bookList.findFromCheckedOutById("3");
     }
 
     @Test(expected = ItemCanNotBeReturned.class)
     public void testFindFromCheckedOutBooksWhenBookToBeFoundIsNotPresentInTheListOfCheckedOutBooks() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
         harryPotterAndTheChambersOfSecretsBook.checkIn();
-        bookList.findFromCheckedOutItemsById("20");
+        bookList.findFromCheckedOutById("20");
     }
 }

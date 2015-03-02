@@ -52,34 +52,34 @@ public class MovieListTest {
 
     @Test
     public void testFindFromAvailableMovies() throws Exception, ItemIsNotAvailableForCheckOut, ItemNotFoundException {
-        assertThat(movieList.findFromAvailableItemsById("1"),is(whiplashMovie));
+        assertThat(movieList.findFromAvailableById("1"),is(whiplashMovie));
     }
 
     @Test(expected = ItemNotFoundException.class)
     public void testFindFromAvailableMoviesWhenMovieToBeFoundIsNotPresentInTheList() throws Exception, ItemIsNotAvailableForCheckOut, ItemNotFoundException {
-        movieList.findFromAvailableItemsById("3");
+        movieList.findFromAvailableById("3");
     }
 
     @Test(expected = ItemIsNotAvailableForCheckOut.class)
     public void testFindingFromAvailableMoviesWhenMovieToBeFoundIsAlreadyCheckedOut() throws Exception, ItemIsNotAvailableForCheckOut, ItemNotFoundException {
         whiplashMovie.checkOut();
-        movieList.findFromAvailableItemsById("1");
+        movieList.findFromAvailableById("1");
     }
 
     @Test
     public void testFindFromCheckedOutBooks() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
         whiplashMovie.checkOut();
-        assertThat(movieList.findFromCheckedOutItemsById("1"),is(whiplashMovie));
+        assertThat(movieList.findFromCheckedOutById("1"),is(whiplashMovie));
     }
 
     @Test(expected = ItemNotFoundException.class)
     public void testFindFromCheckedOutBooksWhenBookToBeCheckedOutIsNotPresentInTheList() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
-        movieList.findFromCheckedOutItemsById("3");
+        movieList.findFromCheckedOutById("3");
     }
 
     @Test(expected = ItemCanNotBeReturned.class)
     public void testFindFromCheckedOutBooksWhenBookToBeFoundIsNotPresentInTheListOfCheckedOutBooks() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
         whiplashMovie.checkIn();
-        movieList.findFromCheckedOutItemsById("1");
+        movieList.findFromCheckedOutById("1");
     }
 }
