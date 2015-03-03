@@ -5,6 +5,7 @@ import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.library.Library;
+import com.biblioteca.session.UserSession;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,9 +31,11 @@ public class InvalidOptionTest {
     private ByteArrayInputStream byteArrayInputStream;
     private Scanner scanner;
     private MovieList movieList;
+    private UserSession userSession;
 
     @Before
     public void setUp() throws Exception {
+        userSession = mock(UserSession.class);
         byteArrayOutputStream = new ByteArrayOutputStream();
         printer = new Printer(byteArrayOutputStream);
 
@@ -52,7 +55,7 @@ public class InvalidOptionTest {
 
     @Test
     public void testPerform() throws Exception {
-        invalidOption.perform(library, printer, scanner);
+        invalidOption.perform(userSession, library, printer, scanner);
         assertThat(byteArrayOutputStream.toString(), is("Invalid option!\n"));
     }
 

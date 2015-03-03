@@ -2,6 +2,7 @@ package com.biblioteca.menu;
 
 import com.biblioteca.io.Printer;
 import com.biblioteca.library.Library;
+import com.biblioteca.session.UserSession;
 
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ public class Quit extends Menu {
     }
 
     @Override
-    public void perform(Library library, Printer printer, Scanner scanner) {
+    public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) {
         printer.println("Book a week, keeps teacher away!");
     }
 

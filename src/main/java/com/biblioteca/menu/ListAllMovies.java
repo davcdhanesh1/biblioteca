@@ -6,6 +6,7 @@ import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.item.InvalidItemException;
 import com.biblioteca.library.Library;
+import com.biblioteca.session.UserSession;
 
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class ListAllMovies extends Menu {
     }
 
     @Override
-    public void perform(Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException {
+    public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException {
         library.printAllMovies();
     }
 

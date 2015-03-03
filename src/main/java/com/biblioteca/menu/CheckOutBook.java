@@ -17,15 +17,6 @@ public class CheckOutBook extends Menu {
     }
 
     @Override
-    public void perform(Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
-        String option;
-        library.printAllBook();
-        printer.println("Enter id of Book: ");
-        option = scanner.next();
-        Validator.validate(option);
-        library.checkOutBook(option);
-    }
-
     public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
         String option;
         library.printAllBook();

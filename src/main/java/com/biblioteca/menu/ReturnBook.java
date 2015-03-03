@@ -16,13 +16,6 @@ public class ReturnBook extends Menu{
     }
 
     @Override
-    public void perform(Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemCanNotBeReturned, InputValidationException {
-        printer.println("Enter id of Book: ");
-        String option = scanner.next();
-        Validator.validate(option);
-        library.returnBook(option);
-    }
-
     public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemCanNotBeReturned, InputValidationException {
         printer.println("Enter id of Book: ");
         String option = scanner.next();

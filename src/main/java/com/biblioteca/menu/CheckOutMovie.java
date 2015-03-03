@@ -16,15 +16,6 @@ public class CheckOutMovie extends Menu{
     public CheckOutMovie() { super("Checkout a Movie"); }
 
     @Override
-    public void perform(Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException {
-        String option;
-        library.printAllMovies();
-        printer.println("Enter id of Movie: ");
-        option = scanner.next();
-        Validator.validate(option);
-        library.checkOutMovie(option);
-    }
-
     public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException {
         String option;
         library.printAllMovies();

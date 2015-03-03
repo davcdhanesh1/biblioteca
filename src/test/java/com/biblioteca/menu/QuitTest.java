@@ -5,6 +5,7 @@ import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.library.Library;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
+import com.biblioteca.session.UserSession;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,9 +32,11 @@ public class QuitTest {
     private ByteArrayInputStream byteArrayInputStream;
     private Scanner scanner;
     private MovieList movieList;
+    private UserSession userSession;
 
     @Before
     public void setUp() throws Exception {
+        userSession = mock(UserSession.class);
         byteArrayOutputStream = new ByteArrayOutputStream();
         printer = new Printer(byteArrayOutputStream);
 
@@ -53,7 +56,7 @@ public class QuitTest {
 
     @Test
     public void testPerform() throws Exception {
-        quit.perform(library, printer, scanner);
+        quit.perform(userSession, library, printer, scanner);
         assertThat(byteArrayOutputStream.toString(), is("Book a week, keeps teacher away!\n"));
     }
 

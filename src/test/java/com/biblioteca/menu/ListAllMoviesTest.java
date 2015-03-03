@@ -10,6 +10,7 @@ import com.biblioteca.item.movie.Movie;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.item.movie.Rating;
 import com.biblioteca.library.Library;
+import com.biblioteca.session.UserSession;
 import org.junit.Before;
 import org.junit.Test;
 import testhelpers.StringUtil;
@@ -32,9 +33,11 @@ public class ListAllMoviesTest {
     private ByteArrayOutputStream byteArrayOutputStream;
     private Printer printer;
     private Scanner scanner;
+    private UserSession userSession;
 
     @Before
     public void setUp() throws Exception {
+        userSession = mock(UserSession.class);
         listAllMovies = new ListAllMovies();
         byteArrayOutputStream = new ByteArrayOutputStream();
         printer = new Printer(byteArrayOutputStream);
@@ -57,7 +60,7 @@ public class ListAllMoviesTest {
 
     @Test
     public void testPerform() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
-        listAllMovies.perform(library, printer, scanner);
+        listAllMovies.perform(userSession, library, printer, scanner);
 
         String expectedMovieList = StringUtil.getOutputString(
                 "|1       |Whiplash                                                        |Damien Chazelle                 |2014|NINE",
