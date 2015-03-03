@@ -2,12 +2,14 @@ package com.biblioteca.menu;
 
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
-import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.InvalidItemException;
+import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.library.Library;
+import com.biblioteca.session.UserSession;
+import com.biblioteca.user.User;
 import org.junit.Before;
 import org.junit.Test;
 import testhelpers.StringUtil;
@@ -18,7 +20,7 @@ import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 public class ReturnBookTest {
 
@@ -38,9 +40,13 @@ public class ReturnBookTest {
     private String input;
     private BookList bookList;
     private MovieList movieList;
+    private UserSession mockUserSession;
 
     @Before
     public void setUp() throws Exception {
+        mockUserSession = mock(UserSession.class);
+        mockUserSession.currentUser = mock(User.class);
+
         input = "1\n";
         byteArrayOutputStream = new ByteArrayOutputStream();
         printer  = new Printer(byteArrayOutputStream);
@@ -70,7 +76,7 @@ public class ReturnBookTest {
     @Test
     public void testPerform() throws Exception, InvalidItemException, ItemCanNotBeReturned, InputValidationException {
         harryPotterAndThePhilosophersStone.checkOut();
-        returnBookOption.perform(library, printer, scanner);
+        returnBookOption.perform(mockUserSession, library, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
                 "Enter id of Book: ",
                 "Thank you for returning the book."
@@ -78,6 +84,8 @@ public class ReturnBookTest {
 
         assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(false));
+
+        verify(mockUserSession.currentUser, times(1)).removeItem(harryPotterAndThePhilosophersStone);
     }
 
     @Test
@@ -88,10 +96,12 @@ public class ReturnBookTest {
         Scanner scanner = new Scanner(byteArrayInputStream);
 
         try {
-            returnBookOption.perform(mockLibrary, mockPrinter, scanner);
+            returnBookOption.perform(mockUserSession, mockLibrary, mockPrinter, scanner);
         } catch (InputValidationException e) {
             assertThat(e.getMessage(),is("Input has to be number"));
         }
+
+        verify(mockUserSession.currentUser, never()).removeItem(harryPotterAndThePhilosophersStone);
     }
 
 }

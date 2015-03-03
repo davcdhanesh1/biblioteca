@@ -147,6 +147,38 @@ public class Library {
         printer.println(closure.perform(bookId));
     }
 
+    public void returnBook(String bookId, final UserSession userSession) throws InvalidItemException, ItemCanNotBeReturned {
+        Closure<Book, BookList> closure = new Closure<Book, BookList>(bookList) {
+            @Override
+            Book getItem(String id) throws InvalidItemException, ItemCanNotBeReturned {
+                return bookList.findFromCheckedOutById(id);
+            }
+
+            @Override
+            String successMsg() {
+                return "Thank you for returning the book.";
+            }
+
+            @Override
+            String invalidItemExceptionMessage() {
+                return "Invalid Book to return";
+            }
+
+            @Override
+            String actionCanNotBePerformedMsg() {
+                return "We already have this book !";
+            }
+
+            @Override
+            void performAction(Book book) {
+                book.checkIn();
+                userSession.currentUser.removeItem(book);
+            }
+        };
+
+        printer.println(closure.perform(bookId));
+    }
+
     public void printAllMovies() {
         printer.println(movieList.toString());
     }
