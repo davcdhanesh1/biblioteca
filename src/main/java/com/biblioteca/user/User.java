@@ -29,7 +29,7 @@ public class User {
         borrowedItems.add(item);
     }
 
-    public ArrayList<Item> borrowedItems() {
+    public ArrayList<Item> getBorrowedItems() {
         return borrowedItems;
     }
 }

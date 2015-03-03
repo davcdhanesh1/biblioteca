@@ -26,34 +26,34 @@ public abstract class ItemList {
         return result;
     }
 
-    protected Item findFromAvailableById(String bookId) throws ItemNotFoundException, ItemIsNotAvailableForCheckOut {
+    protected Item findFromAvailableById(String bookId) throws InvalidItemException, ItemIsNotAvailableForCheckOut {
         int idOfBookToBeFound = Integer.parseInt(bookId);
         try {
             Item item = findItemWithId(idOfBookToBeFound);
             if (item.isCheckedOut()) throw new ItemIsNotAvailableForCheckOut();
             return item;
-        } catch (ItemNotFoundException e) {
-            throw new ItemNotFoundException();
+        } catch (InvalidItemException e) {
+            throw new InvalidItemException();
         }
     }
 
-    protected Item findFromCheckedOutById(String index) throws ItemNotFoundException, ItemCanNotBeReturned {
+    protected Item findFromCheckedOutById(String index) throws InvalidItemException, ItemCanNotBeReturned {
         int idOfBookToBeFound = Integer.parseInt(index);
         try {
             Item item = findItemWithId(idOfBookToBeFound);
             if (!item.isCheckedOut()) throw new ItemCanNotBeReturned();
             return item;
-        } catch (ItemNotFoundException e) {
-            throw new ItemNotFoundException();
+        } catch (InvalidItemException e) {
+            throw new InvalidItemException();
         }
     }
 
-    private Item findItemWithId(int bookId) throws ItemNotFoundException {
+    private Item findItemWithId(int bookId) throws InvalidItemException {
         for(Item item : itemList) {
             if (item.hasId(bookId)) {
                 return item;
             }
         }
-        throw new ItemNotFoundException();
+        throw new InvalidItemException();
     }
 }

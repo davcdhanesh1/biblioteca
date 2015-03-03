@@ -5,7 +5,7 @@ import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
 import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
-import com.biblioteca.item.ItemNotFoundException;
+import com.biblioteca.item.InvalidItemException;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
 import com.biblioteca.item.movie.Movie;
@@ -72,7 +72,7 @@ public class BibliotecaAppTestForMovies {
     }
 
     @Test
-    public void testSelectionOfListOfMovies() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
+    public void testSelectionOfListOfMovies() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
         inputForSelectingBook = "1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
@@ -101,7 +101,7 @@ public class BibliotecaAppTestForMovies {
     }
 
     @Test
-    public void testSuccessfulCheckOut() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
+    public void testSuccessfulCheckOut() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
         inputForSelectingBook = "2\n1\n1";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
@@ -141,7 +141,7 @@ public class BibliotecaAppTestForMovies {
     }
 
     @Test
-    public void testUnSuccessFulCheckOutWhenMovieToBeCheckedOutIsAlreadyCheckedOut() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
+    public void testUnSuccessFulCheckOutWhenMovieToBeCheckedOutIsAlreadyCheckedOut() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
         whiplashMovie.checkOut();
         inputForSelectingBook = "2\n1\n1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
@@ -180,7 +180,7 @@ public class BibliotecaAppTestForMovies {
     }
 
     @Test
-    public void testUnSuccessFulCheckOutWhenMovieToBeCheckedOutIsNotPresentInTheLibrary() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
+    public void testUnSuccessFulCheckOutWhenMovieToBeCheckedOutIsNotPresentInTheLibrary() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
         inputForSelectingBook = "2\n10\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);

@@ -13,7 +13,7 @@ abstract class Closure<T extends Item, S extends ItemList> {
     Closure(S list) {
         this.list = list;
     }
-    abstract T getItem(String id) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException, ItemCanNotBeReturned;
+    abstract T getItem(String id) throws ItemIsNotAvailableForCheckOut, InvalidItemException, ItemCanNotBeReturned;
     abstract String successMsg();
     abstract String itemNotFoundMsg();
     abstract String actionCanNotBePerformedMsg();
@@ -24,7 +24,7 @@ abstract class Closure<T extends Item, S extends ItemList> {
             Item item = getItem(itemId);
             performAction((T) item);
             return successMsg();
-        } catch (ItemNotFoundException e) {
+        } catch (InvalidItemException e) {
             return itemNotFoundMsg();
         } catch (ItemIsNotAvailableForCheckOut|ItemCanNotBeReturned e) {
             return actionCanNotBePerformedMsg();
@@ -44,13 +44,13 @@ public class Library {
         this.printer = printer;
     }
 
-    public void checkOutBook(String bookId) throws ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
+    public void checkOutBook(String bookId) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
 
         Closure<Book, BookList> closure;
         closure = new Closure<Book, BookList>(bookList) {
 
             @Override
-            Book getItem(String id) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException {
+            Book getItem(String id) throws ItemIsNotAvailableForCheckOut, InvalidItemException {
                 return bookList.findFromAvailableById(id);
             }
 
@@ -81,10 +81,10 @@ public class Library {
         printer.println(bookList.toString());
     }
 
-    public void returnBook(String bookId) throws ItemNotFoundException, ItemCanNotBeReturned {
+    public void returnBook(String bookId) throws InvalidItemException, ItemCanNotBeReturned {
         Closure<Book, BookList> closure = new Closure<Book, BookList>(bookList) {
             @Override
-            Book getItem(String id) throws ItemNotFoundException, ItemCanNotBeReturned {
+            Book getItem(String id) throws InvalidItemException, ItemCanNotBeReturned {
                 return bookList.findFromCheckedOutById(id);
             }
 
@@ -116,11 +116,11 @@ public class Library {
         printer.println(movieList.toString());
     }
 
-    public void checkOutMovie(String movieId) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException, ItemCanNotBeReturned {
+    public void checkOutMovie(String movieId) throws ItemIsNotAvailableForCheckOut, InvalidItemException, ItemCanNotBeReturned {
         Closure<Movie, MovieList> closure = new Closure<Movie, MovieList>(movieList) {
 
             @Override
-            Movie getItem(String id) throws ItemIsNotAvailableForCheckOut, ItemNotFoundException {
+            Movie getItem(String id) throws ItemIsNotAvailableForCheckOut, InvalidItemException {
                 return movieList.findFromAvailableById(id);
             }
 

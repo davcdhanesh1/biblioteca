@@ -33,8 +33,8 @@ public class UserTest {
         user.addItem(book);
         user.addItem(movie);
 
-        assertThat(user.borrowedItems(),hasItem(book));
-        assertThat(user.borrowedItems(),hasItem(movie));
+        assertThat(user.getBorrowedItems(), hasItem(book));
+        assertThat(user.getBorrowedItems(),hasItem(movie));
     }
 
 

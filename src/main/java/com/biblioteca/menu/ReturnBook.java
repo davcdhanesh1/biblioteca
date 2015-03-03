@@ -4,7 +4,7 @@ import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.inputValidator.Validator;
 import com.biblioteca.io.Printer;
-import com.biblioteca.item.ItemNotFoundException;
+import com.biblioteca.item.InvalidItemException;
 import com.biblioteca.library.Library;
 
 import java.util.Scanner;
@@ -15,7 +15,7 @@ public class ReturnBook extends Menu{
     }
 
     @Override
-    public void perform(Library library, Printer printer, Scanner scanner) throws ItemNotFoundException, ItemCanNotBeReturned, InputValidationException {
+    public void perform(Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemCanNotBeReturned, InputValidationException {
         printer.println("Enter id of Book: ");
         String option = scanner.next();
         Validator.validate(option);

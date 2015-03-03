@@ -4,7 +4,7 @@ import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
 import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
-import com.biblioteca.item.ItemNotFoundException;
+import com.biblioteca.item.InvalidItemException;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
 import com.biblioteca.item.movie.MovieList;
@@ -68,7 +68,7 @@ public class CheckOutBookTest {
     }
 
     @Test
-    public void testPerform() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
+    public void testPerform() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
         checkOutBook.perform(library, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
                 "|1       |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
@@ -83,7 +83,7 @@ public class CheckOutBookTest {
     }
 
     @Test
-    public void testPerformWhenInputIsNotValid() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
+    public void testPerformWhenInputIsNotValid() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
         Library mockLibrary = mock(Library.class);
         Printer mockPrinter = mock(Printer.class);
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream("a".getBytes());

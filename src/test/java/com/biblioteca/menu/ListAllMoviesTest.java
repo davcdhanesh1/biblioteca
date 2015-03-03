@@ -4,7 +4,7 @@ import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
 import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
-import com.biblioteca.item.ItemNotFoundException;
+import com.biblioteca.item.InvalidItemException;
 import com.biblioteca.item.book.BookList;
 import com.biblioteca.item.movie.Movie;
 import com.biblioteca.item.movie.MovieList;
@@ -56,7 +56,7 @@ public class ListAllMoviesTest {
     }
 
     @Test
-    public void testPerform() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
+    public void testPerform() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
         listAllMovies.perform(library, printer, scanner);
 
         String expectedMovieList = StringUtil.getOutputString(

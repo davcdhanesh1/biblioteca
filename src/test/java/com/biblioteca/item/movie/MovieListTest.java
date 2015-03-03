@@ -2,7 +2,7 @@ package com.biblioteca.item.movie;
 
 import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
-import com.biblioteca.item.ItemNotFoundException;
+import com.biblioteca.item.InvalidItemException;
 import org.junit.Before;
 import org.junit.Test;
 import testhelpers.StringUtil;
@@ -51,34 +51,34 @@ public class MovieListTest {
     }
 
     @Test
-    public void testFindFromAvailableMovies() throws Exception, ItemIsNotAvailableForCheckOut, ItemNotFoundException {
+    public void testFindFromAvailableMovies() throws Exception, ItemIsNotAvailableForCheckOut, InvalidItemException {
         assertThat(movieList.findFromAvailableById("1"),is(whiplashMovie));
     }
 
-    @Test(expected = ItemNotFoundException.class)
-    public void testFindFromAvailableMoviesWhenMovieToBeFoundIsNotPresentInTheList() throws Exception, ItemIsNotAvailableForCheckOut, ItemNotFoundException {
+    @Test(expected = InvalidItemException.class)
+    public void testFindFromAvailableMoviesWhenMovieToBeFoundIsNotPresentInTheList() throws Exception, ItemIsNotAvailableForCheckOut, InvalidItemException {
         movieList.findFromAvailableById("3");
     }
 
     @Test(expected = ItemIsNotAvailableForCheckOut.class)
-    public void testFindingFromAvailableMoviesWhenMovieToBeFoundIsAlreadyCheckedOut() throws Exception, ItemIsNotAvailableForCheckOut, ItemNotFoundException {
+    public void testFindingFromAvailableMoviesWhenMovieToBeFoundIsAlreadyCheckedOut() throws Exception, ItemIsNotAvailableForCheckOut, InvalidItemException {
         whiplashMovie.checkOut();
         movieList.findFromAvailableById("1");
     }
 
     @Test
-    public void testFindFromCheckedOutBooks() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
+    public void testFindFromCheckedOutBooks() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
         whiplashMovie.checkOut();
         assertThat(movieList.findFromCheckedOutById("1"),is(whiplashMovie));
     }
 
-    @Test(expected = ItemNotFoundException.class)
-    public void testFindFromCheckedOutBooksWhenBookToBeCheckedOutIsNotPresentInTheList() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
+    @Test(expected = InvalidItemException.class)
+    public void testFindFromCheckedOutBooksWhenBookToBeCheckedOutIsNotPresentInTheList() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
         movieList.findFromCheckedOutById("3");
     }
 
     @Test(expected = ItemCanNotBeReturned.class)
-    public void testFindFromCheckedOutBooksWhenBookToBeFoundIsNotPresentInTheListOfCheckedOutBooks() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
+    public void testFindFromCheckedOutBooksWhenBookToBeFoundIsNotPresentInTheListOfCheckedOutBooks() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
         whiplashMovie.checkIn();
         movieList.findFromCheckedOutById("1");
     }
