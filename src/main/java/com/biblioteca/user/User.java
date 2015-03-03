@@ -7,16 +7,16 @@ import java.util.ArrayList;
 public class User {
     private final String libraryNumber;
     private final String name;
-    private String password;
+    private String passWord;
     private final String email;
     private final String phoneNumber;
     private ArrayList<Item> borrowedItems;
 
-    public User(String libraryNumber, String name, String password, String email, String phoneNumber) {
+    public User(String libraryNumber, String name, String passWord, String email, String phoneNumber) {
 
         this.libraryNumber = libraryNumber;
         this.name = name;
-        this.password = password;
+        this.passWord = passWord;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.borrowedItems = new ArrayList<Item>();
@@ -39,7 +39,7 @@ public class User {
         return result;
     }
 
-    public boolean hasLibraryNumber(String libraryNumber) {
-        return this.libraryNumber.equals(libraryNumber);
+    public boolean matches(String libraryNumber, String passWord) {
+        return this.libraryNumber.equals(libraryNumber) && this.passWord.equals(passWord);
     }
 }

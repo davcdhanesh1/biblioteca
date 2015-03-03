@@ -9,9 +9,9 @@ public class UserList {
         users.add(user);
     }
 
-    public User findByLibraryNumber(String libraryNumber) throws InvalidUserPasswordCombination {
+    public User findByLibraryNumberAndPassword(String libraryNumber, String passWord) throws InvalidUserPasswordCombination {
         for(User user: users) {
-            if (user.hasLibraryNumber(libraryNumber)) return user;
+            if (user.matches(libraryNumber, passWord)) return user;
         }
         throw new InvalidUserPasswordCombination("Invalid Username or Password");
     }
