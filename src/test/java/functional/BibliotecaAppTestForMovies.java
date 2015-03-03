@@ -55,6 +55,7 @@ public class BibliotecaAppTestForMovies {
 
         menuList = new MenuList();
         menuList.add(new ListAllMovies());
+        menuList.add(new CheckOutMovie());
         menuList.add(new Quit());
 
         bookList = mock(BookList.class);
@@ -82,7 +83,8 @@ public class BibliotecaAppTestForMovies {
                 "Welcome To Biblioteca",
                 "-----------------------------------------------------------------------------",
                 "1. List Movies",
-                "2. Quit",
+                "2. Checkout a Movie",
+                "3. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "|1       |Whiplash                                                        |Damien Chazelle                 |2014|NINE",
@@ -90,10 +92,121 @@ public class BibliotecaAppTestForMovies {
                 "",
                 "-----------------------------------------------------------------------------",
                 "1. List Movies",
-                "2. Quit",
+                "2. Checkout a Movie",
+                "3. Quit",
                 "Select Option: "
         );
 
         assertThat(outputStream.toString(),is(expectedOutPut));
+    }
+
+    @Test
+    public void testSuccessfulCheckOut() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
+        inputForSelectingBook = "2\n1\n1";
+        byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
+        scanner = new Scanner(byteArrayInputStream);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
+        bibliotecaApp.run(library);
+
+        String expectedOutput = StringUtil.getOutputString(
+                "Welcome To Biblioteca",
+                "-----------------------------------------------------------------------------",
+                "1. List Movies",
+                "2. Checkout a Movie",
+                "3. Quit",
+                "Select Option: ",
+                "-----------------------------------------------------------------------------",
+                "|1       |Whiplash                                                        |Damien Chazelle                 |2014|NINE",
+                "|2       |BirdMan                                                         |Alejandro González Iñárritu     |2014|TEN",
+                "",
+                "Enter id of Movie: ",
+                "Thanks you! Enjoy the movie",
+                "-----------------------------------------------------------------------------",
+                "1. List Movies",
+                "2. Checkout a Movie",
+                "3. Quit",
+                "Select Option: ",
+                "-----------------------------------------------------------------------------",
+                "|2       |BirdMan                                                         |Alejandro González Iñárritu     |2014|TEN",
+                "",
+                "-----------------------------------------------------------------------------",
+                "1. List Movies",
+                "2. Checkout a Movie",
+                "3. Quit",
+                "Select Option: "
+        );
+
+        assertThat(outputStream.toString(),is(expectedOutput));
+        assertThat(whiplashMovie.isCheckedOut(),is(true));
+    }
+
+    @Test
+    public void testUnSuccessFulCheckOutWhenMovieToBeCheckedOutIsAlreadyCheckedOut() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
+        whiplashMovie.checkOut();
+        inputForSelectingBook = "2\n1\n1\n";
+        byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
+        scanner = new Scanner(byteArrayInputStream);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
+        bibliotecaApp.run(library);
+
+        String expectedOutput = StringUtil.getOutputString(
+                "Welcome To Biblioteca",
+                "-----------------------------------------------------------------------------",
+                "1. List Movies",
+                "2. Checkout a Movie",
+                "3. Quit",
+                "Select Option: ",
+                "-----------------------------------------------------------------------------",
+                "|2       |BirdMan                                                         |Alejandro González Iñárritu     |2014|TEN",
+                "",
+                "Enter id of Movie: ",
+                "That movie is not available",
+                "-----------------------------------------------------------------------------",
+                "1. List Movies",
+                "2. Checkout a Movie",
+                "3. Quit",
+                "Select Option: ",
+                "-----------------------------------------------------------------------------",
+                "|2       |BirdMan                                                         |Alejandro González Iñárritu     |2014|TEN",
+                "",
+                "-----------------------------------------------------------------------------",
+                "1. List Movies",
+                "2. Checkout a Movie",
+                "3. Quit",
+                "Select Option: "
+        );
+
+        assertThat(outputStream.toString(),is(expectedOutput));
+    }
+
+    @Test
+    public void testUnSuccessFulCheckOutWhenMovieToBeCheckedOutIsNotPresentInTheLibrary() throws Exception, ItemNotFoundException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
+        inputForSelectingBook = "2\n10\n";
+        byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
+        scanner = new Scanner(byteArrayInputStream);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, menuList);
+        bibliotecaApp.run(library);
+
+        String expectedOutput = StringUtil.getOutputString(
+                "Welcome To Biblioteca",
+                "-----------------------------------------------------------------------------",
+                "1. List Movies",
+                "2. Checkout a Movie",
+                "3. Quit",
+                "Select Option: ",
+                "-----------------------------------------------------------------------------",
+                "|1       |Whiplash                                                        |Damien Chazelle                 |2014|NINE",
+                "|2       |BirdMan                                                         |Alejandro González Iñárritu     |2014|TEN",
+                "",
+                "Enter id of Movie: ",
+                "Invalid Movie to checkout",
+                "-----------------------------------------------------------------------------",
+                "1. List Movies",
+                "2. Checkout a Movie",
+                "3. Quit",
+                "Select Option: "
+        );
+
+        assertThat(outputStream.toString(),is(expectedOutput));
     }
 }
