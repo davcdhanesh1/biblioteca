@@ -16,7 +16,7 @@ abstract class Closure<T extends Item, S extends ItemList> {
     }
     abstract T getItem(String id) throws ItemIsNotAvailableForCheckOut, InvalidItemException, ItemCanNotBeReturned;
     abstract String successMsg();
-    abstract String itemNotFoundMsg();
+    abstract String invalidItemExceptionMessage();
     abstract String actionCanNotBePerformedMsg();
     abstract void performAction(T item);
 
@@ -26,7 +26,7 @@ abstract class Closure<T extends Item, S extends ItemList> {
             performAction((T) item);
             return successMsg();
         } catch (InvalidItemException e) {
-            return itemNotFoundMsg();
+            return invalidItemExceptionMessage();
         } catch (ItemIsNotAvailableForCheckOut|ItemCanNotBeReturned e) {
             return actionCanNotBePerformedMsg();
         }
@@ -61,7 +61,7 @@ public class Library {
             }
 
             @Override
-            String itemNotFoundMsg() {
+            String invalidItemExceptionMessage() {
                 return "Invalid Book to checkout";
             }
 
@@ -94,7 +94,7 @@ public class Library {
             }
 
             @Override
-            String itemNotFoundMsg() {
+            String invalidItemExceptionMessage() {
                 return "Invalid Book to checkout";
             }
 
@@ -129,7 +129,7 @@ public class Library {
             }
 
             @Override
-            String itemNotFoundMsg() {
+            String invalidItemExceptionMessage() {
                 return "Invalid Book to return";
             }
 
@@ -165,7 +165,7 @@ public class Library {
             }
 
             @Override
-            String itemNotFoundMsg() {
+            String invalidItemExceptionMessage() {
                 return "Invalid Movie to checkout";
             }
 
