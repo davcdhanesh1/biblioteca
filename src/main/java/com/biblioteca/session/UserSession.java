@@ -6,7 +6,7 @@ import com.biblioteca.user.UserList;
 
 public class UserSession {
 
-    public final User currentUser;
+    public User currentUser;
 
     private UserSession(User currentUser) {
         this.currentUser = currentUser;

@@ -2,13 +2,15 @@ package com.biblioteca.menu;
 
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
+import com.biblioteca.item.InvalidItemException;
 import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
-import com.biblioteca.item.InvalidItemException;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.library.Library;
+import com.biblioteca.session.UserSession;
+import com.biblioteca.user.User;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +22,7 @@ import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 public class CheckOutBookTest {
 
@@ -38,9 +40,13 @@ public class CheckOutBookTest {
     private Scanner scanner;
     private String input;
     private MovieList movieList;
+    private UserSession mockUserSession;
 
     @Before
     public void setUp() throws Exception {
+        mockUserSession = mock(UserSession.class);
+        mockUserSession.currentUser = mock(User.class);
+
         input = "1\n";
         byteArrayOutputStream = new ByteArrayOutputStream();
         printer  = new Printer(byteArrayOutputStream);
@@ -69,7 +75,7 @@ public class CheckOutBookTest {
 
     @Test
     public void testPerform() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
-        checkOutBook.perform(library, printer, scanner);
+        checkOutBook.perform(mockUserSession, library, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
                 "|1       |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
                 "|2       |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987", "",
@@ -77,9 +83,10 @@ public class CheckOutBookTest {
                 "Thanks you! Enjoy the book"
 
         );
-
         assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
+
+        verify(mockUserSession.currentUser, times(1)).addItem(harryPotterAndThePhilosophersStone);
     }
 
     @Test
@@ -90,10 +97,12 @@ public class CheckOutBookTest {
         Scanner scanner = new Scanner(byteArrayInputStream);
 
         try {
-            checkOutBook.perform(mockLibrary, mockPrinter, scanner);
+            checkOutBook.perform(mockUserSession, mockLibrary, mockPrinter, scanner);
             Assert.fail("Test did not fail for invalid input");
         } catch (InputValidationException e) {
             assertThat(e.getMessage(),is("Input has to be number"));
         }
+
+        verify(mockUserSession.currentUser, never()).addItem(harryPotterAndThePhilosophersStone);
     }
 }

@@ -6,6 +6,7 @@ import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
 import com.biblioteca.item.movie.Movie;
 import com.biblioteca.item.movie.MovieList;
+import com.biblioteca.session.UserSession;
 
 abstract class Closure<T extends Item, S extends ItemList> {
     private S list;
@@ -72,6 +73,40 @@ public class Library {
             @Override
             void performAction(Book book) {
                 book.checkOut();
+            }
+        };
+        printer.println(closure.perform(bookId));
+    }
+
+    public void checkOutBook(String bookId, final UserSession userSession) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
+
+        Closure<Book, BookList> closure;
+        closure = new Closure<Book, BookList>(bookList) {
+
+            @Override
+            Book getItem(String id) throws ItemIsNotAvailableForCheckOut, InvalidItemException {
+                return bookList.findFromAvailableById(id);
+            }
+
+            @Override
+            String successMsg() {
+                return "Thanks you! Enjoy the book";
+            }
+
+            @Override
+            String itemNotFoundMsg() {
+                return "Invalid Book to checkout";
+            }
+
+            @Override
+            String actionCanNotBePerformedMsg() {
+                return "That book is not available";
+            }
+
+            @Override
+            void performAction(Book book) {
+                book.checkOut();
+                userSession.currentUser.addItem(book);
             }
         };
         printer.println(closure.perform(bookId));
