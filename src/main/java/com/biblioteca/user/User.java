@@ -31,8 +31,12 @@ public class User {
         borrowedItems.add(item);
     }
 
-    public ArrayList<Item> getBorrowedItems() {
-        return borrowedItems;
+    public String getBorrowedItems() {
+        String result = new String();
+        for(Item item : borrowedItems) {
+            result = String.format("|%-12s|%-16s", libraryNumber, item.description());
+        }
+        return result;
     }
 
     public boolean hasLibraryNumber(String libraryNumber) {

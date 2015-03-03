@@ -22,4 +22,8 @@ public abstract class Item {
     public boolean hasId(int bookId) {
         return this.id == bookId;
     }
+
+    public String description() {
+        return name;
+    }
 }

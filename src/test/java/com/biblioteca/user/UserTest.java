@@ -6,7 +6,6 @@ import com.biblioteca.item.movie.Rating;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -33,8 +32,7 @@ public class UserTest {
         user.addItem(book);
         user.addItem(movie);
 
-        assertThat(user.getBorrowedItems(), hasItem(book));
-        assertThat(user.getBorrowedItems(),hasItem(movie));
+        assertThat(user.getBorrowedItems(), is("|777-4445    |Whiplash        "));
     }
 
 
