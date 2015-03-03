@@ -18,7 +18,9 @@ public class Main {
     public static void main(String[] args) throws ItemNotFoundException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException {
         MenuList menuList = new MenuList();
         menuList.add(new ListAllBook());
+        menuList.add(new ListAllMovies());
         menuList.add(new CheckOutBook());
+        menuList.add(new CheckOutMovie());
         menuList.add(new ReturnBook());
         menuList.add(new Quit());
 
@@ -31,7 +33,6 @@ public class Main {
         MovieList movieList = new MovieList();
         Movie whiplashMovie = new Movie(1, "Whiplash", "Damien Chazelle", 2014, Rating.NINE);
         Movie birdmanMovie = new Movie(2, "BirdMan", "Alejandro González Iñárritu", 2014, Rating.TEN);
-        movieList = new MovieList();
         movieList.add(whiplashMovie);
         movieList.add(birdmanMovie);
 
