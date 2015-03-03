@@ -2,14 +2,16 @@ package com.biblioteca.menu;
 
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
+import com.biblioteca.item.InvalidItemException;
 import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
-import com.biblioteca.item.InvalidItemException;
 import com.biblioteca.item.book.BookList;
 import com.biblioteca.item.movie.Movie;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.item.movie.Rating;
 import com.biblioteca.library.Library;
+import com.biblioteca.session.UserSession;
+import com.biblioteca.user.User;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +23,7 @@ import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 public class CheckOutMovieTest {
     private CheckOutMovie checkOutMovieOption;
@@ -35,9 +37,13 @@ public class CheckOutMovieTest {
     private Movie whiplashMovie;
     private Movie birdmanMovie;
     private BookList bookList;
+    private UserSession mockUserSession;
 
     @Before
     public void setUp() throws Exception {
+        mockUserSession = mock(UserSession.class);
+        mockUserSession.currentUser = mock(User.class);
+
         checkOutMovieOption = new CheckOutMovie();
         input = "1\n";
         byteArrayOutputStream = new ByteArrayOutputStream();
@@ -67,7 +73,7 @@ public class CheckOutMovieTest {
 
     @Test
     public void testPerform() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
-        checkOutMovieOption.perform(library, printer, scanner);
+        checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
                 whiplashMovie.toString(),
                 birdmanMovie.toString(),
@@ -78,6 +84,7 @@ public class CheckOutMovieTest {
 
         assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
         assertThat(whiplashMovie.isCheckedOut(),is(true));
+        verify(mockUserSession.currentUser, times(1)).addItem(whiplashMovie);
     }
 
     @Test
@@ -88,10 +95,12 @@ public class CheckOutMovieTest {
         Scanner scanner = new Scanner(byteArrayInputStream);
 
         try {
-            checkOutMovieOption.perform(mockLibrary, mockPrinter, scanner);
+            checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
             Assert.fail("Test did not fail for invalid input");
         } catch (InputValidationException e) {
             assertThat(e.getMessage(), is("Input has to be number"));
         }
+
+        verify(mockUserSession.currentUser, never()).addItem(whiplashMovie);
     }
 }

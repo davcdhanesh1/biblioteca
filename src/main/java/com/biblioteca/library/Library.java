@@ -182,4 +182,36 @@ public class Library {
         printer.println(closure.perform(movieId));
     }
 
+    public void checkOutMovie(String movieId, final UserSession userSession) throws ItemIsNotAvailableForCheckOut, InvalidItemException, ItemCanNotBeReturned {
+        Closure<Movie, MovieList> closure = new Closure<Movie, MovieList>(movieList) {
+
+            @Override
+            Movie getItem(String id) throws ItemIsNotAvailableForCheckOut, InvalidItemException {
+                return movieList.findFromAvailableById(id);
+            }
+
+            @Override
+            String successMsg() {
+                return "Thanks you! Enjoy the movie";
+            }
+
+            @Override
+            String invalidItemExceptionMessage() {
+                return "Invalid Movie to checkout";
+            }
+
+            @Override
+            String actionCanNotBePerformedMsg() {
+                return "That movie is not available";
+            }
+
+            @Override
+            void performAction(Movie movie) {
+                movie.checkOut();
+                userSession.currentUser.addItem(movie);
+            }
+        };
+        printer.println(closure.perform(movieId));
+    }
+
 }
