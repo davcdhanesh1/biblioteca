@@ -17,7 +17,7 @@ public class UserTest {
 
     @Before
     public void setUp() throws Exception {
-        user = new User("777-4445", "Dhanesh", "davcdhanesh1@gmail.com", "9096904102");
+        user = new User("777-4445", "Dhanesh", "password", "davcdhanesh1@gmail.com", "9096904102");
         book = new Book(1, "A pedagogy of opression", "Paulo Freire", 1987);
         movie = new Movie(1, "Whiplash", "Damien Chazelle", 2014, Rating.TEN);
     }

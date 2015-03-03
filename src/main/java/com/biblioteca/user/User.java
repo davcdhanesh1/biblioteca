@@ -7,14 +7,16 @@ import java.util.ArrayList;
 public class User {
     private final String libraryNumber;
     private final String name;
+    private String password;
     private final String email;
     private final String phoneNumber;
     private ArrayList<Item> borrowedItems;
 
-    public User(String libraryNumber, String name, String email, String phoneNumber) {
+    public User(String libraryNumber, String name, String password, String email, String phoneNumber) {
 
         this.libraryNumber = libraryNumber;
         this.name = name;
+        this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.borrowedItems = new ArrayList<Item>();
