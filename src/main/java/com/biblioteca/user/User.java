@@ -34,4 +34,8 @@ public class User {
     public ArrayList<Item> getBorrowedItems() {
         return borrowedItems;
     }
+
+    public boolean hasLibraryNumber(String libraryNumber) {
+        return this.libraryNumber.equals(libraryNumber);
+    }
 }
