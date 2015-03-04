@@ -30,7 +30,6 @@ import java.util.Scanner;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class BibliotecaAppTestForMovies {
 
@@ -52,14 +51,16 @@ public class BibliotecaAppTestForMovies {
     private Movie birdmanMovie;
     private UserList userList;
     private User currentUser;
+    private User dhanesh;
+    private User frank;
 
     @Before
     public void setUp() throws Exception, InvalidLibraryAndPasswordCombination {
-        userList = mock(UserList.class);
-        currentUser = User.customer("777-4445", "Dhanesh", "password", "davcdhanesh1@gmail.com", "9096904102");
-        userList = mock(UserList.class);
-        when(userList.findByLibraryNumberAndPassword("dhanesh", "password")).thenReturn(currentUser);
-
+        userList = new UserList();
+        dhanesh = User.customer("777-4445", "Dhanesh", "password", "davcdhanesh1@gmail.com", "9096904102");
+        frank = User.customer("777-4446", "frank", "password", "frank.underwood@gmail.com", "9096904102");
+        userList.add(dhanesh);
+        userList.add(frank);
 
         inputForSelectingMenu = "0\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingMenu.getBytes());
@@ -118,7 +119,7 @@ public class BibliotecaAppTestForMovies {
 
     @Test
     public void testSuccessfulCheckOut() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
-        inputForSelectingBook = "2\n1\n1";
+        inputForSelectingBook = "2\n777-4445\npassword\n1\n1";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuList, userList);
@@ -131,6 +132,9 @@ public class BibliotecaAppTestForMovies {
                 "2. Checkout a Movie",
                 "3. Quit",
                 "Select Option: ",
+                "-----------------------------------------------------------------------------",
+                "Enter your library Number: ",
+                "Enter your password: ",
                 "-----------------------------------------------------------------------------",
                 "|1       |Whiplash                                                        |Damien Chazelle                 |2014|NINE",
                 "|2       |BirdMan                                                         |Alejandro González Iñárritu     |2014|TEN",
@@ -159,7 +163,7 @@ public class BibliotecaAppTestForMovies {
     @Test
     public void testUnSuccessFulCheckOutWhenMovieToBeCheckedOutIsAlreadyCheckedOut() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
         whiplashMovie.checkOut();
-        inputForSelectingBook = "2\n1\n1\n";
+        inputForSelectingBook = "2\n777-4445\npassword\n1\n1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuList, userList);
@@ -172,6 +176,9 @@ public class BibliotecaAppTestForMovies {
                 "2. Checkout a Movie",
                 "3. Quit",
                 "Select Option: ",
+                "-----------------------------------------------------------------------------",
+                "Enter your library Number: ",
+                "Enter your password: ",
                 "-----------------------------------------------------------------------------",
                 "|2       |BirdMan                                                         |Alejandro González Iñárritu     |2014|TEN",
                 "",
@@ -197,7 +204,7 @@ public class BibliotecaAppTestForMovies {
 
     @Test
     public void testUnSuccessFulCheckOutWhenMovieToBeCheckedOutIsNotPresentInTheLibrary() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
-        inputForSelectingBook = "2\n10\n";
+        inputForSelectingBook = "2\n777-4445\npassword\n10\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuList, userList);
@@ -210,6 +217,9 @@ public class BibliotecaAppTestForMovies {
                 "2. Checkout a Movie",
                 "3. Quit",
                 "Select Option: ",
+                "-----------------------------------------------------------------------------",
+                "Enter your library Number: ",
+                "Enter your password: ",
                 "-----------------------------------------------------------------------------",
                 "|1       |Whiplash                                                        |Damien Chazelle                 |2014|NINE",
                 "|2       |BirdMan                                                         |Alejandro González Iñárritu     |2014|TEN",

@@ -32,6 +32,7 @@ public class UserSession {
         printer.println("Enter your library Number: ");
         String libraryNumber = scanner.next();
         printer.println("Enter your password: ");
+        printer.println("-----------------------------------------------------------------------------");
         String passWord = scanner.next();
         currentUser = userList.findByLibraryNumberAndPassword(libraryNumber, passWord);
     }
