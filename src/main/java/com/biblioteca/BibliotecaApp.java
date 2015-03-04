@@ -9,7 +9,7 @@ import com.biblioteca.library.Library;
 import com.biblioteca.item.InvalidItemException;
 import com.biblioteca.menu.*;
 import com.biblioteca.session.UserSession;
-import com.biblioteca.user.InvalidUserPasswordCombination;
+import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.user.UserList;
 
 import java.util.Scanner;
@@ -34,9 +34,9 @@ public class BibliotecaApp {
             ItemIsNotAvailableForCheckOut,
             ItemCanNotBeReturned,
             InputValidationException,
-            InvalidUserPasswordCombination {
+            InvalidLibraryAndPasswordCombination {
 
-        UserSession userSession = UserSession.createNew(userList);
+        UserSession userSession = UserSession.createNew(userList, printer, scanner);
         init();
         Menu menu; String option;
         scanner.useDelimiter("\n");
@@ -70,7 +70,7 @@ public class BibliotecaApp {
         printSeparatorLine();
     }
 
-    private void performSelectedMenu(UserSession userSession, Library library, Menu menu) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException {
+    private void performSelectedMenu(UserSession userSession, Library library, Menu menu) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         printSeparatorLine();
         menu.perform(userSession, library, printer, scanner);
         printSeparatorLine();

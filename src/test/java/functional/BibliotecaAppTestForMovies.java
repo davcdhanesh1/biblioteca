@@ -16,7 +16,7 @@ import com.biblioteca.menu.CheckOutMovie;
 import com.biblioteca.menu.ListAllMovies;
 import com.biblioteca.menu.MenuList;
 import com.biblioteca.menu.Quit;
-import com.biblioteca.user.InvalidUserPasswordCombination;
+import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.user.User;
 import com.biblioteca.user.UserList;
 import org.junit.Before;
@@ -54,7 +54,7 @@ public class BibliotecaAppTestForMovies {
     private User currentUser;
 
     @Before
-    public void setUp() throws Exception, InvalidUserPasswordCombination {
+    public void setUp() throws Exception, InvalidLibraryAndPasswordCombination {
         userList = mock(UserList.class);
         currentUser = User.customer("777-4445", "Dhanesh", "password", "davcdhanesh1@gmail.com", "9096904102");
         userList = mock(UserList.class);
@@ -87,7 +87,7 @@ public class BibliotecaAppTestForMovies {
     }
 
     @Test
-    public void testSelectionOfListOfMovies() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidUserPasswordCombination {
+    public void testSelectionOfListOfMovies() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
 
         inputForSelectingBook = "1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
@@ -117,7 +117,7 @@ public class BibliotecaAppTestForMovies {
     }
 
     @Test
-    public void testSuccessfulCheckOut() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidUserPasswordCombination {
+    public void testSuccessfulCheckOut() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
         inputForSelectingBook = "2\n1\n1";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
@@ -157,7 +157,7 @@ public class BibliotecaAppTestForMovies {
     }
 
     @Test
-    public void testUnSuccessFulCheckOutWhenMovieToBeCheckedOutIsAlreadyCheckedOut() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidUserPasswordCombination {
+    public void testUnSuccessFulCheckOutWhenMovieToBeCheckedOutIsAlreadyCheckedOut() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
         whiplashMovie.checkOut();
         inputForSelectingBook = "2\n1\n1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
@@ -196,7 +196,7 @@ public class BibliotecaAppTestForMovies {
     }
 
     @Test
-    public void testUnSuccessFulCheckOutWhenMovieToBeCheckedOutIsNotPresentInTheLibrary() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidUserPasswordCombination {
+    public void testUnSuccessFulCheckOutWhenMovieToBeCheckedOutIsNotPresentInTheLibrary() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
         inputForSelectingBook = "2\n10\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);

@@ -22,12 +22,12 @@ public class UserListTest {
     }
 
     @Test
-    public void testFindByLibraryNumber() throws Exception, InvalidUserPasswordCombination {
+    public void testFindByLibraryNumber() throws Exception, InvalidLibraryAndPasswordCombination {
         assertThat(userList.findByLibraryNumberAndPassword("777-4446", "password"),is(frank));
     }
 
-    @Test(expected = InvalidUserPasswordCombination.class)
-    public void testFindByLibraryNumberWhenUserWithGivenLibraryNumberIsDoesntExist() throws Exception, InvalidUserPasswordCombination {
+    @Test(expected = InvalidLibraryAndPasswordCombination.class)
+    public void testFindByLibraryNumberWhenUserWithGivenLibraryNumberIsDoesntExist() throws Exception, InvalidLibraryAndPasswordCombination {
         userList.findByLibraryNumberAndPassword("777-4443","pass");
     }
 }

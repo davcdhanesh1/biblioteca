@@ -9,6 +9,7 @@ import com.biblioteca.item.book.BookList;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.library.Library;
 import com.biblioteca.session.UserSession;
+import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.user.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -74,7 +75,7 @@ public class ReturnBookTest {
     }
 
     @Test
-    public void testPerform() throws Exception, InvalidItemException, ItemCanNotBeReturned, InputValidationException {
+    public void testPerform() throws Exception, InvalidItemException, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         harryPotterAndThePhilosophersStone.checkOut();
         returnBookOption.perform(mockUserSession, library, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
@@ -90,7 +91,7 @@ public class ReturnBookTest {
     }
 
     @Test
-    public void testPerformWhenInputIsNotValid() throws InputValidationException, InvalidItemException, ItemCanNotBeReturned {
+    public void testPerformWhenInputIsNotValid() throws InputValidationException, InvalidItemException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
         Library mockLibrary = mock(Library.class);
         Printer mockPrinter = mock(Printer.class);
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream("a".getBytes());

@@ -7,6 +7,7 @@ import com.biblioteca.io.Printer;
 import com.biblioteca.item.InvalidItemException;
 import com.biblioteca.library.Library;
 import com.biblioteca.session.UserSession;
+import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class ReturnBook extends Menu{
     }
 
     @Override
-    public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemCanNotBeReturned, InputValidationException {
+    public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         userSession.login();
         printer.println("Enter id of Book: ");
         String option = scanner.next();
