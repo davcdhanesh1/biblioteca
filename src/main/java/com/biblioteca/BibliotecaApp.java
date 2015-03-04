@@ -17,23 +17,30 @@ import java.util.Scanner;
 public class BibliotecaApp {
 
     private final UserSession userSession;
+    private final Library library;
     private UserList userList;
     private Printer printer;
     private Scanner scanner;
     private MenuList menuList;
 
-    public BibliotecaApp(Printer printer, Scanner scanner, MenuList menuList, UserList userList) {
+    public BibliotecaApp(Printer printer, Scanner scanner, MenuList menuList, UserList userList, Library library) {
 
         this.printer = printer;
         this.scanner = scanner;
         this.menuList = menuList;
         this.userList = userList;
         this.userSession = UserSession.createNew(userList, printer, scanner);
+        this.library = library;
     }
 
-    public void run(Library library) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
+    public void run() throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         init();
-        Menu menu; String option;
+        startRouting();
+    }
+
+    private void startRouting() throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
+        Menu menu;
+        String option;
 
         scanner.useDelimiter("\n");
         while(scanner.hasNext()) {
