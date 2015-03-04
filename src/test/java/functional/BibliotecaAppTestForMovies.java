@@ -56,7 +56,7 @@ public class BibliotecaAppTestForMovies {
     @Before
     public void setUp() throws Exception, InvalidUserPasswordCombination {
         userList = mock(UserList.class);
-        currentUser = new User("777-4445", "Dhanesh", "password", "davcdhanesh1@gmail.com", "9096904102");
+        currentUser = User.customer("777-4445", "Dhanesh", "password", "davcdhanesh1@gmail.com", "9096904102");
         userList = mock(UserList.class);
         when(userList.findByLibraryNumberAndPassword("dhanesh", "password")).thenReturn(currentUser);
 

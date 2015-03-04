@@ -14,10 +14,12 @@ public class UserTest {
     private User user;
     private Book book;
     private Movie movie;
+    private User admin;
 
     @Before
     public void setUp() throws Exception {
-        user = new User("777-4445", "Dhanesh", "password", "davcdhanesh1@gmail.com", "9096904102");
+        admin = User.admin("777-4445", "Dhanesh", "password", "davcdhanesh1@gmail.com", "9096904102");
+        user = User.customer("777-4445", "Dhanesh", "password", "davcdhanesh1@gmail.com", "9096904102");
         book = new Book(1, "A pedagogy of opression", "Paulo Freire", 1987);
         movie = new Movie(1, "Whiplash", "Damien Chazelle", 2014, Rating.TEN);
     }
@@ -51,4 +53,11 @@ public class UserTest {
         );
         assertThat(user.getBorrowedItems(), is(expectedOutput));
     }
+
+    @Test
+    public void testIsAdmin() throws Exception {
+        assertThat(admin.isAdmin(),is(true));
+        assertThat(user.isAdmin(),is(false));
+    }
+
 }

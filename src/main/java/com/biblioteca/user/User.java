@@ -11,15 +11,18 @@ public class User {
     private String passWord;
     private final String email;
     private final String phoneNumber;
+    private boolean isAdmin;
     private ArrayList<Item> borrowedItems;
+    private boolean admin;
 
-    public User(String libraryNumber, String name, String passWord, String email, String phoneNumber) {
+    private User(String libraryNumber, String name, String passWord, String email, String phoneNumber, boolean isAdmin) {
 
         this.libraryNumber = libraryNumber;
         this.name = name;
         this.passWord = passWord;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.isAdmin = isAdmin;
         this.borrowedItems = new ArrayList<Item>();
     }
 
@@ -46,5 +49,17 @@ public class User {
 
     public void removeItem(Book book) {
         borrowedItems.remove(book);
+    }
+
+    public static User admin(String libraryNumber, String name, String password, String email, String phoneNumber) {
+        return new User(libraryNumber, name, password, email, phoneNumber, true);
+    }
+
+    public static User customer(String libraryNumber, String name, String password, String email, String phoneNumber) {
+        return new User(libraryNumber, name, password, email, phoneNumber, false);
+    }
+
+    public boolean isAdmin() {
+        return isAdmin == true;
     }
 }
