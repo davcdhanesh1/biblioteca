@@ -11,6 +11,7 @@ import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.item.movie.Rating;
 import com.biblioteca.library.Library;
 import com.biblioteca.session.UserSession;
+import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.user.User;
 import org.junit.Assert;
 import org.junit.Before;
@@ -72,7 +73,7 @@ public class CheckOutMovieTest {
     }
 
     @Test
-    public void testPerform() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
+    public void testPerform() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
         checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
                 whiplashMovie.toString(),
@@ -85,12 +86,11 @@ public class CheckOutMovieTest {
         assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
         assertThat(whiplashMovie.isCheckedOut(),is(true));
         verify(mockUserSession.currentUser, times(1)).addItem(whiplashMovie);
+        verify(mockUserSession, times(1)).login();
     }
 
     @Test
-    public void testPerformWhenInputIsInvalid() throws Exception, ItemCanNotBeReturned, ItemIsNotAvailableForCheckOut, InvalidItemException {
-        Library mockLibrary = mock(Library.class);
-        Printer mockPrinter = mock(Printer.class);
+    public void testPerformWhenInputIsInvalid() throws Exception, ItemCanNotBeReturned, ItemIsNotAvailableForCheckOut, InvalidItemException, InvalidLibraryAndPasswordCombination {
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream("a".getBytes());
         Scanner scanner = new Scanner(byteArrayInputStream);
 
@@ -102,5 +102,17 @@ public class CheckOutMovieTest {
         }
 
         verify(mockUserSession.currentUser, never()).addItem(whiplashMovie);
+    }
+
+    @Test(expected = InvalidLibraryAndPasswordCombination.class)
+    public void testPerformWhenLoginIsUnSuccessful() throws Exception, InvalidLibraryAndPasswordCombination, ItemIsNotAvailableForCheckOut, InputValidationException, InvalidItemException, ItemCanNotBeReturned {
+        doThrow(new InvalidLibraryAndPasswordCombination("Invalid Library number and password pair"))
+                .when(mockUserSession).login();
+
+        checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
+        assertThat(byteArrayOutputStream.toString(),is(""));
+        assertThat(whiplashMovie.isCheckedOut(),is(false));
+        verify(mockUserSession.currentUser, never()).addItem(whiplashMovie);
+        verify(mockUserSession, never()).login();
     }
 }
