@@ -12,7 +12,7 @@ import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 
 import java.util.Scanner;
 
-public class CheckOutBook extends Menu {
+public class CheckOutBook extends MenuOption {
     public CheckOutBook() {
         super("Checkout a Book");
     }

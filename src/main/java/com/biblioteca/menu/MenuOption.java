@@ -11,11 +11,11 @@ import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 
 import java.util.Scanner;
 
-public abstract class Menu {
+public abstract class MenuOption {
 
     private final String description;
 
-    Menu(String description) {
+    MenuOption(String description) {
         this.description = description;
     }
 

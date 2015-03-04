@@ -6,7 +6,7 @@ import com.biblioteca.session.UserSession;
 
 import java.util.Scanner;
 
-public class Quit extends Menu {
+public class Quit extends MenuOption {
 
     public Quit() {
         super("Quit");

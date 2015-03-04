@@ -11,7 +11,7 @@ import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 
 import java.util.Scanner;
 
-public class ReturnBook extends Menu{
+public class ReturnBook extends MenuOption {
     public ReturnBook() {
         super("Return a Book");
     }

@@ -39,26 +39,26 @@ public class BibliotecaApp {
     }
 
     private void startRoutingEngine() throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
-        Menu menu;
+        MenuOption menuOption;
         String option;
 
         while(isAppRunning()) {
             option = readInput();
             if (inputIsNotValid(option)) continue;
 
-            menu = getSelectedMenu(option);
-            executeSelectedMenuOption(library, menu);
-            if(selectedMenuIsQuit(menu)) break;
+            menuOption = getSelectedMenuOption(option);
+            executeSelectedMenuOption(library, menuOption);
+            if(selectedMenuOptionIsQuit(menuOption)) break;
 
             printMenuListAndPrompt();
         }
     }
 
-    private boolean selectedMenuIsQuit(Menu menu) {
-        return !menu.shouldContinueRunning();
+    private boolean selectedMenuOptionIsQuit(MenuOption menuOption) {
+        return !menuOption.shouldContinueRunning();
     }
 
-    private Menu getSelectedMenu(String option) {
+    private MenuOption getSelectedMenuOption(String option) {
         return menuList.find(option);
     }
 
@@ -96,10 +96,10 @@ public class BibliotecaApp {
         printSeparatorLine();
     }
 
-    private void executeSelectedMenuOption(Library library, Menu menu) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
+    private void executeSelectedMenuOption(Library library, MenuOption menuOption) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         printSeparatorLine();
 
-        if( menu.isSecureLoginRequired() ) {
+        if( menuOption.isSecureLoginRequired() ) {
             try {
                 userSession.login();
             } catch (InvalidLibraryAndPasswordCombination e) {
@@ -108,7 +108,7 @@ public class BibliotecaApp {
                 return;
             }
         }
-        menu.perform(userSession, library, printer, scanner);
+        menuOption.perform(userSession, library, printer, scanner);
 
         printSeparatorLine();
     }

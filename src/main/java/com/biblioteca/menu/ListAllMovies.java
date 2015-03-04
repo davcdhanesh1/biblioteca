@@ -10,7 +10,7 @@ import com.biblioteca.session.UserSession;
 
 import java.util.Scanner;
 
-public class ListAllMovies extends Menu {
+public class ListAllMovies extends MenuOption {
 
     public ListAllMovies() {
         super("List Movies");

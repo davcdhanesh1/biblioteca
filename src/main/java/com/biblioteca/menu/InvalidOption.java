@@ -6,7 +6,7 @@ import com.biblioteca.session.UserSession;
 
 import java.util.Scanner;
 
-public class InvalidOption extends Menu {
+public class InvalidOption extends MenuOption {
 
     public InvalidOption() {
         super("Invalid Option!");

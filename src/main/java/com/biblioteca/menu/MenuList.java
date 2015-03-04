@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public class MenuList {
 
-    private ArrayList<Menu> list = new ArrayList<Menu>();
+    private ArrayList<MenuOption> list = new ArrayList<MenuOption>();
 
-    public void add(Menu menu) {
-        list.add(menu);
+    public void add(MenuOption menuOption) {
+        list.add(menuOption);
     }
 
     public void printAll(Printer printer) {
@@ -18,7 +18,7 @@ public class MenuList {
         }
     }
 
-    public Menu find(String index) {
+    public MenuOption find(String index) {
         int indexOfItemToBeFound = Integer.parseInt(index) - 1;
         try {
             return list.get(indexOfItemToBeFound);

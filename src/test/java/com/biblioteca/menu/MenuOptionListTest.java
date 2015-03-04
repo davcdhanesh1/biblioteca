@@ -9,7 +9,7 @@ import java.io.ByteArrayOutputStream;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-public class MenuListTest {
+public class MenuOptionListTest {
 
     @Test
     public void testPrintAll() throws Exception {
@@ -27,9 +27,9 @@ public class MenuListTest {
     @Test
     public void testFindMenu() throws Exception {
         MenuList menuList = new MenuList();
-        Menu listAllBookOption = new ListAllBook();
+        MenuOption listAllBookOption = new ListAllBook();
         menuList.add(listAllBookOption);
-        Menu quitOption = new Quit();
+        MenuOption quitOption = new Quit();
         menuList.add(quitOption);
 
         assertThat(menuList.find("1"), is(listAllBookOption));
@@ -38,9 +38,9 @@ public class MenuListTest {
     @Test
     public void testFindMenuWhenInvalidOptionIsGiven() throws Exception {
         MenuList menuList = new MenuList();
-        Menu listAllBookOption = new ListAllBook();
+        MenuOption listAllBookOption = new ListAllBook();
         menuList.add(listAllBookOption);
-        Menu quitOption = new Quit();
+        MenuOption quitOption = new Quit();
         menuList.add(quitOption);
 
         assertThat(menuList.find("3").toString(), is("Invalid Option!"));

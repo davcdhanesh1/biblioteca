@@ -6,7 +6,7 @@ import com.biblioteca.session.UserSession;
 
 import java.util.Scanner;
 
-public class ListAllBook extends Menu{
+public class ListAllBook extends MenuOption {
 
     public ListAllBook() {
         super("List Books");
