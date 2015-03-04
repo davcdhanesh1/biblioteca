@@ -447,4 +447,37 @@ public class BibliotecaAppTestForBooks {
         assertThat(actualOutput,is(expectedOutput));
     }
 
+    @Test
+    public void testUserLoginWhenUseLoginIsUnSuccessfulSheShouldBeRedirectedToMainMenuAgain() throws Exception, ItemIsNotAvailableForCheckOut, InvalidLibraryAndPasswordCombination, InputValidationException, InvalidItemException, ItemCanNotBeReturned {
+        inputForSelectingBook = "2\n777-4445\ninvalidPassword\n";
+        byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
+        scanner = new Scanner(byteArrayInputStream);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, menuList, userList);
+        bibliotecaApp.run(library);
+
+        String actualOutput = outputStream.toString();
+
+        String expectedOutput = StringUtil.getOutputString(
+                "Welcome To Biblioteca",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Return a Book",
+                "4. Quit",
+                "Select Option: ",
+                "-----------------------------------------------------------------------------",
+                "Enter your library Number: ",
+                "Enter your password: ",
+                "-----------------------------------------------------------------------------",
+                "Invalid Library Number or Password !",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. Checkout a Book",
+                "3. Return a Book",
+                "4. Quit",
+                "Select Option: "
+        );
+
+        assertThat(actualOutput,is(expectedOutput));
+    }
 }

@@ -72,7 +72,11 @@ public class BibliotecaApp {
 
     private void performSelectedMenu(UserSession userSession, Library library, Menu menu) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         printSeparatorLine();
-        menu.perform(userSession, library, printer, scanner);
+        try {
+            menu.perform(userSession, library, printer, scanner);
+        } catch (InvalidLibraryAndPasswordCombination e) {
+            printer.println(e.getMessage());
+        }
         printSeparatorLine();
     }
 

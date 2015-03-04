@@ -13,6 +13,6 @@ public class UserList {
         for(User user: users) {
             if (user.matches(libraryNumber, passWord)) return user;
         }
-        throw new InvalidLibraryAndPasswordCombination("Invalid Username or Password");
+        throw new InvalidLibraryAndPasswordCombination("Invalid Library Number or Password !");
     }
 }

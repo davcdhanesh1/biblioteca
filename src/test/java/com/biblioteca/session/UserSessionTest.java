@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 
 public class UserSessionTest {
 
@@ -69,6 +70,7 @@ public class UserSessionTest {
         );
 
         userSession.login();
+        assertEquals(userSession.getCurrentUser(), null);
     }
 
     @Test
