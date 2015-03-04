@@ -108,4 +108,19 @@ public class CheckOutBookTest {
         verify(mockUserSession.currentUser, never()).addItem(harryPotterAndThePhilosophersStone);
         verify(mockUserSession, times(1)).login();
     }
+
+    @Test(expected = InvalidLibraryAndPasswordCombination.class)
+    public void testPerformWhenUserLoginIsNotSuccessful() throws Exception, InvalidLibraryAndPasswordCombination, ItemIsNotAvailableForCheckOut, InputValidationException, InvalidItemException, ItemCanNotBeReturned {
+        Library mockedLibrary = mock(Library.class);
+        doThrow(new InvalidLibraryAndPasswordCombination("Invalid Username and Password pair"))
+                .when(mockUserSession).login();
+
+        checkOutBook.perform(mockUserSession, mockedLibrary, printer, scanner);
+
+        assertThat(byteArrayOutputStream.toString(), is(""));
+        assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(), is(false));
+        verify(mockUserSession.currentUser, never()).addItem(harryPotterAndThePhilosophersStone);
+        verify(mockedLibrary, never()).printAllBook();
+        verify(mockedLibrary, never()).checkOutBook("1", mockUserSession);
+    }
 }
