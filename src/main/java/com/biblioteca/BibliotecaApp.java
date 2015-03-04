@@ -16,6 +16,7 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
 
+    private final UserSession userSession;
     private UserList userList;
     private Printer printer;
     private Scanner scanner;
@@ -27,6 +28,7 @@ public class BibliotecaApp {
         this.scanner = scanner;
         this.menuList = menuList;
         this.userList = userList;
+        this.userSession = UserSession.createNew(userList, printer, scanner);
     }
 
     public void run(Library library) throws
@@ -36,21 +38,26 @@ public class BibliotecaApp {
             InputValidationException,
             InvalidLibraryAndPasswordCombination {
 
-        UserSession userSession = UserSession.createNew(userList, printer, scanner);
         init();
         Menu menu; String option;
         scanner.useDelimiter("\n");
         while(scanner.hasNext()) {
             option = scanner.next();
             if (!isValidInput(option)) continue;
+
             menu = menuList.find(option);
-            performSelectedMenu(userSession, library, menu);
-            if(!menu.shouldContinueRunning()) {
-                break;
-            }
+            performSelectedMenu(library, menu);
+            if(!menu.shouldContinueRunning()) break;
+
             printMenuListAndPrompt();
         }
 
+    }
+
+    private void init() {
+        printWelcomeMessage();
+        printSeparatorLine();
+        printMenuListAndPrompt();
     }
 
     private boolean isValidInput(String option) {
@@ -64,26 +71,16 @@ public class BibliotecaApp {
         return true;
     }
 
-    private void printErrorMessage(String msg) {
+    void printErrorMessage(String msg) {
         printSeparatorLine();
         printer.println(msg);
         printSeparatorLine();
     }
 
-    private void performSelectedMenu(UserSession userSession, Library library, Menu menu) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
+    private void performSelectedMenu(Library library, Menu menu) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         printSeparatorLine();
-        try {
-            menu.perform(userSession, library, printer, scanner);
-        } catch (InvalidLibraryAndPasswordCombination e) {
-            printer.println(e.getMessage());
-        }
+        menu.perform(userSession, library, printer, scanner);
         printSeparatorLine();
-    }
-
-    private void init() {
-        printWelcomeMessage();
-        printSeparatorLine();
-        printMenuListAndPrompt();
     }
 
     private void printMenuListAndPrompt() {

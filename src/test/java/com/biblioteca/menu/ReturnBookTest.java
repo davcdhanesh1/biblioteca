@@ -107,7 +107,7 @@ public class ReturnBookTest {
         verify(mockUserSession, times(1)).login();
     }
 
-    @Test(expected = InvalidLibraryAndPasswordCombination.class)
+    @Test
     public void testPerformWhenLoginIsNotUnSuccessful() throws Exception, InvalidLibraryAndPasswordCombination, InputValidationException, InvalidItemException, ItemCanNotBeReturned {
         harryPotterAndThePhilosophersStone.checkOut();
 
@@ -116,7 +116,7 @@ public class ReturnBookTest {
                 .when(mockUserSession).login();
         returnBookOption.perform(mockUserSession, mockLibrary, printer, scanner);
 
-        assertThat(byteArrayOutputStream.toString(),is(""));
+        assertThat(byteArrayOutputStream.toString(),is("Invalid Library Number and Password combination pair\n"));
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
 
         verify(mockUserSession.currentUser, never()).removeItem(harryPotterAndThePhilosophersStone);

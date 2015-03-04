@@ -39,11 +39,13 @@ public class CheckOutMovieTest {
     private Movie birdmanMovie;
     private BookList bookList;
     private UserSession mockUserSession;
+    private Library mockLibrary;
 
     @Before
     public void setUp() throws Exception {
         mockUserSession = mock(UserSession.class);
         mockUserSession.currentUser = mock(User.class);
+        mockLibrary = mock(Library.class);
 
         checkOutMovieOption = new CheckOutMovie();
         input = "1\n";
@@ -104,15 +106,15 @@ public class CheckOutMovieTest {
         verify(mockUserSession.currentUser, never()).addItem(whiplashMovie);
     }
 
-    @Test(expected = InvalidLibraryAndPasswordCombination.class)
+    @Test
     public void testPerformWhenLoginIsUnSuccessful() throws Exception, InvalidLibraryAndPasswordCombination, ItemIsNotAvailableForCheckOut, InputValidationException, InvalidItemException, ItemCanNotBeReturned {
         doThrow(new InvalidLibraryAndPasswordCombination("Invalid Library number and password pair"))
                 .when(mockUserSession).login();
 
-        checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
-        assertThat(byteArrayOutputStream.toString(),is(""));
-        assertThat(whiplashMovie.isCheckedOut(),is(false));
+        checkOutMovieOption.perform(mockUserSession, mockLibrary, printer, scanner);
+        assertThat(byteArrayOutputStream.toString(),is("Invalid Library number and password pair\n"));
+        assertThat(whiplashMovie.isCheckedOut(), is(false));
         verify(mockUserSession.currentUser, never()).addItem(whiplashMovie);
-        verify(mockUserSession, never()).login();
+        verify(mockLibrary, never()).checkOutMovie("1", mockUserSession);
     }
 }
