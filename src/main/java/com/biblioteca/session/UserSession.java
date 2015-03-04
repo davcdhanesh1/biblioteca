@@ -28,7 +28,6 @@ public class UserSession {
     public void login() throws InvalidLibraryAndPasswordCombination {
         if (currentUser != null) return;
 
-        scanner.useDelimiter("\n");
         printer.println("Enter your library Number: ");
         String libraryNumber = scanner.next();
         printer.println("Enter your password: ");

@@ -77,4 +77,9 @@ public class ListAllBookTest {
     public void testShouldContinueRunning() throws Exception {
         assertThat(listAllBook.shouldContinueRunning(),is(true));
     }
+
+    @Test
+    public void testIsSecuredLoginRequired() throws Exception {
+        assertThat(listAllBook.isSecureLoginRequired(),is(false));
+    }
 }

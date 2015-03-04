@@ -21,4 +21,9 @@ public class ListAllBook extends Menu{
     public boolean shouldContinueRunning() {
         return true;
     }
+
+    @Override
+    public boolean isSecureLoginRequired() {
+        return false;
+    }
 }

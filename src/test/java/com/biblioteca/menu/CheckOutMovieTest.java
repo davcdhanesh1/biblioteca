@@ -86,9 +86,8 @@ public class CheckOutMovieTest {
         );
 
         assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
-        assertThat(whiplashMovie.isCheckedOut(),is(true));
+        assertThat(whiplashMovie.isCheckedOut(), is(true));
         verify(mockUserSession.currentUser, times(1)).addItem(whiplashMovie);
-        verify(mockUserSession, times(1)).login();
     }
 
     @Test
@@ -107,14 +106,7 @@ public class CheckOutMovieTest {
     }
 
     @Test
-    public void testPerformWhenLoginIsUnSuccessful() throws Exception, InvalidLibraryAndPasswordCombination, ItemIsNotAvailableForCheckOut, InputValidationException, InvalidItemException, ItemCanNotBeReturned {
-        doThrow(new InvalidLibraryAndPasswordCombination("Invalid Library number and password pair"))
-                .when(mockUserSession).login();
-
-        checkOutMovieOption.perform(mockUserSession, mockLibrary, printer, scanner);
-        assertThat(byteArrayOutputStream.toString(),is("Invalid Library number and password pair\n"));
-        assertThat(whiplashMovie.isCheckedOut(), is(false));
-        verify(mockUserSession.currentUser, never()).addItem(whiplashMovie);
-        verify(mockLibrary, never()).checkOutMovie("1", mockUserSession);
+    public void testIsSecureLoginRequired() throws Exception {
+        assertThat(checkOutMovieOption.isSecureLoginRequired(),is(true));
     }
 }

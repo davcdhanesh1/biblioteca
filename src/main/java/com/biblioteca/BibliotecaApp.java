@@ -31,15 +31,10 @@ public class BibliotecaApp {
         this.userSession = UserSession.createNew(userList, printer, scanner);
     }
 
-    public void run(Library library) throws
-            InvalidItemException,
-            ItemIsNotAvailableForCheckOut,
-            ItemCanNotBeReturned,
-            InputValidationException,
-            InvalidLibraryAndPasswordCombination {
-
+    public void run(Library library) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         init();
         Menu menu; String option;
+
         scanner.useDelimiter("\n");
         while(scanner.hasNext()) {
             option = scanner.next();
@@ -51,7 +46,6 @@ public class BibliotecaApp {
 
             printMenuListAndPrompt();
         }
-
     }
 
     private void init() {
@@ -79,7 +73,18 @@ public class BibliotecaApp {
 
     private void performSelectedMenu(Library library, Menu menu) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         printSeparatorLine();
+
+        if( menu.isSecureLoginRequired() ) {
+            try {
+                userSession.login();
+            } catch (InvalidLibraryAndPasswordCombination e) {
+                printer.println(e.getMessage());
+                printSeparatorLine();
+                return;
+            }
+        }
         menu.perform(userSession, library, printer, scanner);
+
         printSeparatorLine();
     }
 

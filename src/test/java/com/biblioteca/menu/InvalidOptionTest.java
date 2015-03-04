@@ -68,4 +68,9 @@ public class InvalidOptionTest {
     public void testShouldContinueRunning() throws Exception {
         assertThat(invalidOption.shouldContinueRunning(),is(true));
     }
+
+    @Test
+    public void testIsSecuredLoginRequired() throws Exception {
+        assertThat(invalidOption.isSecureLoginRequired(),is(false));
+    }
 }

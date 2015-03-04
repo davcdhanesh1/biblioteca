@@ -22,4 +22,9 @@ public class InvalidOption extends Menu {
         return true;
     }
 
+    @Override
+    public boolean isSecureLoginRequired() {
+        return false;
+    }
+
 }

@@ -21,4 +21,9 @@ public class Quit extends Menu {
     public boolean shouldContinueRunning() {
         return false;
     }
+
+    @Override
+    public boolean isSecureLoginRequired() {
+        return false;
+    }
 }

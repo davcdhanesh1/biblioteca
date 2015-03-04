@@ -88,7 +88,6 @@ public class CheckOutBookTest {
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
 
         verify(mockUserSession.currentUser, times(1)).addItem(harryPotterAndThePhilosophersStone);
-        verify(mockUserSession, times(1)).login();
     }
 
     @Test
@@ -106,21 +105,10 @@ public class CheckOutBookTest {
         }
 
         verify(mockUserSession.currentUser, never()).addItem(harryPotterAndThePhilosophersStone);
-        verify(mockUserSession, times(1)).login();
     }
 
     @Test
-    public void testPerformWhenUserLoginIsNotSuccessful() throws Exception, InvalidLibraryAndPasswordCombination, ItemIsNotAvailableForCheckOut, InputValidationException, InvalidItemException, ItemCanNotBeReturned {
-        Library mockedLibrary = mock(Library.class);
-        doThrow(new InvalidLibraryAndPasswordCombination("Invalid Username and Password pair"))
-                .when(mockUserSession).login();
-
-        checkOutBook.perform(mockUserSession, mockedLibrary, printer, scanner);
-
-        assertThat(byteArrayOutputStream.toString(), is("Invalid Username and Password pair\n"));
-        assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(), is(false));
-        verify(mockUserSession.currentUser, never()).addItem(harryPotterAndThePhilosophersStone);
-        verify(mockedLibrary, never()).printAllBook();
-        verify(mockedLibrary, never()).checkOutBook("1", mockUserSession);
+    public void testIsSecureLoginRequired() throws Exception {
+        assertThat(checkOutBook.isSecureLoginRequired(),is(true));
     }
 }

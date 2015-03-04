@@ -75,4 +75,9 @@ public class ListAllMoviesTest {
     public void testShouldContinueRunning() throws Exception {
         assertThat(listAllMovies.shouldContinueRunning(),is(true));
     }
+
+    @Test
+    public void testIsSecureLoginRequired() throws Exception {
+        assertThat(listAllMovies.isSecureLoginRequired(),is(false));
+    }
 }

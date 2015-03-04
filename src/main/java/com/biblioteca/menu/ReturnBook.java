@@ -18,12 +18,6 @@ public class ReturnBook extends Menu{
 
     @Override
     public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
-        try {
-            userSession.login();
-        } catch (InvalidLibraryAndPasswordCombination e) {
-            printer.println(e.getMessage());
-            return;
-        }
         printer.println("Enter id of Book: ");
         String option = scanner.next();
         Validator.validate(option);
@@ -39,5 +33,8 @@ public class ReturnBook extends Menu{
         return super.toString();
     }
 
-
+    @Override
+    public boolean isSecureLoginRequired() {
+        return true;
+    }
 }

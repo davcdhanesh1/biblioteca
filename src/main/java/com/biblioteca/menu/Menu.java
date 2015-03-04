@@ -27,4 +27,6 @@ public abstract class Menu {
     public String toString() {
         return description;
     }
+
+    public abstract boolean isSecureLoginRequired();
 }

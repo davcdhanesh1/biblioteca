@@ -19,12 +19,6 @@ public class CheckOutBook extends Menu {
 
     @Override
     public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
-        try {
-            userSession.login();
-        } catch (InvalidLibraryAndPasswordCombination e) {
-            printer.println(e.getMessage());
-            return;
-        }
         String option;
         library.printAllBook();
         printer.println("Enter id of Book: ");
@@ -35,5 +29,10 @@ public class CheckOutBook extends Menu {
 
     @Override
     public boolean shouldContinueRunning() { return true; }
+
+    @Override
+    public boolean isSecureLoginRequired() {
+        return true;
+    }
 
 }
