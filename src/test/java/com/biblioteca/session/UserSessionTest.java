@@ -69,4 +69,18 @@ public class UserSessionTest {
 
         userSession.login();
     }
+
+    @Test
+    public void testLoginWhenUserIsAlreadyLoggedInToCurrentSession() throws Exception, InvalidLibraryAndPasswordCombination {
+        UserSession userSession = UserSession.createNew(userList, printer, scanner);
+        String expectedOutput = StringUtil.getOutputString(
+                "Enter your library Number: ",
+                "Enter your password: "
+        );
+        userSession.login();
+
+        // Calling login on userSession after user has already logged in
+        userSession.login();
+        assertThat(byteArrayOutputStream.toString(), is(expectedOutput));
+    }
 }
