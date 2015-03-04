@@ -35,41 +35,59 @@ public class BibliotecaApp {
 
     public void run() throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         init();
-        startRouting();
+        startRoutingEngine();
     }
 
-    private void startRouting() throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
+    private void startRoutingEngine() throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         Menu menu;
         String option;
 
-        scanner.useDelimiter("\n");
-        while(scanner.hasNext()) {
-            option = scanner.next();
-            if (!isValidInput(option)) continue;
+        while(isAppRunning()) {
+            option = readInput();
+            if (inputIsNotValid(option)) continue;
 
-            menu = menuList.find(option);
-            performSelectedMenu(library, menu);
-            if(!menu.shouldContinueRunning()) break;
+            menu = getSelectedMenu(option);
+            executeSelectedMenuOption(library, menu);
+            if(selectedMenuIsQuit(menu)) break;
 
             printMenuListAndPrompt();
         }
     }
 
+    private boolean selectedMenuIsQuit(Menu menu) {
+        return !menu.shouldContinueRunning();
+    }
+
+    private Menu getSelectedMenu(String option) {
+        return menuList.find(option);
+    }
+
+    private String readInput() {
+        String option;
+        option = scanner.next();
+        return option;
+    }
+
+    private boolean isAppRunning() {
+        return scanner.hasNext();
+    }
+
     private void init() {
+        scanner.useDelimiter("\n");
         printWelcomeMessage();
         printSeparatorLine();
         printMenuListAndPrompt();
     }
 
-    private boolean isValidInput(String option) {
+    private boolean inputIsNotValid(String option) {
         try {
             Validator.validate(option);
+            return false;
         } catch (InputValidationException e) {
             printErrorMessage(e.getMessage());
             printMenuListAndPrompt();
-            return false;
+            return true;
         }
-        return true;
     }
 
     void printErrorMessage(String msg) {
@@ -78,7 +96,7 @@ public class BibliotecaApp {
         printSeparatorLine();
     }
 
-    private void performSelectedMenu(Library library, Menu menu) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
+    private void executeSelectedMenuOption(Library library, Menu menu) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         printSeparatorLine();
 
         if( menu.isSecureLoginRequired() ) {
