@@ -70,7 +70,7 @@ public class CheckOutBookTest {
 
     @Test
     public void testDescription() throws Exception {
-        assertThat(checkOutBook.toString(),is("Checkout a Book"));
+        assertThat(checkOutBook.toString(), is("Checkout a Book"));
     }
 
     @Test
@@ -87,6 +87,7 @@ public class CheckOutBookTest {
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
 
         verify(mockUserSession.currentUser, times(1)).addItem(harryPotterAndThePhilosophersStone);
+        verify(mockUserSession, times(1)).login();
     }
 
     @Test
@@ -104,5 +105,6 @@ public class CheckOutBookTest {
         }
 
         verify(mockUserSession.currentUser, never()).addItem(harryPotterAndThePhilosophersStone);
+        verify(mockUserSession, times(1)).login();
     }
 }

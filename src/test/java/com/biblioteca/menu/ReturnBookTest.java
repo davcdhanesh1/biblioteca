@@ -86,6 +86,7 @@ public class ReturnBookTest {
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(false));
 
         verify(mockUserSession.currentUser, times(1)).removeItem(harryPotterAndThePhilosophersStone);
+        verify(mockUserSession, times(1)).login();
     }
 
     @Test
@@ -102,6 +103,7 @@ public class ReturnBookTest {
         }
 
         verify(mockUserSession.currentUser, never()).removeItem(harryPotterAndThePhilosophersStone);
+        verify(mockUserSession, times(1)).login();
     }
 
 }

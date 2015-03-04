@@ -1,13 +1,8 @@
 package com.biblioteca.session;
 
-import com.biblioteca.user.InvalidUserPasswordCombination;
 import com.biblioteca.user.User;
 import com.biblioteca.user.UserList;
 import org.junit.Before;
-import org.junit.Test;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 
 public class UserSessionTest {
 
@@ -24,20 +19,4 @@ public class UserSessionTest {
         userList.add(frank);
     }
 
-    @Test
-    public void testCreateNew() throws Exception, InvalidUserPasswordCombination {
-        String passWord = "password";
-        String libraryNumber = "777-4445";
-        UserSession userSession = UserSession.createNew(userList, libraryNumber, passWord);
-
-        assertThat(userSession.currentUser,is(dhanesh));
-    }
-
-    @Test(expected = InvalidUserPasswordCombination.class)
-    public void testCreateNewSessionWhenInvalidUserNamePassWordCombinationIsGiven() throws Exception, InvalidUserPasswordCombination {
-        String passWord = "password";
-        String libraryNumber = "777-4442";
-        UserSession userSession = UserSession.createNew(userList, libraryNumber, passWord);
-        System.out.println(userSession.currentUser);
-    }
 }

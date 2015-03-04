@@ -36,7 +36,7 @@ public class BibliotecaApp {
             InputValidationException,
             InvalidUserPasswordCombination {
 
-        UserSession userSession = UserSession.createNew(userList, "dhanesh", "password");
+        UserSession userSession = UserSession.createNew(userList);
         init();
         Menu menu; String option;
         scanner.useDelimiter("\n");
