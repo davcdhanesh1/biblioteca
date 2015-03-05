@@ -116,6 +116,7 @@ public class BibliotecaApp {
     }
 
     private void login() throws InvalidLibraryAndPasswordCombination, ItemIsNotAvailableForCheckOut, InputValidationException, InvalidItemException, ItemCanNotBeReturned {
+        if (userSession.getCurrentUser() != null) return;
         Login login = new Login();
         login.perform(userSession, library, printer, scanner);
         printSeparatorLine();

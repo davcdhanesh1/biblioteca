@@ -10,11 +10,8 @@ import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.library.Library;
-import com.biblioteca.menu.*;
-import com.biblioteca.menu.options.CheckOutBook;
-import com.biblioteca.menu.options.ListAllBook;
-import com.biblioteca.menu.options.Quit;
-import com.biblioteca.menu.options.ReturnBook;
+import com.biblioteca.menu.MenuOptionList;
+import com.biblioteca.menu.options.*;
 import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.user.User;
 import com.biblioteca.user.UserList;
@@ -73,6 +70,7 @@ public class BibliotecaAppTestForBooks {
         menuOptionList.add(new ListAllBook());
         menuOptionList.add(new CheckOutBook());
         menuOptionList.add(new ReturnBook());
+        menuOptionList.add(new Login());
         menuOptionList.add(new Quit());
 
         bookList = new BookList();
@@ -103,7 +101,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "|1       |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
@@ -113,7 +112,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: ");
 
         assertThat(actual, is(expectedOutput));
@@ -133,7 +133,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Input can't be 0 or less than 0",
@@ -141,7 +142,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: "
         );
 
@@ -150,7 +152,7 @@ public class BibliotecaAppTestForBooks {
 
     @Test
     public void testSelectingOptionsUntilQuitOptionIsSelected() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
-        inputForSelectingBook = "1\na\n5\n4\n";
+        inputForSelectingBook = "1\na\n10\n5\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
@@ -164,7 +166,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "|1       |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
@@ -174,7 +177,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Input has to be number",
@@ -182,7 +186,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Invalid option!",
@@ -190,7 +195,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Book a week, keeps teacher away!",
@@ -216,7 +222,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
@@ -231,7 +238,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "|2       |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
@@ -240,7 +248,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: "
         );
 
@@ -263,7 +272,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
@@ -278,7 +288,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: "
         );
 
@@ -303,7 +314,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
@@ -317,7 +329,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: "
         );
 
@@ -341,7 +354,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "|2       |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
@@ -350,7 +364,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
@@ -362,7 +377,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "|1       |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
@@ -372,7 +388,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: "
         );
 
@@ -396,7 +413,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
@@ -408,7 +426,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: "
         );
 
@@ -432,7 +451,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
@@ -444,7 +464,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: "
         );
 
@@ -453,7 +474,7 @@ public class BibliotecaAppTestForBooks {
 
     @Test
     public void testUserLoginWhenUseLoginIsUnSuccessfulSheShouldBeRedirectedToMainMenuAgain() throws Exception, ItemIsNotAvailableForCheckOut, InvalidLibraryAndPasswordCombination, InputValidationException, InvalidItemException, ItemCanNotBeReturned {
-        inputForSelectingBook = "2\n777-4445\ninvalidPassword\n";
+        inputForSelectingBook = "4\n777-4445\ninvalidPassword\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
         bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
@@ -467,7 +488,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
@@ -478,7 +500,8 @@ public class BibliotecaAppTestForBooks {
                 "1. List Books",
                 "2. Checkout a Book",
                 "3. Return a Book",
-                "4. Quit",
+                "4. Login",
+                "5. Quit",
                 "Select Option: "
         );
 
