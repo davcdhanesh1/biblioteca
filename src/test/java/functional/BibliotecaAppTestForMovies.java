@@ -12,10 +12,7 @@ import com.biblioteca.item.movie.Movie;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.item.movie.Rating;
 import com.biblioteca.library.Library;
-import com.biblioteca.menu.options.CheckOutMovie;
-import com.biblioteca.menu.options.ListAllMovies;
 import com.biblioteca.menu.MenuOptionList;
-import com.biblioteca.menu.options.Quit;
 import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.user.User;
 import com.biblioteca.user.UserList;
@@ -69,11 +66,6 @@ public class BibliotecaAppTestForMovies {
         outputStream = new ByteArrayOutputStream();
         printer = new Printer(outputStream);
 
-        menuOptionList = new MenuOptionList();
-        menuOptionList.add(new ListAllMovies());
-        menuOptionList.add(new CheckOutMovie());
-        menuOptionList.add(new Quit());
-
         bookList = mock(BookList.class);
         movieList = new MovieList();
         whiplashMovie = new Movie(1, "Whiplash", "Damien Chazelle", 2014, Rating.NINE);
@@ -89,27 +81,35 @@ public class BibliotecaAppTestForMovies {
     @Test
     public void testSelectionOfListOfMovies() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
 
-        inputForSelectingBook = "1\n";
+        inputForSelectingBook = "2\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
         bibliotecaApp.run();
 
         String expectedOutPut = StringUtil.getOutputString(
                 "Welcome To Biblioteca",
                 "-----------------------------------------------------------------------------",
-                "1. List Movies",
-                "2. Checkout a Movie",
-                "3. Quit",
+                "1. List Books",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "|1       |Whiplash                                                        |Damien Chazelle                 |2014|NINE",
                 "|2       |BirdMan                                                         |Alejandro González Iñárritu     |2014|TEN",
                 "",
                 "-----------------------------------------------------------------------------",
-                "1. List Movies",
-                "2. Checkout a Movie",
-                "3. Quit",
+                "1. List Books",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: "
         );
 
@@ -118,18 +118,22 @@ public class BibliotecaAppTestForMovies {
 
     @Test
     public void testSuccessfulCheckOut() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
-        inputForSelectingBook = "2\n777-4445\npassword\n1\n1";
+        inputForSelectingBook = "4\n777-4445\npassword\n1\n2";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
         bibliotecaApp.run();
 
         String expectedOutput = StringUtil.getOutputString(
                 "Welcome To Biblioteca",
                 "-----------------------------------------------------------------------------",
-                "1. List Movies",
-                "2. Checkout a Movie",
-                "3. Quit",
+                "1. List Books",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
@@ -141,17 +145,25 @@ public class BibliotecaAppTestForMovies {
                 "Enter id of Movie: ",
                 "Thanks you! Enjoy the movie",
                 "-----------------------------------------------------------------------------",
-                "1. List Movies",
-                "2. Checkout a Movie",
-                "3. Quit",
+                "1. List Books",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Profile information",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "|2       |BirdMan                                                         |Alejandro González Iñárritu     |2014|TEN",
                 "",
                 "-----------------------------------------------------------------------------",
-                "1. List Movies",
-                "2. Checkout a Movie",
-                "3. Quit",
+                "1. List Books",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Profile information",
+                "7. Quit",
                 "Select Option: "
         );
 
@@ -162,18 +174,22 @@ public class BibliotecaAppTestForMovies {
     @Test
     public void testUnSuccessFulCheckOutWhenMovieToBeCheckedOutIsAlreadyCheckedOut() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
         whiplashMovie.checkOut();
-        inputForSelectingBook = "2\n777-4445\npassword\n1\n1\n";
+        inputForSelectingBook = "4\n777-4445\npassword\n1\n2\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
         bibliotecaApp.run();
 
         String expectedOutput = StringUtil.getOutputString(
                 "Welcome To Biblioteca",
                 "-----------------------------------------------------------------------------",
-                "1. List Movies",
-                "2. Checkout a Movie",
-                "3. Quit",
+                "1. List Books",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
@@ -184,17 +200,25 @@ public class BibliotecaAppTestForMovies {
                 "Enter id of Movie: ",
                 "That movie is not available",
                 "-----------------------------------------------------------------------------",
-                "1. List Movies",
-                "2. Checkout a Movie",
-                "3. Quit",
+                "1. List Books",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Profile information",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "|2       |BirdMan                                                         |Alejandro González Iñárritu     |2014|TEN",
                 "",
                 "-----------------------------------------------------------------------------",
-                "1. List Movies",
-                "2. Checkout a Movie",
-                "3. Quit",
+                "1. List Books",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Profile information",
+                "7. Quit",
                 "Select Option: "
         );
 
@@ -203,18 +227,22 @@ public class BibliotecaAppTestForMovies {
 
     @Test
     public void testUnSuccessFulCheckOutWhenMovieToBeCheckedOutIsNotPresentInTheLibrary() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
-        inputForSelectingBook = "2\n777-4445\npassword\n10\n";
+        inputForSelectingBook = "4\n777-4445\npassword\n10\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
         bibliotecaApp.run();
 
         String expectedOutput = StringUtil.getOutputString(
                 "Welcome To Biblioteca",
                 "-----------------------------------------------------------------------------",
-                "1. List Movies",
-                "2. Checkout a Movie",
-                "3. Quit",
+                "1. List Books",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
@@ -226,9 +254,13 @@ public class BibliotecaAppTestForMovies {
                 "Enter id of Movie: ",
                 "Invalid Movie to checkout",
                 "-----------------------------------------------------------------------------",
-                "1. List Movies",
-                "2. Checkout a Movie",
-                "3. Quit",
+                "1. List Books",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Profile information",
+                "7. Quit",
                 "Select Option: "
         );
 

@@ -53,7 +53,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         Library library = new Library(bookList, movieList, printer);
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(printer, scanner, menuList, userList, library);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
         bibliotecaApp.run();
     }
 }

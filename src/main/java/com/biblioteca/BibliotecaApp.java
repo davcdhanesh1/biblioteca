@@ -25,11 +25,11 @@ public class BibliotecaApp {
     private Scanner scanner;
     private MenuOptionList menuOptionList;
 
-    public BibliotecaApp(Printer printer, Scanner scanner, MenuOptionList menuOptionList, UserList userList, Library library) {
+    public BibliotecaApp(Printer printer, Scanner scanner, UserList userList, Library library) {
 
         this.printer = printer;
         this.scanner = scanner;
-        this.menuOptionList = menuOptionList;
+        this.menuOptionList = ViewState.defaultMenuView().menuOptionList;
         this.userList = userList;
         this.userSession = UserSession.createNew(userList, printer, scanner);
         this.library = library;
@@ -128,6 +128,13 @@ public class BibliotecaApp {
     }
 
     private void printMenuList() {
+        ViewState viewState;
+        if (userSession.getCurrentUser() == null) {
+            viewState = ViewState.defaultMenuView();
+        } else {
+            viewState = ViewState.menuViewWithProfileInformation();
+        }
+        menuOptionList = viewState.menuOptionList;
         menuOptionList.printAll(printer);
     }
 

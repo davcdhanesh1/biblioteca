@@ -11,7 +11,6 @@ import com.biblioteca.item.book.BookList;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.library.Library;
 import com.biblioteca.menu.MenuOptionList;
-import com.biblioteca.menu.options.*;
 import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.user.User;
 import com.biblioteca.user.UserList;
@@ -66,13 +65,6 @@ public class BibliotecaAppTestForBooks {
         outputStream = new ByteArrayOutputStream();
         printer = new Printer(outputStream);
 
-        menuOptionList = new MenuOptionList();
-        menuOptionList.add(new ListAllBook());
-        menuOptionList.add(new CheckOutBook());
-        menuOptionList.add(new ReturnBook());
-        menuOptionList.add(new Login());
-        menuOptionList.add(new Quit());
-
         bookList = new BookList();
         harryPotterAndPhilosophersStoneBook = new Book(1, harryPotterAndPhilosophersStone, JKRowling, 1987);
         harryPotterAndChambersOfSecretsBook = new Book(2, BibliotecaAppTestForBooks.harryPotterAndChambersOfSecrets, JKRowling, 1987);
@@ -83,7 +75,7 @@ public class BibliotecaAppTestForBooks {
 
         library = new Library(bookList, movieList, printer);
 
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
     }
 
     @Test
@@ -91,7 +83,7 @@ public class BibliotecaAppTestForBooks {
         inputForSelectingBook = "1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
         bibliotecaApp.run();
 
         String actual = outputStream.toString();
@@ -99,10 +91,12 @@ public class BibliotecaAppTestForBooks {
                 "Welcome To Biblioteca",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "|1       |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
@@ -110,10 +104,12 @@ public class BibliotecaAppTestForBooks {
                 "",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ");
 
         assertThat(actual, is(expectedOutput));
@@ -124,26 +120,30 @@ public class BibliotecaAppTestForBooks {
         inputForSelectingBook = "-1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
         bibliotecaApp.run();
 
         String expectedOutput = StringUtil.getOutputString(
                 "Welcome To Biblioteca",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Input can't be 0 or less than 0",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: "
         );
 
@@ -152,10 +152,10 @@ public class BibliotecaAppTestForBooks {
 
     @Test
     public void testSelectingOptionsUntilQuitOptionIsSelected() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
-        inputForSelectingBook = "1\na\n10\n5\n";
+        inputForSelectingBook = "1\na\n10\n7\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
         bibliotecaApp.run();
 
         String actualOutput = outputStream.toString();
@@ -164,10 +164,12 @@ public class BibliotecaAppTestForBooks {
                 "Welcome To Biblioteca",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "|1       |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
@@ -175,28 +177,34 @@ public class BibliotecaAppTestForBooks {
                 "",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Input has to be number",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Invalid option!",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Book a week, keeps teacher away!",
@@ -208,10 +216,10 @@ public class BibliotecaAppTestForBooks {
 
     @Test
     public void testSuccessfulBookCheckOut() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
-        inputForSelectingBook = "2\n777-4445\npassword\n1\n1\n";
+        inputForSelectingBook = "3\n777-4445\npassword\n1\n1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
         bibliotecaApp.run();
 
         String actualOutput = outputStream.toString();
@@ -220,10 +228,12 @@ public class BibliotecaAppTestForBooks {
                 "Welcome To Biblioteca",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
@@ -236,20 +246,24 @@ public class BibliotecaAppTestForBooks {
                 "Thanks you! Enjoy the book",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Profile information",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "|2       |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 "",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Profile information",
+                "7. Quit",
                 "Select Option: "
         );
 
@@ -258,10 +272,10 @@ public class BibliotecaAppTestForBooks {
 
     @Test
     public void testUnsuccessfulCheckOutWhenAnInvalidBookIsTriedToBeCheckedOut() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
-        inputForSelectingBook = "2\n777-4445\npassword\n3\n";
+        inputForSelectingBook = "3\n777-4445\npassword\n3\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
         bibliotecaApp.run();
 
         String actualOutput = outputStream.toString();
@@ -270,10 +284,12 @@ public class BibliotecaAppTestForBooks {
                 "Welcome To Biblioteca",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
@@ -286,10 +302,12 @@ public class BibliotecaAppTestForBooks {
                 "Invalid Book to checkout",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Profile information",
+                "7. Quit",
                 "Select Option: "
         );
 
@@ -300,10 +318,10 @@ public class BibliotecaAppTestForBooks {
     public void testUnsuccessfulCheckOutWhenAlreadyCheckedOutBookIsTriedToCheckedOut() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         harryPotterAndChambersOfSecretsBook.checkOut();
 
-        inputForSelectingBook = "2\n777-4445\npassword\n2\n";
+        inputForSelectingBook = "3\n777-4445\npassword\n2\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
         bibliotecaApp.run();
 
         String actualOutput = outputStream.toString();
@@ -312,10 +330,12 @@ public class BibliotecaAppTestForBooks {
                 "Welcome To Biblioteca",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
@@ -327,10 +347,12 @@ public class BibliotecaAppTestForBooks {
                 "That book is not available",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Profile information",
+                "7. Quit",
                 "Select Option: "
         );
 
@@ -340,10 +362,10 @@ public class BibliotecaAppTestForBooks {
     @Test
     public void testSuccessfulBookReturn() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         harryPotterAndPhilosophersStoneBook.checkOut();
-        inputForSelectingBook = "1\n3\n777-4445\npassword\n1\n1\n";
+        inputForSelectingBook = "1\n5\n777-4445\npassword\n1\n1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
         bibliotecaApp.run();
 
         String actualOutput = outputStream.toString();
@@ -352,20 +374,24 @@ public class BibliotecaAppTestForBooks {
                 "Welcome To Biblioteca",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "|2       |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
                 "",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
@@ -375,10 +401,12 @@ public class BibliotecaAppTestForBooks {
                 "Thank you for returning the book.",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Profile information",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "|1       |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
@@ -386,10 +414,12 @@ public class BibliotecaAppTestForBooks {
                 "",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Profile information",
+                "7. Quit",
                 "Select Option: "
         );
 
@@ -399,10 +429,10 @@ public class BibliotecaAppTestForBooks {
     @Test
     public void testUnsuccessfulBookReturnWhenInvalidBookIsTriedToBeReturned() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
 
-        inputForSelectingBook = "3\n777-4445\npassword\n10\n";
+        inputForSelectingBook = "5\n777-4445\npassword\n10\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
         bibliotecaApp.run();
 
         String actualOutput = outputStream.toString();
@@ -411,10 +441,12 @@ public class BibliotecaAppTestForBooks {
                 "Welcome To Biblioteca",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
@@ -424,10 +456,12 @@ public class BibliotecaAppTestForBooks {
                 "Invalid Book to return",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Profile information",
+                "7. Quit",
                 "Select Option: "
         );
 
@@ -437,10 +471,10 @@ public class BibliotecaAppTestForBooks {
     @Test
     public void testUnsuccessfulBookReturnWhenAlreadyCheckedInBookIsTriedToBeCheckedIn() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         harryPotterAndPhilosophersStoneBook.checkIn();
-        inputForSelectingBook = "3\n777-4445\npassword\n2\n";
+        inputForSelectingBook = "5\n777-4445\npassword\n2\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
         bibliotecaApp.run();
 
         String actualOutput = outputStream.toString();
@@ -449,10 +483,12 @@ public class BibliotecaAppTestForBooks {
                 "Welcome To Biblioteca",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
@@ -462,10 +498,12 @@ public class BibliotecaAppTestForBooks {
                 "We already have this book !",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Profile information",
+                "7. Quit",
                 "Select Option: "
         );
 
@@ -474,10 +512,10 @@ public class BibliotecaAppTestForBooks {
 
     @Test
     public void testUserLoginWhenUseLoginIsUnSuccessfulSheShouldBeRedirectedToMainMenuAgain() throws Exception, ItemIsNotAvailableForCheckOut, InvalidLibraryAndPasswordCombination, InputValidationException, InvalidItemException, ItemCanNotBeReturned {
-        inputForSelectingBook = "4\n777-4445\ninvalidPassword\n";
+        inputForSelectingBook = "6\n777-4445\ninvalidPassword\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
         bibliotecaApp.run();
 
         String actualOutput = outputStream.toString();
@@ -486,10 +524,12 @@ public class BibliotecaAppTestForBooks {
                 "Welcome To Biblioteca",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
                 "Select Option: ",
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
@@ -498,10 +538,61 @@ public class BibliotecaAppTestForBooks {
                 "Invalid Library Number or Password !",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
-                "2. Checkout a Book",
-                "3. Return a Book",
-                "4. Login",
-                "5. Quit",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
+                "Select Option: "
+        );
+
+        assertThat(actualOutput,is(expectedOutput));
+    }
+
+    @Test
+    public void testProfileInformationOptionWhenOnlyUserIsLoggedIntoSystem() throws Exception, ItemIsNotAvailableForCheckOut, InvalidLibraryAndPasswordCombination, InputValidationException, InvalidItemException, ItemCanNotBeReturned {
+        inputForSelectingBook = "6\n777-4445\npassword\n6\n";
+        byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
+        scanner = new Scanner(byteArrayInputStream);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
+        bibliotecaApp.run();
+
+        String actualOutput = outputStream.toString();
+
+        String expectedOutput = StringUtil.getOutputString(
+                "Welcome To Biblioteca",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
+                "Select Option: ",
+                "-----------------------------------------------------------------------------",
+                "Enter your library Number: ",
+                "Enter your password: ",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Profile information",
+                "7. Quit",
+                "Select Option: ",
+                "-----------------------------------------------------------------------------",
+                "|777-4445|Dhanesh                         |davcdhanesh1@gmail.com          |9096904102",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Profile information",
+                "7. Quit",
                 "Select Option: "
         );
 
