@@ -19,7 +19,7 @@ public class ProfileInfo extends MenuOption {
 
     @Override
     public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
-
+        printer.println(userSession.getCurrentUser().toString());
     }
 
     @Override
