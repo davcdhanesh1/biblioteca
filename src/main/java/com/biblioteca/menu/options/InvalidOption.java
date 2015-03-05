@@ -1,4 +1,4 @@
-package com.biblioteca.menu;
+package com.biblioteca.menu.options;
 
 import com.biblioteca.io.Printer;
 import com.biblioteca.library.Library;
@@ -6,24 +6,25 @@ import com.biblioteca.session.UserSession;
 
 import java.util.Scanner;
 
-public class Quit extends MenuOption {
+public class InvalidOption extends MenuOption {
 
-    public Quit() {
-        super("Quit");
+    public InvalidOption() {
+        super("Invalid Option!");
     }
 
     @Override
     public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) {
-        printer.println("Book a week, keeps teacher away!");
+        printer.println("Invalid option!");
     }
 
     @Override
     public boolean shouldContinueRunning() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isSecureLoginRequired() {
         return false;
     }
+
 }

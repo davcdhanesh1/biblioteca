@@ -1,10 +1,12 @@
 package com.biblioteca.menu;
 
 import com.biblioteca.io.Printer;
+import com.biblioteca.menu.options.InvalidOption;
+import com.biblioteca.menu.options.MenuOption;
 
 import java.util.ArrayList;
 
-public class MenuList {
+public class MenuOptionList {
 
     private ArrayList<MenuOption> list = new ArrayList<MenuOption>();
 

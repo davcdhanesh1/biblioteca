@@ -8,6 +8,7 @@ import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.library.Library;
 import com.biblioteca.item.InvalidItemException;
 import com.biblioteca.menu.*;
+import com.biblioteca.menu.options.MenuOption;
 import com.biblioteca.session.UserSession;
 import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.user.UserList;
@@ -21,13 +22,13 @@ public class BibliotecaApp {
     private UserList userList;
     private Printer printer;
     private Scanner scanner;
-    private MenuList menuList;
+    private MenuOptionList menuOptionList;
 
-    public BibliotecaApp(Printer printer, Scanner scanner, MenuList menuList, UserList userList, Library library) {
+    public BibliotecaApp(Printer printer, Scanner scanner, MenuOptionList menuOptionList, UserList userList, Library library) {
 
         this.printer = printer;
         this.scanner = scanner;
-        this.menuList = menuList;
+        this.menuOptionList = menuOptionList;
         this.userList = userList;
         this.userSession = UserSession.createNew(userList, printer, scanner);
         this.library = library;
@@ -59,7 +60,7 @@ public class BibliotecaApp {
     }
 
     private MenuOption getSelectedMenuOption(String option) {
-        return menuList.find(option);
+        return menuOptionList.find(option);
     }
 
     private String readInput() {
@@ -125,7 +126,7 @@ public class BibliotecaApp {
     }
 
     private void printMenuList() {
-        menuList.printAll(printer);
+        menuOptionList.printAll(printer);
     }
 
     private void printPrompt() {

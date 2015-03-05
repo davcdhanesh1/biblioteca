@@ -1,14 +1,14 @@
-package com.biblioteca.menu;
+package com.biblioteca.menu.options;
 
 import com.biblioteca.io.Printer;
-import com.biblioteca.item.book.Book;
-import com.biblioteca.item.book.BookList;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.library.Library;
+import com.biblioteca.item.book.Book;
+import com.biblioteca.item.book.BookList;
+import com.biblioteca.menu.options.Quit;
 import com.biblioteca.session.UserSession;
 import org.junit.Before;
 import org.junit.Test;
-import testhelpers.StringUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -18,7 +18,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class ListAllBookTest {
+public class QuitTest {
     public final String HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE = "Harry Potter and the Philosopher's Stone";
     public final String HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS = "Harry Potter and the Chamber of Secrets";
 
@@ -28,7 +28,7 @@ public class ListAllBookTest {
     private ByteArrayOutputStream byteArrayOutputStream;
     private Printer printer;
     private BookList bookList;
-    private ListAllBook listAllBook;
+    private Quit quit;
     private Library library;
     private ByteArrayInputStream byteArrayInputStream;
     private Scanner scanner;
@@ -47,39 +47,27 @@ public class ListAllBookTest {
 
         bookList = new BookList();
         bookList.add(new Book(1, HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987));
-        bookList.add(new Book(2, HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
-        listAllBook = new ListAllBook();
-
+        bookList.add(new Book(1, HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
+        
         movieList = mock(MovieList.class);
 
+        quit = new Quit();
         library = new Library(bookList, movieList, printer);
     }
 
     @Test
     public void testPerform() throws Exception {
-        String expectedOutput = StringUtil.getOutputString(
-                "|1       |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
-                "|2       |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
-                ""
-        );
-
-        listAllBook.perform(userSession, library, printer, scanner);
-
-        assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
+        quit.perform(userSession, library, printer, scanner);
+        assertThat(byteArrayOutputStream.toString(), is("Book a week, keeps teacher away!\n"));
     }
 
     @Test
     public void testToString() throws Exception {
-        assertThat(listAllBook.toString(), is("List Books"));
+        assertThat(quit.toString(),is("Quit"));
     }
 
     @Test
     public void testShouldContinueRunning() throws Exception {
-        assertThat(listAllBook.shouldContinueRunning(),is(true));
-    }
-
-    @Test
-    public void testIsSecuredLoginRequired() throws Exception {
-        assertThat(listAllBook.isSecureLoginRequired(),is(false));
+        assertThat(quit.shouldContinueRunning(),is(false));
     }
 }

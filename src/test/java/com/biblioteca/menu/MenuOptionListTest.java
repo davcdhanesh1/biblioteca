@@ -1,6 +1,9 @@
 package com.biblioteca.menu;
 
 import com.biblioteca.io.Printer;
+import com.biblioteca.menu.options.ListAllBook;
+import com.biblioteca.menu.options.MenuOption;
+import com.biblioteca.menu.options.Quit;
 import testhelpers.StringUtil;
 import org.junit.Test;
 
@@ -15,34 +18,34 @@ public class MenuOptionListTest {
     public void testPrintAll() throws Exception {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         Printer printer = new Printer(byteArrayOutputStream);
-        MenuList menuList = new MenuList();
-        menuList.add(new ListAllBook());
-        menuList.add(new Quit());
+        MenuOptionList menuOptionList = new MenuOptionList();
+        menuOptionList.add(new ListAllBook());
+        menuOptionList.add(new Quit());
         String expectedMenuList = StringUtil.getOutputString("1. List Books", "2. Quit");
-        menuList.printAll(printer);
+        menuOptionList.printAll(printer);
 
         assertThat(byteArrayOutputStream.toString(),is(expectedMenuList));
     }
 
     @Test
     public void testFindMenu() throws Exception {
-        MenuList menuList = new MenuList();
+        MenuOptionList menuOptionList = new MenuOptionList();
         MenuOption listAllBookOption = new ListAllBook();
-        menuList.add(listAllBookOption);
+        menuOptionList.add(listAllBookOption);
         MenuOption quitOption = new Quit();
-        menuList.add(quitOption);
+        menuOptionList.add(quitOption);
 
-        assertThat(menuList.find("1"), is(listAllBookOption));
+        assertThat(menuOptionList.find("1"), is(listAllBookOption));
     }
 
     @Test
     public void testFindMenuWhenInvalidOptionIsGiven() throws Exception {
-        MenuList menuList = new MenuList();
+        MenuOptionList menuOptionList = new MenuOptionList();
         MenuOption listAllBookOption = new ListAllBook();
-        menuList.add(listAllBookOption);
+        menuOptionList.add(listAllBookOption);
         MenuOption quitOption = new Quit();
-        menuList.add(quitOption);
+        menuOptionList.add(quitOption);
 
-        assertThat(menuList.find("3").toString(), is("Invalid Option!"));
+        assertThat(menuOptionList.find("3").toString(), is("Invalid Option!"));
     }
 }

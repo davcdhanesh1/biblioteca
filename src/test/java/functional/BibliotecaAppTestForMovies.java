@@ -12,10 +12,10 @@ import com.biblioteca.item.movie.Movie;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.item.movie.Rating;
 import com.biblioteca.library.Library;
-import com.biblioteca.menu.CheckOutMovie;
-import com.biblioteca.menu.ListAllMovies;
-import com.biblioteca.menu.MenuList;
-import com.biblioteca.menu.Quit;
+import com.biblioteca.menu.options.CheckOutMovie;
+import com.biblioteca.menu.options.ListAllMovies;
+import com.biblioteca.menu.MenuOptionList;
+import com.biblioteca.menu.options.Quit;
 import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.user.User;
 import com.biblioteca.user.UserList;
@@ -41,7 +41,7 @@ public class BibliotecaAppTestForMovies {
     private String inputForSelectingBook;
     private ByteArrayInputStream byteArrayInputStream;
     private Scanner scanner;
-    private MenuList menuList;
+    private MenuOptionList menuOptionList;
     private Library library;
     private String inputForSelectingMenu;
     private Book harryPotterAndPhilosophersStoneBook;
@@ -69,10 +69,10 @@ public class BibliotecaAppTestForMovies {
         outputStream = new ByteArrayOutputStream();
         printer = new Printer(outputStream);
 
-        menuList = new MenuList();
-        menuList.add(new ListAllMovies());
-        menuList.add(new CheckOutMovie());
-        menuList.add(new Quit());
+        menuOptionList = new MenuOptionList();
+        menuOptionList.add(new ListAllMovies());
+        menuOptionList.add(new CheckOutMovie());
+        menuOptionList.add(new Quit());
 
         bookList = mock(BookList.class);
         movieList = new MovieList();
@@ -92,7 +92,7 @@ public class BibliotecaAppTestForMovies {
         inputForSelectingBook = "1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
         bibliotecaApp.run();
 
         String expectedOutPut = StringUtil.getOutputString(
@@ -121,7 +121,7 @@ public class BibliotecaAppTestForMovies {
         inputForSelectingBook = "2\n777-4445\npassword\n1\n1";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
         bibliotecaApp.run();
 
         String expectedOutput = StringUtil.getOutputString(
@@ -165,7 +165,7 @@ public class BibliotecaAppTestForMovies {
         inputForSelectingBook = "2\n777-4445\npassword\n1\n1\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
         bibliotecaApp.run();
 
         String expectedOutput = StringUtil.getOutputString(
@@ -206,7 +206,7 @@ public class BibliotecaAppTestForMovies {
         inputForSelectingBook = "2\n777-4445\npassword\n10\n";
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        bibliotecaApp = new BibliotecaApp(printer, scanner, menuList, userList, library);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, menuOptionList, userList, library);
         bibliotecaApp.run();
 
         String expectedOutput = StringUtil.getOutputString(

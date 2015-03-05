@@ -1,4 +1,4 @@
-package com.biblioteca.menu;
+package com.biblioteca.menu.options;
 
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.inputValidator.Validator;
@@ -12,18 +12,19 @@ import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 
 import java.util.Scanner;
 
-public class CheckOutMovie extends MenuOption {
-
-    public CheckOutMovie() { super("Checkout a Movie"); }
+public class CheckOutBook extends MenuOption {
+    public CheckOutBook() {
+        super("Checkout a Book");
+    }
 
     @Override
-    public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
+    public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
         String option;
-        library.printAllMovies();
-        printer.println("Enter id of Movie: ");
+        library.printAllBook();
+        printer.println("Enter id of Book: ");
         option = scanner.next();
         Validator.validate(option);
-        library.checkOutMovie(option, userSession);
+        library.checkOutBook(option, userSession);
     }
 
     @Override
@@ -33,4 +34,5 @@ public class CheckOutMovie extends MenuOption {
     public boolean isSecureLoginRequired() {
         return true;
     }
+
 }

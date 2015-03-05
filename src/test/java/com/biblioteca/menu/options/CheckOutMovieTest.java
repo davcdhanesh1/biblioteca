@@ -1,4 +1,4 @@
-package com.biblioteca.menu;
+package com.biblioteca.menu.options;
 
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
@@ -10,6 +10,7 @@ import com.biblioteca.item.movie.Movie;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.item.movie.Rating;
 import com.biblioteca.library.Library;
+import com.biblioteca.menu.options.CheckOutMovie;
 import com.biblioteca.session.UserSession;
 import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.user.User;

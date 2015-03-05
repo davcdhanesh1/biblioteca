@@ -1,25 +1,26 @@
-package com.biblioteca.menu;
+package com.biblioteca.menu.options;
 
 import com.biblioteca.io.Printer;
 import com.biblioteca.library.Library;
+import com.biblioteca.menu.options.MenuOption;
 import com.biblioteca.session.UserSession;
 
 import java.util.Scanner;
 
-public class ListAllBook extends MenuOption {
+public class Quit extends MenuOption {
 
-    public ListAllBook() {
-        super("List Books");
+    public Quit() {
+        super("Quit");
     }
 
     @Override
     public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) {
-        library.printAllBook();
+        printer.println("Book a week, keeps teacher away!");
     }
 
     @Override
     public boolean shouldContinueRunning() {
-        return true;
+        return false;
     }
 
     @Override
