@@ -44,7 +44,8 @@ public class CheckOutMovieTest {
     @Before
     public void setUp() throws Exception {
         mockUserSession = mock(UserSession.class);
-        mockUserSession.currentUser = mock(User.class);
+        User mockCurrentUser = mock(User.class);
+        when(mockUserSession.getCurrentUser()).thenReturn(mockCurrentUser);
         mockLibrary = mock(Library.class);
 
         checkOutMovieOption = new CheckOutMovie();
@@ -87,7 +88,7 @@ public class CheckOutMovieTest {
 
         assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
         assertThat(whiplashMovie.isCheckedOut(), is(true));
-        verify(mockUserSession.currentUser, times(1)).addItem(whiplashMovie);
+        verify(mockUserSession.getCurrentUser(), times(1)).addItem(whiplashMovie);
     }
 
     @Test
@@ -102,7 +103,7 @@ public class CheckOutMovieTest {
             assertThat(e.getMessage(), is("Input has to be number"));
         }
 
-        verify(mockUserSession.currentUser, never()).addItem(whiplashMovie);
+        verify(mockUserSession.getCurrentUser(), never()).addItem(whiplashMovie);
     }
 
     @Test

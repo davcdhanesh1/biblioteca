@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class UserSession {
 
-    public User currentUser;
+    private User currentUser;
     private UserList userList;
     private Printer printer;
     private Scanner scanner;

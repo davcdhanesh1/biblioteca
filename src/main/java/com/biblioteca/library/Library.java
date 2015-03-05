@@ -106,7 +106,7 @@ public class Library {
             @Override
             void performAction(Book book) {
                 book.checkOut();
-                userSession.currentUser.addItem(book);
+                userSession.getCurrentUser().addItem(book);
             }
         };
         printer.println(closure.perform(bookId));
@@ -172,7 +172,7 @@ public class Library {
             @Override
             void performAction(Book book) {
                 book.checkIn();
-                userSession.currentUser.removeItem(book);
+                userSession.getCurrentUser().removeItem(book);
             }
         };
 
@@ -240,7 +240,7 @@ public class Library {
             @Override
             void performAction(Movie movie) {
                 movie.checkOut();
-                userSession.currentUser.addItem(movie);
+                userSession.getCurrentUser().addItem(movie);
             }
         };
         printer.println(closure.perform(movieId));

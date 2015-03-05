@@ -46,7 +46,8 @@ public class ReturnBookTest {
     @Before
     public void setUp() throws Exception {
         mockUserSession = mock(UserSession.class);
-        mockUserSession.currentUser = mock(User.class);
+        User mockCurrentUser = mock(User.class);
+        when(mockUserSession.getCurrentUser()).thenReturn(mockCurrentUser);
 
         input = "1\n";
         byteArrayOutputStream = new ByteArrayOutputStream();
@@ -86,7 +87,7 @@ public class ReturnBookTest {
         assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(false));
 
-        verify(mockUserSession.currentUser, times(1)).removeItem(harryPotterAndThePhilosophersStone);
+        verify(mockUserSession.getCurrentUser(), times(1)).removeItem(harryPotterAndThePhilosophersStone);
     }
 
     @Test
@@ -102,7 +103,7 @@ public class ReturnBookTest {
             assertThat(e.getMessage(),is("Input has to be number"));
         }
 
-        verify(mockUserSession.currentUser, never()).removeItem(harryPotterAndThePhilosophersStone);
+        verify(mockUserSession.getCurrentUser(), never()).removeItem(harryPotterAndThePhilosophersStone);
     }
 
     @Test
