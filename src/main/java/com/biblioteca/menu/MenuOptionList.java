@@ -28,4 +28,22 @@ public class MenuOptionList {
             return new InvalidOption();
         }
     }
+
+    public void remove(String menuName) {
+        int indexOfItemToBeRemoved = 0;
+        for(int index = 0; index < list.size(); index++) {
+            if(list.get(index).toString().equals(menuName)) {
+                indexOfItemToBeRemoved = index;
+                break;
+            }
+        }
+        list.remove(indexOfItemToBeRemoved);
+    }
+
+    public boolean hasMenu(String menuName) {
+        for(int index = 0; index < list.size(); index++) {
+            if(list.get(index).toString().equals(menuName)) return true;
+        }
+        return false;
+    }
 }

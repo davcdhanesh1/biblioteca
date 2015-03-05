@@ -48,4 +48,34 @@ public class MenuOptionListTest {
 
         assertThat(menuOptionList.find("3").toString(), is("Invalid Option!"));
     }
+
+    @Test
+    public void testRemove() throws Exception {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        Printer printer = new Printer(byteArrayOutputStream);
+
+        MenuOptionList menuOptionList = new MenuOptionList();
+        MenuOption listAllBookOption = new ListAllBook();
+        menuOptionList.add(listAllBookOption);
+        MenuOption quitOption = new Quit();
+        menuOptionList.add(quitOption);
+
+        menuOptionList.remove("List Books");
+        menuOptionList.printAll(printer);
+
+        assertThat(byteArrayOutputStream.toString(), is("1. Quit\n"));
+    }
+
+    @Test
+    public void testHasMenu() throws Exception {
+        MenuOptionList menuOptionList = new MenuOptionList();
+        MenuOption listAllBookOption = new ListAllBook();
+        menuOptionList.add(listAllBookOption);
+        MenuOption quitOption = new Quit();
+        menuOptionList.add(quitOption);
+        menuOptionList.remove("List Books");
+
+        assertThat(menuOptionList.hasMenu("List Books"), is(false));
+        assertThat(menuOptionList.hasMenu("Quit"), is(true));
+    }
 }
