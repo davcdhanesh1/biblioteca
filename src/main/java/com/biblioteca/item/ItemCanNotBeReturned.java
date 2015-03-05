@@ -1,4 +1,4 @@
 package com.biblioteca.item;
 
-public class ItemCanNotBeReturned extends Throwable {
+public class ItemCanNotBeReturned extends Exception {
 }

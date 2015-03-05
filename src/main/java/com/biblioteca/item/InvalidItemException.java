@@ -1,6 +1,6 @@
 package com.biblioteca.item;
 
-public class InvalidItemException extends Throwable {
+public class InvalidItemException extends Exception {
     public InvalidItemException() {
         super();
     }

@@ -2,7 +2,6 @@ package com.biblioteca.menu.options;
 
 import com.biblioteca.io.Printer;
 import com.biblioteca.library.Library;
-import com.biblioteca.menu.options.MenuOption;
 import com.biblioteca.session.UserSession;
 
 import java.util.Scanner;
