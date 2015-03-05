@@ -28,24 +28,16 @@ public abstract class ItemList {
 
     protected Item findFromAvailableById(String bookId) throws InvalidItemException, ItemIsNotAvailableForCheckOut {
         int idOfBookToBeFound = Integer.parseInt(bookId);
-        try {
-            Item item = findItemWithId(idOfBookToBeFound);
-            if (item.isCheckedOut()) throw new ItemIsNotAvailableForCheckOut();
-            return item;
-        } catch (InvalidItemException e) {
-            throw new InvalidItemException();
-        }
+        Item item = findItemWithId(idOfBookToBeFound);
+        if (item.isCheckedOut()) throw new ItemIsNotAvailableForCheckOut();
+        return item;
     }
 
     protected Item findFromCheckedOutById(String index) throws InvalidItemException, ItemCanNotBeReturned {
         int idOfBookToBeFound = Integer.parseInt(index);
-        try {
-            Item item = findItemWithId(idOfBookToBeFound);
-            if (!item.isCheckedOut()) throw new ItemCanNotBeReturned();
-            return item;
-        } catch (InvalidItemException e) {
-            throw new InvalidItemException();
-        }
+        Item item = findItemWithId(idOfBookToBeFound);
+        if (!item.isCheckedOut()) throw new ItemCanNotBeReturned();
+        return item;
     }
 
     private Item findItemWithId(int bookId) throws InvalidItemException {

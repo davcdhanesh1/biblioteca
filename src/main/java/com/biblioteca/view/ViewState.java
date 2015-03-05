@@ -37,10 +37,9 @@ public class ViewState {
     }
 
     public static ViewState getCurrentView(UserSession userSession) {
-        if (userSession.getCurrentUser() == null) {
+        if (userSession.getCurrentUser() == null)
             return new ViewState(defaultMenuOptionList());
-        } else {
-            return new ViewState(menuViewWithProfileInformation());
-        }
+
+        return new ViewState(menuViewWithProfileInformation());
     }
 }
