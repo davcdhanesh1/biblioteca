@@ -1,13 +1,14 @@
 package com.biblioteca;
 
-import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.inputValidator.Validator;
 import com.biblioteca.io.Printer;
+import com.biblioteca.item.InvalidItemException;
+import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.library.Library;
-import com.biblioteca.item.InvalidItemException;
-import com.biblioteca.menu.*;
+import com.biblioteca.menu.MenuOptionList;
+import com.biblioteca.menu.options.Login;
 import com.biblioteca.menu.options.MenuOption;
 import com.biblioteca.session.UserSession;
 import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
@@ -111,11 +112,12 @@ public class BibliotecaApp {
         printSeparatorLine();
     }
 
-    private void loginIfGivenMenuOptionRequiresLogin(MenuOption menuOption) throws InvalidLibraryAndPasswordCombination {
+    private void loginIfGivenMenuOptionRequiresLogin(MenuOption menuOption) throws InvalidLibraryAndPasswordCombination, ItemIsNotAvailableForCheckOut, InputValidationException, InvalidItemException, ItemCanNotBeReturned {
         if (userSession.getCurrentUser() != null) return;
 
         if( menuOption.isSecureLoginRequired() ) {
-            userSession.login();
+            Login login = new Login();
+            login.perform(userSession, library, printer, scanner);
             printSeparatorLine();
         }
     }
