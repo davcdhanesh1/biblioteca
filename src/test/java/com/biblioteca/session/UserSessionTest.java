@@ -45,13 +45,13 @@ public class UserSessionTest {
 
     @Test
     public void testLogin() throws Exception, InvalidLibraryAndPasswordCombination {
-        UserSession userSession = UserSession.createNew(userList, printer, scanner);
+        UserSession userSession = UserSession.createNew(userList);
         String expectedOutput = StringUtil.getOutputString(
                 "Enter your library Number: ",
                 "Enter your password: "
         );
 
-        userSession.login();
+        userSession.login(printer, scanner);
 
         assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
         assertThat(userSession.getCurrentUser(),is(dhanesh));
@@ -62,27 +62,27 @@ public class UserSessionTest {
         input = "777-4445\nInvalidPassword\n";
         byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        UserSession userSession = UserSession.createNew(userList, printer, scanner);
+        UserSession userSession = UserSession.createNew(userList);
         String expectedOutput = StringUtil.getOutputString(
                 "Enter your library Number: ",
                 "Enter your password: "
         );
 
-        userSession.login();
+        userSession.login(printer, scanner);
         assertEquals(userSession.getCurrentUser(), null);
     }
 
     @Test
     public void testLoginWhenUserIsAlreadyLoggedInToCurrentSession() throws Exception, InvalidLibraryAndPasswordCombination {
-        UserSession userSession = UserSession.createNew(userList, printer, scanner);
+        UserSession userSession = UserSession.createNew(userList);
         String expectedOutput = StringUtil.getOutputString(
                 "Enter your library Number: ",
                 "Enter your password: "
         );
-        userSession.login();
+        userSession.login(printer, scanner);
 
         // Calling login on userSession after user has already logged in
-        userSession.login();
+        userSession.login(printer, scanner);
         assertThat(byteArrayOutputStream.toString(), is(expectedOutput));
     }
 }

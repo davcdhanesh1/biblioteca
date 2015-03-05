@@ -31,7 +31,7 @@ public class BibliotecaApp {
         this.printer = printer;
         this.scanner = scanner;
         this.userList = userList;
-        this.userSession = UserSession.createNew(userList, printer, scanner);
+        this.userSession = UserSession.createNew(userList);
         this.library = library;
         this.menuOptionList = ViewState.getCurrentView(userSession).menuOptionList;
     }

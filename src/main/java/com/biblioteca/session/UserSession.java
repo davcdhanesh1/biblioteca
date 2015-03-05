@@ -14,18 +14,18 @@ public class UserSession {
     private Printer printer;
     private Scanner scanner;
 
-    private UserSession(User currentUser, UserList userList, Printer printer, Scanner scanner) {
+    private UserSession(User currentUser, UserList userList) {
         this.currentUser = currentUser;
         this.userList = userList;
         this.printer = printer;
         this.scanner = scanner;
     }
 
-    public static UserSession createNew(UserList userList, Printer printer, Scanner scanner)  {
-        return new UserSession(null, userList, printer, scanner);
+    public static UserSession createNew(UserList userList)  {
+        return new UserSession(null, userList);
     }
 
-    public void login() throws InvalidLibraryAndPasswordCombination {
+    public void login(Printer printer, Scanner scanner) throws InvalidLibraryAndPasswordCombination {
         if (currentUser != null) return;
 
         printer.println("Enter your library Number: ");

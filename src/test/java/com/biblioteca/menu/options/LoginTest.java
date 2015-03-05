@@ -43,7 +43,7 @@ public class LoginTest {
         dhanesh = User.customer("777-4445", "Dhanesh", "password", "davcdhanesh1@gmail.com", "9096904102");
         UserList userList = new UserList();
         userList.add(dhanesh);
-        userSession = UserSession.createNew(userList, printer, scanner);
+        userSession = UserSession.createNew(userList);
 
     }
 
@@ -60,7 +60,7 @@ public class LoginTest {
 
         loginOption.perform(mockUserSession, mockLibrary, printer, scanner);
 
-        verify(mockUserSession, never()).login();
+        verify(mockUserSession, never()).login(printer, scanner);
     }
 
     @Test

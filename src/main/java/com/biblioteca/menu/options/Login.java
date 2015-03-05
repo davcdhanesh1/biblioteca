@@ -19,7 +19,7 @@ public class Login extends MenuOption {
     @Override
     public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         if (userSession.getCurrentUser() != null) return;
-        userSession.login();
+        userSession.login(printer, scanner);
     }
 
     @Override
