@@ -6,7 +6,6 @@ import com.biblioteca.item.InvalidItemException;
 import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.library.Library;
-import com.biblioteca.menu.options.MenuOption;
 import com.biblioteca.session.UserSession;
 import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 
@@ -15,7 +14,7 @@ import java.util.Scanner;
 public class ProfileInfo extends MenuOption {
 
     public ProfileInfo() {
-        super("Profile information: ");
+        super("Profile information");
     }
 
     @Override

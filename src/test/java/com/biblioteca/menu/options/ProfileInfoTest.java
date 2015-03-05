@@ -6,7 +6,6 @@ import com.biblioteca.item.InvalidItemException;
 import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.library.Library;
-import com.biblioteca.menu.options.ProfileInfo;
 import com.biblioteca.session.UserSession;
 import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.user.User;
@@ -63,6 +62,6 @@ public class ProfileInfoTest {
 
     @Test
     public void testToString() throws Exception {
-        assertThat(profileInfo.toString(), is("Profile information: "));
+        assertThat(profileInfo.toString(), is("Profile information"));
     }
 }
