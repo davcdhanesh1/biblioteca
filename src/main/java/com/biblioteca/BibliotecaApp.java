@@ -99,18 +99,24 @@ public class BibliotecaApp {
     private void executeSelectedMenuOption(Library library, MenuOption menuOption) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         printSeparatorLine();
 
-        if( menuOption.isSecureLoginRequired() ) {
-            try {
-                userSession.login();
-            } catch (InvalidLibraryAndPasswordCombination e) {
-                printer.println(e.getMessage());
-                printSeparatorLine();
-                return;
-            }
+        try {
+            loginIfGivenMenuOptionRequiresLogin(menuOption);
+        } catch (InvalidLibraryAndPasswordCombination e) {
+            printErrorMessage(e.getMessage());
+            return;
         }
         menuOption.perform(userSession, library, printer, scanner);
 
         printSeparatorLine();
+    }
+
+    private void loginIfGivenMenuOptionRequiresLogin(MenuOption menuOption) throws InvalidLibraryAndPasswordCombination {
+        if (userSession.getCurrentUser() != null) return;
+
+        if( menuOption.isSecureLoginRequired() ) {
+            userSession.login();
+            printSeparatorLine();
+        }
     }
 
     private void printMenuListAndPrompt() {

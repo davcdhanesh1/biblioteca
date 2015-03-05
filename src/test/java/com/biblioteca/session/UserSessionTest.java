@@ -48,8 +48,7 @@ public class UserSessionTest {
         UserSession userSession = UserSession.createNew(userList, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
                 "Enter your library Number: ",
-                "Enter your password: ",
-                "-----------------------------------------------------------------------------"
+                "Enter your password: "
         );
 
         userSession.login();
@@ -78,8 +77,7 @@ public class UserSessionTest {
         UserSession userSession = UserSession.createNew(userList, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
                 "Enter your library Number: ",
-                "Enter your password: ",
-                "-----------------------------------------------------------------------------"
+                "Enter your password: "
         );
         userSession.login();
 

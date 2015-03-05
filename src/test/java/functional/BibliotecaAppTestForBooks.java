@@ -408,7 +408,7 @@ public class BibliotecaAppTestForBooks {
                 "Select Option: "
         );
 
-        assertThat(actualOutput,is(expectedOutput));
+            assertThat(actualOutput,is(expectedOutput));
     }
 
     @Test
