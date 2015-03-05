@@ -13,6 +13,7 @@ import com.biblioteca.menu.options.MenuOption;
 import com.biblioteca.session.UserSession;
 import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.user.UserList;
+import com.biblioteca.view.ViewState;
 
 import java.util.Scanner;
 
@@ -29,17 +30,16 @@ public class BibliotecaApp {
 
         this.printer = printer;
         this.scanner = scanner;
-        this.menuOptionList = ViewState.defaultMenuView().menuOptionList;
         this.userList = userList;
         this.userSession = UserSession.createNew(userList, printer, scanner);
         this.library = library;
+        this.menuOptionList = ViewState.getCurrentView(userSession).menuOptionList;
     }
 
     public void run() throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         init();
         startRoutingEngine();
     }
-
 
     private void startRoutingEngine() throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         MenuOption menuOption;
@@ -128,12 +128,7 @@ public class BibliotecaApp {
     }
 
     private void printMenuList() {
-        ViewState viewState;
-        if (userSession.getCurrentUser() == null) {
-            viewState = ViewState.defaultMenuView();
-        } else {
-            viewState = ViewState.menuViewWithProfileInformation();
-        }
+        ViewState viewState = ViewState.getCurrentView(userSession);
         menuOptionList = viewState.menuOptionList;
         menuOptionList.printAll(printer);
     }
