@@ -16,7 +16,25 @@ public class ViewRenderer {
         this.scanner = scanner;
     }
 
+    public ViewRenderer(Printer printer, Scanner scanner) {
+
+        this.printer = printer;
+        this.scanner = scanner;
+    }
+
     public void render() {
         printer.println(outPutToRender);
+    }
+
+    public void render(String output) {
+        printer.println(output);
+    }
+
+    public String scan() {
+        scanner.useDelimiter("\n");
+        if (scanner.hasNext()) {
+            return scanner.next();
+        }
+        return null;
     }
 }
