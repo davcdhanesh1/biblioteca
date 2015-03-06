@@ -1,5 +1,5 @@
 # biblioteca
-An Object Oriented Way to create basic java-based application for Book com.biblioteca.library management
+An Object Oriented Way to create basic java-based application for Book com.biblioteca.model.library management
 
 Pre-requisites:
 You need to have gradle installed on your system.
