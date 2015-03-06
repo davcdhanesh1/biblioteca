@@ -61,8 +61,7 @@ public class BibliotecaApp {
         MenuOption menuOption;
         printSeparatorLine();
         menuOption = getSelectedMenuOption(option);
-        View view = performSelectedMenuOption(library, menuOption);
-        view.render();
+        performSelectedMenuOption(library, menuOption);
         printSeparatorLine();
         return menuOption;
     }
@@ -71,15 +70,16 @@ public class BibliotecaApp {
         return menuOptionList.find(option);
     }
 
-    private View performSelectedMenuOption(Library library, MenuOption menuOption) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
-        View view;
+    private void performSelectedMenuOption(Library library, MenuOption menuOption) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
+        View view = new View(printer, scanner);
+        String output;
         try {
             if (givenMenuOptionRequiresLogin(menuOption)) login();
-            view = menuOption.perform(userSession, library, printer, scanner);
+            output = menuOption.perform(userSession, library, printer, scanner);
         } catch (InvalidLibraryAndPasswordCombination e) {
-            view = new View(e.getMessage(), printer, scanner);
+            output = e.getMessage();
         }
-        return view;
+        view.render(output);
     }
 
     private boolean isSelectedMenuOptionIsQuit(MenuOption menuOption) {
@@ -127,7 +127,7 @@ public class BibliotecaApp {
 
     private void printErrorMessage(String msg) {
         printSeparatorLine();
-        new View(msg, printer, scanner).render();
+        new View(printer, scanner).render(msg);
         printSeparatorLine();
     }
 
@@ -139,20 +139,19 @@ public class BibliotecaApp {
     private void printMenuList() {
         ViewState viewState = ViewState.getCurrentView(userSession);
         menuOptionList = viewState.menuOptionList;
-        View view = new View(menuOptionList.getAll(printer), printer, scanner);
-        view.render();
+        View view = new View(printer, scanner);
+        view.render(menuOptionList.getAll(printer));
     }
 
     private void printPrompt() {
-        new View("Select Option: ", printer, scanner).render();
+        new View(printer, scanner).render("Select Option: ");
     }
 
     private void printSeparatorLine() {
-        new View("-----------------------------------------------------------------------------",
-                        printer, scanner).render();
+        new View(printer, scanner).render("-----------------------------------------------------------------------------");
     }
 
     private void printWelcomeMessage() {
-        new View("Welcome To Biblioteca", printer, scanner).render();
+        new View(printer, scanner).render("Welcome To Biblioteca");
     }
 }

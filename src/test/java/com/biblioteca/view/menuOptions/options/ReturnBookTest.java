@@ -90,8 +90,8 @@ public class ReturnBookTest {
                 "Thank you for returning the book"
         );
 
-        View view = returnBookOption.perform(mockUserSession, library, printer, scanner);
-        view.render();
+        String output = returnBookOption.perform(mockUserSession, library, printer, scanner);
+        new View(printer, scanner).render(output);
 
         assertEquals(byteArrayOutputStream.toString(), expectedOutput);
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(false));

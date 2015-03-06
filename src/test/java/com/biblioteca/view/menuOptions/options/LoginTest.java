@@ -60,8 +60,8 @@ public class LoginTest {
         UserSession mockUserSession = mock(UserSession.class);
         when(mockUserSession.getCurrentUser()).thenReturn(mock(User.class));
 
-        View view = loginOption.perform(mockUserSession, mockLibrary, printer, scanner);
-        view.render();
+        String output = loginOption.perform(mockUserSession, mockLibrary, printer, scanner);
+        new View(printer, scanner).render(output);
 
         assertThat(byteArrayOutputStream.toString(), is("Successfully logged in.\n"));
         verify(mockUserSession, never()).login(printer, scanner);

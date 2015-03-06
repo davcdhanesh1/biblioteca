@@ -91,8 +91,8 @@ public class CheckOutBookTest {
 
         );
 
-        View view = checkOutBook.perform(mockUserSession, library, printer, scanner);
-        view.render();
+        String output = checkOutBook.perform(mockUserSession, library, printer, scanner);
+        new View(printer, scanner).render(output);
 
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
         assertEquals(byteArrayOutputStream.toString(), expectedOutput);
@@ -106,8 +106,8 @@ public class CheckOutBookTest {
         Scanner scanner = new Scanner(byteArrayInputStream);
 
         try {
-            View view = checkOutBook.perform(mockUserSession, library, printer, scanner);
-            view.render();
+            String output= checkOutBook.perform(mockUserSession, library, printer, scanner);
+            new View(printer, scanner).render(output);
             Assert.fail("Test did not fail for invalid input");
         } catch (InputValidationException e) {
             assertThat(e.getMessage(),is("Input has to be number"));

@@ -9,13 +9,6 @@ public class View {
     private final Printer printer;
     private final Scanner scanner;
 
-    public View(String outPutToRender, Printer printer, Scanner scanner) {
-
-        this.outPutToRender = outPutToRender;
-        this.printer = printer;
-        this.scanner = scanner;
-    }
-
     public View(Printer printer, Scanner scanner) {
 
         this.printer = printer;

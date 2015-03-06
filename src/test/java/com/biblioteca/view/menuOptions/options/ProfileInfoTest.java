@@ -49,8 +49,8 @@ public class ProfileInfoTest {
     public void testPerform() throws Exception, ItemIsNotAvailableForCheckOut, InvalidLibraryAndPasswordCombination, InputValidationException, InvalidItemException, ItemCanNotBeReturned {
         String expectedString = "|777-4445|dhanesh                         |davcdhanesh1@gmail.com          |9096904102\n";
 
-        View view = profileInfo.perform(mockUserSession, mockLibrary, printer, mockScanner);
-        view.render();
+        String output = profileInfo.perform(mockUserSession, mockLibrary, printer, mockScanner);
+        new View(printer, mockScanner).render(output);
 
         assertThat(byteArrayOutputStream.toString(), is(expectedString));
     }

@@ -25,8 +25,8 @@ public class MenuOptionListTest {
         String expectedMenuList = StringUtil.getOutputString("1. List Books", "2. Quit");
         String allMenus = menuOptionList.getAll(printer);
 
-        View view = new View(allMenus, printer, scanner);
-        view.render();
+        View view = new View(printer, scanner);
+        view.render(allMenus);
 
         assertEquals(expectedMenuList, byteArrayOutputStream.toString());
     }
@@ -66,8 +66,8 @@ public class MenuOptionListTest {
 
         menuOptionList.remove("List Books");
         Scanner scanner = new Scanner(System.in);
-        View view = new View(menuOptionList.getAll(printer), printer, scanner);
-        view.render();
+        View view = new View(printer, scanner);
+        view.render(menuOptionList.getAll(printer));
 
         assertThat(byteArrayOutputStream.toString(), is("1. Quit\n"));
     }

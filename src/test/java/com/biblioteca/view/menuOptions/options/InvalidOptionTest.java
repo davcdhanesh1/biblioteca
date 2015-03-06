@@ -59,8 +59,8 @@ public class InvalidOptionTest {
 
     @Test
     public void testPerform() throws Exception {
-        View view = invalidOption.perform(userSession, library, printer, scanner);
-        view.render();
+        String output = invalidOption.perform(userSession, library, printer, scanner);
+        new View(printer, scanner).render(output);
         assertThat(byteArrayOutputStream.toString(), is("Invalid option!\n"));
     }
 

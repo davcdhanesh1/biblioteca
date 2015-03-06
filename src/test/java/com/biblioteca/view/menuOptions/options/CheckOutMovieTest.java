@@ -90,8 +90,8 @@ public class CheckOutMovieTest {
                 "Enter id of Movie: ",
                 "Thanks you! Enjoy the movie"
         );
-        View view = checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
-        view.render();
+        String output= checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
+        new View(printer, scanner).render(output);
 
         assertEquals(byteArrayOutputStream.toString(), expectedOutput);
         assertThat(whiplashMovie.isCheckedOut(), is(true));
@@ -103,8 +103,8 @@ public class CheckOutMovieTest {
         Scanner scanner = new Scanner(byteArrayInputStream);
 
         try {
-            View view = checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
-            view.render();
+            String string = checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
+            new View(printer, scanner).render();
             Assert.fail("Test did not fail for invalid input");
         } catch (InputValidationException e) {
             assertThat(e.getMessage(), is("Input has to be number"));

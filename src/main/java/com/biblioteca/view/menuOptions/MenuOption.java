@@ -20,7 +20,7 @@ public abstract class MenuOption {
         this.description = description;
     }
 
-    public abstract View perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination;
+    public abstract String perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination;
 
     public abstract boolean shouldContinueRunning();
 

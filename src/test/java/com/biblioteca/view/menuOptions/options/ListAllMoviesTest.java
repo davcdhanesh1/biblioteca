@@ -71,8 +71,8 @@ public class ListAllMoviesTest {
                 ""
         );
 
-        View view = listAllMovies.perform(userSession, library, printer, scanner);
-        view.render();
+        String output = listAllMovies.perform(userSession, library, printer, scanner);
+        new View(printer, scanner).render(output);
 
         assertThat(byteArrayOutputStream.toString(), is(expectedMovieList));
     }

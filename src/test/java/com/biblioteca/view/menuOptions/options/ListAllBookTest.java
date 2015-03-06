@@ -68,8 +68,8 @@ public class ListAllBookTest {
                 ""
         );
 
-        View view = listAllBook.perform(userSession, library, printer, scanner);
-        view.render();
+        String output= listAllBook.perform(userSession, library, printer, scanner);
+        new View(printer, scanner).render(output);
         assertEquals(expectedOutput, byteArrayOutputStream.toString());
     }
 
