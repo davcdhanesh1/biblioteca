@@ -63,12 +63,12 @@ public class Library {
         }
     }
 
-    public void printAllBook() {
-        printer.println(bookList.toString());
+    public String getAllBooks() {
+        return bookList.toString();
     }
 
-    public void printAllMovies() {
-        printer.println(movieList.toString());
+    public String getAllMovies() {
+        return movieList.toString();
     }
 
 }

@@ -23,6 +23,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -88,8 +89,8 @@ public class CheckOutBookTest {
                 "Thanks you! Enjoy the book"
 
         );
-        assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
+        assertEquals(byteArrayOutputStream.toString(), expectedOutput);
     }
 
     @Test

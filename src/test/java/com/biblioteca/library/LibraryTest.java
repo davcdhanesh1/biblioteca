@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import testhelpers.StringUtil;
 
 import java.io.ByteArrayOutputStream;
 
@@ -176,5 +177,29 @@ public class LibraryTest {
         assertEquals(outPutMsgFromLibrary, "We already have this book !");
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(false));
         verify(mockBorrowedItemList, never()).remove(mockBorrowedItem);
+    }
+
+    @Test
+    public void testGetAllBooks() throws Exception {
+        String outputMsgFromLibrary = library.getAllBooks();
+
+        String expectedBookListOutput = StringUtil.getOutputString(
+                "|1       |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
+                "|2       |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987"
+        );
+
+        assertEquals(expectedBookListOutput, outputMsgFromLibrary);
+    }
+
+    @Test
+    public void testGetAllMovies() throws Exception {
+        String outputMsgFromLibrary = library.getAllMovies();
+
+        String expectedMovieList = StringUtil.getOutputString(
+                "|1       |Whiplash                                                        |Damien Chazelle                 |2014|NINE",
+                "|2       |BirdMan                                                         |Alejandro González Iñárritu     |2014|TEN"
+        );
+
+        assertEquals(expectedMovieList, outputMsgFromLibrary);
     }
 }

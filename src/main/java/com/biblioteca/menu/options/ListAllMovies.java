@@ -18,7 +18,7 @@ public class ListAllMovies extends MenuOption {
 
     @Override
     public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException {
-        library.printAllMovies();
+        printer.println(library.getAllMovies());
     }
 
     @Override

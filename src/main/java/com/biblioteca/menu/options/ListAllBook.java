@@ -14,7 +14,7 @@ public class ListAllBook extends MenuOption {
 
     @Override
     public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) {
-        library.printAllBook();
+        printer.println(library.getAllBooks());
     }
 
     @Override
