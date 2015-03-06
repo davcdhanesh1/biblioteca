@@ -1,4 +1,4 @@
-package com.biblioteca.model.menu.options;
+package com.biblioteca.view.menu.options;
 
 import com.biblioteca.io.Printer;
 import com.biblioteca.model.rental.Book;
@@ -9,7 +9,6 @@ import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
 import org.junit.Before;
 import org.junit.Test;
-import testhelpers.StringUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -17,21 +16,19 @@ import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
-public class ListAllBookTest {
+public class InvalidOptionTest {
     public final String HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE = "Harry Potter and the Philosopher's Stone";
     public final String HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS = "Harry Potter and the Chamber of Secrets";
 
     private final String JKRowling = "J K Rowling";
 
-
     private ByteArrayOutputStream byteArrayOutputStream;
     private Printer printer;
     private BookList bookList;
-    private ListAllBook listAllBook;
     private Library library;
+    private InvalidOption invalidOption;
     private ByteArrayInputStream byteArrayInputStream;
     private Scanner scanner;
     private MovieList movieList;
@@ -49,8 +46,8 @@ public class ListAllBookTest {
 
         bookList = new BookList();
         bookList.add(new Book(1, HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987));
-        bookList.add(new Book(2, HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
-        listAllBook = new ListAllBook();
+        bookList.add(new Book(1, HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987));
+        invalidOption = new InvalidOption();
 
         movieList = mock(MovieList.class);
 
@@ -60,29 +57,22 @@ public class ListAllBookTest {
 
     @Test
     public void testPerform() throws Exception {
-        String expectedOutput = StringUtil.getOutputString(
-                "|1       |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
-                "|2       |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987",
-                ""
-        );
-
-        listAllBook.perform(userSession, library, printer, scanner);
-
-        assertEquals(expectedOutput, byteArrayOutputStream.toString());
+        invalidOption.perform(userSession, library, printer, scanner);
+        assertThat(byteArrayOutputStream.toString(), is("Invalid option!\n"));
     }
 
     @Test
     public void testToString() throws Exception {
-        assertThat(listAllBook.toString(), is("List Books"));
+        assertThat(invalidOption.toString(), is("Invalid Option!"));
     }
 
     @Test
     public void testShouldContinueRunning() throws Exception {
-        assertThat(listAllBook.shouldContinueRunning(),is(true));
+        assertThat(invalidOption.shouldContinueRunning(),is(true));
     }
 
     @Test
     public void testIsSecuredLoginRequired() throws Exception {
-        assertThat(listAllBook.isSecureLoginRequired(),is(false));
+        assertThat(invalidOption.isSecureLoginRequired(),is(false));
     }
 }

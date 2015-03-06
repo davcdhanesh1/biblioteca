@@ -1,9 +1,9 @@
-package com.biblioteca.model.menu;
+package com.biblioteca.view.menu;
 
 import com.biblioteca.io.Printer;
-import com.biblioteca.model.menu.options.ListAllBook;
-import com.biblioteca.model.menu.options.MenuOption;
-import com.biblioteca.model.menu.options.Quit;
+import com.biblioteca.view.menu.options.ListAllBook;
+import com.biblioteca.view.menu.options.MenuOption;
+import com.biblioteca.view.menu.options.Quit;
 import testhelpers.StringUtil;
 import org.junit.Test;
 

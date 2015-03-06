@@ -1,10 +1,9 @@
-package com.biblioteca.model.menu.options;
+package com.biblioteca.view.menu.options;
 
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
 import com.biblioteca.exceptions.InvalidItemException;
 import com.biblioteca.exceptions.ItemCanNotBeReturned;
-import com.biblioteca.exceptions.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.model.rental.Book;
 import com.biblioteca.model.rental.BookList;
 import com.biblioteca.model.rental.BorrowedItemList;
@@ -13,7 +12,6 @@ import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
 import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.model.User;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import testhelpers.StringUtil;
@@ -22,27 +20,29 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.Scanner;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class CheckOutBookTest {
+public class ReturnBookTest {
 
     public final String HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE = "Harry Potter and the Philosopher's Stone";
     public final String HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS = "Harry Potter and the Chamber of Secrets";
-    BookList bookList;
+
     private final String JKRowling = "J K Rowling";
+
     private Book harryPotterAndThePhilosophersStone;
     private Book harryPotterAndTheChambersOfSecrets;
-    private CheckOutBook checkOutBook = new CheckOutBook();
+    private ReturnBook returnBookOption = new ReturnBook();
     private Printer printer;
     private ByteArrayOutputStream byteArrayOutputStream;
     private ByteArrayInputStream byteArrayInputStream;
     private Library library;
     private Scanner scanner;
     private String input;
+    private BookList bookList;
     private MovieList movieList;
     private UserSession mockUserSession;
 
@@ -57,13 +57,14 @@ public class CheckOutBookTest {
         printer  = new Printer(byteArrayOutputStream);
         byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
         scanner = new Scanner(byteArrayInputStream);
-        movieList = mock(MovieList.class);
 
         bookList = new BookList();
         harryPotterAndThePhilosophersStone = new Book(1, HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987);
-        harryPotterAndTheChambersOfSecrets = new Book(2, HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987);
+        harryPotterAndTheChambersOfSecrets = new Book(1, HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987);
         bookList.add(harryPotterAndThePhilosophersStone);
         bookList.add(harryPotterAndTheChambersOfSecrets);
+
+        movieList = mock(MovieList.class);
 
         BorrowedItemList borrowedItemList = new BorrowedItemList();
         library = new Library(bookList, movieList, borrowedItemList);
@@ -71,38 +72,36 @@ public class CheckOutBookTest {
 
     @Test
     public void testShouldContinueRunning() throws Exception {
-        assertThat(checkOutBook.shouldContinueRunning(),is(true));
+        assertThat(returnBookOption.shouldContinueRunning(),is(true));
     }
 
     @Test
     public void testDescription() throws Exception {
-        assertThat(checkOutBook.toString(), is("Checkout a Book"));
+        assertThat(returnBookOption.toString(),is("Return a Book"));
     }
 
     @Test
-    public void testPerform() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
-        checkOutBook.perform(mockUserSession, library, printer, scanner);
+    public void testPerform() throws Exception, InvalidItemException, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
+        harryPotterAndThePhilosophersStone.checkOut();
+        returnBookOption.perform(mockUserSession, library, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
-                "|1       |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
-                "|2       |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987", "",
                 "Enter id of Book: ",
-                "Thanks you! Enjoy the book"
-
+                "Thank you for returning the book"
         );
-        assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
+
         assertEquals(byteArrayOutputStream.toString(), expectedOutput);
+        assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(false));
     }
 
     @Test
-    public void testPerformWhenInputIsNotValid() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
+    public void testPerformWhenInputIsNotValid() throws InputValidationException, InvalidItemException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
         Library mockLibrary = mock(Library.class);
         Printer mockPrinter = mock(Printer.class);
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream("a".getBytes());
         Scanner scanner = new Scanner(byteArrayInputStream);
 
         try {
-            checkOutBook.perform(mockUserSession, mockLibrary, mockPrinter, scanner);
-            Assert.fail("Test did not fail for invalid input");
+            returnBookOption.perform(mockUserSession, mockLibrary, mockPrinter, scanner);
         } catch (InputValidationException e) {
             assertThat(e.getMessage(),is("Input has to be number"));
         }
@@ -110,6 +109,6 @@ public class CheckOutBookTest {
 
     @Test
     public void testIsSecureLoginRequired() throws Exception {
-        assertThat(checkOutBook.isSecureLoginRequired(),is(true));
+        assertThat(returnBookOption.isSecureLoginRequired(),is(true));
     }
 }

@@ -11,7 +11,7 @@ import com.biblioteca.model.rental.BookList;
 import com.biblioteca.model.rental.BorrowedItemList;
 import com.biblioteca.model.rental.MovieList;
 import com.biblioteca.model.Library;
-import com.biblioteca.model.menu.MenuOptionList;
+import com.biblioteca.view.menu.MenuOptionList;
 import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.model.User;
 import com.biblioteca.model.UserList;
