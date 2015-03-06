@@ -24,7 +24,7 @@ public class CheckOutBook extends MenuOption {
         printer.println("Enter id of Book: ");
         option = scanner.next();
         Validator.validate(option);
-        library.checkOutBook(option, userSession);
+        printer.println(library.checkOutBook(option, userSession));
     }
 
     @Override

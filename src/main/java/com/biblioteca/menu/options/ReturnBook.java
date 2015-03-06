@@ -1,12 +1,11 @@
 package com.biblioteca.menu.options;
 
-import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.inputValidator.Validator;
 import com.biblioteca.io.Printer;
 import com.biblioteca.item.InvalidItemException;
+import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.library.Library;
-import com.biblioteca.menu.options.MenuOption;
 import com.biblioteca.session.UserSession;
 import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 
@@ -22,7 +21,7 @@ public class ReturnBook extends MenuOption {
         printer.println("Enter id of Book: ");
         String option = scanner.next();
         Validator.validate(option);
-        library.returnBook(option, userSession);
+        printer.println(library.returnBook(option, userSession));
     }
 
     public boolean shouldContinueRunning() {

@@ -7,6 +7,7 @@ import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
+import com.biblioteca.item.borrowedItem.BorrowedItemList;
 import com.biblioteca.item.movie.Movie;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.item.movie.Rating;
@@ -52,7 +53,8 @@ public class Main {
         Printer printer = new Printer(System.out);
         Scanner scanner = new Scanner(System.in);
 
-        Library library = new Library(bookList, movieList, printer);
+        BorrowedItemList borrowedItemList = new BorrowedItemList();
+        Library library = new Library(bookList, movieList, borrowedItemList, printer);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
         bibliotecaApp.run();
     }

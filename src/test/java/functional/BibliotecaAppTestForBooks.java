@@ -8,6 +8,7 @@ import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
+import com.biblioteca.item.borrowedItem.BorrowedItemList;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.library.Library;
 import com.biblioteca.menu.MenuOptionList;
@@ -23,6 +24,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
@@ -73,7 +75,8 @@ public class BibliotecaAppTestForBooks {
 
         movieList = mock(MovieList.class);
 
-        library = new Library(bookList, movieList, printer);
+        BorrowedItemList borrowedItemList = new BorrowedItemList();
+        library = new Library(bookList, movieList, borrowedItemList, printer);
 
         bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
     }
@@ -344,7 +347,7 @@ public class BibliotecaAppTestForBooks {
                 "|1       |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
                 "",
                 "Enter id of Book: ",
-                "That book is not available",
+                "This book is not available",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
                 "2. List Movies",
@@ -356,7 +359,7 @@ public class BibliotecaAppTestForBooks {
                 "Select Option: "
         );
 
-        assertThat(actualOutput,is(expectedOutput));
+        assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
@@ -398,7 +401,7 @@ public class BibliotecaAppTestForBooks {
                 "Enter your password: ",
                 "-----------------------------------------------------------------------------",
                 "Enter id of Book: ",
-                "Thank you for returning the book.",
+                "Thank you for returning the book",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
                 "2. List Movies",
@@ -423,7 +426,7 @@ public class BibliotecaAppTestForBooks {
                 "Select Option: "
         );
 
-        assertThat(actualOutput,is(expectedOutput));
+        assertEquals(actualOutput, expectedOutput);
     }
 
     @Test

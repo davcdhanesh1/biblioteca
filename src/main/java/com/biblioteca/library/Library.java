@@ -4,140 +4,63 @@ import com.biblioteca.io.Printer;
 import com.biblioteca.item.*;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
+import com.biblioteca.item.borrowedItem.BorrowedItem;
+import com.biblioteca.item.borrowedItem.BorrowedItemList;
 import com.biblioteca.item.movie.Movie;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.session.UserSession;
 
-abstract class Closure<T extends Item, S extends ItemList> {
-    private S list;
-
-    Closure(S list) {
-        this.list = list;
-    }
-    abstract T getItem(String id) throws ItemIsNotAvailableForCheckOut, InvalidItemException, ItemCanNotBeReturned;
-    abstract String successMsg();
-    abstract String invalidItemExceptionMessage();
-    abstract String actionCanNotBePerformedMsg();
-    abstract void performAction(T item);
-
-    public String perform(String itemId) throws ItemCanNotBeReturned {
-        try {
-            Item item = getItem(itemId);
-            performAction((T) item);
-            return successMsg();
-        } catch (InvalidItemException e) {
-            return invalidItemExceptionMessage();
-        } catch (ItemIsNotAvailableForCheckOut|ItemCanNotBeReturned e) {
-            return actionCanNotBePerformedMsg();
-        }
-    }
-};
-
 public class Library {
     private final BookList bookList;
+    private BorrowedItemList borrowedItemList;
     private final Printer printer;
     private final MovieList movieList;
 
-    public Library(BookList bookList, MovieList movieList, Printer printer) {
+    public Library(BookList bookList, MovieList movieList, BorrowedItemList borrowedItemList, Printer printer) {
 
         this.bookList = bookList;
         this.movieList = movieList;
+        this.borrowedItemList = borrowedItemList;
         this.printer = printer;
     }
 
-    public void checkOutBook(String bookId, final UserSession userSession) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
-
-        Closure<Book, BookList> closure;
-        closure = new Closure<Book, BookList>(bookList) {
-
-            @Override
-            Book getItem(String id) throws ItemIsNotAvailableForCheckOut, InvalidItemException {
-                return bookList.findFromAvailableById(id);
-            }
-
-            @Override
-            String successMsg() {
-                return "Thanks you! Enjoy the book";
-            }
-
-            @Override
-            String invalidItemExceptionMessage() {
-                return "Invalid Book to checkout";
-            }
-
-            @Override
-            String actionCanNotBePerformedMsg() {
-                return "That book is not available";
-            }
-
-            @Override
-            void performAction(Book book) {
-                book.checkOut();
-            }
-        };
-        printer.println(closure.perform(bookId));
+    public String checkOutBook(String bookId, final UserSession userSession) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
+        try {
+            Book book = bookList.findFromAvailableById(bookId);
+            book.checkOut();
+            borrowedItemList.add(new BorrowedItem(userSession.getCurrentUser(), book));
+            return "Thanks you! Enjoy the book";
+        } catch (InvalidItemException e) {
+            return "Invalid Book to checkout";
+        } catch (ItemIsNotAvailableForCheckOut e) {
+            return "This book is not available";
+        }
     }
 
-    public void checkOutMovie(String movieId, final UserSession userSession) throws ItemIsNotAvailableForCheckOut, InvalidItemException, ItemCanNotBeReturned {
-        Closure<Movie, MovieList> closure = new Closure<Movie, MovieList>(movieList) {
-
-            @Override
-            Movie getItem(String id) throws ItemIsNotAvailableForCheckOut, InvalidItemException {
-                return movieList.findFromAvailableById(id);
-            }
-
-            @Override
-            String successMsg() {
-                return "Thanks you! Enjoy the movie";
-            }
-
-            @Override
-            String invalidItemExceptionMessage() {
-                return "Invalid Movie to checkout";
-            }
-
-            @Override
-            String actionCanNotBePerformedMsg() {
-                return "That movie is not available";
-            }
-
-            @Override
-            void performAction(Movie movie) {
-                movie.checkOut();
-            }
-        };
-        printer.println(closure.perform(movieId));
+    public String checkOutMovie(String movieId, final UserSession userSession) throws ItemIsNotAvailableForCheckOut, InvalidItemException, ItemCanNotBeReturned {
+        try {
+            Movie movie = movieList.findFromAvailableById(movieId);
+            movie.checkOut();
+            borrowedItemList.add(new BorrowedItem(userSession.getCurrentUser(), movie));
+            return "Thanks you! Enjoy the movie";
+        } catch (InvalidItemException e) {
+            return "Invalid Movie to checkout";
+        } catch (ItemIsNotAvailableForCheckOut e) {
+            return "This movie is not available";
+        }
     }
 
-    public void returnBook(String bookId, final UserSession userSession) throws InvalidItemException, ItemCanNotBeReturned {
-        Closure<Book, BookList> closure = new Closure<Book, BookList>(bookList) {
-            @Override
-            Book getItem(String id) throws InvalidItemException, ItemCanNotBeReturned {
-                return bookList.findFromCheckedOutById(id);
-            }
-
-            @Override
-            String successMsg() {
-                return "Thank you for returning the book.";
-            }
-
-            @Override
-            String invalidItemExceptionMessage() {
-                return "Invalid Book to return";
-            }
-
-            @Override
-            String actionCanNotBePerformedMsg() {
-                return "We already have this book !";
-            }
-
-            @Override
-            void performAction(Book book) {
-                book.checkIn();
-            }
-        };
-
-        printer.println(closure.perform(bookId));
+    public String returnBook(String bookId, final UserSession userSession) throws InvalidItemException, ItemCanNotBeReturned {
+        try {
+            Book book = bookList.findFromCheckedOutById(bookId);
+            book.checkIn();
+            borrowedItemList.remove(new BorrowedItem(userSession.getCurrentUser(), book));
+            return "Thank you for returning the book";
+        } catch (InvalidItemException e) {
+            return "Invalid Book to return";
+        } catch (ItemCanNotBeReturned e) {
+            return "We already have this book !";
+        }
     }
 
     public void printAllBook() {

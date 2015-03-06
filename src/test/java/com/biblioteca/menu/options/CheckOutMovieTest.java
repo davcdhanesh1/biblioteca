@@ -6,6 +6,7 @@ import com.biblioteca.item.InvalidItemException;
 import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.item.book.BookList;
+import com.biblioteca.item.borrowedItem.BorrowedItemList;
 import com.biblioteca.item.movie.Movie;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.item.movie.Rating;
@@ -63,7 +64,8 @@ public class CheckOutMovieTest {
         movieList.add(whiplashMovie);
         movieList.add(birdmanMovie);
 
-        library = new Library(bookList, movieList, printer);
+        BorrowedItemList borrowedItemList = new BorrowedItemList();
+        library = new Library(bookList, movieList, borrowedItemList, printer);
     }
 
     @Test

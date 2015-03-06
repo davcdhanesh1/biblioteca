@@ -6,11 +6,11 @@ import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.item.InvalidItemException;
 import com.biblioteca.item.book.BookList;
+import com.biblioteca.item.borrowedItem.BorrowedItemList;
 import com.biblioteca.item.movie.Movie;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.item.movie.Rating;
 import com.biblioteca.library.Library;
-import com.biblioteca.menu.options.ListAllMovies;
 import com.biblioteca.session.UserSession;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,7 +51,9 @@ public class ListAllMoviesTest {
         movieList.add(birdmanMovie);
 
         bookList = mock(BookList.class);
-        library = new Library(bookList, movieList, printer);
+
+        BorrowedItemList borrowedItemList = new BorrowedItemList();
+        library = new Library(bookList, movieList, borrowedItemList, printer);
     }
 
     @Test

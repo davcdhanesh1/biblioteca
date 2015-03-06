@@ -2,9 +2,9 @@ package com.biblioteca.item.borrowedItem;
 
 import com.biblioteca.item.book.Book;
 import com.biblioteca.user.User;
-import org.junit.Assert;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.mock;
@@ -29,13 +29,7 @@ public class BorrowedItemListTest {
         BorrowedItem borrowedItem = new BorrowedItem(user, book);
         BorrowedItemList borrowedItemList = new BorrowedItemList();
         borrowedItemList.add(borrowedItem);
-
         borrowedItemList.remove(borrowedItem);
-
-        try {
-            assertThat(borrowedItemList.getAllItems(), hasItem(borrowedItem));
-            Assert.fail("BorrowedItemList should have removed item");
-        } catch (AssertionError e) {;}
-
+        assertThat(borrowedItemList.getAllItems().contains(borrowedItem), is(false));
     }
 }

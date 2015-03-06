@@ -7,6 +7,7 @@ import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
+import com.biblioteca.item.borrowedItem.BorrowedItemList;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.library.Library;
 import com.biblioteca.session.UserSession;
@@ -63,7 +64,8 @@ public class CheckOutBookTest {
         bookList.add(harryPotterAndThePhilosophersStone);
         bookList.add(harryPotterAndTheChambersOfSecrets);
 
-        library = new Library(bookList, movieList, printer);
+        BorrowedItemList borrowedItemList = new BorrowedItemList();
+        library = new Library(bookList, movieList, borrowedItemList, printer);
     }
 
     @Test

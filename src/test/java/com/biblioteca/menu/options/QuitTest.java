@@ -1,11 +1,11 @@
 package com.biblioteca.menu.options;
 
 import com.biblioteca.io.Printer;
+import com.biblioteca.item.borrowedItem.BorrowedItemList;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.library.Library;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
-import com.biblioteca.menu.options.Quit;
 import com.biblioteca.session.UserSession;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,7 +52,9 @@ public class QuitTest {
         movieList = mock(MovieList.class);
 
         quit = new Quit();
-        library = new Library(bookList, movieList, printer);
+
+        BorrowedItemList borrowedItemList = new BorrowedItemList();
+        library = new Library(bookList, movieList, borrowedItemList, printer);
     }
 
     @Test

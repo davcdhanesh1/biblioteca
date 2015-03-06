@@ -6,6 +6,7 @@ import com.biblioteca.item.InvalidItemException;
 import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
+import com.biblioteca.item.borrowedItem.BorrowedItemList;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.library.Library;
 import com.biblioteca.session.UserSession;
@@ -19,6 +20,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.Scanner;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -63,7 +65,9 @@ public class ReturnBookTest {
         bookList.add(harryPotterAndTheChambersOfSecrets);
 
         movieList = mock(MovieList.class);
-        library = new Library(bookList, movieList, printer);
+
+        BorrowedItemList borrowedItemList = new BorrowedItemList();
+        library = new Library(bookList, movieList, borrowedItemList, printer);
     }
 
     @Test
@@ -82,10 +86,10 @@ public class ReturnBookTest {
         returnBookOption.perform(mockUserSession, library, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
                 "Enter id of Book: ",
-                "Thank you for returning the book."
+                "Thank you for returning the book"
         );
 
-        assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
+        assertEquals(byteArrayOutputStream.toString(), expectedOutput);
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(false));
     }
 

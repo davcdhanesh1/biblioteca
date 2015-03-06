@@ -8,6 +8,7 @@ import com.biblioteca.item.ItemCanNotBeReturned;
 import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
+import com.biblioteca.item.borrowedItem.BorrowedItemList;
 import com.biblioteca.item.movie.Movie;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.item.movie.Rating;
@@ -26,6 +27,7 @@ import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 public class BibliotecaAppTestForMovies {
@@ -74,7 +76,8 @@ public class BibliotecaAppTestForMovies {
         movieList.add(whiplashMovie);
         movieList.add(birdmanMovie);
 
-        library = new Library(bookList, movieList, printer);
+        BorrowedItemList borrowedItemList = new BorrowedItemList();
+        library = new Library(bookList, movieList, borrowedItemList, printer);
 
     }
 
@@ -198,7 +201,7 @@ public class BibliotecaAppTestForMovies {
                 "|2       |BirdMan                                                         |Alejandro González Iñárritu     |2014|TEN",
                 "",
                 "Enter id of Movie: ",
-                "That movie is not available",
+                "This movie is not available",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
                 "2. List Movies",
@@ -222,7 +225,7 @@ public class BibliotecaAppTestForMovies {
                 "Select Option: "
         );
 
-        assertThat(outputStream.toString(),is(expectedOutput));
+        assertEquals(expectedOutput, outputStream.toString());
     }
 
     @Test

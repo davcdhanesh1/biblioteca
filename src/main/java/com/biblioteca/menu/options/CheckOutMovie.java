@@ -23,7 +23,7 @@ public class CheckOutMovie extends MenuOption {
         printer.println("Enter id of Movie: ");
         option = scanner.next();
         Validator.validate(option);
-        library.checkOutMovie(option, userSession);
+        printer.println(library.checkOutMovie(option, userSession));
     }
 
     @Override
