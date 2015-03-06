@@ -1,6 +1,6 @@
-package com.biblioteca.item.borrowedItem;
+package com.biblioteca.rental.borrowedItem;
 
-import com.biblioteca.item.book.Book;
+import com.biblioteca.rental.book.Book;
 import com.biblioteca.user.User;
 import org.junit.Test;
 

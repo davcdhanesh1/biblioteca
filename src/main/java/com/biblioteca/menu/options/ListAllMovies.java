@@ -2,9 +2,9 @@ package com.biblioteca.menu.options;
 
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
-import com.biblioteca.item.ItemCanNotBeReturned;
-import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
-import com.biblioteca.item.InvalidItemException;
+import com.biblioteca.rental.ItemCanNotBeReturned;
+import com.biblioteca.rental.ItemIsNotAvailableForCheckOut;
+import com.biblioteca.rental.InvalidItemException;
 import com.biblioteca.library.Library;
 import com.biblioteca.session.UserSession;
 

@@ -1,4 +1,4 @@
-package com.biblioteca.item;
+package com.biblioteca.rental;
 
 import java.util.ArrayList;
 

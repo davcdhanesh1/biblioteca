@@ -1,9 +1,9 @@
-package com.biblioteca.item.book;
+package com.biblioteca.rental.book;
 
-import com.biblioteca.item.ItemCanNotBeReturned;
-import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
-import com.biblioteca.item.ItemList;
-import com.biblioteca.item.InvalidItemException;
+import com.biblioteca.rental.ItemCanNotBeReturned;
+import com.biblioteca.rental.ItemIsNotAvailableForCheckOut;
+import com.biblioteca.rental.ItemList;
+import com.biblioteca.rental.InvalidItemException;
 
 public class BookList extends ItemList {
 

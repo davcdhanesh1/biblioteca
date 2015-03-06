@@ -1,4 +1,4 @@
-package com.biblioteca.item.book;
+package com.biblioteca.rental.book;
 
 import org.junit.Test;
 

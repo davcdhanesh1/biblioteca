@@ -1,6 +1,6 @@
-package com.biblioteca.item.book;
+package com.biblioteca.rental.book;
 
-import com.biblioteca.item.Item;
+import com.biblioteca.rental.Item;
 
 public class Book extends Item {
     private final String author;

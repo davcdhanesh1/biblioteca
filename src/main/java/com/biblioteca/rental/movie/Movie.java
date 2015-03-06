@@ -1,6 +1,6 @@
-package com.biblioteca.item.movie;
+package com.biblioteca.rental.movie;
 
-import com.biblioteca.item.Item;
+import com.biblioteca.rental.Item;
 
 public class Movie extends Item {
     private final String directorName;

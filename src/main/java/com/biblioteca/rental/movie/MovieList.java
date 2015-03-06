@@ -1,6 +1,6 @@
-package com.biblioteca.item.movie;
+package com.biblioteca.rental.movie;
 
-import com.biblioteca.item.*;
+import com.biblioteca.rental.*;
 
 public class MovieList extends ItemList {
     @Override

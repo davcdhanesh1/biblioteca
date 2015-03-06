@@ -1,8 +1,8 @@
 package com.biblioteca.user;
 
-import com.biblioteca.item.book.Book;
-import com.biblioteca.item.movie.Movie;
-import com.biblioteca.item.movie.Rating;
+import com.biblioteca.rental.book.Book;
+import com.biblioteca.rental.movie.Movie;
+import com.biblioteca.rental.movie.Rating;
 import org.junit.Before;
 import org.junit.Test;
 

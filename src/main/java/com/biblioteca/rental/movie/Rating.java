@@ -1,4 +1,4 @@
-package com.biblioteca.item.movie;
+package com.biblioteca.rental.movie;
 
 public enum Rating {
     ONE,

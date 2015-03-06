@@ -2,15 +2,15 @@ package com.biblioteca;
 
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
-import com.biblioteca.item.InvalidItemException;
-import com.biblioteca.item.ItemCanNotBeReturned;
-import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
-import com.biblioteca.item.book.Book;
-import com.biblioteca.item.book.BookList;
-import com.biblioteca.item.borrowedItem.BorrowedItemList;
-import com.biblioteca.item.movie.Movie;
-import com.biblioteca.item.movie.MovieList;
-import com.biblioteca.item.movie.Rating;
+import com.biblioteca.rental.InvalidItemException;
+import com.biblioteca.rental.ItemCanNotBeReturned;
+import com.biblioteca.rental.ItemIsNotAvailableForCheckOut;
+import com.biblioteca.rental.book.Book;
+import com.biblioteca.rental.book.BookList;
+import com.biblioteca.rental.borrowedItem.BorrowedItemList;
+import com.biblioteca.rental.movie.Movie;
+import com.biblioteca.rental.movie.MovieList;
+import com.biblioteca.rental.movie.Rating;
 import com.biblioteca.library.Library;
 import com.biblioteca.menu.MenuOptionList;
 import com.biblioteca.menu.options.*;
@@ -54,7 +54,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         BorrowedItemList borrowedItemList = new BorrowedItemList();
-        Library library = new Library(bookList, movieList, borrowedItemList, printer);
+        Library library = new Library(bookList, movieList, borrowedItemList);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
         bibliotecaApp.run();
     }

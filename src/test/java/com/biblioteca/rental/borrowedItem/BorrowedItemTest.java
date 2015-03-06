@@ -1,8 +1,8 @@
-package com.biblioteca.item.borrowedItem;
+package com.biblioteca.rental.borrowedItem;
 
-import com.biblioteca.item.book.Book;
-import com.biblioteca.item.movie.Movie;
-import com.biblioteca.item.movie.Rating;
+import com.biblioteca.rental.book.Book;
+import com.biblioteca.rental.movie.Movie;
+import com.biblioteca.rental.movie.Rating;
 import com.biblioteca.user.User;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,6 +1,6 @@
 package com.biblioteca.user;
 
-import com.biblioteca.item.Item;
+import com.biblioteca.rental.Item;
 
 import java.util.ArrayList;
 

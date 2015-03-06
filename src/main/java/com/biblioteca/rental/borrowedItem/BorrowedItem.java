@@ -1,6 +1,6 @@
-package com.biblioteca.item.borrowedItem;
+package com.biblioteca.rental.borrowedItem;
 
-import com.biblioteca.item.Item;
+import com.biblioteca.rental.Item;
 import com.biblioteca.user.User;
 
 public class BorrowedItem {

@@ -1,4 +1,4 @@
-package com.biblioteca.item.movie;
+package com.biblioteca.rental.movie;
 
 import org.junit.Test;
 

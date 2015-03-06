@@ -2,14 +2,14 @@ package com.biblioteca.menu.options;
 
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
-import com.biblioteca.item.InvalidItemException;
-import com.biblioteca.item.ItemCanNotBeReturned;
-import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
-import com.biblioteca.item.book.BookList;
-import com.biblioteca.item.borrowedItem.BorrowedItemList;
-import com.biblioteca.item.movie.Movie;
-import com.biblioteca.item.movie.MovieList;
-import com.biblioteca.item.movie.Rating;
+import com.biblioteca.rental.InvalidItemException;
+import com.biblioteca.rental.ItemCanNotBeReturned;
+import com.biblioteca.rental.ItemIsNotAvailableForCheckOut;
+import com.biblioteca.rental.book.BookList;
+import com.biblioteca.rental.borrowedItem.BorrowedItemList;
+import com.biblioteca.rental.movie.Movie;
+import com.biblioteca.rental.movie.MovieList;
+import com.biblioteca.rental.movie.Rating;
 import com.biblioteca.library.Library;
 import com.biblioteca.session.UserSession;
 import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
@@ -65,7 +65,7 @@ public class CheckOutMovieTest {
         movieList.add(birdmanMovie);
 
         BorrowedItemList borrowedItemList = new BorrowedItemList();
-        library = new Library(bookList, movieList, borrowedItemList, printer);
+        library = new Library(bookList, movieList, borrowedItemList);
     }
 
     @Test

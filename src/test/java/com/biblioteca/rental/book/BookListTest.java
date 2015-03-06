@@ -1,8 +1,8 @@
-package com.biblioteca.item.book;
+package com.biblioteca.rental.book;
 
-import com.biblioteca.item.ItemCanNotBeReturned;
-import com.biblioteca.item.ItemIsNotAvailableForCheckOut;
-import com.biblioteca.item.InvalidItemException;
+import com.biblioteca.rental.ItemCanNotBeReturned;
+import com.biblioteca.rental.ItemIsNotAvailableForCheckOut;
+import com.biblioteca.rental.InvalidItemException;
 import org.junit.Before;
 import org.junit.Test;
 import testhelpers.StringUtil;
