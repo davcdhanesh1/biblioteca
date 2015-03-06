@@ -1,7 +1,6 @@
 package com.biblioteca.user;
 
 import com.biblioteca.item.Item;
-import com.biblioteca.item.book.Book;
 
 import java.util.ArrayList;
 
@@ -31,24 +30,8 @@ public class User {
         return String.format("|%-8s|%-32s|%-32s|%-10s", libraryNumber, name, email, phoneNumber);
     }
 
-    public void addItem(Item item) {
-        borrowedItems.add(item);
-    }
-
-    public String getBorrowedItems() {
-        String result = new String();
-        for(Item item : borrowedItems) {
-            result += String.format("|%-12s|%-32s\n", libraryNumber, item.description());
-        }
-        return result;
-    }
-
     public boolean matches(String libraryNumber, String passWord) {
         return this.libraryNumber.equals(libraryNumber) && this.passWord.equals(passWord);
-    }
-
-    public void removeItem(Book book) {
-        borrowedItems.remove(book);
     }
 
     public static User admin(String libraryNumber, String name, String password, String email, String phoneNumber) {

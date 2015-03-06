@@ -9,7 +9,6 @@ import com.biblioteca.item.book.Book;
 import com.biblioteca.item.book.BookList;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.library.Library;
-import com.biblioteca.menu.options.CheckOutBook;
 import com.biblioteca.session.UserSession;
 import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.user.User;
@@ -24,7 +23,8 @@ import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class CheckOutBookTest {
 
@@ -88,8 +88,6 @@ public class CheckOutBookTest {
         );
         assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
-
-        verify(mockUserSession.getCurrentUser(), times(1)).addItem(harryPotterAndThePhilosophersStone);
     }
 
     @Test
@@ -105,8 +103,6 @@ public class CheckOutBookTest {
         } catch (InputValidationException e) {
             assertThat(e.getMessage(),is("Input has to be number"));
         }
-
-        verify(mockUserSession.getCurrentUser(), never()).addItem(harryPotterAndThePhilosophersStone);
     }
 
     @Test

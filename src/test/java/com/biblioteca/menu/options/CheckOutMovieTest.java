@@ -10,7 +10,6 @@ import com.biblioteca.item.movie.Movie;
 import com.biblioteca.item.movie.MovieList;
 import com.biblioteca.item.movie.Rating;
 import com.biblioteca.library.Library;
-import com.biblioteca.menu.options.CheckOutMovie;
 import com.biblioteca.session.UserSession;
 import com.biblioteca.user.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.user.User;
@@ -25,7 +24,8 @@ import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class CheckOutMovieTest {
     private CheckOutMovie checkOutMovieOption;
@@ -89,7 +89,6 @@ public class CheckOutMovieTest {
 
         assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
         assertThat(whiplashMovie.isCheckedOut(), is(true));
-        verify(mockUserSession.getCurrentUser(), times(1)).addItem(whiplashMovie);
     }
 
     @Test
@@ -104,7 +103,6 @@ public class CheckOutMovieTest {
             assertThat(e.getMessage(), is("Input has to be number"));
         }
 
-        verify(mockUserSession.getCurrentUser(), never()).addItem(whiplashMovie);
     }
 
     @Test

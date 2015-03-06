@@ -45,39 +45,6 @@ public class Library {
         this.printer = printer;
     }
 
-    public void checkOutBook(String bookId) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
-
-        Closure<Book, BookList> closure;
-        closure = new Closure<Book, BookList>(bookList) {
-
-            @Override
-            Book getItem(String id) throws ItemIsNotAvailableForCheckOut, InvalidItemException {
-                return bookList.findFromAvailableById(id);
-            }
-
-            @Override
-            String successMsg() {
-                return "Thanks you! Enjoy the book";
-            }
-
-            @Override
-            String invalidItemExceptionMessage() {
-                return "Invalid Book to checkout";
-            }
-
-            @Override
-            String actionCanNotBePerformedMsg() {
-                return "That book is not available";
-            }
-
-            @Override
-            void performAction(Book book) {
-                book.checkOut();
-            }
-        };
-        printer.println(closure.perform(bookId));
-    }
-
     public void checkOutBook(String bookId, final UserSession userSession) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
 
         Closure<Book, BookList> closure;
@@ -106,112 +73,9 @@ public class Library {
             @Override
             void performAction(Book book) {
                 book.checkOut();
-                userSession.getCurrentUser().addItem(book);
             }
         };
         printer.println(closure.perform(bookId));
-    }
-
-    public void printAllBook() {
-        printer.println(bookList.toString());
-    }
-
-    public void returnBook(String bookId) throws InvalidItemException, ItemCanNotBeReturned {
-        Closure<Book, BookList> closure = new Closure<Book, BookList>(bookList) {
-            @Override
-            Book getItem(String id) throws InvalidItemException, ItemCanNotBeReturned {
-                return bookList.findFromCheckedOutById(id);
-            }
-
-            @Override
-            String successMsg() {
-                return "Thank you for returning the book.";
-            }
-
-            @Override
-            String invalidItemExceptionMessage() {
-                return "Invalid Book to return";
-            }
-
-            @Override
-            String actionCanNotBePerformedMsg() {
-                return "We already have this book !";
-            }
-
-            @Override
-            void performAction(Book book) {
-                book.checkIn();
-            }
-        };
-
-        printer.println(closure.perform(bookId));
-    }
-
-    public void returnBook(String bookId, final UserSession userSession) throws InvalidItemException, ItemCanNotBeReturned {
-        Closure<Book, BookList> closure = new Closure<Book, BookList>(bookList) {
-            @Override
-            Book getItem(String id) throws InvalidItemException, ItemCanNotBeReturned {
-                return bookList.findFromCheckedOutById(id);
-            }
-
-            @Override
-            String successMsg() {
-                return "Thank you for returning the book.";
-            }
-
-            @Override
-            String invalidItemExceptionMessage() {
-                return "Invalid Book to return";
-            }
-
-            @Override
-            String actionCanNotBePerformedMsg() {
-                return "We already have this book !";
-            }
-
-            @Override
-            void performAction(Book book) {
-                book.checkIn();
-                userSession.getCurrentUser().removeItem(book);
-            }
-        };
-
-        printer.println(closure.perform(bookId));
-    }
-
-    public void printAllMovies() {
-        printer.println(movieList.toString());
-    }
-
-    public void checkOutMovie(String movieId) throws ItemIsNotAvailableForCheckOut, InvalidItemException, ItemCanNotBeReturned {
-        Closure<Movie, MovieList> closure = new Closure<Movie, MovieList>(movieList) {
-
-            @Override
-            Movie getItem(String id) throws ItemIsNotAvailableForCheckOut, InvalidItemException {
-                return movieList.findFromAvailableById(id);
-            }
-
-            @Override
-            String successMsg() {
-                return "Thanks you! Enjoy the movie";
-            }
-
-            @Override
-            String invalidItemExceptionMessage() {
-                return "Invalid Movie to checkout";
-            }
-
-            @Override
-            String actionCanNotBePerformedMsg() {
-                return "That movie is not available";
-            }
-
-            @Override
-            void performAction(Movie item) {
-                item.checkOut();
-            }
-        };
-        printer.println(closure.perform(movieId));
     }
 
     public void checkOutMovie(String movieId, final UserSession userSession) throws ItemIsNotAvailableForCheckOut, InvalidItemException, ItemCanNotBeReturned {
@@ -240,10 +104,48 @@ public class Library {
             @Override
             void performAction(Movie movie) {
                 movie.checkOut();
-                userSession.getCurrentUser().addItem(movie);
             }
         };
         printer.println(closure.perform(movieId));
+    }
+
+    public void returnBook(String bookId, final UserSession userSession) throws InvalidItemException, ItemCanNotBeReturned {
+        Closure<Book, BookList> closure = new Closure<Book, BookList>(bookList) {
+            @Override
+            Book getItem(String id) throws InvalidItemException, ItemCanNotBeReturned {
+                return bookList.findFromCheckedOutById(id);
+            }
+
+            @Override
+            String successMsg() {
+                return "Thank you for returning the book.";
+            }
+
+            @Override
+            String invalidItemExceptionMessage() {
+                return "Invalid Book to return";
+            }
+
+            @Override
+            String actionCanNotBePerformedMsg() {
+                return "We already have this book !";
+            }
+
+            @Override
+            void performAction(Book book) {
+                book.checkIn();
+            }
+        };
+
+        printer.println(closure.perform(bookId));
+    }
+
+    public void printAllBook() {
+        printer.println(bookList.toString());
+    }
+
+    public void printAllMovies() {
+        printer.println(movieList.toString());
     }
 
 }
