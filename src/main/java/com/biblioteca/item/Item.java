@@ -24,6 +24,6 @@ public abstract class Item {
     }
 
     public String description() {
-        return name;
+        return String.format("|%-8d|%-32s", id, name);
     }
 }

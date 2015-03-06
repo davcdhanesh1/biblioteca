@@ -11,14 +11,10 @@ public class UserSession {
 
     private User currentUser;
     private UserList userList;
-    private Printer printer;
-    private Scanner scanner;
 
     private UserSession(User currentUser, UserList userList) {
         this.currentUser = currentUser;
         this.userList = userList;
-        this.printer = printer;
-        this.scanner = scanner;
     }
 
     public static UserSession createNew(UserList userList)  {

@@ -62,4 +62,8 @@ public class User {
     public boolean isAdmin() {
         return isAdmin == true;
     }
+
+    public String description() {
+        return String.format("|%-8s|%-16s", libraryNumber, name);
+    }
 }

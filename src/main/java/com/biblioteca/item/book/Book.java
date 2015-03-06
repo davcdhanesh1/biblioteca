@@ -17,4 +17,8 @@ public class Book extends Item {
         return String.format("|%-8d|%-64s|%-32s|%d", id, name, author, publicationYear);
     }
 
+    @Override
+    public String description() {
+        return super.description() + "|Book";
+    }
 }

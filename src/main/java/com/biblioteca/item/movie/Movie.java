@@ -18,4 +18,9 @@ public class Movie extends Item {
     public String toString() {
         return String.format("|%-8d|%-64s|%-32s|%d|%s", id, name, directorName, publicationYear, rating.toString());
     }
+
+    @Override
+    public String description() {
+        return super.description() + "|Movie";
+    }
 }
