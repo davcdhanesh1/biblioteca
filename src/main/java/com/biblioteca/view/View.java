@@ -30,4 +30,8 @@ public class View {
         }
         return null;
     }
+
+    public boolean hasNext() {
+        return scanner.hasNext();
+    }
 }

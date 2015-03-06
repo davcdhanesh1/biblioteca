@@ -1,14 +1,13 @@
 package com.biblioteca.view.menuOptions;
 
+import com.biblioteca.exceptions.InvalidItemException;
+import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.exceptions.ItemCanNotBeReturned;
+import com.biblioteca.exceptions.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
-import com.biblioteca.exceptions.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.model.Library;
-import com.biblioteca.exceptions.InvalidItemException;
 import com.biblioteca.model.UserSession;
-import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
-import com.biblioteca.view.View;
 
 import java.util.Scanner;
 

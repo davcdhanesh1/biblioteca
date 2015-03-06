@@ -8,6 +8,7 @@ import com.biblioteca.inputValidator.Validator;
 import com.biblioteca.io.Printer;
 import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
+import com.biblioteca.view.View;
 
 import java.util.Scanner;
 
@@ -18,8 +19,9 @@ public class ReturnBook extends MenuOption {
 
     @Override
     public String perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
-        printer.println("Enter id of Book: ");
-        String option = scanner.next();
+        View view = new View(printer, scanner);
+        view.render("Enter id of Book: ");
+        String option = view.scan();
         Validator.validate(option);
         return library.returnBook(option, userSession);
     }

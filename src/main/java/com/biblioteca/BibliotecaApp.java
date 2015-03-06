@@ -94,7 +94,7 @@ public class BibliotecaApp {
     }
 
     private boolean isAppRunning() {
-        return scanner.hasNext();
+        return view.hasNext();
     }
 
     private void init() {

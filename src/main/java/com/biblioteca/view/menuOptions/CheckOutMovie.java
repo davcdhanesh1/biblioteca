@@ -9,6 +9,7 @@ import com.biblioteca.inputValidator.Validator;
 import com.biblioteca.io.Printer;
 import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
+import com.biblioteca.view.View;
 
 import java.util.Scanner;
 
@@ -18,10 +19,11 @@ public class CheckOutMovie extends MenuOption {
 
     @Override
     public String perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
+        View view = new View(printer, scanner);
         String option;
-        printer.println(library.getAllMovies());
-        printer.println("Enter id of Movie: ");
-        option = scanner.next();
+        view.render(library.getAllMovies());
+        view.render("Enter id of Movie: ");
+        option = view.scan();
         Validator.validate(option);
         return library.checkOutMovie(option, userSession);
     }
