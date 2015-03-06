@@ -1,7 +1,5 @@
 package com.biblioteca.view.menuOptions;
 
-import com.biblioteca.io.Printer;
-
 import java.util.ArrayList;
 
 public class MenuOptionList {
@@ -12,7 +10,7 @@ public class MenuOptionList {
         list.add(menuOption);
     }
 
-    public String getAll(Printer printer) {
+    public String getAll() {
         String allMenus = new String();
         int index;
         for(index = 0; index < list.size() - 1; index++) {
