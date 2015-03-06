@@ -537,7 +537,6 @@ public class BibliotecaAppTestForBooks {
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
                 "Enter your password: ",
-                "-----------------------------------------------------------------------------",
                 "Invalid Library Number or Password !",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
@@ -550,7 +549,7 @@ public class BibliotecaAppTestForBooks {
                 "Select Option: "
         );
 
-        assertThat(actualOutput,is(expectedOutput));
+        assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
@@ -577,6 +576,7 @@ public class BibliotecaAppTestForBooks {
                 "-----------------------------------------------------------------------------",
                 "Enter your library Number: ",
                 "Enter your password: ",
+                "Successfully logged in.",
                 "-----------------------------------------------------------------------------",
                 "1. List Books",
                 "2. List Movies",
@@ -599,6 +599,6 @@ public class BibliotecaAppTestForBooks {
                 "Select Option: "
         );
 
-        assertThat(actualOutput,is(expectedOutput));
+        assertEquals(expectedOutput, actualOutput);
     }
 }

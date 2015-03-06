@@ -12,6 +12,7 @@ import com.biblioteca.model.rental.MovieList;
 import com.biblioteca.model.rental.Rating;
 import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
+import com.biblioteca.view.ViewRenderer;
 import com.biblioteca.view.menuOptions.ListAllMovies;
 import org.junit.Before;
 import org.junit.Test;
@@ -64,13 +65,14 @@ public class ListAllMoviesTest {
 
     @Test
     public void testPerform() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned {
-        listAllMovies.perform(userSession, library, printer, scanner);
-
         String expectedMovieList = StringUtil.getOutputString(
                 "|1       |Whiplash                                                        |Damien Chazelle                 |2014|NINE",
                 "|2       |BirdMan                                                         |Alejandro González Iñárritu     |2014|TEN",
                 ""
         );
+
+        ViewRenderer viewRenderer = listAllMovies.perform(userSession, library, printer, scanner);
+        viewRenderer.render();
 
         assertThat(byteArrayOutputStream.toString(), is(expectedMovieList));
     }

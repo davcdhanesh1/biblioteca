@@ -7,6 +7,7 @@ import com.biblioteca.exceptions.InvalidItemException;
 import com.biblioteca.exceptions.ItemCanNotBeReturned;
 import com.biblioteca.exceptions.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.model.Library;
+import com.biblioteca.view.ViewRenderer;
 import com.biblioteca.view.menuOptions.MenuOptionList;
 import com.biblioteca.view.menuOptions.Login;
 import com.biblioteca.view.menuOptions.MenuOption;
@@ -101,13 +102,14 @@ public class BibliotecaApp {
 
     private void executeSelectedMenuOption(Library library, MenuOption menuOption) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         printSeparatorLine();
+        ViewRenderer viewRenderer;
         try {
             if (givenMenuOptionRequiresLogin(menuOption)) login();
-            menuOption.perform(userSession, library, printer, scanner);
+            viewRenderer = menuOption.perform(userSession, library, printer, scanner);
         } catch (InvalidLibraryAndPasswordCombination e) {
-            printErrorMessage(e.getMessage());
-            return;
+            viewRenderer = new ViewRenderer(e.getMessage(), printer, scanner);
         }
+        viewRenderer.render();
         printSeparatorLine();
     }
 

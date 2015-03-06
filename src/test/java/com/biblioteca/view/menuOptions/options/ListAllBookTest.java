@@ -7,6 +7,7 @@ import com.biblioteca.model.rental.BorrowedItemList;
 import com.biblioteca.model.rental.MovieList;
 import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
+import com.biblioteca.view.ViewRenderer;
 import com.biblioteca.view.menuOptions.ListAllBook;
 import org.junit.Before;
 import org.junit.Test;
@@ -67,8 +68,8 @@ public class ListAllBookTest {
                 ""
         );
 
-        listAllBook.perform(userSession, library, printer, scanner);
-
+        ViewRenderer viewRenderer = listAllBook.perform(userSession, library, printer, scanner);
+        viewRenderer.render();
         assertEquals(expectedOutput, byteArrayOutputStream.toString());
     }
 

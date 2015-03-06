@@ -13,6 +13,7 @@ import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
 import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.model.User;
+import com.biblioteca.view.ViewRenderer;
 import com.biblioteca.view.menuOptions.CheckOutBook;
 import org.junit.Assert;
 import org.junit.Before;
@@ -82,7 +83,6 @@ public class CheckOutBookTest {
 
     @Test
     public void testPerform() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
-        checkOutBook.perform(mockUserSession, library, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
                 "|1       |Harry Potter and the Philosopher's Stone                        |J K Rowling                     |1987",
                 "|2       |Harry Potter and the Chamber of Secrets                         |J K Rowling                     |1987", "",
@@ -90,6 +90,10 @@ public class CheckOutBookTest {
                 "Thanks you! Enjoy the book"
 
         );
+
+        ViewRenderer viewRenderer = checkOutBook.perform(mockUserSession, library, printer, scanner);
+        viewRenderer.render();
+
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
         assertEquals(byteArrayOutputStream.toString(), expectedOutput);
     }
@@ -102,7 +106,8 @@ public class CheckOutBookTest {
         Scanner scanner = new Scanner(byteArrayInputStream);
 
         try {
-            checkOutBook.perform(mockUserSession, mockLibrary, mockPrinter, scanner);
+            ViewRenderer viewRenderer = checkOutBook.perform(mockUserSession, library, printer, scanner);
+            viewRenderer.render();
             Assert.fail("Test did not fail for invalid input");
         } catch (InputValidationException e) {
             assertThat(e.getMessage(),is("Input has to be number"));

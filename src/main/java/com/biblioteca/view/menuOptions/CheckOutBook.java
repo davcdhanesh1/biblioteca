@@ -9,6 +9,7 @@ import com.biblioteca.exceptions.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
 import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
+import com.biblioteca.view.ViewRenderer;
 
 import java.util.Scanner;
 
@@ -18,13 +19,13 @@ public class CheckOutBook extends MenuOption {
     }
 
     @Override
-    public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
+    public ViewRenderer perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
         String option;
         printer.println(library.getAllBooks());
         printer.println("Enter id of Book: ");
         option = scanner.next();
         Validator.validate(option);
-        printer.println(library.checkOutBook(option, userSession));
+        return new ViewRenderer(library.checkOutBook(option, userSession), printer, scanner);
     }
 
     @Override

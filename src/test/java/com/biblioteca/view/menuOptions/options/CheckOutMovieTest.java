@@ -14,6 +14,7 @@ import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
 import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.model.User;
+import com.biblioteca.view.ViewRenderer;
 import com.biblioteca.view.menuOptions.CheckOutMovie;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,6 +25,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.Scanner;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -81,7 +83,6 @@ public class CheckOutMovieTest {
 
     @Test
     public void testPerform() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, InputValidationException, ItemCanNotBeReturned, InvalidLibraryAndPasswordCombination {
-        checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
         String expectedOutput = StringUtil.getOutputString(
                 whiplashMovie.toString(),
                 birdmanMovie.toString(),
@@ -89,8 +90,10 @@ public class CheckOutMovieTest {
                 "Enter id of Movie: ",
                 "Thanks you! Enjoy the movie"
         );
+        ViewRenderer viewRenderer = checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
+        viewRenderer.render();
 
-        assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
+        assertEquals(byteArrayOutputStream.toString(), expectedOutput);
         assertThat(whiplashMovie.isCheckedOut(), is(true));
     }
 
@@ -100,7 +103,8 @@ public class CheckOutMovieTest {
         Scanner scanner = new Scanner(byteArrayInputStream);
 
         try {
-            checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
+            ViewRenderer viewRenderer = checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
+            viewRenderer.render();
             Assert.fail("Test did not fail for invalid input");
         } catch (InputValidationException e) {
             assertThat(e.getMessage(), is("Input has to be number"));

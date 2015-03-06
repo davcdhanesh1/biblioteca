@@ -1,15 +1,16 @@
 package com.biblioteca.view.menuOptions.options;
 
-import com.biblioteca.inputValidator.InputValidationException;
-import com.biblioteca.io.Printer;
 import com.biblioteca.exceptions.InvalidItemException;
+import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.exceptions.ItemCanNotBeReturned;
 import com.biblioteca.exceptions.ItemIsNotAvailableForCheckOut;
+import com.biblioteca.inputValidator.InputValidationException;
+import com.biblioteca.io.Printer;
 import com.biblioteca.model.Library;
-import com.biblioteca.model.UserSession;
-import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.model.User;
 import com.biblioteca.model.UserList;
+import com.biblioteca.model.UserSession;
+import com.biblioteca.view.ViewRenderer;
 import com.biblioteca.view.menuOptions.Login;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,8 +60,10 @@ public class LoginTest {
         UserSession mockUserSession = mock(UserSession.class);
         when(mockUserSession.getCurrentUser()).thenReturn(mock(User.class));
 
-        loginOption.perform(mockUserSession, mockLibrary, printer, scanner);
+        ViewRenderer viewRenderer = loginOption.perform(mockUserSession, mockLibrary, printer, scanner);
+        viewRenderer.render();
 
+        assertThat(byteArrayOutputStream.toString(), is("Successfully logged in.\n"));
         verify(mockUserSession, never()).login(printer, scanner);
     }
 
