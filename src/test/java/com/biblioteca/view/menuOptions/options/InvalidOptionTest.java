@@ -35,6 +35,7 @@ public class InvalidOptionTest {
     private Scanner scanner;
     private MovieList movieList;
     private UserSession userSession;
+    private View view;
 
     @Before
     public void setUp() throws Exception {
@@ -54,12 +55,13 @@ public class InvalidOptionTest {
         movieList = mock(MovieList.class);
 
         BorrowedItemList borrowedItemList = new BorrowedItemList();
+        view = new View(printer, scanner);
         library = new Library(bookList, movieList, borrowedItemList);
     }
 
     @Test
     public void testPerform() throws Exception {
-        String output = invalidOption.perform(userSession, library, printer, scanner);
+        String output = invalidOption.perform(userSession, library, view);
         new View(printer, scanner).render(output);
         assertThat(byteArrayOutputStream.toString(), is("Invalid option!\n"));
     }

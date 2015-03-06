@@ -1,10 +1,11 @@
 package com.biblioteca.model.session;
 
-import com.biblioteca.io.Printer;
-import com.biblioteca.model.UserSession;
 import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
+import com.biblioteca.io.Printer;
 import com.biblioteca.model.User;
 import com.biblioteca.model.UserList;
+import com.biblioteca.model.UserSession;
+import com.biblioteca.view.View;
 import org.junit.Before;
 import org.junit.Test;
 import testhelpers.StringUtil;
@@ -27,6 +28,7 @@ public class UserSessionTest {
     private ByteArrayOutputStream byteArrayOutputStream;
     private ByteArrayInputStream byteArrayInputStream;
     private String input;
+    private View view;
 
     @Before
     public void setUp() throws Exception {
@@ -42,6 +44,7 @@ public class UserSessionTest {
         input = "777-4445\npassword\n";
         byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
         scanner = new Scanner(byteArrayInputStream);
+        view = new View(printer, scanner);
     }
 
     @Test
@@ -52,7 +55,7 @@ public class UserSessionTest {
                 "Enter your password: "
         );
 
-        userSession.login(printer, scanner);
+        userSession.login(view);
 
         assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
         assertThat(userSession.getCurrentUser(),is(dhanesh));
@@ -68,8 +71,8 @@ public class UserSessionTest {
                 "Enter your library Number: ",
                 "Enter your password: "
         );
-
-        userSession.login(printer, scanner);
+        View view = new View(printer, scanner);
+        userSession.login(view);
         assertEquals(userSession.getCurrentUser(), null);
     }
 
@@ -80,10 +83,10 @@ public class UserSessionTest {
                 "Enter your library Number: ",
                 "Enter your password: "
         );
-        userSession.login(printer, scanner);
+        userSession.login(view);
 
         // Calling login on userSession after user has already logged in
-        userSession.login(printer, scanner);
+        userSession.login(view);
         assertThat(byteArrayOutputStream.toString(), is(expectedOutput));
     }
 }

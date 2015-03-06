@@ -47,6 +47,7 @@ public class CheckOutBookTest {
     private String input;
     private MovieList movieList;
     private UserSession mockUserSession;
+    private View view;
 
     @Before
     public void setUp() throws Exception {
@@ -68,6 +69,7 @@ public class CheckOutBookTest {
         bookList.add(harryPotterAndTheChambersOfSecrets);
 
         BorrowedItemList borrowedItemList = new BorrowedItemList();
+        view = new View(printer, scanner);
         library = new Library(bookList, movieList, borrowedItemList);
     }
 
@@ -91,7 +93,7 @@ public class CheckOutBookTest {
 
         );
 
-        String output = checkOutBook.perform(mockUserSession, library, printer, scanner);
+        String output = checkOutBook.perform(mockUserSession, library, view);
         new View(printer, scanner).render(output);
 
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
@@ -104,10 +106,10 @@ public class CheckOutBookTest {
         Printer mockPrinter = mock(Printer.class);
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream("a".getBytes());
         Scanner scanner = new Scanner(byteArrayInputStream);
-
+        view = new View(printer, scanner);
         try {
-            String output= checkOutBook.perform(mockUserSession, library, printer, scanner);
-            new View(printer, scanner).render(output);
+            String output= checkOutBook.perform(mockUserSession, library, view);
+            view.render(output);
             Assert.fail("Test did not fail for invalid input");
         } catch (InputValidationException e) {
             assertThat(e.getMessage(),is("Input has to be number"));

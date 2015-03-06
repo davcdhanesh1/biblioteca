@@ -61,8 +61,8 @@ public class QuitTest {
 
     @Test
     public void testPerform() throws Exception {
-        String output = quit.perform(userSession, library, printer, scanner);
         View view = new View(printer, scanner);
+        String output = quit.perform(userSession, library, view);
         view.render(output);
         assertThat(byteArrayOutputStream.toString(), is("Book a week, keeps teacher away!\n"));
     }

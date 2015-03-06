@@ -38,6 +38,7 @@ public class ListAllBookTest {
     private Scanner scanner;
     private MovieList movieList;
     private UserSession userSession;
+    private View view;
 
     @Before
     public void setUp() throws Exception {
@@ -57,6 +58,7 @@ public class ListAllBookTest {
         movieList = mock(MovieList.class);
 
         BorrowedItemList borrowedItemList = new BorrowedItemList();
+        View view = new View(printer, scanner);
         library = new Library(bookList, movieList, borrowedItemList);
     }
 
@@ -68,7 +70,7 @@ public class ListAllBookTest {
                 ""
         );
 
-        String output= listAllBook.perform(userSession, library, printer, scanner);
+        String output= listAllBook.perform(userSession, library, view);
         new View(printer, scanner).render(output);
         assertEquals(expectedOutput, byteArrayOutputStream.toString());
     }

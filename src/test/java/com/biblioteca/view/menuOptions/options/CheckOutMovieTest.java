@@ -45,6 +45,7 @@ public class CheckOutMovieTest {
     private BookList bookList;
     private UserSession mockUserSession;
     private Library mockLibrary;
+    private View view;
 
     @Before
     public void setUp() throws Exception {
@@ -66,7 +67,7 @@ public class CheckOutMovieTest {
         movieList = new MovieList();
         movieList.add(whiplashMovie);
         movieList.add(birdmanMovie);
-
+        view = new View(printer, scanner);
         BorrowedItemList borrowedItemList = new BorrowedItemList();
         library = new Library(bookList, movieList, borrowedItemList);
     }
@@ -90,7 +91,7 @@ public class CheckOutMovieTest {
                 "Enter id of Movie: ",
                 "Thanks you! Enjoy the movie"
         );
-        String output= checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
+        String output= checkOutMovieOption.perform(mockUserSession, library, view);
         new View(printer, scanner).render(output);
 
         assertEquals(byteArrayOutputStream.toString(), expectedOutput);
@@ -101,10 +102,10 @@ public class CheckOutMovieTest {
     public void testPerformWhenInputIsInvalid() throws Exception, ItemCanNotBeReturned, ItemIsNotAvailableForCheckOut, InvalidItemException, InvalidLibraryAndPasswordCombination {
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream("a".getBytes());
         Scanner scanner = new Scanner(byteArrayInputStream);
-
+        View view = new View(printer, scanner);
         try {
-            String string = checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
-            new View(printer, scanner).render();
+            String string = checkOutMovieOption.perform(mockUserSession, library, view);
+            view.render();
             Assert.fail("Test did not fail for invalid input");
         } catch (InputValidationException e) {
             assertThat(e.getMessage(), is("Input has to be number"));

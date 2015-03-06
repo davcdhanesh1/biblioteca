@@ -1,10 +1,8 @@
 package com.biblioteca.view.menuOptions;
 
-import com.biblioteca.io.Printer;
 import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
-
-import java.util.Scanner;
+import com.biblioteca.view.View;
 
 public class ListAllBook extends MenuOption {
 
@@ -13,7 +11,7 @@ public class ListAllBook extends MenuOption {
     }
 
     @Override
-    public String perform(UserSession userSession, Library library, Printer printer, Scanner scanner) {
+    public String perform(UserSession userSession, Library library, View view) {
         return library.getAllBooks();
     }
 

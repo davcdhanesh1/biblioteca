@@ -31,6 +31,7 @@ public class ProfileInfoTest {
     private Scanner mockScanner;
     private Printer printer;
     private ByteArrayOutputStream byteArrayOutputStream;
+    private View view;
 
     @Before
     public void setUp() throws Exception {
@@ -43,13 +44,15 @@ public class ProfileInfoTest {
 
         byteArrayOutputStream = new ByteArrayOutputStream();
         printer = new Printer(byteArrayOutputStream);
+
+        view = new View(printer, mockScanner);
     }
 
     @Test
     public void testPerform() throws Exception, ItemIsNotAvailableForCheckOut, InvalidLibraryAndPasswordCombination, InputValidationException, InvalidItemException, ItemCanNotBeReturned {
         String expectedString = "|777-4445|dhanesh                         |davcdhanesh1@gmail.com          |9096904102\n";
 
-        String output = profileInfo.perform(mockUserSession, mockLibrary, printer, mockScanner);
+        String output = profileInfo.perform(mockUserSession, mockLibrary, view);
         new View(printer, mockScanner).render(output);
 
         assertThat(byteArrayOutputStream.toString(), is(expectedString));

@@ -33,6 +33,7 @@ public class LoginTest {
     private Scanner scanner;
     private User dhanesh;
     private UserSession userSession;
+    private View view;
 
     @Before
     public void setUp() throws Exception {
@@ -45,13 +46,14 @@ public class LoginTest {
         dhanesh = User.customer("777-4445", "Dhanesh", "password", "davcdhanesh1@gmail.com", "9096904102");
         UserList userList = new UserList();
         userList.add(dhanesh);
+        view = new View(printer, scanner);
         userSession = UserSession.createNew(userList);
 
     }
 
     @Test
     public void testPerform() throws Exception, ItemIsNotAvailableForCheckOut, InvalidLibraryAndPasswordCombination, InputValidationException, InvalidItemException, ItemCanNotBeReturned {
-        loginOption.perform(userSession, mockLibrary, printer, scanner);
+        loginOption.perform(userSession, mockLibrary, view);
         assertThat(userSession.getCurrentUser(), is(dhanesh));
     }
 
@@ -60,11 +62,11 @@ public class LoginTest {
         UserSession mockUserSession = mock(UserSession.class);
         when(mockUserSession.getCurrentUser()).thenReturn(mock(User.class));
 
-        String output = loginOption.perform(mockUserSession, mockLibrary, printer, scanner);
+        String output = loginOption.perform(mockUserSession, mockLibrary, view);
         new View(printer, scanner).render(output);
 
         assertThat(byteArrayOutputStream.toString(), is("Successfully logged in.\n"));
-        verify(mockUserSession, never()).login(printer, scanner);
+        verify(mockUserSession, never()).login(view);
     }
 
     @Test

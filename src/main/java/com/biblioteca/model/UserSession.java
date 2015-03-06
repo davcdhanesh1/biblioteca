@@ -1,10 +1,7 @@
 package com.biblioteca.model;
 
 import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
-import com.biblioteca.io.Printer;
 import com.biblioteca.view.View;
-
-import java.util.Scanner;
 
 public class UserSession {
 
@@ -20,14 +17,13 @@ public class UserSession {
         return new UserSession(null, userList);
     }
 
-    public void login(Printer printer, Scanner scanner) throws InvalidLibraryAndPasswordCombination {
-        View view = new View(printer, scanner);
+    public void login(View view) throws InvalidLibraryAndPasswordCombination {
         if (currentUser != null) return;
 
         view.render("Enter your library Number: ");
         String libraryNumber = view.scan();
         view.render("Enter your password: ");
-        String passWord = scanner.next();
+        String passWord = view.scan();
         currentUser = userList.findByLibraryNumberAndPassword(libraryNumber, passWord);
     }
 

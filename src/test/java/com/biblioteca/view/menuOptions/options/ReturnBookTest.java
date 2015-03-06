@@ -47,6 +47,7 @@ public class ReturnBookTest {
     private BookList bookList;
     private MovieList movieList;
     private UserSession mockUserSession;
+    private View view;
 
     @Before
     public void setUp() throws Exception {
@@ -69,6 +70,7 @@ public class ReturnBookTest {
         movieList = mock(MovieList.class);
 
         BorrowedItemList borrowedItemList = new BorrowedItemList();
+        view = new View(printer, scanner);
         library = new Library(bookList, movieList, borrowedItemList);
     }
 
@@ -90,7 +92,7 @@ public class ReturnBookTest {
                 "Thank you for returning the book"
         );
 
-        String output = returnBookOption.perform(mockUserSession, library, printer, scanner);
+        String output = returnBookOption.perform(mockUserSession, library, view);
         new View(printer, scanner).render(output);
 
         assertEquals(byteArrayOutputStream.toString(), expectedOutput);
@@ -105,7 +107,7 @@ public class ReturnBookTest {
         Scanner scanner = new Scanner(byteArrayInputStream);
 
         try {
-            returnBookOption.perform(mockUserSession, mockLibrary, mockPrinter, scanner);
+            returnBookOption.perform(mockUserSession, mockLibrary, view);
         } catch (InputValidationException e) {
             assertThat(e.getMessage(),is("Input has to be number"));
         }

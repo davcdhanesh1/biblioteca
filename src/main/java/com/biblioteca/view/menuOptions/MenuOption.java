@@ -8,6 +8,7 @@ import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
 import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
+import com.biblioteca.view.View;
 
 import java.util.Scanner;
 
@@ -19,7 +20,7 @@ public abstract class MenuOption {
         this.description = description;
     }
 
-    public abstract String perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination;
+    public abstract String perform(UserSession userSession, Library library, View view) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination;
 
     public abstract boolean shouldContinueRunning();
 
@@ -29,4 +30,5 @@ public abstract class MenuOption {
     }
 
     public abstract boolean isSecureLoginRequired();
+
 }
