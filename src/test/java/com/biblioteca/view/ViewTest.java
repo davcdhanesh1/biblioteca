@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 import static junit.framework.TestCase.assertEquals;
 
-public class ViewRendererTest {
+public class ViewTest {
     @Test
     public void testRender() throws Exception {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -18,8 +18,8 @@ public class ViewRendererTest {
         String input = new String();
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
         Scanner scanner = new Scanner(byteArrayInputStream);
-        ViewRenderer viewRenderer = new ViewRenderer("Hi output", printer, scanner);
-        viewRenderer.render();
+        View view = new View("Hi output", printer, scanner);
+        view.render();
         assertEquals(byteArrayOutputStream.toString(), "Hi output\n");
     }
 
@@ -32,8 +32,8 @@ public class ViewRendererTest {
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
         Scanner scanner = new Scanner(byteArrayInputStream);
 
-        ViewRenderer viewRenderer = new ViewRenderer(printer, scanner);
-        viewRenderer.render("Hi output");
+        View view = new View(printer, scanner);
+        view.render("Hi output");
 
         assertEquals(byteArrayOutputStream.toString(), "Hi output\n");
     }
@@ -47,11 +47,11 @@ public class ViewRendererTest {
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
         Scanner scanner = new Scanner(byteArrayInputStream);
 
-        ViewRenderer viewRenderer = new ViewRenderer(printer, scanner);
+        View view = new View(printer, scanner);
 
-        String inputFromView = viewRenderer.scan();
+        String inputFromView = view.scan();
         assertEquals("1", inputFromView);
-        inputFromView = viewRenderer.scan();
+        inputFromView = view.scan();
         assertEquals("input", inputFromView);
     }
 }

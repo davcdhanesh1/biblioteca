@@ -14,7 +14,7 @@ import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
 import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.model.User;
-import com.biblioteca.view.ViewRenderer;
+import com.biblioteca.view.View;
 import com.biblioteca.view.menuOptions.CheckOutMovie;
 import org.junit.Assert;
 import org.junit.Before;
@@ -90,8 +90,8 @@ public class CheckOutMovieTest {
                 "Enter id of Movie: ",
                 "Thanks you! Enjoy the movie"
         );
-        ViewRenderer viewRenderer = checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
-        viewRenderer.render();
+        View view = checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
+        view.render();
 
         assertEquals(byteArrayOutputStream.toString(), expectedOutput);
         assertThat(whiplashMovie.isCheckedOut(), is(true));
@@ -103,8 +103,8 @@ public class CheckOutMovieTest {
         Scanner scanner = new Scanner(byteArrayInputStream);
 
         try {
-            ViewRenderer viewRenderer = checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
-            viewRenderer.render();
+            View view = checkOutMovieOption.perform(mockUserSession, library, printer, scanner);
+            view.render();
             Assert.fail("Test did not fail for invalid input");
         } catch (InputValidationException e) {
             assertThat(e.getMessage(), is("Input has to be number"));

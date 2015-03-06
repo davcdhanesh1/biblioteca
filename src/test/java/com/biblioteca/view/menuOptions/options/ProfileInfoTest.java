@@ -9,7 +9,7 @@ import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
 import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.model.User;
-import com.biblioteca.view.ViewRenderer;
+import com.biblioteca.view.View;
 import com.biblioteca.view.menuOptions.ProfileInfo;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,8 +49,8 @@ public class ProfileInfoTest {
     public void testPerform() throws Exception, ItemIsNotAvailableForCheckOut, InvalidLibraryAndPasswordCombination, InputValidationException, InvalidItemException, ItemCanNotBeReturned {
         String expectedString = "|777-4445|dhanesh                         |davcdhanesh1@gmail.com          |9096904102\n";
 
-        ViewRenderer viewRenderer = profileInfo.perform(mockUserSession, mockLibrary, printer, mockScanner);
-        viewRenderer.render();
+        View view = profileInfo.perform(mockUserSession, mockLibrary, printer, mockScanner);
+        view.render();
 
         assertThat(byteArrayOutputStream.toString(), is(expectedString));
     }

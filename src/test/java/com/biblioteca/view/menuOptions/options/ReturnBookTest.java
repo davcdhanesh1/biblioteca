@@ -12,7 +12,7 @@ import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
 import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.model.User;
-import com.biblioteca.view.ViewRenderer;
+import com.biblioteca.view.View;
 import com.biblioteca.view.menuOptions.ReturnBook;
 import org.junit.Before;
 import org.junit.Test;
@@ -90,8 +90,8 @@ public class ReturnBookTest {
                 "Thank you for returning the book"
         );
 
-        ViewRenderer viewRenderer = returnBookOption.perform(mockUserSession, library, printer, scanner);
-        viewRenderer.render();
+        View view = returnBookOption.perform(mockUserSession, library, printer, scanner);
+        view.render();
 
         assertEquals(byteArrayOutputStream.toString(), expectedOutput);
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(false));

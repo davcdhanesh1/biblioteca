@@ -8,7 +8,7 @@ import com.biblioteca.exceptions.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
 import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
-import com.biblioteca.view.ViewRenderer;
+import com.biblioteca.view.View;
 
 import java.util.Scanner;
 
@@ -19,8 +19,8 @@ public class ProfileInfo extends MenuOption {
     }
 
     @Override
-    public ViewRenderer perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
-        return new ViewRenderer(userSession.getCurrentUser().toString(), printer, scanner);
+    public View perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
+        return new View(userSession.getCurrentUser().toString(), printer, scanner);
     }
 
     @Override

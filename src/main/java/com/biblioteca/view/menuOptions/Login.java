@@ -8,7 +8,7 @@ import com.biblioteca.exceptions.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
 import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
-import com.biblioteca.view.ViewRenderer;
+import com.biblioteca.view.View;
 
 import java.util.Scanner;
 
@@ -18,11 +18,11 @@ public class Login extends MenuOption {
     }
 
     @Override
-    public ViewRenderer perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
+    public View perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         if (userSession.getCurrentUser() == null) {
             userSession.login(printer, scanner);
         }
-        return new ViewRenderer("Successfully logged in.", printer, scanner);
+        return new View("Successfully logged in.", printer, scanner);
     }
 
     @Override

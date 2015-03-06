@@ -13,7 +13,7 @@ import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
 import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.model.User;
-import com.biblioteca.view.ViewRenderer;
+import com.biblioteca.view.View;
 import com.biblioteca.view.menuOptions.CheckOutBook;
 import org.junit.Assert;
 import org.junit.Before;
@@ -91,8 +91,8 @@ public class CheckOutBookTest {
 
         );
 
-        ViewRenderer viewRenderer = checkOutBook.perform(mockUserSession, library, printer, scanner);
-        viewRenderer.render();
+        View view = checkOutBook.perform(mockUserSession, library, printer, scanner);
+        view.render();
 
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(true));
         assertEquals(byteArrayOutputStream.toString(), expectedOutput);
@@ -106,8 +106,8 @@ public class CheckOutBookTest {
         Scanner scanner = new Scanner(byteArrayInputStream);
 
         try {
-            ViewRenderer viewRenderer = checkOutBook.perform(mockUserSession, library, printer, scanner);
-            viewRenderer.render();
+            View view = checkOutBook.perform(mockUserSession, library, printer, scanner);
+            view.render();
             Assert.fail("Test did not fail for invalid input");
         } catch (InputValidationException e) {
             assertThat(e.getMessage(),is("Input has to be number"));

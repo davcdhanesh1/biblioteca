@@ -12,7 +12,7 @@ import com.biblioteca.model.rental.MovieList;
 import com.biblioteca.model.rental.Rating;
 import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
-import com.biblioteca.view.ViewRenderer;
+import com.biblioteca.view.View;
 import com.biblioteca.view.menuOptions.ListAllMovies;
 import org.junit.Before;
 import org.junit.Test;
@@ -71,8 +71,8 @@ public class ListAllMoviesTest {
                 ""
         );
 
-        ViewRenderer viewRenderer = listAllMovies.perform(userSession, library, printer, scanner);
-        viewRenderer.render();
+        View view = listAllMovies.perform(userSession, library, printer, scanner);
+        view.render();
 
         assertThat(byteArrayOutputStream.toString(), is(expectedMovieList));
     }

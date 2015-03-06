@@ -3,7 +3,7 @@ package com.biblioteca.view.menuOptions;
 import com.biblioteca.io.Printer;
 import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
-import com.biblioteca.view.ViewRenderer;
+import com.biblioteca.view.View;
 
 import java.util.Scanner;
 
@@ -14,8 +14,8 @@ public class Quit extends MenuOption {
     }
 
     @Override
-    public ViewRenderer perform(UserSession userSession, Library library, Printer printer, Scanner scanner) {
-        return new ViewRenderer("Book a week, keeps teacher away!", printer, scanner);
+    public View perform(UserSession userSession, Library library, Printer printer, Scanner scanner) {
+        return new View("Book a week, keeps teacher away!", printer, scanner);
     }
 
     @Override

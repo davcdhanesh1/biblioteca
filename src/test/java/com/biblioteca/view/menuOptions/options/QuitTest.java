@@ -7,7 +7,7 @@ import com.biblioteca.model.Library;
 import com.biblioteca.model.rental.Book;
 import com.biblioteca.model.rental.BookList;
 import com.biblioteca.model.UserSession;
-import com.biblioteca.view.ViewRenderer;
+import com.biblioteca.view.View;
 import com.biblioteca.view.menuOptions.Quit;
 import org.junit.Before;
 import org.junit.Test;
@@ -61,8 +61,8 @@ public class QuitTest {
 
     @Test
     public void testPerform() throws Exception {
-        ViewRenderer viewRenderer = quit.perform(userSession, library, printer, scanner);
-        viewRenderer.render();
+        View view = quit.perform(userSession, library, printer, scanner);
+        view.render();
         assertThat(byteArrayOutputStream.toString(), is("Book a week, keeps teacher away!\n"));
     }
 

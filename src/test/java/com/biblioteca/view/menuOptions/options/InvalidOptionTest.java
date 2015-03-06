@@ -7,7 +7,7 @@ import com.biblioteca.model.rental.BorrowedItemList;
 import com.biblioteca.model.rental.MovieList;
 import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
-import com.biblioteca.view.ViewRenderer;
+import com.biblioteca.view.View;
 import com.biblioteca.view.menuOptions.InvalidOption;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,8 +59,8 @@ public class InvalidOptionTest {
 
     @Test
     public void testPerform() throws Exception {
-        ViewRenderer viewRenderer = invalidOption.perform(userSession, library, printer, scanner);
-        viewRenderer.render();
+        View view = invalidOption.perform(userSession, library, printer, scanner);
+        view.render();
         assertThat(byteArrayOutputStream.toString(), is("Invalid option!\n"));
     }
 

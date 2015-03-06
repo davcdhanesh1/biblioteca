@@ -1,7 +1,7 @@
 package com.biblioteca.view.menuOptions;
 
 import com.biblioteca.io.Printer;
-import com.biblioteca.view.ViewRenderer;
+import com.biblioteca.view.View;
 import org.junit.Test;
 import testhelpers.StringUtil;
 
@@ -25,8 +25,8 @@ public class MenuOptionListTest {
         String expectedMenuList = StringUtil.getOutputString("1. List Books", "2. Quit");
         String allMenus = menuOptionList.getAll(printer);
 
-        ViewRenderer viewRenderer = new ViewRenderer(allMenus, printer, scanner);
-        viewRenderer.render();
+        View view = new View(allMenus, printer, scanner);
+        view.render();
 
         assertEquals(expectedMenuList, byteArrayOutputStream.toString());
     }
@@ -66,8 +66,8 @@ public class MenuOptionListTest {
 
         menuOptionList.remove("List Books");
         Scanner scanner = new Scanner(System.in);
-        ViewRenderer viewRenderer = new ViewRenderer(menuOptionList.getAll(printer), printer, scanner);
-        viewRenderer.render();
+        View view = new View(menuOptionList.getAll(printer), printer, scanner);
+        view.render();
 
         assertThat(byteArrayOutputStream.toString(), is("1. Quit\n"));
     }

@@ -4,19 +4,19 @@ import com.biblioteca.io.Printer;
 
 import java.util.Scanner;
 
-public class ViewRenderer {
+public class View {
     private String outPutToRender;
     private final Printer printer;
     private final Scanner scanner;
 
-    public ViewRenderer(String outPutToRender, Printer printer, Scanner scanner) {
+    public View(String outPutToRender, Printer printer, Scanner scanner) {
 
         this.outPutToRender = outPutToRender;
         this.printer = printer;
         this.scanner = scanner;
     }
 
-    public ViewRenderer(Printer printer, Scanner scanner) {
+    public View(Printer printer, Scanner scanner) {
 
         this.printer = printer;
         this.scanner = scanner;

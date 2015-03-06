@@ -3,7 +3,7 @@ package com.biblioteca.view.menuOptions;
 import com.biblioteca.io.Printer;
 import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
-import com.biblioteca.view.ViewRenderer;
+import com.biblioteca.view.View;
 
 import java.util.Scanner;
 
@@ -14,8 +14,8 @@ public class ListAllBook extends MenuOption {
     }
 
     @Override
-    public ViewRenderer perform(UserSession userSession, Library library, Printer printer, Scanner scanner) {
-        return new ViewRenderer(library.getAllBooks(), printer, scanner);
+    public View perform(UserSession userSession, Library library, Printer printer, Scanner scanner) {
+        return new View(library.getAllBooks(), printer, scanner);
     }
 
     @Override

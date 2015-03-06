@@ -10,7 +10,7 @@ import com.biblioteca.model.Library;
 import com.biblioteca.model.User;
 import com.biblioteca.model.UserList;
 import com.biblioteca.model.UserSession;
-import com.biblioteca.view.ViewRenderer;
+import com.biblioteca.view.View;
 import com.biblioteca.view.menuOptions.Login;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,8 +60,8 @@ public class LoginTest {
         UserSession mockUserSession = mock(UserSession.class);
         when(mockUserSession.getCurrentUser()).thenReturn(mock(User.class));
 
-        ViewRenderer viewRenderer = loginOption.perform(mockUserSession, mockLibrary, printer, scanner);
-        viewRenderer.render();
+        View view = loginOption.perform(mockUserSession, mockLibrary, printer, scanner);
+        view.render();
 
         assertThat(byteArrayOutputStream.toString(), is("Successfully logged in.\n"));
         verify(mockUserSession, never()).login(printer, scanner);
