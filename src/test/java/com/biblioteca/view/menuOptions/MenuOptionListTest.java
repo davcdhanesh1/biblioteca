@@ -1,27 +1,34 @@
 package com.biblioteca.view.menuOptions;
 
 import com.biblioteca.io.Printer;
-import testhelpers.StringUtil;
+import com.biblioteca.view.ViewRenderer;
 import org.junit.Test;
+import testhelpers.StringUtil;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class MenuOptionListTest {
 
     @Test
     public void testPrintAll() throws Exception {
+        Scanner scanner = new Scanner(System.in);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         Printer printer = new Printer(byteArrayOutputStream);
         MenuOptionList menuOptionList = new MenuOptionList();
         menuOptionList.add(new ListAllBook());
         menuOptionList.add(new Quit());
         String expectedMenuList = StringUtil.getOutputString("1. List Books", "2. Quit");
-        menuOptionList.printAll(printer);
+        String allMenus = menuOptionList.getAll(printer);
 
-        assertThat(byteArrayOutputStream.toString(),is(expectedMenuList));
+        ViewRenderer viewRenderer = new ViewRenderer(allMenus, printer, scanner);
+        viewRenderer.render();
+
+        assertEquals(expectedMenuList, byteArrayOutputStream.toString());
     }
 
     @Test
@@ -58,7 +65,9 @@ public class MenuOptionListTest {
         menuOptionList.add(quitOption);
 
         menuOptionList.remove("List Books");
-        menuOptionList.printAll(printer);
+        Scanner scanner = new Scanner(System.in);
+        ViewRenderer viewRenderer = new ViewRenderer(menuOptionList.getAll(printer), printer, scanner);
+        viewRenderer.render();
 
         assertThat(byteArrayOutputStream.toString(), is("1. Quit\n"));
     }

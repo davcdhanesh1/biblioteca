@@ -12,10 +12,14 @@ public class MenuOptionList {
         list.add(menuOption);
     }
 
-    public void printAll(Printer printer) {
-        for(int index = 0; index < list.size(); index++) {
-            printer.println((index + 1) + ". " + list.get(index).toString());
+    public String getAll(Printer printer) {
+        String allMenus = new String();
+        int index;
+        for(index = 0; index < list.size() - 1; index++) {
+            allMenus += ((index + 1) + ". " + list.get(index).toString()) + "\n";
         }
+        allMenus += ((index + 1) + ". " + list.get(index).toString());
+        return allMenus;
     }
 
     public MenuOption find(String index) {

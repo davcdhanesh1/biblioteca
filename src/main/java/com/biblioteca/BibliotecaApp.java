@@ -114,12 +114,6 @@ public class BibliotecaApp {
         }
     }
 
-    private void printErrorMessage(String msg) {
-        printSeparatorLine();
-        new ViewRenderer(msg, printer, scanner).render();
-        printSeparatorLine();
-    }
-
     private boolean givenMenuOptionRequiresLogin(MenuOption menuOption) {
         return menuOption.isSecureLoginRequired();
     }
@@ -131,6 +125,12 @@ public class BibliotecaApp {
         printSeparatorLine();
     }
 
+    private void printErrorMessage(String msg) {
+        printSeparatorLine();
+        new ViewRenderer(msg, printer, scanner).render();
+        printSeparatorLine();
+    }
+
     private void printMenuListAndPrompt() {
         printMenuList();
         printPrompt();
@@ -139,18 +139,20 @@ public class BibliotecaApp {
     private void printMenuList() {
         ViewState viewState = ViewState.getCurrentView(userSession);
         menuOptionList = viewState.menuOptionList;
-        menuOptionList.printAll(printer);
+        ViewRenderer viewRenderer = new ViewRenderer(menuOptionList.getAll(printer), printer, scanner);
+        viewRenderer.render();
     }
 
     private void printPrompt() {
-        printer.println("Select Option: ");
+        new ViewRenderer("Select Option: ", printer, scanner).render();
     }
 
     private void printSeparatorLine() {
-        printer.println("-----------------------------------------------------------------------------");
+        new ViewRenderer("-----------------------------------------------------------------------------",
+                        printer, scanner).render();
     }
 
     private void printWelcomeMessage() {
-        printer.println("Welcome To Biblioteca");
+        new ViewRenderer("Welcome To Biblioteca", printer, scanner).render();
     }
 }
