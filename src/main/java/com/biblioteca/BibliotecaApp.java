@@ -50,20 +50,40 @@ public class BibliotecaApp {
             option = readInput();
             if (inputIsNotValid(option)) continue;
 
-            menuOption = getSelectedMenuOption(option);
-            executeSelectedMenuOption(library, menuOption);
+            menuOption = getAndPerformSelectedMenu(option);
             if(isSelectedMenuOptionIsQuit(menuOption)) break;
 
             printMenuListAndPrompt();
         }
     }
 
-    private boolean isSelectedMenuOptionIsQuit(MenuOption menuOption) {
-        return !menuOption.shouldContinueRunning();
+    private MenuOption getAndPerformSelectedMenu(String option) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
+        MenuOption menuOption;
+        printSeparatorLine();
+        menuOption = getSelectedMenuOption(option);
+        ViewRenderer viewRenderer = performSelectedMenuOption(library, menuOption);
+        viewRenderer.render();
+        printSeparatorLine();
+        return menuOption;
     }
 
     private MenuOption getSelectedMenuOption(String option) {
         return menuOptionList.find(option);
+    }
+
+    private ViewRenderer performSelectedMenuOption(Library library, MenuOption menuOption) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
+        ViewRenderer viewRenderer;
+        try {
+            if (givenMenuOptionRequiresLogin(menuOption)) login();
+            viewRenderer = menuOption.perform(userSession, library, printer, scanner);
+        } catch (InvalidLibraryAndPasswordCombination e) {
+            viewRenderer = new ViewRenderer(e.getMessage(), printer, scanner);
+        }
+        return viewRenderer;
+    }
+
+    private boolean isSelectedMenuOptionIsQuit(MenuOption menuOption) {
+        return !menuOption.shouldContinueRunning();
     }
 
     private String readInput() {
@@ -96,20 +116,7 @@ public class BibliotecaApp {
 
     private void printErrorMessage(String msg) {
         printSeparatorLine();
-        printer.println(msg);
-        printSeparatorLine();
-    }
-
-    private void executeSelectedMenuOption(Library library, MenuOption menuOption) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
-        printSeparatorLine();
-        ViewRenderer viewRenderer;
-        try {
-            if (givenMenuOptionRequiresLogin(menuOption)) login();
-            viewRenderer = menuOption.perform(userSession, library, printer, scanner);
-        } catch (InvalidLibraryAndPasswordCombination e) {
-            viewRenderer = new ViewRenderer(e.getMessage(), printer, scanner);
-        }
-        viewRenderer.render();
+        new ViewRenderer(msg, printer, scanner).render();
         printSeparatorLine();
     }
 
