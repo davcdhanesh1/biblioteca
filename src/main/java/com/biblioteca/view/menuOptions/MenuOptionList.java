@@ -1,8 +1,6 @@
-package com.biblioteca.view.menu;
+package com.biblioteca.view.menuOptions;
 
 import com.biblioteca.io.Printer;
-import com.biblioteca.view.menu.options.InvalidOption;
-import com.biblioteca.view.menu.options.MenuOption;
 
 import java.util.ArrayList;
 

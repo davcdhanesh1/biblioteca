@@ -1,4 +1,4 @@
-package com.biblioteca.view.menu.options;
+package com.biblioteca.view.menuOptions;
 
 import com.biblioteca.io.Printer;
 import com.biblioteca.model.Library;

@@ -1,4 +1,4 @@
-package com.biblioteca.view.menu.options;
+package com.biblioteca.view.menuOptions;
 
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.inputValidator.Validator;

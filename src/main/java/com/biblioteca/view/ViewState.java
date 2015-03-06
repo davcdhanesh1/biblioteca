@@ -1,7 +1,6 @@
 package com.biblioteca.view;
 
-import com.biblioteca.view.menu.MenuOptionList;
-import com.biblioteca.view.menu.options.*;
+import com.biblioteca.view.menuOptions.*;
 import com.biblioteca.model.UserSession;
 
 public class ViewState {

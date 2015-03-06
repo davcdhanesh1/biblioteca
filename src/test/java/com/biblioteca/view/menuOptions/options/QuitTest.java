@@ -1,4 +1,4 @@
-package com.biblioteca.view.menu.options;
+package com.biblioteca.view.menuOptions.options;
 
 import com.biblioteca.io.Printer;
 import com.biblioteca.model.rental.BorrowedItemList;
@@ -7,6 +7,7 @@ import com.biblioteca.model.Library;
 import com.biblioteca.model.rental.Book;
 import com.biblioteca.model.rental.BookList;
 import com.biblioteca.model.UserSession;
+import com.biblioteca.view.menuOptions.Quit;
 import org.junit.Before;
 import org.junit.Test;
 

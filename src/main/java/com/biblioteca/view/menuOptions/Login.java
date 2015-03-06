@@ -1,4 +1,4 @@
-package com.biblioteca.view.menu.options;
+package com.biblioteca.view.menuOptions;
 
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
@@ -11,15 +11,15 @@ import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
 
 import java.util.Scanner;
 
-public class ProfileInfo extends MenuOption {
-
-    public ProfileInfo() {
-        super("Profile information");
+public class Login extends MenuOption {
+    public Login() {
+        super("Login");
     }
 
     @Override
     public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
-        printer.println(userSession.getCurrentUser().toString());
+        if (userSession.getCurrentUser() != null) return;
+        userSession.login(printer, scanner);
     }
 
     @Override
@@ -29,6 +29,7 @@ public class ProfileInfo extends MenuOption {
 
     @Override
     public boolean isSecureLoginRequired() {
-        return true;
+        // This is login option itself, hence false by default !
+        return false;
     }
 }

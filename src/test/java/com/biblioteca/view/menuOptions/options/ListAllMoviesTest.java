@@ -1,4 +1,4 @@
-package com.biblioteca.view.menu.options;
+package com.biblioteca.view.menuOptions.options;
 
 import com.biblioteca.inputValidator.InputValidationException;
 import com.biblioteca.io.Printer;
@@ -12,6 +12,7 @@ import com.biblioteca.model.rental.MovieList;
 import com.biblioteca.model.rental.Rating;
 import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
+import com.biblioteca.view.menuOptions.ListAllMovies;
 import org.junit.Before;
 import org.junit.Test;
 import testhelpers.StringUtil;

@@ -1,4 +1,4 @@
-package com.biblioteca.view.menu.options;
+package com.biblioteca.view.menuOptions;
 
 import com.biblioteca.io.Printer;
 import com.biblioteca.model.Library;
@@ -6,20 +6,20 @@ import com.biblioteca.model.UserSession;
 
 import java.util.Scanner;
 
-public class ListAllBook extends MenuOption {
+public class Quit extends MenuOption {
 
-    public ListAllBook() {
-        super("List Books");
+    public Quit() {
+        super("Quit");
     }
 
     @Override
     public void perform(UserSession userSession, Library library, Printer printer, Scanner scanner) {
-        printer.println(library.getAllBooks());
+        printer.println("Book a week, keeps teacher away!");
     }
 
     @Override
     public boolean shouldContinueRunning() {
-        return true;
+        return false;
     }
 
     @Override
