@@ -31,7 +31,7 @@ public class View {
         return null;
     }
 
-    public boolean hasNext() {
+    public boolean hasInput() {
         return scanner.hasNext();
     }
 }

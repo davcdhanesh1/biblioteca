@@ -41,31 +41,21 @@ public class BibliotecaApp {
 
     public void run() throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
         init();
-        startRoutingEngine();
-    }
-
-    private void startRoutingEngine() throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
-        MenuOption menuOption;
         String option;
+        MenuOption menuOption;
 
         while(isAppRunning()) {
             option = readInput();
             if (inputIsNotValid(option)) continue;
 
-            menuOption = getAndPerformSelectedMenu(option);
+            printSeparatorLine();
+            menuOption = getSelectedMenuOption(option);
+            performSelectedMenuOption(library, menuOption);
+            printSeparatorLine();
             if(isSelectedMenuOptionIsQuit(menuOption)) break;
 
             printMenuListAndPrompt();
         }
-    }
-
-    private MenuOption getAndPerformSelectedMenu(String option) throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
-        MenuOption menuOption;
-        printSeparatorLine();
-        menuOption = getSelectedMenuOption(option);
-        performSelectedMenuOption(library, menuOption);
-        printSeparatorLine();
-        return menuOption;
     }
 
     private MenuOption getSelectedMenuOption(String option) {
@@ -94,7 +84,7 @@ public class BibliotecaApp {
     }
 
     private boolean isAppRunning() {
-        return view.hasNext();
+        return view.hasInput();
     }
 
     private void init() {
