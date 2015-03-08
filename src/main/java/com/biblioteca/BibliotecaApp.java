@@ -36,7 +36,7 @@ public class BibliotecaApp {
         this.userList = userList;
         this.userSession = UserSession.createNew(userList);
         this.library = library;
-        this.menuOptionList = ViewState.getCurrentView(userSession).menuOptionList;
+        this.menuOptionList = ViewState.getCurrentMenuList(userSession).menuOptionList;
     }
 
     public void run() throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
@@ -127,7 +127,7 @@ public class BibliotecaApp {
     }
 
     private void printMenuList() {
-        ViewState viewState = ViewState.getCurrentView(userSession);
+        ViewState viewState = ViewState.getCurrentMenuList(userSession);
         menuOptionList = viewState.menuOptionList;
         view.render(menuOptionList.getAll());
     }

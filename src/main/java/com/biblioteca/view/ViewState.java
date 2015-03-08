@@ -35,7 +35,7 @@ public class ViewState {
         return menuOptionList;
     }
 
-    public static ViewState getCurrentView(UserSession userSession) {
+    public static ViewState getCurrentMenuList(UserSession userSession) {
         if (userSession.getCurrentUser() == null)
             return new ViewState(defaultMenuOptionList());
 
