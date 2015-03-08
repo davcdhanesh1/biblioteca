@@ -70,4 +70,9 @@ public class ViewRentedItemsTest {
     public void testIsSecureLoginRequired() throws Exception {
         assertThat(viewRentedItems.isSecureLoginRequired(), is(true));
     }
+
+    @Test
+    public void testDescription() throws Exception {
+        assertThat(viewRentedItems.toString(), is("View Rented Items"));
+    }
 }
