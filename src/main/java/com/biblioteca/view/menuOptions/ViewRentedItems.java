@@ -10,7 +10,7 @@ import com.biblioteca.model.UserSession;
 import com.biblioteca.view.View;
 
 public class ViewRentedItems extends MenuOption {
-    ViewRentedItems() {
+    public ViewRentedItems() {
         super("View Rented Items");
     }
 

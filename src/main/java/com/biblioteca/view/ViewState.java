@@ -35,10 +35,23 @@ public class ViewState {
         return menuOptionList;
     }
 
-    public static ViewState getCurrentMenuList(UserSession userSession) {
-        if (userSession.getCurrentUser() == null)
-            return new ViewState(defaultMenuOptionList());
+    private static MenuOptionList adminMenuOptionList() {
+        MenuOptionList menuOptionList = new MenuOptionList();
+        menuOptionList.add(new ListAllBook());
+        menuOptionList.add(new ListAllMovies());
+        menuOptionList.add(new CheckOutBook());
+        menuOptionList.add(new CheckOutMovie());
+        menuOptionList.add(new ReturnBook());
+        menuOptionList.add(new ProfileInfo());
+        menuOptionList.add(new ViewRentedItems());
+        menuOptionList.add(new Quit());
 
+        return menuOptionList;
+    }
+
+    public static ViewState getCurrentMenuList(UserSession userSession) {
+        if (userSession.getCurrentUser() == null) return new ViewState(defaultMenuOptionList());
+        if (userSession.getCurrentUser().isAdmin()) return new ViewState(adminMenuOptionList());
         return new ViewState(menuViewWithProfileInformation());
     }
 }

@@ -34,7 +34,7 @@ public class BibliotecaAppTestForMovies {
 
 
     BookList bookList;
-    private ByteArrayOutputStream outputStream;
+    private ByteArrayOutputStream byteArrayOutputStream;
     private Printer printer;
     private BibliotecaApp bibliotecaApp;
     private String inputForSelectingBook;
@@ -65,8 +65,8 @@ public class BibliotecaAppTestForMovies {
         byteArrayInputStream = new ByteArrayInputStream(inputForSelectingMenu.getBytes());
         scanner = new Scanner(byteArrayInputStream);
 
-        outputStream = new ByteArrayOutputStream();
-        printer = new Printer(outputStream);
+        byteArrayOutputStream = new ByteArrayOutputStream();
+        printer = new Printer(byteArrayOutputStream);
 
         bookList = mock(BookList.class);
         movieList = new MovieList();
@@ -116,7 +116,7 @@ public class BibliotecaAppTestForMovies {
                 "Select Option: "
         );
 
-        assertThat(outputStream.toString(),is(expectedOutPut));
+        assertThat(byteArrayOutputStream.toString(),is(expectedOutPut));
     }
 
     @Test
@@ -170,7 +170,7 @@ public class BibliotecaAppTestForMovies {
                 "Select Option: "
         );
 
-        assertThat(outputStream.toString(),is(expectedOutput));
+        assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
         assertThat(whiplashMovie.isCheckedOut(),is(true));
     }
 
@@ -225,7 +225,7 @@ public class BibliotecaAppTestForMovies {
                 "Select Option: "
         );
 
-        assertEquals(expectedOutput, outputStream.toString());
+        assertEquals(expectedOutput, byteArrayOutputStream.toString());
     }
 
     @Test
@@ -267,10 +267,65 @@ public class BibliotecaAppTestForMovies {
                 "Select Option: "
         );
 
-        assertThat(outputStream.toString(),is(expectedOutput));
+        assertThat(byteArrayOutputStream.toString(),is(expectedOutput));
     }
 
     @Test
     public void testViewRentedItemsAdminUI() throws Exception {
+        User admin = User.admin("111-0000", "dhanesh", "password", "admin@bilioteca.com", "9422084738");
+        userList.add(admin);
+
+        inputForSelectingBook = "4\n111-0000\npassword\n1\n7";
+        byteArrayInputStream = new ByteArrayInputStream(inputForSelectingBook.getBytes());
+        scanner = new Scanner(byteArrayInputStream);
+        bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
+        bibliotecaApp.run();
+
+        String expectedOutput = StringUtil.getOutputString(
+                "Welcome To Biblioteca",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Login",
+                "7. Quit",
+                "Select Option: ",
+                "-----------------------------------------------------------------------------",
+                "Enter your library Number: ",
+                "Enter your password: ",
+                "-----------------------------------------------------------------------------",
+                "|1       |Whiplash                                                        |Damien Chazelle                 |2014|NINE",
+                "|2       |BirdMan                                                         |Alejandro González Iñárritu     |2014|TEN",
+                "",
+                "Enter id of Movie: ",
+                "Thanks you! Enjoy the movie",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Profile information",
+                "7. View Rented Items",
+                "8. Quit",
+                "Select Option: ",
+                "-----------------------------------------------------------------------------",
+                "|111-0000|dhanesh         |1       |Whiplash                        |Movie",
+                "",
+                "-----------------------------------------------------------------------------",
+                "1. List Books",
+                "2. List Movies",
+                "3. Checkout a Book",
+                "4. Checkout a Movie",
+                "5. Return a Book",
+                "6. Profile information",
+                "7. View Rented Items",
+                "8. Quit",
+                "Select Option: "
+        );
+
+        assertEquals(expectedOutput, byteArrayOutputStream.toString());
     }
 }
