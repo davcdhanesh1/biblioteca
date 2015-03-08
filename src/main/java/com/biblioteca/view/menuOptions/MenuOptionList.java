@@ -40,10 +40,4 @@ public class MenuOptionList {
         list.remove(indexOfItemToBeRemoved);
     }
 
-    public boolean hasMenu(String menuName) {
-        for(int index = 0; index < list.size(); index++) {
-            if(list.get(index).toString().equals(menuName)) return true;
-        }
-        return false;
-    }
 }

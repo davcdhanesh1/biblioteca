@@ -269,4 +269,8 @@ public class BibliotecaAppTestForMovies {
 
         assertThat(outputStream.toString(),is(expectedOutput));
     }
+
+    @Test
+    public void testViewRentedItemsAdminUI() throws Exception {
+    }
 }

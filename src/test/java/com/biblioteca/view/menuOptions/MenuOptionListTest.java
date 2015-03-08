@@ -72,16 +72,4 @@ public class MenuOptionListTest {
         assertThat(byteArrayOutputStream.toString(), is("1. Quit\n"));
     }
 
-    @Test
-    public void testHasMenu() throws Exception {
-        MenuOptionList menuOptionList = new MenuOptionList();
-        MenuOption listAllBookOption = new ListAllBook();
-        menuOptionList.add(listAllBookOption);
-        MenuOption quitOption = new Quit();
-        menuOptionList.add(quitOption);
-        menuOptionList.remove("List Books");
-
-        assertThat(menuOptionList.hasMenu("List Books"), is(false));
-        assertThat(menuOptionList.hasMenu("Quit"), is(true));
-    }
 }
