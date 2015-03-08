@@ -1,18 +1,12 @@
 package com.biblioteca.model.library;
 
-import com.biblioteca.io.Printer;
-import com.biblioteca.model.Library;
 import com.biblioteca.exceptions.InvalidItemException;
 import com.biblioteca.exceptions.ItemCanNotBeReturned;
 import com.biblioteca.exceptions.ItemIsNotAvailableForCheckOut;
-import com.biblioteca.model.rental.Book;
-import com.biblioteca.model.rental.BookList;
-import com.biblioteca.model.rental.BorrowedItem;
-import com.biblioteca.model.rental.BorrowedItemList;
-import com.biblioteca.model.rental.Movie;
-import com.biblioteca.model.rental.MovieList;
-import com.biblioteca.model.rental.Rating;
+import com.biblioteca.io.Printer;
+import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
+import com.biblioteca.model.rental.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,12 +40,12 @@ public class LibraryTest {
     private Movie whiplashMovie;
     private Movie birdmanMovie;
     private UserSession mockUserSession;
-    private BorrowedItemList mockBorrowedItemList;
+    private RentedItemList mockRentedItemList;
 
     @Before
     public void setUp() throws Exception {
         mockUserSession = mock(UserSession.class);
-        mockBorrowedItemList = mock(BorrowedItemList.class);
+        mockRentedItemList = mock(RentedItemList.class);
         bookList = new BookList();
         harryPotterAndThePhilosophersStone = new Book(1, HARRY_POTTER_AND_THE_PHILOSOPHERS_STONE, JKRowling, 1987);
         harryPotterAndTheChambersOfSecrets = new Book(2, HARRY_POTTER_AND_THE_CHAMBER_OF_SECRETS, JKRowling, 1987);
@@ -66,118 +60,118 @@ public class LibraryTest {
 
         outputStream = new ByteArrayOutputStream();
         printer = new Printer(outputStream);
-        library = new Library(bookList, movieList, mockBorrowedItemList);
+        library = new Library(bookList, movieList, mockRentedItemList);
     }
 
     @Test
     public void testCheckOutBook() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
-        BorrowedItem mockBorrowedItem = mock(BorrowedItem.class);
-        whenNew(BorrowedItem.class).withAnyArguments().thenReturn(mockBorrowedItem);
+        RentedItem mockRentedItem = mock(RentedItem.class);
+        whenNew(RentedItem.class).withAnyArguments().thenReturn(mockRentedItem);
 
         String outPutMessageFromLibrary = library.checkOutBook("1", mockUserSession);
 
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(), is(true));
         assertEquals(outPutMessageFromLibrary, "Thanks you! Enjoy the book");
-        verify(mockBorrowedItemList, times(1)).add(mockBorrowedItem);
+        verify(mockRentedItemList, times(1)).add(mockRentedItem);
     }
 
     @Test
     public void testCheckOutBookWhenInvalidBookIdIsGiven() throws Exception, InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned {
-        BorrowedItem mockBorrowedItem = mock(BorrowedItem.class);
-        whenNew(BorrowedItem.class).withAnyArguments().thenReturn(mockBorrowedItem);
+        RentedItem mockRentedItem = mock(RentedItem.class);
+        whenNew(RentedItem.class).withAnyArguments().thenReturn(mockRentedItem);
 
         String outPutMessageFromLibrary = library.checkOutBook("10", mockUserSession);
 
         assertEquals(outPutMessageFromLibrary, "Invalid Book to checkout");
-        verify(mockBorrowedItemList, never()).add(mockBorrowedItem);
+        verify(mockRentedItemList, never()).add(mockRentedItem);
     }
 
     @Test
     public void testCheckOutBookWhenBookWithGivenIdIsNotAvailable() throws Exception {
         harryPotterAndThePhilosophersStone.checkOut();
-        BorrowedItem mockBorrowedItem = mock(BorrowedItem.class);
-        whenNew(BorrowedItem.class).withAnyArguments().thenReturn(mockBorrowedItem);
+        RentedItem mockRentedItem = mock(RentedItem.class);
+        whenNew(RentedItem.class).withAnyArguments().thenReturn(mockRentedItem);
 
         String outPutMessageFromLibrary = library.checkOutBook("1", mockUserSession);
 
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(), is(true));
         assertEquals(outPutMessageFromLibrary, "This book is not available");
-        verify(mockBorrowedItemList, never()).add(mockBorrowedItem);
+        verify(mockRentedItemList, never()).add(mockRentedItem);
     }
 
     @Test
     public void testCheckOutMovie() throws Exception, ItemIsNotAvailableForCheckOut, InvalidItemException, ItemCanNotBeReturned {
-        BorrowedItem mockBorrowedItem = mock(BorrowedItem.class);
-        whenNew(BorrowedItem.class).withAnyArguments().thenReturn(mockBorrowedItem);
+        RentedItem mockRentedItem = mock(RentedItem.class);
+        whenNew(RentedItem.class).withAnyArguments().thenReturn(mockRentedItem);
 
         String outputMessageFromLibrary = library.checkOutMovie("1", mockUserSession);
 
         assertThat(whiplashMovie.isCheckedOut(),is(true));
         assertEquals(outputMessageFromLibrary, ("Thanks you! Enjoy the movie"));
-        verify(mockBorrowedItemList, times(1)).add(mockBorrowedItem);
+        verify(mockRentedItemList, times(1)).add(mockRentedItem);
     }
 
     @Test
     public void testCheckOutMovieWhenInvalidMovieIdIsGiven() throws Exception, ItemIsNotAvailableForCheckOut, InvalidItemException, ItemCanNotBeReturned {
-        BorrowedItem mockBorrowedItem = mock(BorrowedItem.class);
-        whenNew(BorrowedItem.class).withAnyArguments().thenReturn(mockBorrowedItem);
+        RentedItem mockRentedItem = mock(RentedItem.class);
+        whenNew(RentedItem.class).withAnyArguments().thenReturn(mockRentedItem);
 
         String outPutMessageFromLibrary = library.checkOutMovie("10", mockUserSession);
 
         assertEquals(outPutMessageFromLibrary, "Invalid Movie to checkout");
-        verify(mockBorrowedItemList, never()).add(mockBorrowedItem);
+        verify(mockRentedItemList, never()).add(mockRentedItem);
     }
 
     @Test
     public void testCheckOutMovieWhenMovieWithGivenIdIsNotAvailableBecauseItIsAlreadyCheckedOut() throws Exception, ItemIsNotAvailableForCheckOut, InvalidItemException, ItemCanNotBeReturned {
         whiplashMovie.checkOut();
-        BorrowedItem mockBorrowedItem = mock(BorrowedItem.class);
-        whenNew(BorrowedItem.class).withAnyArguments().thenReturn(mockBorrowedItem);
+        RentedItem mockRentedItem = mock(RentedItem.class);
+        whenNew(RentedItem.class).withAnyArguments().thenReturn(mockRentedItem);
 
         String outPutMessageFromLibrary = library.checkOutMovie("1", mockUserSession);
 
         assertThat(whiplashMovie.isCheckedOut(), is(true));
         assertEquals(outPutMessageFromLibrary, "This movie is not available");
-        verify(mockBorrowedItemList, never()).add(mockBorrowedItem);
+        verify(mockRentedItemList, never()).add(mockRentedItem);
     }
 
     @Test
     public void testCheckInBook() throws Exception, InvalidItemException, ItemCanNotBeReturned {
         harryPotterAndThePhilosophersStone.checkOut();
-        BorrowedItem mockBorrowedItem = mock(BorrowedItem.class);
-        whenNew(BorrowedItem.class).withAnyArguments().thenReturn(mockBorrowedItem);
+        RentedItem mockRentedItem = mock(RentedItem.class);
+        whenNew(RentedItem.class).withAnyArguments().thenReturn(mockRentedItem);
 
         String outPutMsgFromLibrary = library.returnBook("1", mockUserSession);
 
         assertEquals(outPutMsgFromLibrary, "Thank you for returning the book");
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(), is(false));
-        verify(mockBorrowedItemList, times(1)).remove(mockBorrowedItem);
+        verify(mockRentedItemList, times(1)).remove(mockRentedItem);
     }
 
     @Test
     public void testCheckInBookWhenInvalidBookIdIsGiven() throws Exception, InvalidItemException, ItemCanNotBeReturned {
-        BorrowedItem mockBorrowedItem = mock(BorrowedItem.class);
-        whenNew(BorrowedItem.class).withAnyArguments().thenReturn(mockBorrowedItem);
+        RentedItem mockRentedItem = mock(RentedItem.class);
+        whenNew(RentedItem.class).withAnyArguments().thenReturn(mockRentedItem);
 
         String outPutMsgFromLibrary = library.returnBook("10", mockUserSession);
 
         assertEquals(outPutMsgFromLibrary, "Invalid Book to return");
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(false));
-        verify(mockBorrowedItemList, never()).remove(mockBorrowedItem);
+        verify(mockRentedItemList, never()).remove(mockRentedItem);
     }
 
     @Test
     public void testCheckInBookWhenBookWithGivenIdIsNotCheckedOut() throws Exception, InvalidItemException, ItemCanNotBeReturned {
         harryPotterAndThePhilosophersStone.checkIn();
 
-        BorrowedItem mockBorrowedItem = mock(BorrowedItem.class);
-        whenNew(BorrowedItem.class).withAnyArguments().thenReturn(mockBorrowedItem);
+        RentedItem mockRentedItem = mock(RentedItem.class);
+        whenNew(RentedItem.class).withAnyArguments().thenReturn(mockRentedItem);
 
         String outPutMsgFromLibrary = library.returnBook("1", mockUserSession);
 
         assertEquals(outPutMsgFromLibrary, "We already have this book !");
         assertThat(harryPotterAndThePhilosophersStone.isCheckedOut(),is(false));
-        verify(mockBorrowedItemList, never()).remove(mockBorrowedItem);
+        verify(mockRentedItemList, never()).remove(mockRentedItem);
     }
 
     @Test
@@ -202,5 +196,11 @@ public class LibraryTest {
         );
 
         assertEquals(expectedMovieList, outputMsgFromLibrary);
+    }
+
+    @Test
+    public void testGetRentedItemList() throws Exception {
+        library.getRentedItemList();
+        verify(mockRentedItemList, times(1)).getAllDescription();
     }
 }
