@@ -1,4 +1,4 @@
-package com.biblioteca.model.rental.borrowedItem;
+package com.biblioteca.model.rental.rentedItem;
 
 import com.biblioteca.model.rental.*;
 import com.biblioteca.model.User;

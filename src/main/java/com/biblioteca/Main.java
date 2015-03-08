@@ -7,7 +7,7 @@ import com.biblioteca.exceptions.ItemCanNotBeReturned;
 import com.biblioteca.exceptions.ItemIsNotAvailableForCheckOut;
 import com.biblioteca.model.rental.Book;
 import com.biblioteca.model.rental.BookList;
-import com.biblioteca.model.rental.BorrowedItemList;
+import com.biblioteca.model.rental.RentedItemList;
 import com.biblioteca.model.rental.Movie;
 import com.biblioteca.model.rental.MovieList;
 import com.biblioteca.model.rental.Rating;
@@ -52,8 +52,8 @@ public class Main {
         Printer printer = new Printer(System.out);
         Scanner scanner = new Scanner(System.in);
 
-        BorrowedItemList borrowedItemList = new BorrowedItemList();
-        Library library = new Library(bookList, movieList, borrowedItemList);
+        RentedItemList rentedItemList = new RentedItemList();
+        Library library = new Library(bookList, movieList, rentedItemList);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(printer, scanner, userList, library);
         bibliotecaApp.run();
     }

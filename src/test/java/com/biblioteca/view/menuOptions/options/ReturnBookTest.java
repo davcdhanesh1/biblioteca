@@ -6,7 +6,7 @@ import com.biblioteca.exceptions.InvalidItemException;
 import com.biblioteca.exceptions.ItemCanNotBeReturned;
 import com.biblioteca.model.rental.Book;
 import com.biblioteca.model.rental.BookList;
-import com.biblioteca.model.rental.BorrowedItemList;
+import com.biblioteca.model.rental.RentedItemList;
 import com.biblioteca.model.rental.MovieList;
 import com.biblioteca.model.Library;
 import com.biblioteca.model.UserSession;
@@ -69,9 +69,9 @@ public class ReturnBookTest {
 
         movieList = mock(MovieList.class);
 
-        BorrowedItemList borrowedItemList = new BorrowedItemList();
+        RentedItemList rentedItemList = new RentedItemList();
         view = new View(printer, scanner);
-        library = new Library(bookList, movieList, borrowedItemList);
+        library = new Library(bookList, movieList, rentedItemList);
     }
 
     @Test

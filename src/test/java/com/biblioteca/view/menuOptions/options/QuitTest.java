@@ -1,7 +1,7 @@
 package com.biblioteca.view.menuOptions.options;
 
 import com.biblioteca.io.Printer;
-import com.biblioteca.model.rental.BorrowedItemList;
+import com.biblioteca.model.rental.RentedItemList;
 import com.biblioteca.model.rental.MovieList;
 import com.biblioteca.model.Library;
 import com.biblioteca.model.rental.Book;
@@ -55,8 +55,8 @@ public class QuitTest {
 
         quit = new Quit();
 
-        BorrowedItemList borrowedItemList = new BorrowedItemList();
-        library = new Library(bookList, movieList, borrowedItemList);
+        RentedItemList rentedItemList = new RentedItemList();
+        library = new Library(bookList, movieList, rentedItemList);
     }
 
     @Test
