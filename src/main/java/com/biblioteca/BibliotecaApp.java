@@ -14,7 +14,7 @@ import com.biblioteca.view.menuOptions.MenuOption;
 import com.biblioteca.model.UserSession;
 import com.biblioteca.exceptions.InvalidLibraryAndPasswordCombination;
 import com.biblioteca.model.UserList;
-import com.biblioteca.view.ViewState;
+import com.biblioteca.view.MenuListView;
 
 import java.util.Scanner;
 
@@ -36,7 +36,7 @@ public class BibliotecaApp {
         this.userList = userList;
         this.userSession = UserSession.createNew(userList);
         this.library = library;
-        this.menuOptionList = ViewState.getCurrentMenuList(userSession).menuOptionList;
+        this.menuOptionList = MenuListView.getCurrentMenuList(userSession).menuOptionList;
     }
 
     public void run() throws InvalidItemException, ItemIsNotAvailableForCheckOut, ItemCanNotBeReturned, InputValidationException, InvalidLibraryAndPasswordCombination {
@@ -127,8 +127,8 @@ public class BibliotecaApp {
     }
 
     private void printMenuList() {
-        ViewState viewState = ViewState.getCurrentMenuList(userSession);
-        menuOptionList = viewState.menuOptionList;
+        MenuListView menuListView = MenuListView.getCurrentMenuList(userSession);
+        menuOptionList = menuListView.menuOptionList;
         view.render(menuOptionList.getAll());
     }
 

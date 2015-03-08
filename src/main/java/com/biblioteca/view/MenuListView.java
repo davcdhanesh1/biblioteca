@@ -3,10 +3,10 @@ package com.biblioteca.view;
 import com.biblioteca.view.menuOptions.*;
 import com.biblioteca.model.UserSession;
 
-public class ViewState {
+public class MenuListView {
     public MenuOptionList menuOptionList;
 
-    private ViewState(MenuOptionList menuOptionList) {
+    private MenuListView(MenuOptionList menuOptionList) {
         this.menuOptionList = menuOptionList;
     }
     private static MenuOptionList defaultMenuOptionList() {
@@ -49,9 +49,9 @@ public class ViewState {
         return menuOptionList;
     }
 
-    public static ViewState getCurrentMenuList(UserSession userSession) {
-        if (userSession.getCurrentUser() == null) return new ViewState(defaultMenuOptionList());
-        if (userSession.getCurrentUser().isAdmin()) return new ViewState(adminMenuOptionList());
-        return new ViewState(menuViewWithProfileInformation());
+    public static MenuListView getCurrentMenuList(UserSession userSession) {
+        if (userSession.getCurrentUser() == null) return new MenuListView(defaultMenuOptionList());
+        if (userSession.getCurrentUser().isAdmin()) return new MenuListView(adminMenuOptionList());
+        return new MenuListView(menuViewWithProfileInformation());
     }
 }
